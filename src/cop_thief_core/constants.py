@@ -58,6 +58,10 @@ DIAGONALS: frozenset[Direction] = frozenset(
 
 STAY = "STAY"  # config move-set token for a HOLD; not a Direction
 
+# Terminal-outcome tokens (anything else scores as a technical loss, 0/0).
+RESULT_CAPTURE = "capture"
+RESULT_SURVIVAL = "survival"
+
 
 def directions_from_move_set(move_set: list[str] | None) -> tuple[Direction, ...] | None:
     """Map a config ``move_set`` (e.g. ["N","S","E","W","STAY"]) to Directions.
