@@ -55,3 +55,17 @@ ORTHOGONAL: tuple[Direction, ...] = (Direction.N, Direction.S, Direction.E, Dire
 DIAGONALS: frozenset[Direction] = frozenset(
     {Direction.NE, Direction.SE, Direction.SW, Direction.NW}
 )
+
+STAY = "STAY"  # config move-set token for a HOLD; not a Direction
+
+
+def directions_from_move_set(move_set: list[str] | None) -> tuple[Direction, ...] | None:
+    """Map a config ``move_set`` (e.g. ["N","S","E","W","STAY"]) to Directions.
+
+    ``STAY`` is a HOLD, not a direction, so it is dropped. ``None`` returns
+    ``None`` so the board falls back to its king-move default.
+    """
+    if move_set is None:
+        return None
+    names = {direction.value for direction in Direction}
+    return tuple(Direction(token) for token in move_set if token in names)
