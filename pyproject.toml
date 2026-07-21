@@ -1,0 +1,49 @@
+[project]
+name = "cop-thief-p2p"
+version = "1.0.0"
+description = "vm__fabi — Distributed Cop-Thief P2P Agent System (University of Haifa final project)"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=3.4.3",
+]
+
+[project.scripts]
+police-agent = "police_agent.__main__:main"
+thief-agent = "thief_agent.__main__:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=5",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cop_thief_core", "src/police_agent", "src/thief_agent"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+# Guideline §6.1 rule categories.
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/gui/*", "src/*/__main__.py"]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
