@@ -1,4 +1,4 @@
-# PRD_cloud_tunnel
+# PRD — Cloud Tunnel & Deployment
 
-> Status: TODO — to be authored in a dedicated Stage -1 PR.
-> Ground-truth spec is pinned in `CLAUDE.md` §36 and the reference repo.
+> Dedicated PRD (guideline §1.3). **Status:** TODO — authored in a later Stage -1 PR.
+> **Build stage:** 5. Ground-truth spec: `CLAUDE.md` §36 + reference repo. Indexed in `docs/PRD.md`.
