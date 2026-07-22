@@ -92,3 +92,14 @@
   `test_gatekeeper` (4). Cov 98%.
 - **Lesson:** an injectable clock makes queue/timeout/window-slide tests
   deterministic and instant (no real sleeping).
+
+## 2026-07-22 · Stage 2 · Implementation · interop primitives + CORE vectors (2.3a)
+- **Output:** `interop/canonical.py` (canonical_json/bytes), `interop/hashing.py`
+  (commit_of/verify/new_nonce), `interop/game_ids.py` (derive_game_ids);
+  `NONCE_BYTES`, `CryptoError`; `test_interop_primitives` (7) + **conformance**
+  `test_core_vectors` (4) loading the league fixtures. Cov 98%.
+- **Result:** OUR functions reproduce the CORE vectors byte-exactly —
+  `canonical_json` (Hebrew/emoji/float), `commit_reveal` reference form,
+  `terms_signature`, order-independent `game_uid`. 3 of 6 CORE surfaces done.
+- **Lesson:** conformance test skips gracefully if the (git-ignored) kit is not
+  fetched, keeping `pytest` green everywhere; unit tests keep coverage regardless.

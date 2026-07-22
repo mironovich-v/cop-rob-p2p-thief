@@ -23,3 +23,7 @@ class ProviderError(SimulationError):
 
 class RateLimitError(SimulationError):
     """The rate-limit queue is full or a caller timed out waiting for a slot."""
+
+
+class CryptoError(SimulationError):
+    """A commit or signature failed to verify (hash mismatch)."""
