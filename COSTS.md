@@ -20,8 +20,9 @@
 | 2026-07-21 | PR #7 (1.3) | stage-1-rules | e432455 | Opus 4.8 · high | rules (TDD, cov 96%) | ~0.1 session | merged |
 | 2026-07-22 | PR #8 (1.4) | stage-1-scoring | 4e06278 | Opus 4.8 · high | scoring (TDD, cov 97%) | ~0.2 session | merged |
 | 2026-07-22 | PR #9 (1.5) | stage-1-config | 84bd6a3 | Opus 4.8 · high | config loader + templates (TDD, cov 98%) | ~0.3 session | merged |
-| 2026-07-22 | Stage-2 PRDs | stage-2-design-prds | ea6d59f | Opus 4.8 · high | 5 Stage-2 mechanism PRDs | ~0.3 session | in review |
-| 2026-07-22 | Process docs | docs-process-and-tracking | (pending) | Opus 4.8 · high | RTS acceptance, open decisions, phase plan, task checkboxes, per-PR PROMPTS/COSTS | ~0.2 session | in review |
+| 2026-07-22 | Stage-2 PRDs | stage-2-design-prds | ea6d59f | Opus 4.8 · high | 5 Stage-2 mechanism PRDs | ~0.3 session | merged |
+| 2026-07-22 | Process docs | docs-process-and-tracking | f29a6a0 | Opus 4.8 · high | RTS acceptance, open decisions, phase plan, task checkboxes, per-PR PROMPTS/COSTS | ~0.2 session | merged |
+| 2026-07-22 | PR (2.1) | stage-2-protocol | (pending) | Opus 4.8 · high | protocol wire schemas (TDD, cov 98%) | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

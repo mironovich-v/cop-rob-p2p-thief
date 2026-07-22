@@ -13,7 +13,7 @@
 > - Author a mechanism's `docs/PRD_*.md` before its slice; strict linear stage
 >   progression (finish + merge a stage before the next).
 
-**Progress:** Stage -1 ✅ · Stage 1 ✅ · Stage 2 ◻ (design PRDs in review).
+**Progress:** Stage -1 ✅ · Stage 1 ✅ · Stage 2 ◻ (in progress).
 
 ## Shared validation (every implementation PR)
 
@@ -59,8 +59,8 @@ transport; results/audit agree.
 
 | Done | Task | Scope | Key files | ~LOC | PRD | Tests |
 |------|------|-------|-----------|------|-----|-------|
-| [~] | D2 | design PRDs | — | — | mcp_protocol, gatekeeper_rate_limit, pregame_agreement, orchestrator_fsm, player_agents | — |
-| [ ] | 2.1 | protocol schemas | `protocol/*.py` | ~120 | mcp_protocol | `test_protocol` |
+| [x] | D2 | design PRDs | — | — | mcp_protocol, gatekeeper_rate_limit, pregame_agreement, orchestrator_fsm, player_agents | — |
+| [x] | 2.1 | protocol schemas | `protocol/*.py` | ~120 | mcp_protocol | `test_protocol` |
 | [ ] | 2.2 | gatekeeper + rate limiter | `shared/gatekeeper.py`, `shared/rate_limiter.py` | ~150 | gatekeeper_rate_limit | `test_gatekeeper`, `test_rate_limiter` |
 | [ ] | 2.3 | canonical JSON + game_ids + negotiation (CORE vectors) | `interop/*.py` | ~140 | interop_serialization, pregame_agreement | conformance + `test_negotiation` |
 | [ ] | 2.4 | FastMCP server (4 tools) + client | `infra/mcp_server.py`, `infra/mcp_client.py` | ~180 | mcp_protocol | `test_transport` |

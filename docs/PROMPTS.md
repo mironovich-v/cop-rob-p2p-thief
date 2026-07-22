@@ -77,3 +77,10 @@
   checkboxes; `PRD.md` RTS acceptance + Open Decisions; `PLAN.md` Phase Plan.
 - **Output:** this PR (branch `docs-process-and-tracking`).
 - **Lesson:** encode tracking/transparency as standing gates, not ad-hoc habits.
+
+## 2026-07-22 · Stage 2 · Implementation · protocol schemas (2.1)
+- **Output:** `protocol/messages.py` (TurnMessage/ControlMessage/AuditPayload with
+  a defensive `to_dict`/`from_dict` mixin), `protocol/__init__` exports;
+  `test_protocol` (7). Cov 98%. Missing-required → TypeError; unknown fields ignored.
+- **Lesson:** tolerate extra inbound fields (cross-team payloads) but reject missing
+  required — robust interop without a rigid schema.
