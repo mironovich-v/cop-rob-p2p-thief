@@ -17,7 +17,7 @@
 | FR-3 | Capture = coord overlap (own-state honest); survival at step≥max; technical otherwise | Book ch.3; Ref `rules.py` | 1 | TODO | `test_rules` — capture, survival threshold, terminal |
 | FR-4 | Scoring 20/5/5/10, tie 2, series aggregation, diversity; totals derived | Book App.F; Ref `scoring.py` | 1 | TODO | `test_scoring` — score_subgame, aggregate, tie path |
 | FR-5 | Separate public/private/inferred/audit-only state | Book ch.1,5; Assign §6.2 | 1 | TODO | `test_own_state`; integration no-leak assertion |
-| FR-6 | FastMCP 4 tools; typed schemas; reject bad/stale/dup/out-of-order | Book ch.2; Ref `infra/mcp_*`, `protocol.py` | 2 | WIP (schemas done 2.1) | `test_protocol`, `test_runtime`, adversarial tests |
+| FR-6 | FastMCP 4 tools; typed schemas; reject bad/stale/dup/out-of-order | Book ch.2; Ref `infra/mcp_*`, `protocol.py` | 2 | WIP (schemas 2.1 + 4-tool server/client 2.4; stale/dup/out-of-order routing 2.5) | `test_protocol`, `test_mcp_*`, `test_runtime` |
 | FR-7 | Terms exchange, mutual signature, `game_uid`/`game_id`; refuse on mismatch | SPEC §4; Ref `negotiation.py`,`game_ids.py` | 2 | WIP (sign/verify/refuse + minimum-validation + game_uid done 2.3a/b; wire handshake over MCP 2.5) | `test_negotiation`, `game_uid.json` vector |
 | FR-8 | Orchestrator FSM; idempotency, monotonic ids, timeouts, retries, watchdog, restart | Book ch.8; Ref `peer/runtime*` | 2/6 | TODO | `test_runtime`, `test_control_link`, `test_series` |
 | FR-9 | Central gatekeeper; FIFO queue on overflow; transient retry | Book App.F; Guide §4; Ref `shared/gatekeeper.py` | 2 | WIP (impl done 2.2; wired per-service later) | `test_gatekeeper`, `test_rate_limiter` |

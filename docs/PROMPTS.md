@@ -111,3 +111,13 @@
   literals); `AgreementError`; `test_negotiation` (9). Cov 98%.
 - **Lesson:** keep the App-F floors as package DATA (`limits.json`) so the
   no-hardcode grep stays clean and minimums can be raised (never lowered) by config.
+
+## 2026-07-22 · Stage 2 · Implementation · FastMCP server + client (2.4)
+- **Output:** `infra/mcp_server.py` (`PeerInboxes`, `build_peer_server` 4 tools,
+  `_ensure_port_free`, `start_peer_server`), `infra/mcp_client.py` (`McpTransport`:
+  exchange_agreement/send_turn/poll_turn/send_control/poll_control/drain/exchange_audit
+  + retry); `infra/__init__` (was missing). `test_mcp_server` (3) + `test_mcp_client`
+  (9). Cov 98%.
+- **Lesson:** fastmcp's in-memory `Client(server_object)` round-trips the real
+  server+client with NO network/port — deterministic tests without a live server.
+  (`start_peer_server` is the only network boundary; marked `# pragma: no cover`.)

@@ -64,7 +64,7 @@ transport; results/audit agree.
 | [x] | 2.2 | gatekeeper + rate limiter | `shared/gatekeeper.py`, `shared/rate_limiter.py` | ~150 | gatekeeper_rate_limit | `test_gatekeeper`, `test_rate_limiter` |
 | [x] | 2.3a | canonical JSON + hashing + game_ids (CORE vectors) | `interop/{canonical,hashing,game_ids}.py` | ~90 | interop_serialization | `test_interop_primitives`, `test_core_vectors` |
 | [x] | 2.3b | negotiation + terms extraction + minimum-validation | `interop/negotiation.py` | ~90 | pregame_agreement | `test_negotiation` |
-| [ ] | 2.4 | FastMCP server (4 tools) + client | `infra/mcp_server.py`, `infra/mcp_client.py` | ~180 | mcp_protocol | `test_transport` |
+| [x] | 2.4 | FastMCP server (4 tools) + client | `infra/mcp_server.py`, `infra/mcp_client.py` | ~180 | mcp_protocol | `test_mcp_server`, `test_mcp_client` |
 | [ ] | 2.5 | orchestrator FSM + turn handler/sender + handshake | `orchestration/*.py` | ~200 | orchestrator_fsm, player_agents | `test_runtime` |
 | [ ] | 2.6 | SDK + series runner (role alternation) | `sdk/*.py` | ~150 | player_agents | `test_sdk`, `test_series` |
 
