@@ -1,0 +1,59 @@
+# POLICE peer — PRIVATE, LOCAL config only. Nothing here is relevant to the
+# opponent. Everything the two sides must AGREE on (board, pheromones, rules,
+# starts, map area, hint length) lives in the signed shared game.json, verified
+# by the pre-game signature. Secrets live in .env / secrets/, never here.
+version = "1.10"
+
+[game]
+group_name = "VM-Fabi"
+group_id = "vm__fabi-police"          # per-GROUP identity (roles alternate across sub-games)
+sub_game_number = 1
+members = ["id-0001", "id-0002"]      # TODO: replace with real student IDs before submission
+repos = { cop = "https://github.com/mironovich-v/cop-rob-p2p-police", thief = "https://github.com/mironovich-v/cop-rob-p2p-thief" }
+mcp_servers = { cop = "http://127.0.0.1:8802/mcp", thief = "http://127.0.0.1:8801/mcp" }
+
+[belief]
+smell_trust_weight = 4.0              # private belief tuning (not shared, not signed)
+
+[gui]
+cell_px = 52
+
+[paths]
+logs_dir = "logs"
+log_filename = "{role}_match.json"
+
+[play]
+step_speed_seconds = 1.0             # my GUI pacing
+seed = 1234                          # my private RNG seed
+
+[network]
+my_port = 8802
+opponent_url = "http://127.0.0.1:8801/mcp"
+turn_timeout_seconds = 180
+poll_interval_seconds = 0.5
+connect_timeout_seconds = 60
+retry_interval_seconds = 1.0
+audit_send_timeout_seconds = 10
+
+# [trash_talk] -- HOW the banter is generated. The MOVE is ALWAYS pure Python.
+# Default (this block absent) = "template": canned lines, 0 tokens, offline.
+# Opt in only by mutual prior agreement. providers: template | ollama | claude_api | claude_cli
+[trash_talk]
+provider = "template"
+
+# [strategy] -- optional student seam; unset => shipped heuristic brain.
+# thief_class  = "my_team.strategy:MyThiefBrain"
+# police_class = "my_team.strategy:MyPoliceBrain"
+
+# [llm] -- only used if a trash_talk provider needs it (opt-in). Model choice is
+# private; the opponent may differ. Gmail OAuth paths come from .env (secrets/).
+[llm]
+model = "claude-opus-4-8[1m]"
+step_deadline_seconds = 30
+short_prompt_threshold_seconds = 10
+
+[email]
+recipient = "rmisegal+uoh26finalgame@gmail.com"
+mode = "draft"
+enabled = false
+timeout_seconds = 120
