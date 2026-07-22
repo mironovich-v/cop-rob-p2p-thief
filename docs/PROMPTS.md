@@ -1,6 +1,6 @@
 # PROMPTS — AI-Assisted Work Log
 
-> Significant AI-assisted sessions (guideline §7.3). Trivial manual edits omitted.
+> AI-assisted work log (guideline §7.3). **Standing rule: one entry per PR.**
 > Kinds: Planning · Implementation · Review/Audit · Fix · Submission.
 
 ## 2026-07-21 · Stage -1 · Planning · Merge guidelines into CLAUDE.md
@@ -45,4 +45,35 @@
 
 ## 2026-07-21 · Stage -1 · Planning · PR #3 TODO + PROMPTS + REVIEW_POLICY
 - **Goal:** decompose the 7 stages into PR-sized slices; process docs.
-- **Output:** `docs/TODO.md`, `docs/PROMPTS.md`, `docs/REVIEW_POLICY.md` (this PR).
+- **Output:** `docs/TODO.md`, `docs/PROMPTS.md`, `docs/REVIEW_POLICY.md` (commit `3421a60`).
+
+## 2026-07-21 · Stage 1 · Planning · PR #4 Stage-1 design PRDs
+- **Output:** `PRD_game_state`, `PRD_scoring_league`, `PRD_config_constitution`
+  (commit `a833fbd`). Design gate before code.
+
+## 2026-07-21 · Stage 1 · Implementation · PR #5 board + constants (1.1)
+- **Output:** `constants.py`, `domain/board.py`, `test_board` (15). Cov 92%. Commit `3badbaa`.
+
+## 2026-07-21 · Stage 1 · Implementation · PR #6 own_state (1.2)
+- **Output:** `domain/own_state.py` + `directions_from_move_set`; `test_own_state`
+  (12). Cov 96%. Commit `e8e7b07`.
+
+## 2026-07-21 · Stage 1 · Implementation · PR #7 rules (1.3)
+- **Output:** `domain/rules.py` + result tokens; `test_rules` (6). Cov 96%. Commit `e432455`.
+
+## 2026-07-22 · Stage 1 · Implementation · PR #8 scoring (1.4)
+- **Output:** `domain/scoring.py`; `test_scoring` (8). Cov 97%. Commit `4e06278`.
+
+## 2026-07-22 · Stage 1 · Implementation · PR #9 config loader + templates (1.5)
+- **Output:** `shared/config.py`, `exceptions.py`, per-role config templates;
+  `test_config` (7). Cov 98%. Commit `84bd6a3`. Completes Stage 1.
+
+## 2026-07-22 · Stage 2 · Planning · Stage-2 design PRDs
+- **Output:** `mcp_protocol`, `gatekeeper_rate_limit`, `pregame_agreement`,
+  `orchestrator_fsm`, `player_agents` PRDs (branch `stage-2-design-prds`, in review).
+
+## 2026-07-22 · Stage -1 · Docs · Process & tracking upgrade
+- **Goal (owner request):** per-PR `PROMPTS.md`/`COSTS.md` rule; `TODO.md` task
+  checkboxes; `PRD.md` RTS acceptance + Open Decisions; `PLAN.md` Phase Plan.
+- **Output:** this PR (branch `docs-process-and-tracking`).
+- **Lesson:** encode tracking/transparency as standing gates, not ad-hoc habits.

@@ -34,6 +34,15 @@ the bootstrap use the documentation-import exception.)
 params (grep gate; `CFG` only) · secret scan · interop slices run
 `tests/conformance/` against the fetched league kit with **no vector edits**.
 
+## Per-PR tracking gates (every PR, including docs)
+
+- **`docs/PROMPTS.md`** — add exactly one entry for the PR.
+- **`COSTS.md`** — add exactly one ledger row for the PR.
+- **`docs/TODO.md`** — check the completed task's `[x]` box in the same PR.
+- **`docs/PRD.md` §14 Open Decisions** — update if a decision was made.
+- **`docs/requirements_matrix.md`** — update the status of affected requirements.
+- **`docs/PRD.md` §4 acceptance criteria** — check any AC newly satisfied.
+
 ## Artifact handling
 
 Source/tests/docs/config tracked; heavy generated outputs (logs, results,

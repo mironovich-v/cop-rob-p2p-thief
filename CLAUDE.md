@@ -459,22 +459,23 @@ compatibility notes, and known limitations or follow-up tasks.
 
 ## 7. Prompt Logging Rules
 
-Maintain `docs/PROMPTS.md` for significant AI-assisted work. Each entry should
-include: date; phase/PR; context; goal; prompt summary or full prompt; files
-changed; expected output; actual output; issues encountered; refinements made;
-lesson learned; approval status. Distinguish planning, implementation,
-review/audit, fix, and final-submission prompts. Trivial manual-only changes do
-not require an entry.
+**Standing rule: add one `docs/PROMPTS.md` entry per PR** (not just "significant"
+sessions). Each entry should include: date; phase/PR; context; goal; prompt
+summary or full prompt; files changed; expected output; actual output; issues
+encountered; refinements made; lesson learned; approval status. Distinguish
+planning, implementation, review/audit, fix, and final-submission prompts. A
+trivial docs-only PR may use a one-line entry, but every PR gets one.
 
 ---
 
 ## 8. Cost Logging Rules
 
-Maintain `COSTS.md` for meaningful AI-assisted sessions and expensive operations.
+**Standing rule: add one `COSTS.md` row per PR**, plus any expensive operation.
 Record: date; phase/PR; branch; PR; commit(s); agent/model; effort/reasoning;
 task; wall-clock time; human review time; runtime/compute; long-running commands;
 experiment runtime; generated artifacts; accepted/reworked/discarded status;
-lessons learned. Use exact token accounting when available; otherwise record
+lessons learned. Also: **check the completed `docs/TODO.md` task box in the same
+PR.** Use exact token accounting when available; otherwise record
 practical proxies (subscription/plan, session count, wall-clock time, review
 burden, rework). Cost tracking also measures review debt, runtime debt, and
 agent efficiency.

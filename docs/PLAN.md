@@ -118,11 +118,27 @@ truth appears only in retrospective replay after audit material is revealed.
   `dist/thief-agent` (self-contained, vendored core snapshot, cross-linked, drift
   check).
 
-## 8. Build order (7 stages; each runs end-to-end before the next)
+## 8. Phase Plan
 
-1 Base Logic → 2 MCP Infra + orchestration → 3 Strategy/belief → 4 Language +
-Scent → 5 Cloud + Tunnel → 6 Security (commit-reveal + interop) → 7 Reporting
-Shell. Stage→PRD→PR decomposition and LOC budgets are in `docs/TODO.md`.
+Each phase runs **end-to-end before the next** (strict linear progression). The
+per-slice PR breakdown, LOC budgets, and completion checkboxes live in
+`docs/TODO.md`; mechanism PRDs are indexed in `docs/PRD.md` and authored at the
+head of their phase.
+
+| Phase | Objective | Entry | Exit criteria | PRDs |
+|-------|-----------|-------|---------------|------|
+| **-1 Planning** | Control files + full doc set | repo exists | Stage -1 docs merged | (planning docs) |
+| **1 Base Logic** | Deterministic domain + config | -1 done | domain (board/own-state/rules/scoring) + `CFG` tested; a scripted game advances by rules | game_state, scoring_league, config_constitution |
+| **2 MCP Infra + orchestration** | Two peers negotiate & play over transport | 1 done | agreement + a full sub-game over fake/real MCP; results & audit agree | mcp_protocol, gatekeeper_rate_limit, pregame_agreement, orchestrator_fsm, player_agents |
+| **3 Strategy & belief** | Legal-action strategy + belief map | 2 done | strategy always returns a legal action; pluggable brain seam works | belief_map, strategy_brains |
+| **4 Language + Scent** | Scent + verbal hints wired in | 3 done | scent emit/decay matches CORE vector; hints capped & audited | pheromone_scent, llm_verbal_layer |
+| **5 Cloud + Tunnel** | Public reachability | 4 done | peer reachable via a documented tunnel; pre-match probe passes | cloud_tunnel |
+| **6 Security** | Commit-reveal + interop finalize | 5 done | sealed logs, mutual audit, tamper→forfeit; **all CORE vectors pass from our code** | commit_reveal, interop_serialization |
+| **7 Reporting Shell** | Artifacts, Gmail, GUI, replay, export | 6 done | four artifacts + report + Gmail draft + GUI + replay + two-repo export | logging_audit_reporting, email_reporting, gui_replay, two_repo_export |
+
+**RTS (Ready-To-Submit)** is declared only when **all** PRD acceptance criteria
+(`docs/PRD.md` §4, AC1–AC17) are satisfied — completing Phase 7 is necessary but
+not sufficient (interop, submission, and quality ACs also gate RTS).
 
 ## 9. Architectural decisions
 

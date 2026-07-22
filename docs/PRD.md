@@ -46,27 +46,41 @@ Course grader (Dr. Segal); opponent student teams (interop partners / sparring
 server); the vm__fabi team (both role deployments). Report recipient is fixed:
 `rmisegal+uoh26finalgame@gmail.com`.
 
-## 4. Measurable goals, KPIs & acceptance criteria
+## 4. Acceptance criteria — Ready-To-Submit (RTS) gate
 
-Acceptance = the assignment's **Definition of Done** (§13), made measurable:
+The product is **Ready-To-Submit (RTS) only when EVERY criterion below is
+satisfied.** This is the single gate for submission — it makes the assignment's
+Definition of Done (§13) measurable. Boxes are checked here as criteria are met
+(and mirrored in `docs/requirements_matrix.md`).
 
-- **AC1** every league CORE vector reproduced by *our* production functions; kit
-  regeneration shows zero drift.
-- **AC2** Police & Thief run in separate processes with separate private dirs; no
-  shared mutable state; neither can read the other's private truth.
-- **AC3** local end-to-end games finish and audit cleanly; totals derived.
-- **AC4** a public FastMCP endpoint works through a documented tunnel; ≥1
-  cross-implementation game audits and settles byte-identically.
-- **AC5** emailed/draft report bytes equal the agreed hashed canonical bytes.
-- **AC6** optional ENH features off by default and negotiation-gated.
-- **AC7** live GUI respects local truth; replay verifies integrity and reconstructs
-  the match.
-- **AC8** both exported repos are self-contained, testable, and traceable to one
-  canonical core commit/hash.
-- **AC9** quality gates: coverage ≥85%, ruff zero, every Python file ≤150 code
-  lines, `uv` only, no hard-coded game/config params, no secrets.
-- **AC10** required README, PRDs, four artifacts, and annotated submission tag
-  present in both repos.
+**Interoperability**
+- [ ] AC1 — every league CORE vector reproduced by *our* production functions; kit regeneration shows zero drift.
+- [ ] AC2 — ≥1 cross-implementation game over a real tunnel audits and settles byte-identically with another team / sparring peer; zero false tamper-forfeits.
+- [ ] AC3 — the emitted email body equals the exact hashed canonical report bytes.
+
+**Distribution & local truth**
+- [ ] AC4 — Police & Thief run as separate processes with separate private dirs; no shared mutable state; neither can read the other's private truth.
+- [ ] AC5 — no central referee/server/board; results are derived from logged events, never trusted from a claim.
+
+**Gameplay & reliability**
+- [ ] AC6 — local end-to-end play of a full 6-sub-game series finishes and audits cleanly with role alternation.
+- [ ] AC7 — safe under malformed / stale / duplicate / out-of-order messages, timeouts, and restart; the game loop never stalls.
+- [ ] AC8 — optional ENH features off by default and negotiation-gated; a CORE-only peer still plays.
+
+**Reporting & UX**
+- [ ] AC9 — the four JSON artifacts (declaration / config / log / result) share one `game_uid`, use the correct filenames, and carry `config_sha256` + `mutual_agreement`.
+- [ ] AC10 — Gmail reporting works (draft/dry-run default; fixed recipient).
+- [ ] AC11 — live GUI respects local truth; replay verifies integrity (`Verified OK` / tamper) and reconstructs the match.
+
+**Deployment & submission**
+- [ ] AC12 — a public FastMCP endpoint works through a documented tunnel (Host-header handled); the pre-match probe passes.
+- [ ] AC13 — both exported repos are self-contained, testable, cross-linked, and traceable to one canonical core commit/hash.
+- [ ] AC14 — required academic README, all 19 PRDs, the four artifacts, submission screenshots, and the annotated submission tag are present in both repos.
+
+**Engineering quality (enforced on every PR)**
+- [ ] AC15 — coverage ≥85%; zero ruff violations; every Python file ≤150 code lines.
+- [ ] AC16 — `uv` only; no hard-coded game/config params (via `CFG`); no secrets committed.
+- [ ] AC17 — every mechanism has a dedicated PRD; `docs/PROMPTS.md` + `COSTS.md` updated on every PR; `docs/TODO.md` task boxes checked as work completes.
 
 ## 5. Functional requirements
 
@@ -218,3 +232,22 @@ annotated submission tag; deterministic two-repo export.
 `copthief-league-protocol/SPEC.md` + `vectors/`; `../Game-P2P-Cop-Chase` (code
 v3.0.0); `instructions/assignment.md`; `instructions/software-project-guidelines.md`;
 `CLAUDE.md` (§36 ground truth).
+
+## 14. Open decisions
+
+Decisions still open; **this section is updated the moment a decision is made**
+(and promoted to an ADR in `docs/decisions.md`). Resolved items move to `decisions.md`.
+
+| # | Open decision | Options / default | Needed by | Status |
+|---|---------------|-------------------|-----------|--------|
+| OD-1 | Public tunnel provider | Cloudflare named tunnel (default) vs ngrok | Stage 5 | OPEN (ADR-15 proposed) |
+| OD-2 | Student member IDs for artifacts | real IDs vs `id-0001` placeholders | before submission | OPEN (placeholders in use) |
+| OD-3 | Gmail sender account + OAuth owner | which account; who runs OAuth setup | Stage 7 (email) | OPEN |
+| OD-4 | First interop opponent | ImreEyal sparring / reference peer / partner team | Stage 5 cross-play | OPEN |
+| OD-5 | Opt-in ENH features | none (default, CORE-only) vs specific ENH | any (negotiation-gated) | OPEN — default none |
+| OD-6 | LLM verbal provider for demos | `template` (default) vs ollama/claude_api | Stage 4 | OPEN — default template |
+
+Resolved so far (see `docs/decisions.md`): ground-truth source (ADR-1), the five
+interop contradictions (ADR-2..6), package layout (ADR-7), Python 3.13 (ADR-8),
+league-kit external (ADR-9), three-repo topology (ADR-10), per-mechanism PRDs
+(ADR-11), LLM-verbal-only (ADR-12), config model (ADR-13).
