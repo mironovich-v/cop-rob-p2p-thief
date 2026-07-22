@@ -24,7 +24,8 @@
 | 2026-07-22 | Process docs | docs-process-and-tracking | f29a6a0 | Opus 4.8 · high | RTS acceptance, open decisions, phase plan, task checkboxes, per-PR PROMPTS/COSTS | ~0.2 session | merged |
 | 2026-07-22 | PR (2.1) | stage-2-protocol | 672db1c | Opus 4.8 · high | protocol wire schemas (TDD, cov 98%) | ~0.2 session | merged |
 | 2026-07-22 | PR (2.2) | stage-2-gatekeeper | 1b8bd95 | Opus 4.8 · high | gatekeeper + token-bucket rate limiter (TDD, cov 98%) | ~0.2 session | merged |
-| 2026-07-22 | PR (2.3a) | stage-2-interop-primitives | (pending) | Opus 4.8 · high | canonical JSON + hashing + game_uid; 4 CORE vectors pass from our code | ~0.3 session | in review |
+| 2026-07-22 | PR (2.3a) | stage-2-interop-primitives | 48ba793 | Opus 4.8 · high | canonical JSON + hashing + game_uid; 4 CORE vectors pass from our code | ~0.3 session | merged |
+| 2026-07-22 | PR (2.3b) | stage-2-negotiation | (pending) | Opus 4.8 · high | Negotiation (sign/verify), terms_from_config, data-driven App-F minimum-validation | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

@@ -103,3 +103,11 @@
   `terms_signature`, order-independent `game_uid`. 3 of 6 CORE surfaces done.
 - **Lesson:** conformance test skips gracefully if the (git-ignored) kit is not
   fetched, keeping `pytest` green everywhere; unit tests keep coverage regardless.
+
+## 2026-07-22 · Stage 2 · Implementation · negotiation (2.3b)
+- **Output:** `interop/negotiation.py` — `terms_from_config` (14-key extraction),
+  `Negotiation` (sign/verify, unsigned identity), `validate_minimums` refusing
+  below-App-F-floor terms; App-F floors in `interop/limits.json` (data, not source
+  literals); `AgreementError`; `test_negotiation` (9). Cov 98%.
+- **Lesson:** keep the App-F floors as package DATA (`limits.json`) so the
+  no-hardcode grep stays clean and minimums can be raised (never lowered) by config.

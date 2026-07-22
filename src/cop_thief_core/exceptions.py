@@ -27,3 +27,8 @@ class RateLimitError(SimulationError):
 
 class CryptoError(SimulationError):
     """A commit or signature failed to verify (hash mismatch)."""
+
+
+class AgreementError(SimulationError):
+    """The pre-game agreement is invalid: mismatched, incomplete, or below an
+    Appendix-F minimum — the peer must refuse to start."""
