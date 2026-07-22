@@ -61,7 +61,7 @@ transport; results/audit agree.
 |------|------|-------|-----------|------|-----|-------|
 | [x] | D2 | design PRDs | — | — | mcp_protocol, gatekeeper_rate_limit, pregame_agreement, orchestrator_fsm, player_agents | — |
 | [x] | 2.1 | protocol schemas | `protocol/*.py` | ~120 | mcp_protocol | `test_protocol` |
-| [ ] | 2.2 | gatekeeper + rate limiter | `shared/gatekeeper.py`, `shared/rate_limiter.py` | ~150 | gatekeeper_rate_limit | `test_gatekeeper`, `test_rate_limiter` |
+| [x] | 2.2 | gatekeeper + rate limiter | `shared/gatekeeper.py`, `shared/rate_limiter.py` | ~150 | gatekeeper_rate_limit | `test_gatekeeper`, `test_rate_limiter` |
 | [ ] | 2.3 | canonical JSON + game_ids + negotiation (CORE vectors) | `interop/*.py` | ~140 | interop_serialization, pregame_agreement | conformance + `test_negotiation` |
 | [ ] | 2.4 | FastMCP server (4 tools) + client | `infra/mcp_server.py`, `infra/mcp_client.py` | ~180 | mcp_protocol | `test_transport` |
 | [ ] | 2.5 | orchestrator FSM + turn handler/sender + handshake | `orchestration/*.py` | ~200 | orchestrator_fsm, player_agents | `test_runtime` |

@@ -84,3 +84,11 @@
   `test_protocol` (7). Cov 98%. Missing-required → TypeError; unknown fields ignored.
 - **Lesson:** tolerate extra inbound fields (cross-team payloads) but reject missing
   required — robust interop without a rigid schema.
+
+## 2026-07-22 · Stage 2 · Implementation · gatekeeper + rate limiter (2.2)
+- **Output:** `shared/rate_limiter.py` (sliding-window token bucket + FIFO wait
+  queue, injectable clock), `shared/gatekeeper.py` (`execute` with transient
+  retry + call stats), `ProviderError`/`RateLimitError`; `test_rate_limiter` (4),
+  `test_gatekeeper` (4). Cov 98%.
+- **Lesson:** an injectable clock makes queue/timeout/window-slide tests
+  deterministic and instant (no real sleeping).

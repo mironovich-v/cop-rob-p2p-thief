@@ -15,3 +15,11 @@ class ConfigError(SimulationError):
 
 class ConfigVersionError(ConfigError):
     """A config file declares an unsupported version."""
+
+
+class ProviderError(SimulationError):
+    """A transient/permanent failure from an external provider (LLM, email, net)."""
+
+
+class RateLimitError(SimulationError):
+    """The rate-limit queue is full or a caller timed out waiting for a slot."""

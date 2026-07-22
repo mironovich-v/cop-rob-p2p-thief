@@ -20,7 +20,7 @@
 | FR-6 | FastMCP 4 tools; typed schemas; reject bad/stale/dup/out-of-order | Book ch.2; Ref `infra/mcp_*`, `protocol.py` | 2 | WIP (schemas done 2.1) | `test_protocol`, `test_runtime`, adversarial tests |
 | FR-7 | Terms exchange, mutual signature, `game_uid`/`game_id`; refuse on mismatch | SPEC §4; Ref `negotiation.py`,`game_ids.py` | 2 | TODO | `test_negotiation`, `game_uid.json` vector |
 | FR-8 | Orchestrator FSM; idempotency, monotonic ids, timeouts, retries, watchdog, restart | Book ch.8; Ref `peer/runtime*` | 2/6 | TODO | `test_runtime`, `test_control_link`, `test_series` |
-| FR-9 | Central gatekeeper; FIFO queue on overflow; transient retry | Book App.F; Guide §4; Ref `shared/gatekeeper.py` | 2 | TODO | `test_gatekeeper`, `test_rate_limiter` |
+| FR-9 | Central gatekeeper; FIFO queue on overflow; transient retry | Book App.F; Guide §4; Ref `shared/gatekeeper.py` | 2 | WIP (impl done 2.2; wired per-service later) | `test_gatekeeper`, `test_rate_limiter` |
 | FR-10 | Belief heatmap from scent, diffused per movement | Book ch.6; Ref `belief.py` | 3 | TODO | `test_belief` — observe, diffuse, exclude, normalize |
 | FR-11 | Legal-action set in code; strategy picks legal only; `BrainBase` seam | Book ch.6; Assign §6.5; Ref `brains.py` | 3 | TODO | `test_brains`, `test_strategy` (injected brain) |
 | FR-12 | Pheromone emission/decay/wire (subtractive_chebyshev_v1) | SPEC §5; Ref `smell.py` | 4 | TODO | `test_smell`, `pheromone.json` vector |
