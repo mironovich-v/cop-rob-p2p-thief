@@ -23,10 +23,10 @@
 | FR-9 | Central gatekeeper; FIFO queue on overflow; transient retry | Book App.F; Guide §4; Ref `shared/gatekeeper.py` | 2 | WIP (impl done 2.2; wired per-service later) | `test_gatekeeper`, `test_rate_limiter` |
 | FR-10 | Belief heatmap from scent, diffused per movement | Book ch.6; Ref `belief.py` | 3 | WIP (BeliefGrid done 3.1; wired into runtime 2.5) | `test_belief` — observe, diffuse, exclude, normalize |
 | FR-11 | Legal-action set in code; strategy picks legal only; `BrainBase` seam | Book ch.6; Assign §6.5; Ref `brains.py` | 3 | WIP (brains + config-driven seam done 3.2; wired into runtime 2.5) | `test_brains`, `test_strategy` (injected brain) |
-| FR-12 | Pheromone emission/decay/wire (subtractive_chebyshev_v1) | SPEC §5; Ref `smell.py` | 4 | TODO | `test_smell`, `pheromone.json` vector |
+| FR-12 | Pheromone emission/decay/wire (subtractive_chebyshev_v1) | SPEC §5; Ref `smell.py` | 4 | WIP (SmellField done + `pheromone` vector passes 4.1; wired into runtime 2.5) | `test_smell`, `pheromone.json` vector |
 | FR-13 | LLM only for hint; offline default; word-limit + deadline fallback; move pure Python | Book ch.6, Table 21; Ref `strategy/*` | 4 | TODO | `test_trash_talk`, `test_brains` (no-LLM-on-move) |
 | FR-14 | Commit-reveal per step; nonce reveal; mutual audit; tamper→forfeit | SPEC §3; Ref `crypto.py`,`summary.py` | 6 | TODO | `test_crypto`, `commit_reveal.json`, audit tests |
-| FR-15 | One canonical JSON fn; 4 serializations; CORE vectors from our code | SPEC §2,§6; Assign §7 | 6 | WIP (canonical/commit/terms/game_uid vectors pass 2.3a; pheromone S4, report_consensus S6) | `tests/conformance/*` vs `vectors/*` |
+| FR-15 | One canonical JSON fn; 4 serializations; CORE vectors from our code | SPEC §2,§6; Assign §7 | 6 | WIP (canonical/commit/terms/game_uid pass 2.3a + pheromone 4.1; only report_consensus S6 remains) | `tests/conformance/*` vs `vectors/*` |
 | FR-16 | Local + public-tunnel; Host-header; pre-match probe; no security weakening | SPEC App.D; Assign §10 | 5 | TODO | manual/live (marked); probe unit test |
 | FR-17 | Sealed logs; mutual audit; replay integrity + reconstruction | Book ch.7; Ref `gui/replay*` | 7 | TODO | `test_replay_data`, `test_replay_normalize` |
 | FR-18 | Four artifacts share one `game_uid`; correct filenames; config_sha256 | SPEC §4; Ref `report/artifacts.py` | 7 | TODO | `test_artifacts`, `test_series` (4 files) |

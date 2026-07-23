@@ -11,6 +11,7 @@ from pathlib import Path
 
 import pytest
 
+from cop_thief_core.domain.smell import SmellField
 from cop_thief_core.interop import canonical_json, commit_of, derive_game_ids
 
 VECTORS = Path(__file__).resolve().parents[2] / "copthief-league-protocol" / "vectors"
@@ -49,3 +50,19 @@ def test_game_uid_vectors():
     for vector in _load("game_uid.json")["vectors"]:
         _, game_uid = derive_game_ids(vector["terms"], vector["group_a"], vector["group_b"])
         assert game_uid == vector["game_uid"]
+
+
+def test_pheromone_vectors():
+    data = _load("pheromone.json")
+    for case in data["emit"]:
+        field = SmellField(case["board_size"], case["grid_size"], 0.1, 0.0)
+        field.deposit(tuple(case["center"]), case["intensity"])
+        assert field.snapshot() == case["field"]
+    for case in data["decay"]:
+        field = SmellField(64, 5, case["decay"], 0.0)
+        field.absorb(case["before"])
+        field.decay_all()
+        # compare via intensity_at so a clamped 0.0 (dropped by snapshot) still checks
+        for key, expected in case["after"].items():
+            row, col = (int(part) for part in key.split(","))
+            assert field.intensity_at((row, col)) == expected

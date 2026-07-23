@@ -137,3 +137,12 @@
   `test_brains` (6) + `test_strategy` (7). Cov 98%.
 - **Lesson:** a `_NullTrash` default keeps brains decoupled from the (Stage-4)
   trash-talk layer; a `BoomLLM` test asserts the LLM is never touched for a move.
+
+## 2026-07-23 · Stage 4 · Implementation · scent field + CORE vector (4.1)
+- **Output:** `domain/smell.py` (`SmellField`: radial Chebyshev emit, max-merge
+  absorb, subtractive decay clamp/round, snapshot wire form); `test_smell` (7) +
+  `test_pheromone_vectors` in conformance. Cov 98%.
+- **Result:** the `pheromone` CORE vector passes from our code — 5 of the 6 CORE
+  surfaces done; only `report_consensus` (Stage 6) remains.
+- **Lesson:** conformance compares decay via `intensity_at` (snapshot drops the
+  clamped 0.0 that the vector's `after` still lists).
