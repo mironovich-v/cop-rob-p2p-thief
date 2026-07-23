@@ -64,6 +64,10 @@ RESULT_SURVIVAL = "survival"
 
 NONCE_BYTES = 16  # secrets.token_hex(NONCE_BYTES) -> a 32-hex-char nonce
 
+# A hint's self-declared honesty (sealed into the commit and revealed at audit).
+VERDICT_TRUTH = "truth"
+VERDICT_LIE = "lie"
+
 
 def directions_from_move_set(move_set: list[str] | None) -> tuple[Direction, ...] | None:
     """Map a config ``move_set`` (e.g. ["N","S","E","W","STAY"]) to Directions.

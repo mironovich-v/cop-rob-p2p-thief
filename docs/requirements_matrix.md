@@ -22,7 +22,7 @@
 | FR-8 | Orchestrator FSM; idempotency, monotonic ids, timeouts, retries, watchdog, restart | Book ch.8; Ref `peer/runtime*` | 2/6 | TODO | `test_runtime`, `test_control_link`, `test_series` |
 | FR-9 | Central gatekeeper; FIFO queue on overflow; transient retry | Book App.F; Guide §4; Ref `shared/gatekeeper.py` | 2 | WIP (impl done 2.2; wired per-service later) | `test_gatekeeper`, `test_rate_limiter` |
 | FR-10 | Belief heatmap from scent, diffused per movement | Book ch.6; Ref `belief.py` | 3 | WIP (BeliefGrid done 3.1; wired into runtime 2.5) | `test_belief` — observe, diffuse, exclude, normalize |
-| FR-11 | Legal-action set in code; strategy picks legal only; `BrainBase` seam | Book ch.6; Assign §6.5; Ref `brains.py` | 3 | TODO | `test_brains`, `test_strategy` (injected brain) |
+| FR-11 | Legal-action set in code; strategy picks legal only; `BrainBase` seam | Book ch.6; Assign §6.5; Ref `brains.py` | 3 | WIP (brains + config-driven seam done 3.2; wired into runtime 2.5) | `test_brains`, `test_strategy` (injected brain) |
 | FR-12 | Pheromone emission/decay/wire (subtractive_chebyshev_v1) | SPEC §5; Ref `smell.py` | 4 | TODO | `test_smell`, `pheromone.json` vector |
 | FR-13 | LLM only for hint; offline default; word-limit + deadline fallback; move pure Python | Book ch.6, Table 21; Ref `strategy/*` | 4 | TODO | `test_trash_talk`, `test_brains` (no-LLM-on-move) |
 | FR-14 | Commit-reveal per step; nonce reveal; mutual audit; tamper→forfeit | SPEC §3; Ref `crypto.py`,`summary.py` | 6 | TODO | `test_crypto`, `commit_reveal.json`, audit tests |

@@ -27,7 +27,8 @@
 | 2026-07-22 | PR (2.3a) | stage-2-interop-primitives | 48ba793 | Opus 4.8 · high | canonical JSON + hashing + game_uid; 4 CORE vectors pass from our code | ~0.3 session | merged |
 | 2026-07-22 | PR (2.3b) | stage-2-negotiation | 1c5d5e8 | Opus 4.8 · high | Negotiation (sign/verify), terms_from_config, data-driven App-F minimum-validation | ~0.2 session | merged |
 | 2026-07-22 | PR (2.4) | stage-2-mcp-server | 58c49e6 | Opus 4.8 · high | FastMCP server (4 tools) + McpTransport client; in-memory Client(server) tests (no network) | ~0.3 session | merged |
-| 2026-07-23 | PR (3.1) | stage-3-belief | (pending) | Opus 4.8 · high | Bayesian belief map (observe/diffuse/exclude); Option-A reorder (ADR-16) | ~0.2 session | in review |
+| 2026-07-23 | PR (3.1) | stage-3-belief | e610f1d | Opus 4.8 · high | Bayesian belief map (observe/diffuse/exclude); Option-A reorder (ADR-16) | ~0.2 session | merged |
+| 2026-07-23 | PR (3.2) | stage-3-brains | (pending) | Opus 4.8 · high | BrainBase + Thief/Police brains + config-driven strategy seam; move is pure Python | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

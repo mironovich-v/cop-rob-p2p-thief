@@ -79,7 +79,7 @@ Exit: strategy always returns a legal action; pluggable brain seam works.
 |------|------|-------|-----------|------|-----|-------|
 | [ ] | D3 | design PRDs | — | — | belief_map, strategy_brains | — |
 | [x] | 3.1 | Bayesian belief map | `domain/belief.py` | ~120 | belief_map | `test_belief` |
-| [ ] | 3.2 | brains + seam | `domain/brains.py`, `strategy/__init__.py` | ~150 | strategy_brains | `test_brains`, `test_strategy` |
+| [x] | 3.2 | brains + seam | `domain/brains.py`, `strategy/__init__.py` | ~150 | strategy_brains | `test_brains`, `test_strategy` |
 
 ## Stage 4 — Language + Scent
 Exit: scent emit/decay matches CORE vector; hints capped & audited.

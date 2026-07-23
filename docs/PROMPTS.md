@@ -129,3 +129,11 @@
   diffuse (von Neumann/king), exclude, most_likely, degenerate reset);
   `test_belief` (8). Cov 98%.
 - **Lesson:** diffusion neighbourhood must match the move set (4 vs 8) — passed in.
+
+## 2026-07-23 · Stage 3 · Implementation · brains + strategy seam (3.2)
+- **Output:** `domain/brains.py` (`Decision`, `BrainBase` with a null-trash default,
+  `ThiefBrain` flee, `PoliceBrain` chase+occasional-barrier), `strategy/__init__.py`
+  (`load_brain_cls`, `resolve_brain_cls`, `resolve_brain`); `VERDICT_TRUTH/LIE`;
+  `test_brains` (6) + `test_strategy` (7). Cov 98%.
+- **Lesson:** a `_NullTrash` default keeps brains decoupled from the (Stage-4)
+  trash-talk layer; a `BoomLLM` test asserts the LLM is never touched for a move.
