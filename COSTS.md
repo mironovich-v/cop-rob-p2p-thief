@@ -29,7 +29,8 @@
 | 2026-07-22 | PR (2.4) | stage-2-mcp-server | 58c49e6 | Opus 4.8 · high | FastMCP server (4 tools) + McpTransport client; in-memory Client(server) tests (no network) | ~0.3 session | merged |
 | 2026-07-23 | PR (3.1) | stage-3-belief | e610f1d | Opus 4.8 · high | Bayesian belief map (observe/diffuse/exclude); Option-A reorder (ADR-16) | ~0.2 session | merged |
 | 2026-07-23 | PR (3.2) | stage-3-brains | 312ce93 | Opus 4.8 · high | BrainBase + Thief/Police brains + config-driven strategy seam; move is pure Python | ~0.2 session | merged |
-| 2026-07-23 | PR (4.1) | stage-4-smell | (pending) | Opus 4.8 · high | SmellField (radial emit, subtractive decay, wire); pheromone CORE vector passes | ~0.2 session | in review |
+| 2026-07-23 | PR (4.1) | stage-4-smell | 5da8f3d | Opus 4.8 · high | SmellField (radial emit, subtractive decay, wire); pheromone CORE vector passes | ~0.2 session | merged |
+| 2026-07-23 | PR (2.5a) | stage-2-runtime-handshake | (pending) | Opus 4.8 · high | sealing helpers + handshake + shared FakeTransport fixture (queue-pair, no network) | ~0.3 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

@@ -25,6 +25,12 @@ def new_nonce() -> str:
     return secrets.token_hex(NONCE_BYTES)
 
 
+def seal(payload: Any) -> dict:
+    """Generate a fresh nonce and its commit for a payload: {'nonce', 'commit'}."""
+    nonce = new_nonce()
+    return {"nonce": nonce, "commit": commit_of(payload, nonce)}
+
+
 def verify(payload: Any, nonce: str, commit: str) -> None:
     """Raise CryptoError unless (payload, nonce) hashes to commit."""
     actual = commit_of(payload, nonce)

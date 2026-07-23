@@ -146,3 +146,13 @@
   surfaces done; only `report_consensus` (Stage 6) remains.
 - **Lesson:** conformance compares decay via `intensity_at` (snapshot drops the
   clamped 0.0 that the vector's `after` still lists).
+
+## 2026-07-23 · Stage 2 · Implementation · sealing + handshake + FakeTransport (2.5a)
+- **Output:** `interop/hashing.seal`; `orchestration/sealing.py` (now_iso,
+  identity_from_config, sealed_step_record, build_turn_message);
+  `orchestration/handshake.py` (`run_handshake` — exchange/verify/derive ids,
+  refuse below-minimum); `tests/conftest.py` FakeTransport + fixtures;
+  `test_sealing` (4) + `test_handshake` (2, incl. a threaded two-peer exchange).
+  Cov 98%. Runtime (2.5) split into 2.5a (this) / 2.5b (PeerRuntime FSM).
+- **Lesson:** host-spec `collect_spec` (sysinfo) is deferred to 6.1, so identity/
+  step records omit `spec` for now — added when Step-0 sealing lands.
