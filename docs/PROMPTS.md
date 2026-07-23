@@ -186,3 +186,12 @@
   null provider); `test_trash_talk` (7). Cov 98%.
 - **Lesson:** the verdict (truth/lie) is decided by the provider and sealed into the
   commit; the opt-in LLM providers + deadline/parse fallback come in the next slice.
+
+## 2026-07-23 · Stage 4 · Implementation · opt-in LLM providers (4.3)
+- **Output:** `LlmTrashTalk` (every_n_steps gating, `_ask_bounded` worker-thread
+  deadline, template fallback on any error/timeout/parse); `resolve_trash_talk`
+  claude_cli/ollama/claude_api branches with lazy `anthropic`; `test_llm_provider`
+  (9, fake askers — no live model). Cov 98%. **Closes Stage 4.**
+- **Lesson:** the network askers are `# pragma: no cover`; `anthropic` stays an
+  OPTIONAL dep via lazy import, so `pyproject` is unchanged. Any LLM failure falls
+  back to the free template — the game never stalls.

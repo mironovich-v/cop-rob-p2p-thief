@@ -13,7 +13,7 @@
 > - Author a mechanism's `docs/PRD_*.md` before its slice; strict linear stage
 >   progression (finish + merge a stage before the next).
 
-**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ◻ (scent ✅; trash-talk/LLM next). Two-peer distributed match runs end-to-end; 5/6 CORE vectors pass.
+**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ✅ (scent + trash-talk + LLM providers). Two-peer distributed match runs end-to-end; 5/6 CORE vectors pass.
 
 > **Build order (ADR-16, Option A):** belief (3.1) → brains (3.2) → smell (4.1)
 > are built **before** the runtime (2.5/2.6), which integrates them. Tasks keep
@@ -90,7 +90,7 @@ Exit: scent emit/decay matches CORE vector; hints capped & audited.
 | [ ] | D4 | design PRDs | — | — | pheromone_scent, llm_verbal_layer | — |
 | [x] | 4.1 | pheromone/scent field | `domain/smell.py` | ~120 | pheromone_scent | conformance `pheromone`; `test_smell` |
 | [x] | 4.2 | trash-talk template + provider factory | `strategy/trash_talk.py`, `strategy/talk_providers.py` | ~150 | llm_verbal_layer | `test_trash_talk` |
-| [ ] | 4.3 | LLM providers (ollama/api/cli), offline-mockable | `llm/*.py` | ~150 | llm_verbal_layer | `test_llm_provider` |
+| [x] | 4.3 | LLM providers (ollama/api/cli), offline-mockable | `strategy/{trash_talk,talk_providers}.py` | ~150 | llm_verbal_layer | `test_llm_provider` |
 
 ## Stage 5 — Cloud + Tunnel
 Exit: peer reachable via a documented public tunnel; pre-match probe passes.
