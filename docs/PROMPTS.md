@@ -167,3 +167,14 @@
   game_uid derived, timeout handled. AC5 (no referee, results derived) met.
 - **Lesson:** dropped the GUI control channel + LLM token accounting for a focused
   runtime; the reference's per-file split keeps each module ≤150 lines.
+
+## 2026-07-23 · Stage 2 · Implementation · SDK + series runner (2.6)
+- **Output:** `sdk/series.py` (`role_for` alternation, `run_series`, `SeriesResult`),
+  `sdk/sdk.py` (`SimulationSdk.run_peer` single entry, `StubLlm`, `_build_transport`
+  network boundary); `test_series` (role_for, 2-game series, SDK.run_peer). Cov 98%.
+  **Closes Stage 2.**
+- **Result:** a 2-sub-game series alternates roles, reuses one transport, and both
+  peers agree per sub-game and share one game_uid. Artifacts/report/email deferred
+  to the reporting stage; a real LLM provider to the language stage.
+- **Lesson:** num_games is a signed term, so a test must override it on BOTH
+  configs to keep the handshake terms value-equal.

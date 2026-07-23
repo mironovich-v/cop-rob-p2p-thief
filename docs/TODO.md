@@ -13,7 +13,7 @@
 > - Author a mechanism's `docs/PRD_*.md` before its slice; strict linear stage
 >   progression (finish + merge a stage before the next).
 
-**Progress:** Stage -1 ✅ · Stage 1 ✅ · Stage 2 ◻ (MCP infra + negotiation done; runtime deferred) · Stage 3 ◻ (belief in progress).
+**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ◻ (scent ✅; trash-talk/LLM next). Two-peer distributed match runs end-to-end; 5/6 CORE vectors pass.
 
 > **Build order (ADR-16, Option A):** belief (3.1) → brains (3.2) → smell (4.1)
 > are built **before** the runtime (2.5/2.6), which integrates them. Tasks keep
@@ -71,7 +71,7 @@ transport; results/audit agree.
 | [x] | 2.4 | FastMCP server (4 tools) + client | `infra/mcp_server.py`, `infra/mcp_client.py` | ~180 | mcp_protocol | `test_mcp_server`, `test_mcp_client` |
 | [x] | 2.5a | sealing + handshake + FakeTransport | `orchestration/{sealing,handshake}.py`, `conftest` | ~110 | orchestrator_fsm, pregame_agreement | `test_sealing`, `test_handshake` |
 | [x] | 2.5b | PeerRuntime FSM (turn loop, handler/sender, audit/summary) | `orchestration/{runtime,turn_handler,summary}.py` | ~200 | orchestrator_fsm, player_agents | `test_runtime` (2 peers, FakeTransport) |
-| [ ] | 2.6 | SDK + series runner (role alternation) | `sdk/*.py` | ~150 | player_agents | `test_sdk`, `test_series` |
+| [x] | 2.6 | SDK + series runner (role alternation) | `sdk/*.py` | ~150 | player_agents | `test_series` (2-game series + SDK.run_peer) |
 
 ## Stage 3 — Strategy & belief
 Exit: strategy always returns a legal action; pluggable brain seam works.

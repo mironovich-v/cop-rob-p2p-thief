@@ -45,7 +45,7 @@
 | NFR-4 | Zero ruff; files ≤150 code lines | Guide §2.2,§6.1 | WIP | `ruff check`; line-count check |
 | NFR-5 | `uv` only; pyproject + uv.lock | Guide §7.4 | DONE | `pyproject.toml`, `uv.lock` committed |
 | NFR-6 | No hard-coded game/config params; `CFG`; never lower a minimum | Book App.F; CLAUDE §13 | TODO | grep gate; config-driven tests |
-| NFR-7 | SDK architecture; role-agnostic single core; no logic in GUI/CLI | Guide §3; Assign §5 | TODO | code review; SDK entry test |
+| NFR-7 | SDK architecture; role-agnostic single core; no logic in GUI/CLI | Guide §3; Assign §5 | WIP (SimulationSdk.run_peer single entry + role-agnostic PeerRuntime done 2.6; CLI/GUI delegate later) | `test_series` (SDK.run_peer) |
 | NFR-8 | No secrets; `.env`/`secrets/`; HTTPS+token auth; revocation | Guide §6.4; Book ch.2 | WIP | secret scan; `.env-example` present |
 | NFR-9 | Byte-exact interop on 6 CORE surfaces | SPEC §1 | TODO | `tests/conformance/*` |
 | NFR-10 | PR size 50–200 (soft cap 300), one purpose | Guide §7.2.1 | WIP | PR review / commit body |
