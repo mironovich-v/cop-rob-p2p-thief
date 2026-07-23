@@ -24,7 +24,7 @@
 | FR-10 | Belief heatmap from scent, diffused per movement | Book ch.6; Ref `belief.py` | 3 | WIP (BeliefGrid done 3.1; wired into runtime 2.5) | `test_belief` — observe, diffuse, exclude, normalize |
 | FR-11 | Legal-action set in code; strategy picks legal only; `BrainBase` seam | Book ch.6; Assign §6.5; Ref `brains.py` | 3 | WIP (brains + config-driven seam done 3.2; wired into runtime 2.5) | `test_brains`, `test_strategy` (injected brain) |
 | FR-12 | Pheromone emission/decay/wire (subtractive_chebyshev_v1) | SPEC §5; Ref `smell.py` | 4 | WIP (SmellField done + `pheromone` vector passes 4.1; wired into runtime 2.5) | `test_smell`, `pheromone.json` vector |
-| FR-13 | LLM only for hint; offline default; word-limit + deadline fallback; move pure Python | Book ch.6, Table 21; Ref `strategy/*` | 4 | TODO | `test_trash_talk`, `test_brains` (no-LLM-on-move) |
+| FR-13 | LLM only for hint; offline default; word-limit + deadline fallback; move pure Python | Book ch.6, Table 21; Ref `strategy/*` | 4 | WIP (template provider + word-cap + bluff + resolve_brain wiring done 4.2; opt-in LLM providers + deadline fallback 4.3) | `test_trash_talk`, `test_brains` (no-LLM-on-move) |
 | FR-14 | Commit-reveal per step; nonce reveal; mutual audit; tamper→forfeit | SPEC §3; Ref `crypto.py`,`summary.py` | 6 | TODO | `test_crypto`, `commit_reveal.json`, audit tests |
 | FR-15 | One canonical JSON fn; 4 serializations; CORE vectors from our code | SPEC §2,§6; Assign §7 | 6 | WIP (canonical/commit/terms/game_uid pass 2.3a + pheromone 4.1; only report_consensus S6 remains) | `tests/conformance/*` vs `vectors/*` |
 | FR-16 | Local + public-tunnel; Host-header; pre-match probe; no security weakening | SPEC App.D; Assign §10 | 5 | TODO | manual/live (marked); probe unit test |

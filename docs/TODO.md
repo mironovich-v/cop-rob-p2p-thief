@@ -89,7 +89,7 @@ Exit: scent emit/decay matches CORE vector; hints capped & audited.
 |------|------|-------|-----------|------|-----|-------|
 | [ ] | D4 | design PRDs | — | — | pheromone_scent, llm_verbal_layer | — |
 | [x] | 4.1 | pheromone/scent field | `domain/smell.py` | ~120 | pheromone_scent | conformance `pheromone`; `test_smell` |
-| [ ] | 4.2 | trash-talk template + provider factory | `strategy/trash_talk.py`, `strategy/talk_providers.py` | ~150 | llm_verbal_layer | `test_trash_talk` |
+| [x] | 4.2 | trash-talk template + provider factory | `strategy/trash_talk.py`, `strategy/talk_providers.py` | ~150 | llm_verbal_layer | `test_trash_talk` |
 | [ ] | 4.3 | LLM providers (ollama/api/cli), offline-mockable | `llm/*.py` | ~150 | llm_verbal_layer | `test_llm_provider` |
 
 ## Stage 5 — Cloud + Tunnel

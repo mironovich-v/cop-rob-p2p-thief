@@ -14,6 +14,7 @@ import random
 
 from cop_thief_core.constants import Role
 from cop_thief_core.domain.brains import BrainBase, Decision, PoliceBrain, ThiefBrain
+from cop_thief_core.strategy.talk_providers import resolve_trash_talk
 
 __all__ = [
     "BrainBase",
@@ -23,6 +24,7 @@ __all__ = [
     "load_brain_cls",
     "resolve_brain",
     "resolve_brain_cls",
+    "resolve_trash_talk",
 ]
 
 _DEFAULTS: dict[Role, type[BrainBase]] = {Role.THIEF: ThiefBrain, Role.POLICE: PoliceBrain}
@@ -56,7 +58,9 @@ def resolve_brain_cls(config, role: Role) -> type[BrainBase]:
 
 
 def resolve_brain(config, role: Role, llm=None, rng: random.Random | None = None, trash=None) -> BrainBase:
-    """Instantiate the resolved brain (trash defaults to the null provider until
-    the Stage-4 trash-talk layer wires a real one)."""
+    """Instantiate the resolved brain, wired with the configured trash-talk provider
+    (default: the free `template`). Pass an explicit `trash` to override."""
     rng = rng or random.Random()
+    if trash is None:
+        trash = resolve_trash_talk(config, rng, llm)
     return resolve_brain_cls(config, role)(llm, rng=rng, trash=trash)

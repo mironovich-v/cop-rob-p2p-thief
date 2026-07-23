@@ -178,3 +178,11 @@
   to the reporting stage; a real LLM provider to the language stage.
 - **Lesson:** num_games is a signed term, so a test must override it on BOTH
   configs to keep the handshake terms value-equal.
+
+## 2026-07-23 · Stage 4 · Implementation · trash-talk template (4.2)
+- **Output:** `strategy/trash_talk.py` (`TrashTalk`: setting-keyed landmarks, thief
+  40% bluff, word-cap-before-wire), `strategy/talk_providers.py`
+  (`resolve_trash_talk`, template default); wired into `resolve_brain` (replaces the
+  null provider); `test_trash_talk` (7). Cov 98%.
+- **Lesson:** the verdict (truth/lie) is decided by the provider and sealed into the
+  commit; the opt-in LLM providers + deadline/parse fallback come in the next slice.
