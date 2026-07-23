@@ -36,7 +36,8 @@
 | 2026-07-23 | PR (4.2) | stage-4-trash-talk | 7c3bc8d | Opus 4.8 · high | template trash-talk (landmarks, bluff, word-cap) + resolve_trash_talk; wired into resolve_brain | ~0.2 session | merged |
 | 2026-07-23 | PR (4.3) | stage-4-llm-providers | 7c01e84 | Opus 4.8 · high | LlmTrashTalk (every_n_steps, deadline/parse fallback) + cli/ollama/api askers; mock-tested | ~0.2 session | merged |
 | 2026-07-23 | PR (5.1) | stage-5-tunnel | 808f232 | Opus 4.8 · high | connectivity probe + PRD_cloud_tunnel (Host-header/tunnel docs); closes Stage 5 | ~0.1 session | merged |
-| 2026-07-23 | PR (6.1) | stage-6-sysinfo | (pending) | Opus 4.8 · high | sysinfo collect_spec + Step-0 host-spec sealed record (into runtime) + PRD_commit_reveal | ~0.2 session | in review |
+| 2026-07-23 | PR (6.1) | stage-6-sysinfo | e04f3bd | Opus 4.8 · high | sysinfo collect_spec + Step-0 host-spec sealed record (into runtime) + PRD_commit_reveal | ~0.2 session | merged |
+| 2026-07-23 | PR (6.2) | stage-6-audit | (pending) | Opus 4.8 · high | adversarial audit test: tampered opponent log -> tamper_forfeit (honest peer wins) | ~0.1 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

@@ -212,3 +212,11 @@
   `spec`; authored `PRD_commit_reveal`; `test_sysinfo` (3). Cov 98%.
 - **Lesson:** the Step-0 record is sealed like any step and re-verified in the
   mutual audit; the integration match still audits clean with it prepended.
+
+## 2026-07-23 · Stage 6 · Review/Audit · adversarial audit (6.2)
+- **Output:** `tests/integration/test_audit.py` (3): a valid opponent log settles
+  normally; a tampered record (flipped position → stale commit) forces
+  `tamper_forfeit` for the honest peer (`failed_steps == [1]`); a missing opponent
+  audit skips (no forfeit). Cov 99% on `finish`. FR-14 DONE.
+- **Lesson:** tamper_forfeit is board-independent — the honest peer wins by
+  technical decision regardless of the survival/capture result.
