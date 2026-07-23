@@ -13,7 +13,11 @@
 > - Author a mechanism's `docs/PRD_*.md` before its slice; strict linear stage
 >   progression (finish + merge a stage before the next).
 
-**Progress:** Stage -1 ✅ · Stage 1 ✅ · Stage 2 ◻ (in progress).
+**Progress:** Stage -1 ✅ · Stage 1 ✅ · Stage 2 ◻ (MCP infra + negotiation done; runtime deferred) · Stage 3 ◻ (belief in progress).
+
+> **Build order (ADR-16, Option A):** belief (3.1) → brains (3.2) → smell (4.1)
+> are built **before** the runtime (2.5/2.6), which integrates them. Tasks keep
+> their IDs; only execution order changed.
 
 ## Shared validation (every implementation PR)
 
@@ -74,7 +78,7 @@ Exit: strategy always returns a legal action; pluggable brain seam works.
 | Done | Task | Scope | Key files | ~LOC | PRD | Tests |
 |------|------|-------|-----------|------|-----|-------|
 | [ ] | D3 | design PRDs | — | — | belief_map, strategy_brains | — |
-| [ ] | 3.1 | Bayesian belief map | `domain/belief.py` | ~120 | belief_map | `test_belief` |
+| [x] | 3.1 | Bayesian belief map | `domain/belief.py` | ~120 | belief_map | `test_belief` |
 | [ ] | 3.2 | brains + seam | `domain/brains.py`, `strategy/__init__.py` | ~150 | strategy_brains | `test_brains`, `test_strategy` |
 
 ## Stage 4 — Language + Scent

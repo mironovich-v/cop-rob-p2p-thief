@@ -121,3 +121,11 @@
 - **Lesson:** fastmcp's in-memory `Client(server_object)` round-trips the real
   server+client with NO network/port — deterministic tests without a live server.
   (`start_peer_server` is the only network boundary; marked `# pragma: no cover`.)
+
+## 2026-07-23 · Stage 3 · Implementation · belief map (3.1)
+- **Context:** owner approved Option A (ADR-16) — build belief/brains/smell before
+  the runtime, so the runtime integrates real components once (no rework).
+- **Output:** `domain/belief.py` (`BeliefGrid`: uniform init, observe_smell,
+  diffuse (von Neumann/king), exclude, most_likely, degenerate reset);
+  `test_belief` (8). Cov 98%.
+- **Lesson:** diffusion neighbourhood must match the move set (4 vs 8) — passed in.

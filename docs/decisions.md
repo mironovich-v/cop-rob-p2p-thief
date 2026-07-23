@@ -116,3 +116,14 @@ repo seed, not a review bypass. **Status:** accepted (one-time).
 **Decision:** default to a Cloudflare named tunnel (`originRequest.httpHostHeader`
 per SPEC App. D); ngrok documented as the alternative. **Rationale:** stable named
 URL for scheduled matches. **Status:** proposed — confirm at Stage 5.
+
+## ADR-16 — Build belief/brains/smell before the runtime (Option A)
+**Context:** the orchestrator/runtime (tasks 2.5/2.6) integrates the belief map,
+strategy brains, and scent field — pure-domain pieces the TODO scheduled in
+Stages 3–4, *after* the runtime. **Decision:** reorder to dependency order —
+build belief (3.1), brains (3.2), and smell (4.1) first, then write the runtime
+once, integrating them. **Rationale:** avoids rewriting the turn loop to add
+belief/scent later; lets the runtime be tested end-to-end with real capture and
+settlement. **Alternatives:** a minimal runtime now (trivial move policy, no
+belief/scent) enriched later — rejected (rework). **Status:** accepted (owner
+approved 2026-07-23).
