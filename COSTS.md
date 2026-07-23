@@ -34,7 +34,8 @@
 | 2026-07-23 | PR (2.5b) | stage-2-runtime | a53ea71 | Opus 4.8 · high | PeerRuntime FSM + turn_handler + summary/audit; two-peer in-process match passes | ~0.4 session | merged |
 | 2026-07-23 | PR (2.6) | stage-2-sdk-series | 726275f | Opus 4.8 · high | SimulationSdk.run_peer + series runner (role alternation); closes Stage 2 | ~0.2 session | merged |
 | 2026-07-23 | PR (4.2) | stage-4-trash-talk | 7c3bc8d | Opus 4.8 · high | template trash-talk (landmarks, bluff, word-cap) + resolve_trash_talk; wired into resolve_brain | ~0.2 session | merged |
-| 2026-07-23 | PR (4.3) | stage-4-llm-providers | (pending) | Opus 4.8 · high | LlmTrashTalk (every_n_steps, deadline/parse fallback) + cli/ollama/api askers; mock-tested | ~0.2 session | in review |
+| 2026-07-23 | PR (4.3) | stage-4-llm-providers | 7c01e84 | Opus 4.8 · high | LlmTrashTalk (every_n_steps, deadline/parse fallback) + cli/ollama/api askers; mock-tested | ~0.2 session | merged |
+| 2026-07-23 | PR (5.1) | stage-5-tunnel | (pending) | Opus 4.8 · high | connectivity probe + PRD_cloud_tunnel (Host-header/tunnel docs); closes Stage 5 | ~0.1 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

@@ -27,7 +27,7 @@
 | FR-13 | LLM only for hint; offline default; word-limit + deadline fallback; move pure Python | Book ch.6, Table 21; Ref `strategy/*` | 4 | DONE (template default + 4 providers + every_n_steps + deadline/parse fallback; move pure Python) | `test_trash_talk`, `test_llm_provider`, `test_brains` |
 | FR-14 | Commit-reveal per step; nonce reveal; mutual audit; tamper→forfeit | SPEC §3; Ref `crypto.py`,`summary.py` | 6 | TODO | `test_crypto`, `commit_reveal.json`, audit tests |
 | FR-15 | One canonical JSON fn; 4 serializations; CORE vectors from our code | SPEC §2,§6; Assign §7 | 6 | WIP (canonical/commit/terms/game_uid pass 2.3a + pheromone 4.1; only report_consensus S6 remains) | `tests/conformance/*` vs `vectors/*` |
-| FR-16 | Local + public-tunnel; Host-header; pre-match probe; no security weakening | SPEC App.D; Assign §10 | 5 | TODO | manual/live (marked); probe unit test |
+| FR-16 | Local + public-tunnel; Host-header; pre-match probe; no security weakening | SPEC App.D; Assign §10 | 5 | WIP (probe + Host-header/tunnel docs done 5.1; live cross-tunnel run is manual AC12) | `test_connectivity`; manual/live (AC12) |
 | FR-17 | Sealed logs; mutual audit; replay integrity + reconstruction | Book ch.7; Ref `gui/replay*` | 7 | TODO | `test_replay_data`, `test_replay_normalize` |
 | FR-18 | Four artifacts share one `game_uid`; correct filenames; config_sha256 | SPEC §4; Ref `report/artifacts.py` | 7 | TODO | `test_artifacts`, `test_series` (4 files) |
 | FR-19 | Report consensus signature (spaced, sign-then-insert Hebrew key); email = exact bytes | SPEC §6; Ref `report_writer.py` | 7 | TODO | `test_report_writer`, `report_consensus.json` |

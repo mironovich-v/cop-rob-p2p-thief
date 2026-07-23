@@ -13,7 +13,7 @@
 > - Author a mechanism's `docs/PRD_*.md` before its slice; strict linear stage
 >   progression (finish + merge a stage before the next).
 
-**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ✅ (scent + trash-talk + LLM providers). Two-peer distributed match runs end-to-end; 5/6 CORE vectors pass.
+**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ✅ · Stage 5 ✅ (tunnel docs + connectivity probe). Two-peer distributed match runs end-to-end; 5/6 CORE vectors pass. Remaining: Stage 6 (security finalize) + Stage 7 (reporting shell).
 
 > **Build order (ADR-16, Option A):** belief (3.1) → brains (3.2) → smell (4.1)
 > are built **before** the runtime (2.5/2.6), which integrates them. Tasks keep
@@ -97,8 +97,8 @@ Exit: peer reachable via a documented public tunnel; pre-match probe passes.
 
 | Done | Task | Scope | Key files | ~LOC | PRD | Tests |
 |------|------|-------|-----------|------|-----|-------|
-| [ ] | D5 | design PRD | — | — | cloud_tunnel | — |
-| [ ] | 5.1 | tunnel mode + Host-header + connectivity probe | `infra/*` | ~120 | cloud_tunnel | probe unit test; manual live run (marked) |
+| [x] | D5 | design PRD | — | — | cloud_tunnel | — |
+| [x] | 5.1 | tunnel mode + Host-header + connectivity probe | `infra/connectivity.py`, `PRD_cloud_tunnel` | ~30 | cloud_tunnel | `test_connectivity`; manual live run (AC12) |
 
 ## Stage 6 — Security (commit-reveal + interop finalize)
 Exit: sealed logs; mutual audit; tamper→forfeit; report consensus signature; all

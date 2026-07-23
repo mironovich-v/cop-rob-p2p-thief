@@ -195,3 +195,12 @@
 - **Lesson:** the network askers are `# pragma: no cover`; `anthropic` stays an
   OPTIONAL dep via lazy import, so `pyproject` is unchanged. Any LLM failure falls
   back to the free template — the game never stalls.
+
+## 2026-07-23 · Stage 5 · Implementation · cloud tunnel + connectivity probe (5.1)
+- **Output:** `infra/connectivity.py` `probe_opponent` (harmless `list_tools` via
+  FastMCP Client — in-memory or URL); authored `docs/PRD_cloud_tunnel.md`
+  (Host-header HTTP-421 fix at the tunnel, not in code); `test_connectivity` (2).
+  Cov 98%. **Closes Stage 5.**
+- **Lesson:** the tunnel Host-header fix is config-only (Cloudflare
+  `httpHostHeader` / ngrok `--host-header=rewrite`); FastMCP's DNS-rebinding check
+  is never weakened. The probe is testable in-memory (reachable) + refused-URL.
