@@ -28,6 +28,7 @@ from cop_thief_core.orchestration.sealing import (
     build_turn_message,
     identity_from_config,
     now_iso,
+    sealed_spec_record,
     sealed_step_record,
 )
 from cop_thief_core.orchestration.summary import finish, snapshot
@@ -66,7 +67,7 @@ class PeerRuntime:
         self._tokens_total = 0
         self._started_monotonic = time.monotonic()
         self._started_at = now_iso()
-        self.records: list[dict] = []
+        self.records: list[dict] = [sealed_spec_record(config, sub_game_number)]
         self._result: tuple[str, str] | None = None
 
     @staticmethod

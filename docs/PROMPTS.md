@@ -204,3 +204,11 @@
 - **Lesson:** the tunnel Host-header fix is config-only (Cloudflare
   `httpHostHeader` / ngrok `--host-header=rewrite`); FastMCP's DNS-rebinding check
   is never weakened. The probe is testable in-memory (reachable) + refused-URL.
+
+## 2026-07-23 · Stage 6 · Implementation · sysinfo + Step-0 record (6.1)
+- **Output:** `shared/sysinfo.py` `collect_spec` (portable, cached, stdlib-only —
+  unknown values stay 'unknown'); `orchestration/sealing.sealed_spec_record`
+  (Step-0 host-spec sealed record) wired into `PeerRuntime.records[0]` + identity
+  `spec`; authored `PRD_commit_reveal`; `test_sysinfo` (3). Cov 98%.
+- **Lesson:** the Step-0 record is sealed like any step and re-verified in the
+  mutual audit; the integration match still audits clean with it prepended.

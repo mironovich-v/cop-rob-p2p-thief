@@ -107,7 +107,7 @@ CORE vectors pass from our code.
 | Done | Task | Scope | Key files | ~LOC | PRD | Tests |
 |------|------|-------|-----------|------|-----|-------|
 | [ ] | D6 | design PRD | — | — | commit_reveal, interop_serialization | — |
-| [ ] | 6.1 | commit-reveal sealing + audit + sysinfo step-0 | `interop/commit_reveal.py`, `audit/*`, `shared/sysinfo.py` | ~160 | commit_reveal | conformance `commit_reveal`; `test_crypto`, `test_sysinfo` |
+| [x] | 6.1 | sysinfo + Step-0 host-spec sealed record + PRD_commit_reveal | `shared/sysinfo.py`, `orchestration/sealing.py` | ~60 | commit_reveal | `test_sysinfo`; conformance `commit_reveal` (2.3a) |
 | [ ] | 6.2 | seal every step + mutual audit integration | `orchestration/*`, `audit/*` | ~120 | commit_reveal | `test_runtime` (audit/tamper) |
 | [ ] | 6.3 | report consensus signature (spaced) | `reporting/report_writer.py` | ~120 | interop_serialization | conformance `report_consensus`; `test_report_writer` |
 
