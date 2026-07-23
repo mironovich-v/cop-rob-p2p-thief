@@ -13,7 +13,7 @@
 > - Author a mechanism's `docs/PRD_*.md` before its slice; strict linear stage
 >   progression (finish + merge a stage before the next).
 
-**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ✅ · Stage 5 ✅ (tunnel docs + connectivity probe). Two-peer distributed match runs end-to-end; 5/6 CORE vectors pass. Remaining: Stage 6 (security finalize) + Stage 7 (reporting shell).
+**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ✅ · Stage 5 ✅ · Stage 6 ✅ (commit-reveal, audit, report sig). Two-peer distributed match runs end-to-end; **all 6/6 CORE vectors pass**. Remaining: Stage 7 (reporting shell) → RTS.
 
 > **Build order (ADR-16, Option A):** belief (3.1) → brains (3.2) → smell (4.1)
 > are built **before** the runtime (2.5/2.6), which integrates them. Tasks keep
@@ -106,10 +106,10 @@ CORE vectors pass from our code.
 
 | Done | Task | Scope | Key files | ~LOC | PRD | Tests |
 |------|------|-------|-----------|------|-----|-------|
-| [ ] | D6 | design PRD | — | — | commit_reveal, interop_serialization | — |
+| [x] | D6 | design PRDs | — | — | commit_reveal (6.1), interop_serialization (6.3) | — |
 | [x] | 6.1 | sysinfo + Step-0 host-spec sealed record + PRD_commit_reveal | `shared/sysinfo.py`, `orchestration/sealing.py` | ~60 | commit_reveal | `test_sysinfo`; conformance `commit_reveal` (2.3a) |
 | [x] | 6.2 | adversarial audit: tampered log -> tamper_forfeit | `tests/integration/test_audit.py` | ~50 | commit_reveal | `test_audit` (valid/tamper/skip) |
-| [ ] | 6.3 | report consensus signature (spaced) | `reporting/report_writer.py` | ~120 | interop_serialization | conformance `report_consensus`; `test_report_writer` |
+| [x] | 6.3 | report consensus signature (spaced) | `reporting/report_writer.py` | ~40 | interop_serialization | conformance `report_consensus`; `test_report_writer` |
 
 ## Stage 7 — Reporting Shell
 Exit: four artifacts + report + Gmail draft + GUI + replay + two-repo export.

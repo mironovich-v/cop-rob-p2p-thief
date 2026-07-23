@@ -13,6 +13,7 @@ import pytest
 
 from cop_thief_core.domain.smell import SmellField
 from cop_thief_core.interop import canonical_json, commit_of, derive_game_ids
+from cop_thief_core.reporting.report_writer import consensus_signature, verify_report
 
 VECTORS = Path(__file__).resolve().parents[2] / "copthief-league-protocol" / "vectors"
 
@@ -66,3 +67,11 @@ def test_pheromone_vectors():
         for key, expected in case["after"].items():
             row, col = (int(part) for part in key.split(","))
             assert field.intensity_at((row, col)) == expected
+
+
+def test_report_consensus_vectors():
+    for vector in _load("report_consensus.json")["vectors"]:
+        signature = consensus_signature(vector["report"])
+        assert signature == vector["signature"]  # SPACED form
+        assert signature != vector["compact_form_sha256"]  # NOT the compact §2 form
+        assert verify_report(vector["signed_report"]) is True

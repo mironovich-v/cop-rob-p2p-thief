@@ -220,3 +220,11 @@
   audit skips (no forfeit). Cov 99% on `finish`. FR-14 DONE.
 - **Lesson:** tamper_forfeit is board-independent — the honest peer wins by
   technical decision regardless of the survival/capture result.
+
+## 2026-07-23 · Stage 6 · Implementation · report consensus signature (6.3)
+- **Output:** `reporting/report_writer.py` (`consensus_signature` SPACED form,
+  `sign_report` sign-then-insert under `חתימת_קונסנזוס_משותפת`, `verify_report`);
+  conformance `test_report_consensus_vectors`; `test_report_writer` (4); authored
+  `PRD_interop_serialization`. Cov 99%. **ALL 6 CORE surfaces now pass.** Closes Stage 6.
+- **Lesson:** the report signature is the deliberate 2nd (spaced) serializer; the
+  vector's `compact_form_sha256` proves the compact form would fail settlement.

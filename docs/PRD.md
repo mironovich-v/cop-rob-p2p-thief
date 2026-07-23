@@ -54,7 +54,7 @@ Definition of Done (§13) measurable. Boxes are checked here as criteria are met
 (and mirrored in `docs/requirements_matrix.md`).
 
 **Interoperability**
-- [ ] AC1 — every league CORE vector reproduced by *our* production functions; kit regeneration shows zero drift.
+- [~] AC1 — every league CORE vector reproduced by *our* production functions *(all 6 pass, 6.3)*; kit-regeneration drift check in CI still to wire.
 - [ ] AC2 — ≥1 cross-implementation game over a real tunnel audits and settles byte-identically with another team / sparring peer; zero false tamper-forfeits.
 - [ ] AC3 — the emitted email body equals the exact hashed canonical report bytes.
 
