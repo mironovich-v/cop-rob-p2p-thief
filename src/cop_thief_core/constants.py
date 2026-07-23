@@ -68,6 +68,8 @@ NONCE_BYTES = 16  # secrets.token_hex(NONCE_BYTES) -> a 32-hex-char nonce
 VERDICT_TRUTH = "truth"
 VERDICT_LIE = "lie"
 
+FINAL_CAUGHT_HINT = "You got me."  # the mandatory final message once captured
+
 
 def directions_from_move_set(move_set: list[str] | None) -> tuple[Direction, ...] | None:
     """Map a config ``move_set`` (e.g. ["N","S","E","W","STAY"]) to Directions.

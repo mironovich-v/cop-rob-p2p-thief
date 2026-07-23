@@ -70,7 +70,7 @@ transport; results/audit agree.
 | [x] | 2.3b | negotiation + terms extraction + minimum-validation | `interop/negotiation.py` | ~90 | pregame_agreement | `test_negotiation` |
 | [x] | 2.4 | FastMCP server (4 tools) + client | `infra/mcp_server.py`, `infra/mcp_client.py` | ~180 | mcp_protocol | `test_mcp_server`, `test_mcp_client` |
 | [x] | 2.5a | sealing + handshake + FakeTransport | `orchestration/{sealing,handshake}.py`, `conftest` | ~110 | orchestrator_fsm, pregame_agreement | `test_sealing`, `test_handshake` |
-| [ ] | 2.5b | PeerRuntime FSM (turn loop, handler/sender, audit/summary) | `orchestration/runtime.py` | ~200 | orchestrator_fsm, player_agents | `test_runtime` (2 peers, FakeTransport) |
+| [x] | 2.5b | PeerRuntime FSM (turn loop, handler/sender, audit/summary) | `orchestration/{runtime,turn_handler,summary}.py` | ~200 | orchestrator_fsm, player_agents | `test_runtime` (2 peers, FakeTransport) |
 | [ ] | 2.6 | SDK + series runner (role alternation) | `sdk/*.py` | ~150 | player_agents | `test_sdk`, `test_series` |
 
 ## Stage 3 — Strategy & belief

@@ -36,3 +36,22 @@ def verify(payload: Any, nonce: str, commit: str) -> None:
     actual = commit_of(payload, nonce)
     if actual != commit:
         raise CryptoError(f"Commit mismatch: expected {commit[:16]}…, got {actual[:16]}…")
+
+
+def audit_records(records: list[dict]) -> dict:
+    """Post-game audit: re-verify every {payload, nonce, commit} record.
+
+    Both peers run this on the opponent's revealed log; any mismatch fails the
+    audit (the honest peer wins by technical decision — tamper_forfeit).
+    """
+    failed: list[int] = []
+    for record in records:
+        try:
+            verify(record["payload"], record["nonce"], record["commit"])
+        except CryptoError:
+            failed.append(record["payload"].get("step", -1))
+    return {
+        "passed": not failed,
+        "verified_steps": len(records) - len(failed),
+        "failed_steps": failed,
+    }

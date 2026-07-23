@@ -134,6 +134,16 @@ class ConfigManager:
             node = node[part]
         return node
 
+    def override(self, dotted_key: str, value: Any) -> None:
+        """Set a value by dotted key (e.g. a GUI num_games choice). Creates
+        intermediate sections. Cannot weaken a signed term at match time — this is
+        for local runtime knobs, not the shared constitution."""
+        parts = dotted_key.split(".")
+        node = self._game
+        for part in parts[:-1]:
+            node = node.setdefault(part, {})
+        node[parts[-1]] = value
+
     @property
     def rate_limits(self) -> dict:
         return self._rates

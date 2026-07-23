@@ -156,3 +156,14 @@
   Cov 98%. Runtime (2.5) split into 2.5a (this) / 2.5b (PeerRuntime FSM).
 - **Lesson:** host-spec `collect_spec` (sysinfo) is deferred to 6.1, so identity/
   step records omit `spec` for now — added when Step-0 sealing lands.
+
+## 2026-07-23 · Stage 2 · Implementation · PeerRuntime FSM (2.5b)
+- **Output:** `orchestration/{runtime,turn_handler,summary}.py` (turn loop wiring
+  belief+smell+brain+sealing, capture/win claims, watchdog timeout, mutual audit →
+  tamper_forfeit); `interop.audit_records`; `FINAL_CAUGHT_HINT`; config `override`;
+  integration `tests/integration/test_runtime.py` (6). Cov 98%.
+- **Result:** two PeerRuntimes play a full sub-game in-process over FakeTransport —
+  both agree on result/winner, audits pass both ways, sealed per step, shared
+  game_uid derived, timeout handled. AC5 (no referee, results derived) met.
+- **Lesson:** dropped the GUI control channel + LLM token accounting for a focused
+  runtime; the reference's per-file split keeps each module ≤150 lines.

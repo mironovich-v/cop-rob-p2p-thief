@@ -60,7 +60,7 @@ Definition of Done (§13) measurable. Boxes are checked here as criteria are met
 
 **Distribution & local truth**
 - [ ] AC4 — Police & Thief run as separate processes with separate private dirs; no shared mutable state; neither can read the other's private truth.
-- [ ] AC5 — no central referee/server/board; results are derived from logged events, never trusted from a claim.
+- [x] AC5 — no central referee/server/board; results are derived from logged events, never trusted from a claim. *(demonstrated by the two-peer runtime match, 2.5b)*
 
 **Gameplay & reliability**
 - [ ] AC6 — local end-to-end play of a full 6-sub-game series finishes and audits cleanly with role alternation.
