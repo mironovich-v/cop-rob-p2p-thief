@@ -30,7 +30,7 @@
 | FR-16 | Local + public-tunnel; Host-header; pre-match probe; no security weakening | SPEC App.D; Assign §10 | 5 | WIP (probe + Host-header/tunnel docs done 5.1; live cross-tunnel run is manual AC12) | `test_connectivity`; manual/live (AC12) |
 | FR-17 | Sealed logs; mutual audit; replay integrity + reconstruction | Book ch.7; Ref `gui/replay*` | 7 | TODO | `test_replay_data`, `test_replay_normalize` |
 | FR-18 | Four artifacts share one `game_uid`; correct filenames; config_sha256 | SPEC §4; Ref `report/artifacts.py` | 7 | DONE (pure builders + schemas + helpers 7.1; emit-to-disk + SDK wiring + cross-peer mutual signature 7.2) | `test_artifacts` (6); `test_emit` (3); `test_series` (4 files) |
-| FR-19 | Report consensus signature (spaced, sign-then-insert Hebrew key); email = exact bytes | SPEC §6; Ref `report_writer.py` | 7 | TODO | `test_report_writer`, `report_consensus.json` |
+| FR-19 | Report consensus signature (spaced, sign-then-insert Hebrew key); email = exact bytes | SPEC §6; Ref `report_writer.py` | 7 | DONE (signature 6.3; official report + exact spaced-canonical body bytes 7.3a) | `test_report_writer`, `test_report_builder`, `report_consensus.json` |
 | FR-20 | Gmail send-only OAuth; draft default; fixed recipient | Book App.A; Ref `email_sender.py` | 7 | TODO | `test_email_sender` (mocked; never sends) |
 | FR-21 | Live GUI shows only local truth; full truth only in replay | Book ch.7; Ref `gui/board_view.py` | 7 | TODO | `test_live_apply`; GUI screenshot evidence |
 | FR-22 | Deterministic two-repo export; vendored core; cross-links; drift check | Assign §5,§11 | 7 | TODO | export smoke test; each export's own suite |
@@ -59,7 +59,7 @@
 | AC2 | Separate processes/dirs; no shared truth | TODO | integration test; architecture review |
 | AC3 | Local E2E finishes + audits clean; totals derived | TODO | `test_mcp_match` |
 | AC4 | Public endpoint via tunnel; ≥1 cross-impl game settles byte-identically | TODO | live cross-team run log |
-| AC5 | Emailed/draft bytes = agreed hashed bytes | TODO | `test_report_writer` + email byte check |
+| AC5 | Emailed/draft bytes = agreed hashed bytes | WIP (exact-bytes `report_body` done 7.3a; MIME-body equality asserted with the Gmail sender 7.3b) | `test_report_builder` + email byte check |
 | AC6 | ENH off by default, negotiation-gated | TODO | negotiation tests |
 | AC7 | GUI local-truth; replay integrity + reconstruction | TODO | GUI/replay tests + screenshots |
 | AC8 | Both exports self-contained + traceable to core commit | TODO | export + drift check |

@@ -40,7 +40,8 @@
 | 2026-07-23 | PR (6.2) | stage-6-audit | 5118b6b | Opus 4.8 · high | adversarial audit test: tampered opponent log -> tamper_forfeit (honest peer wins) | ~0.1 session | merged |
 | 2026-07-23 | PR (6.3) | stage-6-report-sig | d8e8347 | Opus 4.8 · high | report consensus signature (spaced) + PRD_interop_serialization; ALL 6 CORE vectors pass | ~0.2 session | merged |
 | 2026-07-24 | PR (7.1) | stage-7-artifacts | acb0929 | Opus 4.8 · high | four JSON artifact builders (declaration/config/log/result) + schemas/helpers + PRD_logging_audit_reporting | ~0.2 session | merged |
-| 2026-07-25 | PR (7.2) | stage-7-emit | (pending) | Opus 4.8 · high | emit_series writes 4 artifacts to disk + wired into SDK.run_peer; cross-peer mutual-signature test | ~0.2 session | in review |
+| 2026-07-25 | PR (7.2) | stage-7-emit | 8f14f69 | Opus 4.8 · high | emit_series writes 4 artifacts to disk + wired into SDK.run_peer; cross-peer mutual-signature test | ~0.2 session | merged |
+| 2026-07-25 | PR (7.3a) | stage-7-report-body | (pending) | Opus 4.8 · high | official Hebrew emailed report (build_report) + exact-bytes report_body + PRD_email_reporting | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

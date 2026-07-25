@@ -249,3 +249,16 @@
 - **Lesson:** the mutual signature must hash ONLY the symmetric outcome
   (roles/result/score/aggregate) — never per-peer tokens or wall-clock timestamps —
   so both peers, seeing mirrored roles, still produce byte-identical `sha256`.
+
+## 2026-07-25 · Stage 7 · Implementation · official emailed report body (7.3a)
+- **Context:** studying SPEC §5/§6 + the kit revealed TWO surfaces — the cross-peer
+  consensus SIGNATURE (spaced, Hebrew key; done 6.3) vs. the EMAILED report body.
+  Per §36 the v3.0.0 reference is ground truth: each team emails its own rich Hebrew
+  `build_report`, self-signed; the body must be exact hashed canonical bytes.
+- **Output:** `reporting/report_builder.py` — `build_report(summary, terms)` (book
+  ch.8 Hebrew schema, spec/token declaration from the sealed step-0 record,
+  sign-then-insert) + `report_body` (spaced canonical, never indent=2). Authored
+  `PRD_email_reporting` (AC-E1..E6). `test_report_builder` (5). Cov 98.56%.
+- **Lesson:** the emailed body reuses the SPACED consensus serializer (not compact),
+  keeps Hebrew literal (`ensure_ascii=False`), and a re-serialized/pretty email
+  nearly scored 0 in EX06 — so `report_body` returns the exact preimage-form bytes.
