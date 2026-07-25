@@ -13,7 +13,7 @@
 > - Author a mechanism's `docs/PRD_*.md` before its slice; strict linear stage
 >   progression (finish + merge a stage before the next).
 
-**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ✅ · Stage 5 ✅ · Stage 6 ✅ (commit-reveal, audit, report sig). Two-peer distributed match runs end-to-end; **all 6/6 CORE vectors pass**. Remaining: Stage 7 (reporting shell) → RTS.
+**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ✅ · Stage 5 ✅ · Stage 6 ✅ (commit-reveal, audit, report sig). Two-peer distributed match runs end-to-end; **all 6/6 CORE vectors pass**. Stage 7 in progress (7.1 four artifact builders ✅). Remaining: 7.2–7.7 → RTS.
 
 > **Build order (ADR-16, Option A):** belief (3.1) → brains (3.2) → smell (4.1)
 > are built **before** the runtime (2.5/2.6), which integrates them. Tasks keep
@@ -117,7 +117,7 @@ Exit: four artifacts + report + Gmail draft + GUI + replay + two-repo export.
 | Done | Task | Scope | Key files | ~LOC | PRD | Tests |
 |------|------|-------|-----------|------|-----|-------|
 | [ ] | D7 | design PRDs | — | — | logging_audit_reporting, email_reporting, gui_replay, two_repo_export | — |
-| [ ] | 7.1 | four artifact builders + schemas + filenames | `reporting/artifacts*.py` | ~180 | logging_audit_reporting | `test_artifacts`, `test_series` |
+| [x] | 7.1 | four artifact builders + schemas + filenames | `reporting/artifacts*.py` | ~180 | logging_audit_reporting | `test_artifacts` |
 | [ ] | 7.2 | Hebrew report emit + emitters wiring | `reporting/emit.py`, `report_writer.py` | ~120 | logging_audit_reporting | `test_report_writer` |
 | [ ] | 7.3 | Gmail send-only OAuth (draft default) | `infra/email_sender.py` | ~130 | email_reporting | `test_email_sender` |
 | [ ] | 7.4 | live GUI (local-truth only) | `gui/*` (coverage-omit) | ~200 | gui_replay | `test_live_apply`, `test_game_mode` |

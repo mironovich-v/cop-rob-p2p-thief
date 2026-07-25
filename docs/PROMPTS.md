@@ -228,3 +228,14 @@
   `PRD_interop_serialization`. Cov 99%. **ALL 6 CORE surfaces now pass.** Closes Stage 6.
 - **Lesson:** the report signature is the deliberate 2nd (spaced) serializer; the
   vector's `compact_form_sha256` proves the compact form would fail settlement.
+
+## 2026-07-24 · Stage 7 · Implementation · four JSON artifact builders (7.1)
+- **Output:** `reporting/{artifact_schemas,artifact_helpers,artifacts}.py` — pure
+  `build_{declaration,config_artifact,log,result}` (all share one `game_uid`,
+  cross-link via `links`); `config_sha256` = compact-canonical lock over terms;
+  `log`/`result` `mutual_agreement.sha256` = SPACED `consensus_signature`;
+  declaration group blocks self-signed with the six book hardware fields. Authored
+  `PRD_logging_audit_reporting` (AC-R1..R7); `test_artifacts` (6). Cov 98%.
+- **Lesson:** the two locks use different serializers on purpose — `config_sha256`
+  compact (App-F byte-identity), `mutual_agreement` spaced (report consensus) — so
+  the pure builders reuse the exact CORE-vector functions and can't drift.
