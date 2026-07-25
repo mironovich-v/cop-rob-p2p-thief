@@ -239,3 +239,13 @@
 - **Lesson:** the two locks use different serializers on purpose — `config_sha256`
   compact (App-F byte-identity), `mutual_agreement` spaced (report consensus) — so
   the pure builders reuse the exact CORE-vector functions and can't drift.
+
+## 2026-07-25 · Stage 7 · Implementation · artifact emit-to-disk + SDK wiring (7.2)
+- **Output:** `reporting/emit.py` `emit_series` — writes declaration + result +
+  per-sub-game config/log into `<logs_dir>/<group_id>/`, deriving per-group scores
+  from `domain.scoring`; wired into `SimulationSdk.run_peer` (emits under workdir,
+  returns `report`+`artifacts_dir`). `test_emit` (3) + `test_series` now asserts 4
+  files on disk and cross-peer mutual-signature agreement. Cov 98.55%.
+- **Lesson:** the mutual signature must hash ONLY the symmetric outcome
+  (roles/result/score/aggregate) — never per-peer tokens or wall-clock timestamps —
+  so both peers, seeing mirrored roles, still produce byte-identical `sha256`.

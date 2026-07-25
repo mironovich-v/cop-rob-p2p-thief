@@ -29,7 +29,7 @@
 | FR-15 | One canonical JSON fn; 4 serializations; CORE vectors from our code | SPEC §2,§6; Assign §7 | 6 | DONE (all 6 CORE surfaces pass from our code: canonical/commit/terms/game_uid/pheromone/report_consensus) | `tests/conformance/*` (6 vectors) |
 | FR-16 | Local + public-tunnel; Host-header; pre-match probe; no security weakening | SPEC App.D; Assign §10 | 5 | WIP (probe + Host-header/tunnel docs done 5.1; live cross-tunnel run is manual AC12) | `test_connectivity`; manual/live (AC12) |
 | FR-17 | Sealed logs; mutual audit; replay integrity + reconstruction | Book ch.7; Ref `gui/replay*` | 7 | TODO | `test_replay_data`, `test_replay_normalize` |
-| FR-18 | Four artifacts share one `game_uid`; correct filenames; config_sha256 | SPEC §4; Ref `report/artifacts.py` | 7 | WIP (pure builders + schemas + helpers + config_sha256/mutual_agreement done 7.1; emit-to-disk + SDK wiring 7.2) | `test_artifacts` (6); `test_series` (4 files, 7.2) |
+| FR-18 | Four artifacts share one `game_uid`; correct filenames; config_sha256 | SPEC §4; Ref `report/artifacts.py` | 7 | DONE (pure builders + schemas + helpers 7.1; emit-to-disk + SDK wiring + cross-peer mutual signature 7.2) | `test_artifacts` (6); `test_emit` (3); `test_series` (4 files) |
 | FR-19 | Report consensus signature (spaced, sign-then-insert Hebrew key); email = exact bytes | SPEC §6; Ref `report_writer.py` | 7 | TODO | `test_report_writer`, `report_consensus.json` |
 | FR-20 | Gmail send-only OAuth; draft default; fixed recipient | Book App.A; Ref `email_sender.py` | 7 | TODO | `test_email_sender` (mocked; never sends) |
 | FR-21 | Live GUI shows only local truth; full truth only in replay | Book ch.7; Ref `gui/board_view.py` | 7 | TODO | `test_live_apply`; GUI screenshot evidence |

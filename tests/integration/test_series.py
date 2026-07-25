@@ -51,10 +51,10 @@ def test_two_sub_game_series_alternates_and_shares_uid(
         assert mine["result"] == theirs["result"]
 
 
-def test_sdk_run_peer_plays_series(transport_pair):
+def test_sdk_run_peer_plays_series(transport_pair, tmp_path):
     thief_t, police_t = transport_pair
-    thief_sdk = SimulationSdk(REPO_ROOT / "config" / "thief")
-    police_sdk = SimulationSdk(REPO_ROOT / "config" / "police")
+    thief_sdk = SimulationSdk(REPO_ROOT / "config" / "thief", workdir=tmp_path / "thief")
+    police_sdk = SimulationSdk(REPO_ROOT / "config" / "police", workdir=tmp_path / "police")
     thief_sdk.config.override("game.num_games", 2)
     police_sdk.config.override("game.num_games", 2)
     results: dict = {}
@@ -70,3 +70,11 @@ def test_sdk_run_peer_plays_series(transport_pair):
     assert len(results["thief"]["summaries"]) == 2
     assert results["thief"]["game_uid"] == results["police"]["game_uid"]
     assert results["thief"]["result"]["result"] in ("capture", "survival")
+    # both peers emitted their four artifacts and agree on the mutual signature
+    for name in ("thief", "police"):
+        files = sorted(p.name for p in Path(results[name]["artifacts_dir"]).glob("*.json"))
+        assert len(files) == 6  # declaration + result + 2*(config+log)
+        assert any(f.startswith("declaration_") for f in files)
+        assert any(f.startswith("result_") for f in files)
+    assert results["thief"]["report"]["mutual_agreement"]["sha256"] == \
+        results["police"]["report"]["mutual_agreement"]["sha256"]

@@ -9,6 +9,7 @@ from pathlib import Path
 
 from cop_thief_core.constants import Role
 from cop_thief_core.interop.negotiation import terms_from_config, validate_minimums
+from cop_thief_core.reporting.emit import emit_series
 from cop_thief_core.sdk.series import run_series
 from cop_thief_core.shared.config import ConfigManager
 
@@ -49,16 +50,19 @@ class SimulationSdk:
             audit_send_timeout=cfg.get("network.audit_send_timeout_seconds", 10),
         )
 
-    def run_peer(self, role: str, stub_llm: bool = True, transport=None, listener=None) -> dict:
-        """Play the whole series and return the summaries + shared ids.
+    def run_peer(self, role: str, stub_llm: bool = True, transport=None,
+                 listener=None, emit: bool = True) -> dict:
+        """Play the whole series, emit the four JSON artifacts, and return the
+        summaries + shared ids + the aggregated report.
 
-        (Artifact/report/email emission is added in the reporting stage.)
+        Artifacts land under ``<workdir>/<reporting.dir>/<group_id>/``; email
+        sending is added in Stage 7.3.
         """
         peer_role = Role(role)
         validate_minimums(terms_from_config(self.config))  # fail fast before any server
         transport = transport or self._build_transport(peer_role)
         series = run_series(self.config, peer_role, self._build_llm(stub_llm), transport, listener)
-        return {
+        out = {
             "summaries": series.summaries,
             "result": series.summaries[-1],
             "game_id": series.game_id,
@@ -66,3 +70,8 @@ class SimulationSdk:
             "own_identity": series.own_identity,
             "peer_identity": series.peer_identity,
         }
+        if emit:
+            logs_dir = self._workdir / self.config.get("paths.logs_dir", "logs")
+            out["report"] = emit_series(self.config, logs_dir, series)
+            out["artifacts_dir"] = str(logs_dir / series.own_identity.get("group_id", ""))
+        return out

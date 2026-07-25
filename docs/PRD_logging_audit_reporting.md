@@ -48,7 +48,7 @@ trusted running tally.
 | `reporting/artifact_helpers.py` | filenames, `links`, `canonical_sha256`, `ended_at`, `group_block`, `hardware_spec`, `tokens_series` | 58 |
 | `reporting/artifacts.py` | pure `build_{declaration,config_artifact,log,result}` | 117 |
 | `reporting/report_writer.py` | `consensus_signature` / `sign_report` / `verify_report` (Stage 6.3) | — |
-| `reporting/emit.py` (7.2) | write the 4 files to disk; wire into `SimulationSdk.run_peer` | ⏳ |
+| `reporting/emit.py` | write the 4 files to disk per series; wire into `SimulationSdk.run_peer` | 94 |
 
 All builders are **pure** (dict in → dict out, no I/O), so they are exhaustively
 unit-testable offline and reused unchanged by the emit writer and the GUI/replay.
@@ -65,8 +65,10 @@ unit-testable offline and reused unchanged by the emit writer and the GUI/replay
 - **AC-R5** — `result.final_result.tokens_total_series` sums per-group tokens across
   sub-games; `mutual_agreement.confirmed` is true only if every sub-game's log
   verified. ✅
-- **AC-R6** (7.2) — `emit_series` writes the 4 files with the derived names; a peer
-  re-reading them reproduces every hash. ⏳
+- **AC-R6** — `emit_series` writes the 4 files with the derived names under
+  `<workdir>/<logs_dir>/<group_id>/`; the returned result equals the on-disk bytes
+  and both peers derive the **same** `mutual_agreement.sha256` (symmetric outcome
+  only — no per-peer tokens/timestamps in the signed preimage). ✅
 - **AC-R7** — result totals are DERIVED from the sealed log, never a trusted tally
   (ties AC5 in `docs/PRD.md`). ✅
 
