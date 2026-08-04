@@ -13,7 +13,7 @@
 > - Author a mechanism's `docs/PRD_*.md` before its slice; strict linear stage
 >   progression (finish + merge a stage before the next).
 
-**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ✅ · Stage 5 ✅ · Stage 6 ✅ (commit-reveal, audit, report sig). Two-peer distributed match runs end-to-end; **all 6/6 CORE vectors pass**. Stage 7 in progress (7.1 artifact builders ✅, 7.2 emit-to-disk + SDK wiring ✅, 7.3a official Hebrew emailed-report body ✅; a full series writes its four JSON artifacts, peers agree on the mutual signature, and the exact-bytes email body is built). Remaining: 7.3b Gmail send + 7.4–7.7 → RTS.
+**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ✅ · Stage 5 ✅ · Stage 6 ✅ (commit-reveal, audit, report sig). Two-peer distributed match runs end-to-end; **all 6/6 CORE vectors pass**. Stage 7 in progress (7.1 artifact builders ✅, 7.2 emit-to-disk + SDK wiring ✅, 7.3a official Hebrew emailed-report body ✅; a full series writes its four JSON artifacts, peers agree on the mutual signature, and the exact-bytes email body is built). 7.3b Gmail send-only (raw-HTTPS, draft/disabled-default, gatekeeper-routed, fully mockable) ✅. Remaining: 7.4–7.7 → RTS. Reporting layer is feature-complete pending final CLI/SDK wiring of the email step (7.7) and owner OAuth secrets (OD-3).
 
 > **Build order (ADR-16, Option A):** belief (3.1) → brains (3.2) → smell (4.1)
 > are built **before** the runtime (2.5/2.6), which integrates them. Tasks keep
@@ -120,7 +120,7 @@ Exit: four artifacts + report + Gmail draft + GUI + replay + two-repo export.
 | [x] | 7.1 | four artifact builders + schemas + filenames | `reporting/artifacts*.py` | ~180 | logging_audit_reporting | `test_artifacts` |
 | [x] | 7.2 | artifact emit-to-disk + SDK wiring | `reporting/emit.py`, `sdk/sdk.py` | ~120 | logging_audit_reporting | `test_emit`, `test_series` (4 files) |
 | [x] | 7.3a | official Hebrew emailed report + exact body bytes | `reporting/report_builder.py` | ~70 | email_reporting | `test_report_builder` |
-| [ ] | 7.3b | Gmail send-only OAuth (draft default, gatekeeper) | `infra/email_sender.py` | ~130 | email_reporting | `test_email_sender` |
+| [x] | 7.3b | Gmail send-only OAuth (raw-HTTPS, draft default, gatekeeper) | `infra/email_sender.py`, `infra/gmail_client.py` | ~140 | email_reporting | `test_email_sender`, `test_gmail_client` |
 | [ ] | 7.4 | live GUI (local-truth only) | `gui/*` (coverage-omit) | ~200 | gui_replay | `test_live_apply`, `test_game_mode` |
 | [ ] | 7.5 | replay viewer + integrity verify | `gui/replay*.py` | ~180 | gui_replay | `test_replay_data`, `test_replay_normalize` |
 | [ ] | 7.6 | two-repo export + drift check | `scripts/export_repos.py` | ~150 | two_repo_export | export smoke; each export's own suite |

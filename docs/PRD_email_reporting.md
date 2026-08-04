@@ -65,11 +65,17 @@ a Windows-path `gg:email` skill — §36.6). Requirements:
   literal; a parsed body re-verifies. ✅
 - **AC-E3** — spec/token declaration is sourced from the sealed step-0 record and
   the summary (derived, not claimed). ✅
-- **AC-E4** (7.3b) — email defaults to disabled/draft; a real send needs explicit
-  opt-in; tests never send. ⏳
-- **AC-E5** (7.3b) — all Gmail calls go through the gatekeeper; failures return a
-  structured reason, never crash the match. ⏳
-- **AC-E6** (7.3b) — the MIME body equals `report_body` bytes exactly. ⏳
+- **AC-E4** — email defaults to disabled; when enabled, defaults to `draft`; a real
+  send needs explicit `email.mode="send"`; the injected transport means tests never
+  send and need no credentials. ✅
+- **AC-E5** — every Gmail call (token refresh + draft/send) goes through the
+  `ApiGatekeeper` (service `email`); a transport failure returns a structured
+  reason and never raises past `send_report`. ✅
+- **AC-E6** — `build_raw` MIME decodes back to exactly `report_body` (Hebrew
+  literal, UTF-8), proven by round-trip. ✅
+
+Implementation split: `infra/gmail_client.py` (raw-HTTPS, stdlib-only, injectable
+`http`) + `infra/email_sender.py` (policy + gatekeeper). No new dependencies.
 
 ## 5. Open decisions / owner input (OD-3)
 

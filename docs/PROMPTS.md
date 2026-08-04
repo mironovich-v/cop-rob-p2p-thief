@@ -262,3 +262,14 @@
 - **Lesson:** the emailed body reuses the SPACED consensus serializer (not compact),
   keeps Hebrew literal (`ensure_ascii=False`), and a re-serialized/pretty email
   nearly scored 0 in EX06 — so `report_body` returns the exact preimage-form bytes.
+
+## 2026-07-29 · Stage 7 · Implementation · Gmail send-only (raw-HTTPS) (7.3b)
+- **Goal (owner):** portable Gmail send-only OAuth, raw HTTPS, no new deps.
+- **Output:** `infra/gmail_client.py` (stdlib urllib/base64/email: refresh token →
+  create draft/send; injectable `http`; `credentials_from_dicts`) + `infra/
+  email_sender.py` (disabled/draft-default gates, gatekeeper-routed, structured
+  result, creds from git-ignored `secrets/` via env). `test_gmail_client` (3) +
+  `test_email_sender` (5, FakeHttp — never sends). Cov 98.28%.
+- **Lesson:** injecting the `http` callable makes the whole OAuth+Gmail path
+  offline-testable (token refresh, draft vs send URL, retry-then-give-up) with zero
+  network and zero credentials; `build_raw` MIME round-trips to the exact body bytes.
