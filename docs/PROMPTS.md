@@ -295,3 +295,15 @@
   shell (7.4c, coverage-omit) keeps the local-truth boundary and event ordering
   under real integration test, not just synthetic-event unit tests. runtime.py is
   now 141 code lines — near the 150 cap; the next runtime change may need a split.
+
+## 2026-08-05 · Stage 7 · Implementation · live Tk shell (7.4c)
+- **Output:** `gui/board_view.py` (canvas: my truth + barriers + visited + belief
+  heatmap; cell_px injected from config), `gui/window.py` (PeerWindow chrome +
+  window protocol), `gui/player.py` (LivePeerApp: threads `sdk.run_peer`, queues
+  events, drains via the 7.4a view-model), `gui/__main__.py`
+  (`python -m cop_thief_core.gui`). Display-guarded `test_gui_shell` (2). Cov 98.29%.
+- **Lesson:** `DISPLAY=:0` (WSLg) is present here, so the smoke test builds a REAL
+  window and asserts labels/board — but it `pytest.importorskip`s tkinter and skips
+  on `TclError`, so headless CI stays green. No PIL/scrot for a PNG, so the committed
+  screenshot is an honest owner manual step; I verified the full LivePeerApp renders
+  end-to-end (board exported to PostScript) rather than fabricating an image.

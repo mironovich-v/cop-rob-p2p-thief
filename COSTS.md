@@ -44,7 +44,8 @@
 | 2026-07-25 | PR (7.3a) | stage-7-report-body | 7c6f320 | Opus 4.8 · high | official Hebrew emailed report (build_report) + exact-bytes report_body + PRD_email_reporting | ~0.2 session | merged |
 | 2026-07-29 | PR (7.3b) | stage-7-gmail-send | ebfec0c | Opus 4.8 · high | raw-HTTPS Gmail send-only client + gatekeeper-routed EmailSender (draft/disabled default, no new deps) | ~0.2 session | merged |
 | 2026-08-04 | PR (7.4a) | stage-7-gui-viewmodel | bc54c14 | Opus 4.8 · high | live-GUI view-model (event→window, game-mode classifier) + local-truth boundary test + PRD_gui_replay | ~0.2 session | merged |
-| 2026-08-05 | PR (7.4b) | stage-7-runtime-events | (pending) | Opus 4.8 · high | runtime emits moved/game_over live event stream (additive) + event-stream integration test | ~0.1 session | in review |
+| 2026-08-05 | PR (7.4b) | stage-7-runtime-events | 3e941cf | Opus 4.8 · high | runtime emits moved/game_over live event stream (additive) + event-stream integration test | ~0.1 session | merged |
+| 2026-08-05 | PR (7.4c) | stage-7-gui-shell | (pending) | Opus 4.8 · high | live Tk shell (board_view/window/player/__main__) + display-guarded smoke test; `python -m cop_thief_core.gui` | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

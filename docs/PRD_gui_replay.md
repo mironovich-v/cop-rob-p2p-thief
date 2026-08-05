@@ -71,8 +71,12 @@ per-step model string.
   `game_over`. ✅
 - **AC-G3** — `game_mode` reports Python/"None" for template and names the model
   for LLM providers; missing config defaults to Python. ✅
-- **AC-G4** (7.4b) — the Tk window renders my truth + barriers + visited + heatmap;
-  a live run shows moves and the final result; screenshot captured. ⏳
+- **AC-G4** — the Tk shell (`board_view` + `window` + `player` + `__main__`) renders
+  my truth + barriers + visited + heatmap and applies the live event stream through
+  the 7.4a view-model. Verified by the display-guarded `test_gui_shell` and a manual
+  build/render (board exported to PostScript). ✅ (code) / ⏳ (committed PNG
+  screenshot — owner manual step on a WSLg/X display; see §8). No opponent marker is
+  ever drawn in live mode (`opponent_pos=None`).
 - **AC-G5** (7.5) — the replay viewer reconstructs both positions ONLY from the
   revealed logs and verifies commit integrity. ⏳
 
@@ -80,3 +84,20 @@ per-step model string.
 
 Report/email (`PRD_email_reporting`), the four artifacts
 (`PRD_logging_audit_reporting`), two-repo export (`PRD_two_repo_export`).
+
+## 8. Running the live GUI (7.4c)
+
+Two windows, one per role — each with its own config dir and opponent URL:
+
+```bash
+uv run python -m cop_thief_core.gui --config config/police --role police
+uv run python -m cop_thief_core.gui --config config/thief  --role thief
+```
+
+Press **Start** in each window; the board shows that peer's own position, known
+barriers, visited trail, and the opponent-belief heatmap (never opponent truth).
+`--real-llm` opts into the configured banter provider (default is the offline
+stub — the MOVE is always pure Python either way). On a headless host the
+display-guarded `test_gui_shell` skips; on a display it builds a real window and
+asserts the render. **Screenshot:** run the command on a WSLg/X display and
+capture the window for the submission (FR-21/AC-G4 evidence).
