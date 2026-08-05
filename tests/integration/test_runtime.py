@@ -84,3 +84,23 @@ def test_timeout_when_opponent_silent(police_config):
     police_config.override("network.turn_timeout_seconds", 0.05)
     lonely = PeerRuntime(Role.POLICE, police_config, _SilentTransport())
     assert lonely.run(skip_negotiation=True)["result"] == "timeout"
+
+
+def test_runtime_emits_live_event_stream(transport_pair, thief_config, police_config):
+    """The listener sees negotiated -> moved... -> game_over, and no `moved`
+    view ever carries opponent truth (the live-GUI local-truth boundary)."""
+    thief_t, police_t = transport_pair
+    events: list[dict] = []
+    thief = PeerRuntime(Role.THIEF, thief_config, thief_t, listener=events.append)
+    police = PeerRuntime(Role.POLICE, police_config, police_t)
+    _run_match(thief, police)
+
+    kinds = [event["type"] for event in events]
+    assert kinds[0] == "negotiated"
+    assert kinds[-1] == "game_over"
+    assert "moved" in kinds
+    for event in events:
+        if event["type"] == "moved":
+            assert "commit" in event and len(event["commit"]) == 64
+            assert not any("opp" in key or "enemy" in key for key in event["view"])
+    assert events[-1]["summary"]["result"] in ("capture", "survival")

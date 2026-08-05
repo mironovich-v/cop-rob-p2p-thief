@@ -32,7 +32,7 @@
 | FR-18 | Four artifacts share one `game_uid`; correct filenames; config_sha256 | SPEC §4; Ref `report/artifacts.py` | 7 | DONE (pure builders + schemas + helpers 7.1; emit-to-disk + SDK wiring + cross-peer mutual signature 7.2) | `test_artifacts` (6); `test_emit` (3); `test_series` (4 files) |
 | FR-19 | Report consensus signature (spaced, sign-then-insert Hebrew key); email = exact bytes | SPEC §6; Ref `report_writer.py` | 7 | DONE (signature 6.3; official report + exact spaced-canonical body bytes 7.3a) | `test_report_writer`, `test_report_builder`, `report_consensus.json` |
 | FR-20 | Gmail send-only OAuth; draft default; fixed recipient | Book App.A; Ref `email_sender.py` | 7 | DONE (raw-HTTPS stdlib client + gatekeeper-routed sender; draft/disabled default; injectable http) | `test_email_sender`, `test_gmail_client` (mocked; never sends) |
-| FR-21 | Live GUI shows only local truth; full truth only in replay | Book ch.7; Ref `gui/board_view.py` | 7 | WIP (view-model + local-truth boundary test done 7.4a; Tk shell + runtime event stream 7.4b) | `test_live_apply`, `test_game_mode`; GUI screenshot evidence |
+| FR-21 | Live GUI shows only local truth; full truth only in replay | Book ch.7; Ref `gui/board_view.py` | 7 | WIP (view-model + local-truth boundary 7.4a; runtime live event stream, no opponent truth in `moved` views 7.4b; Tk shell 7.4c) | `test_live_apply`, `test_game_mode`, `test_runtime` (stream); GUI screenshot evidence |
 | FR-22 | Deterministic two-repo export; vendored core; cross-links; drift check | Assign §5,§11 | 7 | TODO | export smoke test; each export's own suite |
 
 ## Non-functional requirements

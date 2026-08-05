@@ -284,3 +284,14 @@
   `test_live_apply` asserts the runtime snapshot key-set carries no opponent
   position/role, so the live board cannot leak truth even by mistake. Splitting the
   pure view-model from the Tk shell keeps the graded invariant fully unit-tested.
+
+## 2026-08-05 · Stage 7 · Implementation · runtime live event stream (7.4b)
+- **Output:** `orchestration/runtime.py` now emits `moved` (after each sealed send)
+  and `game_over` (after `finish`) listener events, completing the live stream the
+  GUI consumes. Additive — listener defaults to no-op, so headless runs/tests are
+  unchanged. `test_runtime` gains an event-stream test (ordered
+  negotiated→moved…→game_over; no `moved` view carries opponent truth). Cov 98.29%.
+- **Lesson:** emitting the stream in the orchestration layer (tested) BEFORE the Tk
+  shell (7.4c, coverage-omit) keeps the local-truth boundary and event ordering
+  under real integration test, not just synthetic-event unit tests. runtime.py is
+  now 141 code lines — near the 150 cap; the next runtime change may need a split.

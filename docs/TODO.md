@@ -13,7 +13,7 @@
 > - Author a mechanism's `docs/PRD_*.md` before its slice; strict linear stage
 >   progression (finish + merge a stage before the next).
 
-**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ✅ · Stage 5 ✅ · Stage 6 ✅ (commit-reveal, audit, report sig). Two-peer distributed match runs end-to-end; **all 6/6 CORE vectors pass**. Stage 7 in progress (7.1 artifact builders ✅, 7.2 emit-to-disk + SDK wiring ✅, 7.3a official Hebrew emailed-report body ✅; a full series writes its four JSON artifacts, peers agree on the mutual signature, and the exact-bytes email body is built). 7.3b Gmail send-only (raw-HTTPS, draft/disabled-default, gatekeeper-routed, fully mockable) ✅. 7.4a GUI view-model (event→window mapping, game-mode classifier, local-truth boundary test) ✅. Remaining: 7.4b Tk shell + 7.5–7.7 → RTS. Reporting layer is feature-complete pending final CLI/SDK wiring of the email step (7.7) and owner OAuth secrets (OD-3).
+**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ✅ · Stage 5 ✅ · Stage 6 ✅ (commit-reveal, audit, report sig). Two-peer distributed match runs end-to-end; **all 6/6 CORE vectors pass**. Stage 7 in progress (7.1 artifact builders ✅, 7.2 emit-to-disk + SDK wiring ✅, 7.3a official Hebrew emailed-report body ✅; a full series writes its four JSON artifacts, peers agree on the mutual signature, and the exact-bytes email body is built). 7.3b Gmail send-only (raw-HTTPS, draft/disabled-default, gatekeeper-routed, fully mockable) ✅. 7.4a GUI view-model ✅, 7.4b runtime live event stream (moved/game_over emitted, no opponent truth in any `moved` view) ✅. Remaining: 7.4c Tk shell + 7.5–7.7 → RTS. Reporting layer is feature-complete pending final CLI/SDK wiring of the email step (7.7) and owner OAuth secrets (OD-3).
 
 > **Build order (ADR-16, Option A):** belief (3.1) → brains (3.2) → smell (4.1)
 > are built **before** the runtime (2.5/2.6), which integrates them. Tasks keep
@@ -122,7 +122,8 @@ Exit: four artifacts + report + Gmail draft + GUI + replay + two-repo export.
 | [x] | 7.3a | official Hebrew emailed report + exact body bytes | `reporting/report_builder.py` | ~70 | email_reporting | `test_report_builder` |
 | [x] | 7.3b | Gmail send-only OAuth (raw-HTTPS, draft default, gatekeeper) | `infra/email_sender.py`, `infra/gmail_client.py` | ~140 | email_reporting | `test_email_sender`, `test_gmail_client` |
 | [x] | 7.4a | GUI view-model (event→window, game-mode, local-truth boundary) | `gui/{live_apply,game_mode}.py` (coverage-omit) | ~110 | gui_replay | `test_live_apply`, `test_game_mode` |
-| [ ] | 7.4b | Tk shell (board_view/window/player) + runtime moved/game_over events | `gui/{board_view,window,player}.py`, `runtime.py` | ~250 | gui_replay | manual + screenshot |
+| [x] | 7.4b | runtime emits live event stream (moved / game_over) | `orchestration/runtime.py` | ~15 | gui_replay | `test_runtime` (event stream) |
+| [ ] | 7.4c | Tk shell (board_view / window / player) renders the stream | `gui/{board_view,window,player}.py` | ~250 | gui_replay | manual + screenshot |
 | [ ] | 7.5 | replay viewer + integrity verify | `gui/replay*.py` | ~180 | gui_replay | `test_replay_data`, `test_replay_normalize` |
 | [ ] | 7.6 | two-repo export + drift check | `scripts/export_repos.py` | ~150 | two_repo_export | export smoke; each export's own suite |
 | [ ] | 7.7 | academic README + submission checklist + tag | `README.md`, `docs/*` | docs | — | manual submission checklist |

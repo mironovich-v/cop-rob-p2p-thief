@@ -90,7 +90,9 @@ class PeerRuntime:
         if self.role is Role.THIEF:
             self._take_turn(None)
         self._turn_loop()
-        return finish(self)
+        summary = finish(self)
+        self._listen({"type": "game_over", "view": self.view(), "summary": summary})
+        return summary
 
     def _turn_loop(self) -> None:
         timeout = self._config.get("network.turn_timeout_seconds")
@@ -144,3 +146,8 @@ class PeerRuntime:
             record["commit"], capture_claim, claim_response, win_claim,
         )
         self._transport.send_turn(message.to_dict())
+        self._listen({
+            "type": "moved", "view": self.view(), "decision": decision,
+            "usage": {"total": 0, "match_total": self._tokens_total},
+            "commit": record["commit"],
+        })

@@ -42,16 +42,17 @@ so it is fully unit-tested against a `FakeWindow` with no display.
 
 | `event["type"]` | Emitted by | Window effect |
 |-----------------|-----------|----------------|
-| `negotiated` | runtime (now) | render; clock starts; status; thief gets first turn |
-| `incoming` | runtime (now) | render; show opponent hint; grant my turn |
-| `moved` | runtime (7.4b) | render; tokens / llm-time / hint-out / verdict / commit; end turn |
-| `game_over` | runtime (7.4b) | render; clock freezes; result + audit summary |
-| `error` | runtime | status only; **never** renders a board |
+| `negotiated` | runtime | render; clock starts; status; thief gets first turn |
+| `incoming` | runtime | render; show opponent hint; grant my turn |
+| `moved` | runtime | render; tokens / llm-time / hint-out / verdict / commit; end turn |
+| `game_over` | runtime | render; clock freezes; result + audit summary |
+| `error` | GUI worker | status only; **never** renders a board |
 
-The runtime emits `negotiated` / `incoming` today (`runtime.py`); `moved` /
-`game_over` emission is added additively next to the Tk shell (7.4b) — the
-view-model already consumes them, exercised by `test_live_apply` with synthetic
-events.
+The runtime emits the full `negotiated` / `incoming` / `moved` / `game_over` stream
+(`runtime.py`, additively — the listener defaults to no-op, so headless runs are
+unaffected); `test_runtime` asserts the ordered stream and that no `moved` view
+carries opponent truth. `error` is raised by the GUI worker on a startup/runtime
+exception. The Tk shell (7.4c) consumes this stream through the 7.4a view-model.
 
 ## 5. `game_mode` (book Table 22)
 
