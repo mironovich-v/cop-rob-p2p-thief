@@ -48,7 +48,8 @@
 | 2026-08-05 | PR (7.4c) | stage-7-gui-shell | df98916 | Opus 4.8 · high | live Tk shell (board_view/window/player/__main__) + display-guarded smoke test; `python -m cop_thief_core.gui` | ~0.2 session | merged |
 | 2026-08-05 | PR (7.5a) | stage-7-replay-data | e805fde | Opus 4.8 · high | replay data layer: commit-reveal re-verify + both-trajectory reconstruction from revealed logs | ~0.2 session | merged |
 | 2026-08-05 | PR (7.5b) | stage-7-replay-view | 143f867 | Opus 4.8 · high | Tk ReplayApp (--replay, both revealed trajectories, per-step commit verify) + smoke test | ~0.2 session | merged |
-| 2026-08-05 | PR (7.6a) | stage-7-agent-cli | (pending) | Opus 4.8 · high | headless role CLI (agent_cli.run_role) filling police/thief __main__ stubs; SDK-delegating | ~0.1 session | in review |
+| 2026-08-05 | PR (7.6a) | stage-7-agent-cli | 24d19ee | Opus 4.8 · high | headless role CLI (agent_cli.run_role) filling police/thief __main__ stubs; SDK-delegating | ~0.1 session | merged |
+| 2026-08-05 | PR (7.6b) | stage-7-export | (pending) | Opus 4.8 · high | deterministic two-repo export (vendored core + drift manifest, no secrets); vendored suite runs standalone | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

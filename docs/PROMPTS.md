@@ -342,3 +342,17 @@
 - **Lesson:** putting the CLI logic in ONE tested `agent_cli` (not the coverage-omit
   `__main__` files) satisfies "no business logic in CLI" (NFR-7) AND keeps it covered;
   the role `__main__` stays a 1-liner, so police/thief never diverge.
+
+## 2026-08-05 · Stage 7 · Implementation · two-repo export + drift check (7.6b)
+- **Output:** `scripts/export_lib.py` (deterministic `content_hash`, filtered
+  `copy_tree` that never carries secrets/junk, per-role pyproject/README templates)
+  + `scripts/export_repos.py` (`export_role`/`export_all`: vendors core + role pkg +
+  both configs + tests, writes `core_manifest.json`, raises on core drift). Added
+  `scripts` to pytest pythonpath; excluded `test_export.py` from the vendored tree.
+  `test_export` (5). Verified the REAL exporter + ran 24 VENDORED tests standalone in
+  an isolated `uv --no-project` env. Cov 98.31%.
+- **Lesson:** hashing only the vendored `cop_thief_core/` subtree (not per-role files
+  like config/role package) makes the drift manifest identical across both exports —
+  the one line that proves both came from the same core. Keeping timestamps OUT of
+  the hashed content makes re-export byte-identical; excluding the exporter's own
+  test (it needs the workspace `scripts/` path) keeps each export self-contained.

@@ -51,12 +51,15 @@ Deterministic, re-runnable, no secrets:
 
 - **AC-X1** — `python -m police_agent` / `-m thief_agent` each play a full series
   and write the four artifacts; `run_role` is covered by `test_agent_cli`. ✅ (7.6a)
-- **AC-X2** — export produces two self-contained trees; each imports and runs its
-  own test subset with no reference to the workspace or the sibling repo. ⏳ (7.6b)
-- **AC-X3** — both exports carry a `core_manifest.json` with the same core hash;
-  a drift check fails if they diverge. ⏳ (7.6b)
-- **AC-X4** — no secrets, `.env`, `secrets/`, or private match logs in either
-  export; re-running export from the same commit is byte-identical. ⏳ (7.6b)
+- **AC-X2** — export produces two self-contained trees; each imports standalone
+  (subprocess with `PYTHONPATH=<export>/src`) and its vendored suite runs in an
+  isolated env with no reference to the workspace or the sibling package (police
+  ships no `thief_agent`, and vice versa). ✅ (7.6b)
+- **AC-X3** — both exports carry a `core_manifest.json` with the same
+  `core_sha256`; `export_all` raises on any drift between them. ✅ (7.6b)
+- **AC-X4** — no `.env`, `secrets/`, `logs/`, `dist/`, or `*.pyc` in either export
+  (`.env-example` placeholders only); the exporter's own test is excluded; the core
+  hash carries no timestamp, so re-running from the same commit is byte-identical. ✅ (7.6b)
 
 ## 5. Open decisions / owner input
 
