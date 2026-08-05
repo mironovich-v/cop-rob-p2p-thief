@@ -319,3 +319,15 @@
   mutually-revealed sibling log under `logs/<opponent_group_id>/` — the same emit
   layout 7.2 wrote. Re-verifying with the SAME production `verify` the live audit
   uses means the replay can't "pass" a log the audit would reject.
+
+## 2026-08-05 · Stage 7 · Implementation · replay Tk viewer (7.5b)
+- **Output:** `gui/replay.py` (`ReplayApp`: play/pause/step/restart; draws both
+  revealed trajectories on one board; `barriers_from_state` parses the sealed state
+  string; per-step commit verify status) + `--replay` in `gui/__main__.py`.
+  `test_replay_view` (3: pure barrier-parse always runs; display-guarded ReplayApp
+  smoke × 2). Verified ReplayApp on a REAL emitted 34-step log. Cov 98.29%.
+- **Lesson:** our standardized log is leaner than the reference's (no received-smell
+  history), so replay honestly shows both trajectories + visited + parsed barriers +
+  commit integrity with a FLAT belief field, rather than faking a heatmap it has no
+  data for. The opponent overlay needs both sibling logs colocated (2-machine games
+  keep only their own until gathered) — documented, not silently empty.

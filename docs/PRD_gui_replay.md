@@ -81,7 +81,10 @@ per-step model string.
   record against its revealed nonce (`verify_record` → OK / TAMPERED), reconstructs
   this peer's trajectory from its records (step-0 spec skipped), and reconstructs the
   OPPONENT's trajectory from the sibling revealed log (`opponent_positions`) — full
-  truth ONLY here, post-reveal. ✅ (7.5a). Tk playback view + `--replay` entry ⏳ (7.5b).
+  truth ONLY here, post-reveal. ✅ (7.5a). The Tk `ReplayApp` (`--replay`) plays
+  play/pause/step/restart, draws both revealed agents on one board, accumulates
+  barriers parsed from the sealed state string, and shows each step's commit verify
+  status; belief stays flat (our log carries no received-smell history). ✅ (7.5b).
 
 ## 7. Out of scope
 
@@ -104,3 +107,14 @@ stub — the MOVE is always pure Python either way). On a headless host the
 display-guarded `test_gui_shell` skips; on a display it builds a real window and
 asserts the render. **Screenshot:** run the command on a WSLg/X display and
 capture the window for the submission (FR-21/AC-G4 evidence).
+
+Replay a saved sub-game log (both revealed trajectories, per-step commit verify):
+
+```bash
+uv run python -m cop_thief_core.gui --config config/police \
+    --replay logs/vm__fabi-police/log_<game_id>_g01.json
+```
+
+The opponent overlay appears when the sibling log
+(`logs/<opponent_group_id>/log_<game_id>_gNN.json`) is colocated; otherwise only
+this peer's trajectory shows (each machine keeps only its own log until gathered).

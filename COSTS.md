@@ -46,7 +46,8 @@
 | 2026-08-04 | PR (7.4a) | stage-7-gui-viewmodel | bc54c14 | Opus 4.8 · high | live-GUI view-model (event→window, game-mode classifier) + local-truth boundary test + PRD_gui_replay | ~0.2 session | merged |
 | 2026-08-05 | PR (7.4b) | stage-7-runtime-events | 3e941cf | Opus 4.8 · high | runtime emits moved/game_over live event stream (additive) + event-stream integration test | ~0.1 session | merged |
 | 2026-08-05 | PR (7.4c) | stage-7-gui-shell | df98916 | Opus 4.8 · high | live Tk shell (board_view/window/player/__main__) + display-guarded smoke test; `python -m cop_thief_core.gui` | ~0.2 session | merged |
-| 2026-08-05 | PR (7.5a) | stage-7-replay-data | (pending) | Opus 4.8 · high | replay data layer: commit-reveal re-verify + both-trajectory reconstruction from revealed logs | ~0.2 session | in review |
+| 2026-08-05 | PR (7.5a) | stage-7-replay-data | e805fde | Opus 4.8 · high | replay data layer: commit-reveal re-verify + both-trajectory reconstruction from revealed logs | ~0.2 session | merged |
+| 2026-08-05 | PR (7.5b) | stage-7-replay-view | (pending) | Opus 4.8 · high | Tk ReplayApp (--replay, both revealed trajectories, per-step commit verify) + smoke test | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the
