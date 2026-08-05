@@ -377,3 +377,14 @@
 - **Lesson:** the README is docs-only but user-facing — kept every command copy-paste
   runnable and flagged member IDs as the one to-fill-before-submission item (OD-2),
   so nothing in it overstates readiness.
+
+## 2026-08-05 · Stage 7 · Review · RTS gate review + owner checklist (7.7c)
+- **Output:** walked PRD §4 AC1–AC17 against the built system, marking each with its
+  test/evidence; verified two I was unsure of by running a real **6-sub-game series**
+  (AC6: alternation + agree + audits pass) and auditing adversarial coverage (AC7).
+  Rewrote PRD §4 + `requirements_matrix` AC rows; authored `docs/PROGRESS.md` (RTS
+  status + the exact owner checklist); condensed the TODO progress line.
+- **Lesson:** the honest split is 13 AC done, 2 dev follow-ups (AC1 CI drift, AC7
+  stale/dup/out-of-order/restart), 3 owner runtime/submission (AC2 live cross-impl
+  game, AC12 live tunnel, AC14 screenshots/tag/push). Declaring "engineering RTS" and
+  handing a precise owner checklist beats a blanket "done" that overstates readiness.

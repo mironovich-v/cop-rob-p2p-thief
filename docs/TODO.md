@@ -13,7 +13,13 @@
 > - Author a mechanism's `docs/PRD_*.md` before its slice; strict linear stage
 >   progression (finish + merge a stage before the next).
 
-**Progress:** Stage -1 ✅ · Stage 1 ✅ · **Stage 2 ✅** (MCP + runtime + SDK/series) · Stage 3 ✅ (belief + brains) · Stage 4 ✅ · Stage 5 ✅ · Stage 6 ✅ (commit-reveal, audit, report sig). Two-peer distributed match runs end-to-end; **all 6/6 CORE vectors pass**. Stage 7 in progress (7.1 artifact builders ✅, 7.2 emit-to-disk + SDK wiring ✅, 7.3a official Hebrew emailed-report body ✅; a full series writes its four JSON artifacts, peers agree on the mutual signature, and the exact-bytes email body is built). 7.3b Gmail send-only (raw-HTTPS, draft/disabled-default, gatekeeper-routed, fully mockable) ✅. 7.4a GUI view-model ✅, 7.4b runtime live event stream ✅, 7.4c Tk shell (board_view/window/player/__main__, `python -m cop_thief_core.gui`) ✅ — the live GUI is complete. 7.5a replay data layer ✅, 7.5b replay Tk viewer (`--replay`, both revealed trajectories, per-step commit verification) ✅ — the GUI (live + replay) is complete. 7.6a headless role CLI entry points (`python -m police_agent` / `-m thief_agent` play a series via the SDK, filling the long-standing stubs) ✅. 7.6b two-repo export ✅. 7.7a email step wired into `SDK.run_peer` (builds the official report, sends the EXACT `report_body` bytes; draft/disabled by default) ✅. 7.7b academic README (install / all run commands / architecture / config / security / credits) ✅. Remaining: 7.7c RTS gate review (AC1–AC17) + submission tag → RTS. Reporting layer is feature-complete pending final CLI/SDK wiring of the email step (7.7) and owner OAuth secrets (OD-3). **Owner manual step:** capture a live-GUI screenshot (WSLg/X display) for FR-21/AC-G4 evidence — run command in `PRD_gui_replay` §8.
+**Progress:** Stages -1 → 7 all ✅ (engineering complete). Base logic, MCP infra +
+orchestration, strategy/belief, language/scent, cloud probe, commit-reveal security,
+and the full reporting shell (four artifacts, emailed report, Gmail draft, live GUI,
+replay, two-repo export) are done. Two-peer distributed match runs end-to-end
+(verified through a full **6-sub-game series**); **all 6/6 CORE vectors pass**; 225
+tests, 98.32% coverage. **RTS: engineering complete (13/17 AC); full submission
+awaits owner actions — see `docs/PROGRESS.md`.**
 
 > **Build order (ADR-16, Option A):** belief (3.1) → brains (3.2) → smell (4.1)
 > are built **before** the runtime (2.5/2.6), which integrates them. Tasks keep
@@ -130,10 +136,13 @@ Exit: four artifacts + report + Gmail draft + GUI + replay + two-repo export.
 | [x] | 7.6b | two-repo export + drift check | `scripts/export_repos.py`, `scripts/export_lib.py` | ~150 | two_repo_export | `test_export`; vendored suite runs standalone |
 | [x] | 7.7a | wire the email step into the SDK (exact report_body, draft/disabled default) | `sdk/sdk.py` | ~20 | email_reporting | `test_email_wiring` |
 | [x] | 7.7b | academic README (install/usage/architecture/run) | `README.md` | docs | — | manual |
-| [ ] | 7.7c | RTS gate review (AC1–AC17) + submission tag | `docs/*` | docs | — | manual submission checklist |
+| [x] | 7.7c | RTS gate review (AC1–AC17) + PROGRESS owner checklist | `docs/PRD.md`, `docs/PROGRESS.md` | docs | — | manual submission checklist |
 
 ## RTS gate
-- [ ] All PRD §4 acceptance criteria (AC1–AC17) satisfied → declare Ready-To-Submit.
+- [~] PRD §4 acceptance criteria (AC1–AC17): **engineering complete** — 13/17
+  satisfied; AC1 & AC7 have small dev follow-ups; AC2/AC12/AC14 are owner runtime +
+  submission actions (see `docs/PROGRESS.md`). Full RTS is declared once the owner
+  checklist is done.
 
 ## Cross-cutting (continuous)
 - [ ] Update `docs/requirements_matrix.md` status per merged slice.

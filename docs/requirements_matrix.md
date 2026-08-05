@@ -55,13 +55,13 @@
 
 | ID | Criterion | Status | Evidence |
 |----|-----------|--------|----------|
-| AC1 | CORE vectors reproduced by our code; zero kit drift | TODO | conformance suite + `gen_vectors` diff |
-| AC2 | Separate processes/dirs; no shared truth | TODO | integration test; architecture review |
-| AC3 | Local E2E finishes + audits clean; totals derived | TODO | `test_mcp_match` |
-| AC4 | Public endpoint via tunnel; ≥1 cross-impl game settles byte-identically | TODO | live cross-team run log |
+| AC1 | CORE vectors reproduced by our code; zero kit drift | DONE-code (all 6 reproduced; `gen_vectors` CI drift check = dev follow-up) | `test_core_vectors` |
+| AC2 | Separate processes/dirs; no shared truth | DONE (role CLIs run as separate processes/config dirs; transport-only comms; snapshot has no opponent truth) | `test_agent_cli`, `test_live_apply` |
+| AC3 | Local E2E finishes + audits clean; totals derived | DONE (6-sub-game series verified: alternation, agree, audits pass; totals derived in emit) | `test_series`, `test_runtime` |
+| AC4 | Public endpoint via tunnel; ≥1 cross-impl game settles byte-identically | OWNER/runtime (probe + Host-header built/tested; live tunnel game is an owner run) | `test_connectivity`; live cross-team run log |
 | AC5 | Emailed/draft bytes = agreed hashed bytes | DONE (exact-bytes `report_body` 7.3a; `build_raw` MIME round-trips 7.3b; SDK end-to-end: drafted body decodes to `report_body` of the played match 7.7a) | `test_report_builder`, `test_gmail_client`, `test_email_wiring` |
-| AC6 | ENH off by default, negotiation-gated | TODO | negotiation tests |
-| AC7 | GUI local-truth; replay integrity + reconstruction | TODO | GUI/replay tests + screenshots |
-| AC8 | Both exports self-contained + traceable to core commit | TODO | export + drift check |
-| AC9 | Coverage/ruff/≤150/uv/no-hardcode/no-secrets gates | WIP | CI gates |
-| AC10 | README, PRDs, four artifacts, submission tag present in both repos | TODO | submission checklist |
+| AC6 | ENH off by default, negotiation-gated | DONE (CORE-only — no ENH implemented, so off by default; a CORE peer plays a full match) | whole suite is CORE |
+| AC7 | GUI local-truth; replay integrity + reconstruction | DONE (local-truth boundary; replay verify + both-trajectory reconstruct; screenshots = owner) | `test_live_apply`, `test_replay_data`, `test_replay_view` |
+| AC8 | Both exports self-contained + traceable to core commit | DONE (vendored suite runs standalone; matching `core_manifest.json`) | `test_export` |
+| AC9 | Coverage/ruff/≤150/uv/no-hardcode/no-secrets gates | DONE (98.32%; ruff clean; ≤150; uv; no-hardcode grep; secret scan — every PR) | full gate each PR |
+| AC10 | README, PRDs, four artifacts, submission tag present in both repos | WIP (README + 19 PRDs + artifacts done; tag + push to both repos = owner submission) | submission checklist |

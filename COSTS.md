@@ -51,7 +51,8 @@
 | 2026-08-05 | PR (7.6a) | stage-7-agent-cli | 24d19ee | Opus 4.8 · high | headless role CLI (agent_cli.run_role) filling police/thief __main__ stubs; SDK-delegating | ~0.1 session | merged |
 | 2026-08-05 | PR (7.6b) | stage-7-export | 4252faf | Opus 4.8 · high | deterministic two-repo export (vendored core + drift manifest, no secrets); vendored suite runs standalone | ~0.2 session | merged |
 | 2026-08-05 | PR (7.7a) | stage-7-email-wiring | 3242ec2 | Opus 4.8 · high | wire email step into SDK.run_peer (exact report_body, draft/disabled default) + end-to-end byte-path test | ~0.1 session | merged |
-| 2026-08-05 | PR (7.7b) | stage-7-readme | (pending) | Opus 4.8 · high | full academic README (install/run/architecture/config/security/credits) | ~0.1 session | in review |
+| 2026-08-05 | PR (7.7b) | stage-7-readme | c1d106c | Opus 4.8 · high | full academic README (install/run/architecture/config/security/credits) | ~0.1 session | merged |
+| 2026-08-05 | PR (7.7c) | stage-7-rts-gate | (pending) | Opus 4.8 · high | RTS gate review (AC1–AC17 with evidence; 6-series verified) + docs/PROGRESS.md owner checklist | ~0.1 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the
