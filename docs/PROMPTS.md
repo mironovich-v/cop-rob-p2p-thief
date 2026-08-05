@@ -307,3 +307,15 @@
   on `TclError`, so headless CI stays green. No PIL/scrot for a PNG, so the committed
   screenshot is an honest owner manual step; I verified the full LivePeerApp renders
   end-to-end (board exported to PostScript) rather than fabricating an image.
+
+## 2026-08-05 · Stage 7 · Implementation · replay data layer (7.5a)
+- **Output:** `gui/replay_data.py` — `verify_record` (commit-reveal re-verification →
+  OK/TAMPERED via our production `hashing.verify`), `reconstruct_positions` (my
+  trajectory from sealed records, step-0 spec skipped), `opponent_positions` (the
+  OPPONENT's trajectory from its sibling revealed log), `normalize_log`,
+  `discover_subgames`, `subgame_log_path`. `test_replay_data` (5) +
+  `test_replay_normalize` (4), tests seal real records then tamper one. Cov 98.29%.
+- **Lesson:** full opponent truth is reconstructed ONLY in replay, ONLY from the
+  mutually-revealed sibling log under `logs/<opponent_group_id>/` — the same emit
+  layout 7.2 wrote. Re-verifying with the SAME production `verify` the live audit
+  uses means the replay can't "pass" a log the audit would reject.

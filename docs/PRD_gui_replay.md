@@ -77,8 +77,11 @@ per-step model string.
   build/render (board exported to PostScript). ✅ (code) / ⏳ (committed PNG
   screenshot — owner manual step on a WSLg/X display; see §8). No opponent marker is
   ever drawn in live mode (`opponent_pos=None`).
-- **AC-G5** (7.5) — the replay viewer reconstructs both positions ONLY from the
-  revealed logs and verifies commit integrity. ⏳
+- **AC-G5** — the replay **data layer** (`replay_data.py`) re-verifies every sealed
+  record against its revealed nonce (`verify_record` → OK / TAMPERED), reconstructs
+  this peer's trajectory from its records (step-0 spec skipped), and reconstructs the
+  OPPONENT's trajectory from the sibling revealed log (`opponent_positions`) — full
+  truth ONLY here, post-reveal. ✅ (7.5a). Tk playback view + `--replay` entry ⏳ (7.5b).
 
 ## 7. Out of scope
 
