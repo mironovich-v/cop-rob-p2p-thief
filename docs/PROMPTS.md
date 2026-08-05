@@ -331,3 +331,14 @@
   commit integrity with a FLAT belief field, rather than faking a heatmap it has no
   data for. The opponent overlay needs both sibling logs colocated (2-machine games
   keep only their own until gathered) — documented, not silently empty.
+
+## 2026-08-05 · Stage 7 · Implementation · headless role CLI entry points (7.6a)
+- **Context:** the export (7.6b) needs runnable role entry points, but
+  `police_agent`/`thief_agent` `__main__` were Stage-2 stubs ("not yet implemented").
+- **Output:** `cop_thief_core/agent_cli.py` (`parse_args` + `run_role` → one series
+  via `SimulationSdk.run_peer`, prints derived result; `transport` injectable for
+  tests) + both role `__main__` filled as one-line delegates (DRY). `test_agent_cli`
+  (2, two peers over FakeTransport). `python -m police_agent --help` works. Cov 98.31%.
+- **Lesson:** putting the CLI logic in ONE tested `agent_cli` (not the coverage-omit
+  `__main__` files) satisfies "no business logic in CLI" (NFR-7) AND keeps it covered;
+  the role `__main__` stays a 1-liner, so police/thief never diverge.
