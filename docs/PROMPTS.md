@@ -356,3 +356,14 @@
   the one line that proves both came from the same core. Keeping timestamps OUT of
   the hashed content makes re-export byte-identical; excluding the exporter's own
   test (it needs the workspace `scripts/` path) keeps each export self-contained.
+
+## 2026-08-05 · Stage 7 · Implementation · wire email step into SDK (7.7a)
+- **Output:** `SDK.run_peer` now builds the official report from the final sub-game
+  and sends the EXACT `report_body` bytes via `EmailSender` (draft/disabled by
+  default; injectable `email_sender` for tests). `test_email_wiring` (2): disabled
+  by default (no send); when an enabled sender is injected, a real 2-peer match's
+  drafted MIME body decodes to exactly `report_body(build_report(final_summary))`.
+  Cov 98.32%.
+- **Lesson:** an injectable `email_sender` on the SDK lets the wiring test prove the
+  end-to-end byte path (played match → report → MIME draft) with zero network, while
+  the default disabled/draft gate keeps every ordinary run and CI from ever sending.

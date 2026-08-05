@@ -72,7 +72,10 @@ a Windows-path `gg:email` skill — §36.6). Requirements:
   `ApiGatekeeper` (service `email`); a transport failure returns a structured
   reason and never raises past `send_report`. ✅
 - **AC-E6** — `build_raw` MIME decodes back to exactly `report_body` (Hebrew
-  literal, UTF-8), proven by round-trip. ✅
+  literal, UTF-8), proven by round-trip. ✅ End-to-end: `SDK.run_peer` builds the
+  official report from the final sub-game and sends `report_body`; a wiring test
+  (`test_email_wiring`) plays a real 2-peer match and asserts the drafted MIME body
+  decodes to exactly that `report_body`. Disabled by default (no send). ✅ (7.7a)
 
 Implementation split: `infra/gmail_client.py` (raw-HTTPS, stdlib-only, injectable
 `http`) + `infra/email_sender.py` (policy + gatekeeper). No new dependencies.

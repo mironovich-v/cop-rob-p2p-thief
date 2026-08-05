@@ -49,7 +49,8 @@
 | 2026-08-05 | PR (7.5a) | stage-7-replay-data | e805fde | Opus 4.8 · high | replay data layer: commit-reveal re-verify + both-trajectory reconstruction from revealed logs | ~0.2 session | merged |
 | 2026-08-05 | PR (7.5b) | stage-7-replay-view | 143f867 | Opus 4.8 · high | Tk ReplayApp (--replay, both revealed trajectories, per-step commit verify) + smoke test | ~0.2 session | merged |
 | 2026-08-05 | PR (7.6a) | stage-7-agent-cli | 24d19ee | Opus 4.8 · high | headless role CLI (agent_cli.run_role) filling police/thief __main__ stubs; SDK-delegating | ~0.1 session | merged |
-| 2026-08-05 | PR (7.6b) | stage-7-export | (pending) | Opus 4.8 · high | deterministic two-repo export (vendored core + drift manifest, no secrets); vendored suite runs standalone | ~0.2 session | in review |
+| 2026-08-05 | PR (7.6b) | stage-7-export | 4252faf | Opus 4.8 · high | deterministic two-repo export (vendored core + drift manifest, no secrets); vendored suite runs standalone | ~0.2 session | merged |
+| 2026-08-05 | PR (7.7a) | stage-7-email-wiring | (pending) | Opus 4.8 · high | wire email step into SDK.run_peer (exact report_body, draft/disabled default) + end-to-end byte-path test | ~0.1 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

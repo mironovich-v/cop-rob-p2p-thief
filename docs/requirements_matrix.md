@@ -59,7 +59,7 @@
 | AC2 | Separate processes/dirs; no shared truth | TODO | integration test; architecture review |
 | AC3 | Local E2E finishes + audits clean; totals derived | TODO | `test_mcp_match` |
 | AC4 | Public endpoint via tunnel; ≥1 cross-impl game settles byte-identically | TODO | live cross-team run log |
-| AC5 | Emailed/draft bytes = agreed hashed bytes | DONE (exact-bytes `report_body` 7.3a; `build_raw` MIME round-trips to the same bytes 7.3b) | `test_report_builder`, `test_gmail_client` |
+| AC5 | Emailed/draft bytes = agreed hashed bytes | DONE (exact-bytes `report_body` 7.3a; `build_raw` MIME round-trips 7.3b; SDK end-to-end: drafted body decodes to `report_body` of the played match 7.7a) | `test_report_builder`, `test_gmail_client`, `test_email_wiring` |
 | AC6 | ENH off by default, negotiation-gated | TODO | negotiation tests |
 | AC7 | GUI local-truth; replay integrity + reconstruction | TODO | GUI/replay tests + screenshots |
 | AC8 | Both exports self-contained + traceable to core commit | TODO | export + drift check |
