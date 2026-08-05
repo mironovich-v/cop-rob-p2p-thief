@@ -273,3 +273,14 @@
 - **Lesson:** injecting the `http` callable makes the whole OAuth+Gmail path
   offline-testable (token refresh, draft vs send URL, retry-then-give-up) with zero
   network and zero credentials; `build_raw` MIME round-trips to the exact body bytes.
+
+## 2026-08-04 · Stage 7 · Implementation · live-GUI view-model (7.4a)
+- **Output:** `gui/game_mode.py` (`mode_and_model` / `mode_from_recorded_model`,
+  Table-22 verbal-mode labels) + `gui/live_apply.py` (`apply_event(state, event)`
+  dispatching runtime events onto a window protocol; `LiveState` clock). Authored
+  `PRD_gui_replay` (event schema + local-truth contract). `test_game_mode` (5) +
+  `test_live_apply` (7, FakeWindow — no Tk). Cov 98.28% (gui coverage-omitted).
+- **Lesson:** the local-truth boundary is STRUCTURAL, not a display convention —
+  `test_live_apply` asserts the runtime snapshot key-set carries no opponent
+  position/role, so the live board cannot leak truth even by mistake. Splitting the
+  pure view-model from the Tk shell keeps the graded invariant fully unit-tested.
