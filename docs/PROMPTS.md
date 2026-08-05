@@ -367,3 +367,13 @@
 - **Lesson:** an injectable `email_sender` on the SDK lets the wiring test prove the
   end-to-end byte path (played match → report → MIME draft) with zero network, while
   the default disabled/draft gate keeps every ordinary run and CI from ever sending.
+
+## 2026-08-05 · Stage 7 · Documentation · academic README (7.7b)
+- **Output:** replaced the Stage -1 README skeleton with the full academic README:
+  overview, `uv` install, ALL run commands (both role agents, live GUI, replay,
+  conformance, export), architecture (no central truth / SDK single entry /
+  commit-reveal / byte-exact interop / four artifacts), config, security, standards,
+  credits. Verified every referenced path/anchor resolves.
+- **Lesson:** the README is docs-only but user-facing — kept every command copy-paste
+  runnable and flagged member IDs as the one to-fill-before-submission item (OD-2),
+  so nothing in it overstates readiness.
