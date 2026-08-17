@@ -569,3 +569,17 @@
   implementation of "a send-only scope cannot create drafts" — a gate that
   exists only in config can be un-configured; a code path that doesn't exist
   cannot be reached by mistake.
+
+## 2026-08-17 · Stage 8 · Tests · behavior-table conformance sweep (8.9)
+- **Output:** `tests/conformance/test_behavior_tables.py` — the kit's four
+  PROMOTED/PROPOSED decision tables driven row-by-row through OUR production
+  seams: delivery_contract arrivals (incl. the vector's window-2 receiver
+  state) through TurnHandler.process; turn_message validation rows through
+  validate_turn_values AND the receive refusal path; pairing/uid truth tables
+  through check_extras. game_id now asserted beside game_uid. Kit's own
+  verify_vectors.py: 125 checks / 15 fixtures ALL PASS; gen_vectors drift
+  check clean.
+- **Lesson:** the vector's validation rows use step 7 on purpose — driving
+  them through the FULL receive path put the flood rule in front of the value
+  checks and failed the accept rows. Behavior tables must be driven at the
+  seam they specify; the composition of seams is its own (unit) test.

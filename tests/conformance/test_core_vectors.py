@@ -49,8 +49,9 @@ def test_terms_signature_vectors():
 
 def test_game_uid_vectors():
     for vector in _load("game_uid.json")["vectors"]:
-        _, game_uid = derive_game_ids(vector["terms"], vector["group_a"], vector["group_b"])
+        game_id, game_uid = derive_game_ids(vector["terms"], vector["group_a"], vector["group_b"])
         assert game_uid == vector["game_uid"]
+        assert game_id == vector["game_id"]  # sorted pair — never self-first
 
 
 def test_pheromone_vectors():
