@@ -52,3 +52,62 @@ def test_forward_step_after_gap_still_accepted(police_config):
     handler.process(_msg(1))
     assert handler.process(_msg(5)).ignored is False  # forward jump is legitimate
     assert handler.process(_msg(5)).ignored is True   # its duplicate is not
+
+
+# --- Rules 46-47: an ending only the thief can see must be SAID (concession) ---
+
+def _thief_handler(config):
+    return PeerRuntime(Role.THIEF, config, transport=None).handler
+
+
+def _police_msg(step: int, barrier=None, capture_claim=None) -> TurnMessage:
+    return TurnMessage(
+        step=step, sender="police", hint="", smell_grid={}, commit="c" * 64,
+        timestamp="t", barrier_placed=barrier, capture_claim=capture_claim,
+        claim_response=None, win_claim=None)
+
+
+def test_thief_concedes_barrier_on_own_cell(thief_config):
+    handler = _thief_handler(thief_config)  # rule 46
+    pos = handler.state.position
+    outcome = handler.process(_police_msg(1, barrier=list(pos)))
+    assert outcome.i_am_caught is True
+    assert outcome.claim_response == {"claim": list(pos), "caught": True}
+
+
+def test_thief_concedes_when_boxed_in(thief_config):
+    handler = _thief_handler(thief_config)  # rule 47
+    row, col = handler.state.position
+    for cell in [(row - 1, col), (row + 1, col), (row, col - 1)]:
+        handler.state.note_barrier(cell)
+    outcome = handler.process(_police_msg(1, barrier=[row, col + 1]))  # last wall
+    assert outcome.i_am_caught is True
+    assert outcome.claim_response == {"claim": [row, col], "caught": True}
+
+
+def test_thief_plays_on_while_an_escape_remains(thief_config):
+    handler = _thief_handler(thief_config)
+    row, col = handler.state.position
+    outcome = handler.process(_police_msg(1, barrier=[row - 1, col]))
+    assert outcome.i_am_caught is False
+    assert outcome.claim_response is None
+
+
+def test_concession_overrides_a_missed_capture_claim(thief_config):
+    handler = _thief_handler(thief_config)  # wrong claim + walling barrier together
+    row, col = handler.state.position
+    for cell in [(row - 1, col), (row + 1, col), (row, col - 1)]:
+        handler.state.note_barrier(cell)
+    outcome = handler.process(
+        _police_msg(1, barrier=[row, col + 1], capture_claim=[0, 0]))
+    assert outcome.i_am_caught is True
+    assert outcome.claim_response == {"claim": [row, col], "caught": True}
+
+
+def test_police_never_self_concedes(police_config):
+    handler = _handler(police_config)  # enclosure capture is thief-only
+    pos = handler.state.position
+    outcome = handler.process(_msg(1))
+    handler.state.note_barrier(pos)
+    outcome = handler.process(_msg(2))
+    assert outcome.i_am_caught is False

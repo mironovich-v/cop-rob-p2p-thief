@@ -437,3 +437,15 @@
   verifying against our code BEFORE replying turned half their checklist into
   "confirm in writing" instead of work.
 - **Approval:** owner asked to save the input; disposition map for owner review.
+
+## 2026-08-17 · Stage 8 · Implementation · rule-46/47 enclosure endings (8.1)
+- **Output:** `GameRules.is_enclosed` (barrier-on-own-cell OR no orthogonal
+  escape; STAY doesn't rescue); thief-side concession in `TurnHandler.process`
+  (unprompted `claim_response={"claim":[own cell],"caught":true}`, overriding a
+  simultaneous missed capture claim). Cop side needed ZERO changes — the
+  existing caught-branch settles CAPTURE on any thief `caught:true`. 10 new
+  tests incl. a 2-peer cornering integration (police walks (0,0)→(3,2), walls
+  (3,3); both settle capture, audits clean). Cov 98.34%.
+- **Lesson:** the 7.8 caught-branch fix (HOLD step-advance before the final)
+  meant the concession path worked end-to-end on the FIRST integration run —
+  hardening one path pre-paid the next feature that reused it.

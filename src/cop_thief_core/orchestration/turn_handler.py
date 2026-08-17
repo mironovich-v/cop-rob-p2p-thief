@@ -6,6 +6,7 @@ NL hint, the scent grid, declared barriers, and claims. There is no shared board
 
 from dataclasses import dataclass
 
+from cop_thief_core.constants import Role
 from cop_thief_core.domain.belief import BeliefGrid
 from cop_thief_core.domain.own_state import OwnGameState
 from cop_thief_core.domain.rules import GameRules
@@ -64,4 +65,13 @@ class TurnHandler:
             caught = self.rules.is_captured(self.state, tuple(message.capture_claim))
             outcome.claim_response = {"claim": list(message.capture_claim), "caught": caught}
             outcome.i_am_caught = caught
+        # Rules 46-47: only the thief can see an enclosure capture, so it must be
+        # SAID — the concession final names MY cell (≠ echoing a claimed cell).
+        if (
+            self.state.role is Role.THIEF
+            and not outcome.i_am_caught
+            and self.rules.is_enclosed(self.state)
+        ):
+            outcome.claim_response = {"claim": list(self.state.position), "caught": True}
+            outcome.i_am_caught = True
         return outcome

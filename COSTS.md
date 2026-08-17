@@ -55,7 +55,8 @@
 | 2026-08-05 | PR (7.7c) | stage-7-rts-gate | bb57f65 | Opus 4.8 · high | RTS gate review (AC1–AC17 with evidence; 6-series verified) + docs/PROGRESS.md owner checklist | ~0.1 session | merged |
 | 2026-08-05 | PR (7.8) | stage-7-robustness | bdfebd5 | Opus 4.8 · high | step-monotonic dedup (stale/dup/out-of-order, AC7) + fix latent caught-branch step-advance desync | ~0.2 session | merged |
 | 2026-08-17 | PR (D8) | stage-8-plan | 152e747 | Fable 5 · high | league-kit resync analysis (2 reader agents + code cross-check) + Stage-8 plan, ADR-17..20, email-PRD re-scope | ~0.4 session | merged |
-| 2026-08-17 | PR (docs) | docs-pairing-imreeyal | (pending) | Fable 5 · high | record imreeyal first-contact verbatim + disposition map; fold 8.10/8.11 into Stage-8; OD-4 resolved (deadline 2026-08-20) | ~0.1 session | in review |
+| 2026-08-17 | PR (docs) | docs-pairing-imreeyal | cf7b811 | Fable 5 · high | record imreeyal first-contact verbatim + disposition map; fold 8.10/8.11 into Stage-8; OD-4 resolved (deadline 2026-08-20) | ~0.1 session | merged |
+| 2026-08-17 | PR (8.1) | stage-8-endings | (pending) | Fable 5 · high | rule-46/47 enclosure endings + thief concession final (TDD; 10 tests incl. cornering integration) | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

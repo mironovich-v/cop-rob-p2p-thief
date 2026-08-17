@@ -35,3 +35,36 @@ def test_is_captured_false_when_position_differs():
 
 def test_is_captured_accepts_tuple_claim():
     assert GameRules.is_captured(_state(pos=(1, 1)), (1, 1)) is True
+
+
+def test_enclosure_barrier_on_own_cell_is_capture():
+    # Rule 46: a barrier placed on the thief's own cell captures it.
+    state = _state(pos=(2, 2))
+    state.note_barrier((2, 2))
+    assert GameRules.is_enclosed(state) is True
+
+
+def test_enclosure_all_neighbours_walled_is_capture():
+    # Rule 47: no legal orthogonal move — STAY does not rescue.
+    state = _state(pos=(2, 2))
+    for cell in [(1, 2), (3, 2), (2, 1), (2, 3)]:
+        state.note_barrier(cell)
+    assert GameRules.is_enclosed(state) is True
+
+
+def test_enclosure_corner_needs_only_two_barriers():
+    state = _state(pos=(0, 0))
+    state.note_barrier((0, 1))
+    state.note_barrier((1, 0))
+    assert GameRules.is_enclosed(state) is True
+
+
+def test_enclosure_false_while_an_escape_remains():
+    state = _state(pos=(2, 2))
+    for cell in [(1, 2), (3, 2), (2, 1)]:  # (2, 3) stays open
+        state.note_barrier(cell)
+    assert GameRules.is_enclosed(state) is False
+
+
+def test_enclosure_false_on_open_board():
+    assert GameRules.is_enclosed(_state(pos=(2, 2))) is False
