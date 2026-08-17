@@ -20,6 +20,7 @@ from cop_thief_core.domain.own_state import OwnGameState
 from cop_thief_core.domain.rules import GameRules
 from cop_thief_core.domain.smell import SmellField
 from cop_thief_core.protocol import TurnMessage
+from cop_thief_core.protocol.messages import validate_turn_values
 
 
 @dataclass
@@ -52,6 +53,18 @@ class TurnHandler:
     @property
     def _next(self) -> int:
         return max(self._played, default=0) + 1
+
+    def receive(self, raw: dict) -> IncomingOutcome:
+        """Parse + value-validate an inbound raw dict, then process it.
+
+        A malformed or invalid-valued turn is REFUSED before any state change
+        (never defaulted, never a crash) — the sender's deadline keeps burning.
+        """
+        try:
+            message = validate_turn_values(TurnMessage.from_dict(raw))
+        except (TypeError, ValueError):
+            return IncomingOutcome(ignored=True)  # refused: adversarial input
+        return self.process(message)
 
     def process(self, message: TurnMessage) -> IncomingOutcome:
         step = message.step

@@ -510,3 +510,16 @@
   PROMOTED table later superseded — deleted deliberately with a comment, not
   worked around. A test is a record of the contract AT THE TIME; when the
   contract moves, the test moves with a citation.
+
+## 2026-08-17 · Stage 8 · Implementation · wire value validation (8.6)
+- **Output:** `validate_turn_values` implements every refusal row of the kit's
+  `turn_message.json`: empty timestamp, non-lowercase-64-hex commit (string
+  comparison), stringified smell intensities, negative/non-int/bool step,
+  invalid sender. New `TurnHandler.receive(raw)` parses + validates BEFORE any
+  state change; refused input returns ignored (never defaulted, never a crash)
+  and never renews the opponent's deadline; unknown keys stay tolerated (the
+  extension seam). 9 new tests.
+- **Lesson:** moving the parse out of the runtime loop into receive() freed a
+  line under the 150 cap that 8.3 had consumed — extracting a seam is often
+  cheaper than compressing at the limit, and it put parse-refusal and
+  table-refusal decisions in one auditable place.

@@ -3,6 +3,7 @@
 import pytest
 
 from cop_thief_core.protocol import AuditPayload, ControlMessage, TurnMessage
+from cop_thief_core.protocol.messages import validate_turn_values
 
 
 def _turn(**overrides):
@@ -70,3 +71,50 @@ def test_audit_roundtrip_and_missing():
     assert AuditPayload.from_dict(msg.to_dict()) == msg
     with pytest.raises(TypeError):
         AuditPayload.from_dict({"sender": "thief", "records": records})
+
+
+# --- 8.6 wire value validation (kit turn_message.json refusal rows) ----------
+
+def _turn_kwargs(**overrides):
+    base = {"step": 1, "sender": "thief", "hint": "hi", "smell_grid": {"3,3": 0.9},
+            "commit": "c" * 64, "timestamp": "2026-08-17T20:00:00+00:00",
+            "barrier_placed": None, "capture_claim": None,
+            "claim_response": None, "win_claim": None}
+    base.update(overrides)
+    return base
+
+
+def test_validate_accepts_a_conformant_turn():
+    validate_turn_values(TurnMessage(**_turn_kwargs()))
+
+
+def test_empty_timestamp_refused():
+    with pytest.raises(ValueError, match="timestamp"):
+        validate_turn_values(TurnMessage(**_turn_kwargs(timestamp="")))
+
+
+def test_uppercase_hex_commit_refused():
+    with pytest.raises(ValueError, match="commit"):
+        validate_turn_values(TurnMessage(**_turn_kwargs(commit="C" * 64)))
+
+
+def test_short_commit_refused():
+    with pytest.raises(ValueError, match="commit"):
+        validate_turn_values(TurnMessage(**_turn_kwargs(commit="abc123")))
+
+
+def test_stringified_smell_intensity_refused():
+    with pytest.raises(ValueError, match="smell"):
+        validate_turn_values(TurnMessage(**_turn_kwargs(smell_grid={"3,3": "0.9"})))
+
+
+def test_negative_or_non_int_step_refused():
+    with pytest.raises(ValueError, match="step"):
+        validate_turn_values(TurnMessage(**_turn_kwargs(step=-1)))
+    with pytest.raises(ValueError, match="step"):
+        validate_turn_values(TurnMessage(**_turn_kwargs(step="3")))
+
+
+def test_invalid_sender_refused():
+    with pytest.raises(ValueError, match="sender"):
+        validate_turn_values(TurnMessage(**_turn_kwargs(sender="referee")))

@@ -33,7 +33,6 @@ from cop_thief_core.orchestration.sealing import (
 )
 from cop_thief_core.orchestration.summary import finish, snapshot
 from cop_thief_core.orchestration.turn_handler import TurnHandler
-from cop_thief_core.protocol import TurnMessage
 from cop_thief_core.strategy import resolve_brain
 
 
@@ -110,7 +109,7 @@ class PeerRuntime:
                 continue
             if incoming is None:
                 continue
-            outcome = self.handler.process(TurnMessage.from_dict(incoming))
+            outcome = self.handler.receive(incoming)
             if outcome.settle:  # equivocation / flood: loud technical decision
                 self._result = (outcome.settle, self.role.value)
                 continue

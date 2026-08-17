@@ -161,3 +161,28 @@ def test_below_next_never_played_is_discarded(police_config):
     handler.process(_cmsg(1, "a" * 64))  # applied; buffer drained; next=3
     ghost = handler.process(_cmsg(0, "0" * 64))  # below next, never played
     assert ghost.ignored is True and ghost.settle is None  # discard, not violation
+
+
+def test_receive_refuses_invalid_values_before_any_state_change(police_config):
+    handler = _handler(police_config)
+    for bad in (
+        {"step": 1, "sender": "thief", "hint": "", "smell_grid": {"3,3": "0.9"},
+         "commit": "c" * 64, "timestamp": "t"},          # stringified intensity
+        {"step": 1, "sender": "thief", "hint": "", "smell_grid": {},
+         "commit": "C" * 64, "timestamp": "t"},          # uppercase hex
+        {"step": 1, "sender": "thief", "hint": "", "smell_grid": {},
+         "commit": "c" * 64, "timestamp": ""},           # empty timestamp
+        {"step": 1, "sender": "thief", "hint": "", "smell_grid": {}},  # missing keys
+    ):
+        outcome = handler.receive(bad)
+        assert outcome.ignored is True and outcome.settle is None
+    assert handler.history == []  # nothing was applied — refusal precedes state
+
+
+def test_receive_applies_a_conformant_raw_dict(police_config):
+    handler = _handler(police_config)
+    raw = {"step": 1, "sender": "thief", "hint": "hi", "smell_grid": {"3,3": 0.9},
+           "commit": "c" * 64, "timestamp": "2026-08-17T20:00:00+00:00",
+           "unknown_extension": {"x": 1}}  # tolerated, ignored
+    assert handler.receive(raw).ignored is False
+    assert len(handler.history) == 1

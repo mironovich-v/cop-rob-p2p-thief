@@ -60,7 +60,8 @@
 | 2026-08-17 | PR (8.2) | stage-8-corroboration | 70ad429 | Fable 5 · high | cop-side capture corroboration (answer/concession, disputed_capture settlement, strict-parse-or-degrade) | ~0.2 session | merged |
 | 2026-08-17 | PR (8.5) | stage-8-negotiate-extras | e4f5921 | Fable 5 · high | negotiate extras + locked-model declarations + opponent-group guard + response-body agreement (16 tests) | ~0.2 session | merged |
 | 2026-08-17 | PR (8.10+8.11) | stage-8-transport | f080022 | Fable 5 · high | per-call timeout cap + config refusal; handshake re-push + door-gap patience; session-per-call documented | ~0.15 session | merged |
-| 2026-08-17 | PR (8.3) | stage-8-delivery | (pending) | Fable 5 · high | delivery contract: commit-keyed dedup, loud equivocation, reorder buffer, flood rule, deadline discipline | ~0.2 session | in review |
+| 2026-08-17 | PR (8.3) | stage-8-delivery | ff9ec12 | Fable 5 · high | delivery contract: commit-keyed dedup, loud equivocation, reorder buffer, flood rule, deadline discipline | ~0.2 session | merged |
+| 2026-08-17 | PR (8.6) | stage-8-wire-validation | (pending) | Fable 5 · high | wire value validation (turn_message refusal rows) + receive() refusal path before any state change | ~0.1 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

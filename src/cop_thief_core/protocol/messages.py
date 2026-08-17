@@ -67,3 +67,31 @@ class AuditPayload(_Wire):
     sender: str
     records: list  # [{"payload": {...}, "nonce": str, "commit": str}]
     result_claim: str  # "capture" | "survival" | "timeout" | ...
+
+
+_HEX = set("0123456789abcdef")
+
+
+def validate_turn_values(message: TurnMessage) -> TurnMessage:
+    """Value-level refusals for an inbound TurnMessage (kit turn_message.json).
+
+    An inbound turn is adversarial input: every rule here is decided BEFORE any
+    state change. A missing/invalid value is refused, never defaulted — a
+    defaulted commit is a move the sender never sealed.
+    """
+    if not isinstance(message.step, int) or isinstance(message.step, bool) or message.step < 1:
+        raise ValueError(f"step must be a positive int, got {message.step!r}")
+    if message.sender not in ("police", "thief"):
+        raise ValueError(f"sender must be police|thief, got {message.sender!r}")
+    commit = message.commit
+    if not (isinstance(commit, str) and len(commit) == 64 and set(commit) <= _HEX):
+        raise ValueError("commit must be 64-char lowercase hex (string-compared)")
+    if not (isinstance(message.timestamp, str) and message.timestamp.strip()):
+        raise ValueError("timestamp must be a non-empty ISO-8601 string")
+    grid = message.smell_grid
+    if not isinstance(grid, dict) or any(
+        isinstance(value, bool) or not isinstance(value, int | float)
+        for value in grid.values()
+    ):
+        raise ValueError("smell_grid intensities must be numeric, not strings")
+    return message
