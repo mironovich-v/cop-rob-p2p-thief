@@ -127,3 +127,47 @@ belief/scent later; lets the runtime be tested end-to-end with real capture and
 settlement. **Alternatives:** a minimal runtime now (trivial move policy, no
 belief/scent) enriched later — rejected (rework). **Status:** accepted (owner
 approved 2026-07-23).
+
+## ADR-17 — Tie rule: `series_add`, declared per pairing
+**Context:** the league surfaced three live readings of where App. F's tie
+score (2) lands (kit WARNINGS §6a): `series_add` (kit + all current league
+teams), `series_replace`, `per_subgame` (the reference). Course staff ruled it
+a genuine contradiction under the academic-freedom clause. **Decision:** keep
+our existing behavior — `series_add` (`domain/scoring.py` already adds
+`tie_score` into each `total_score` on a series tie, on top of per-row tie
+scores) — and DECLARE `tie_rule: series_add` in the first-contact constitution,
+beside the scent model. **Rationale:** matches the kit default and every team
+played so far; the mismatch only surfaces in a counted series that ties, where
+it becomes a rule-35 contradiction. **Status:** accepted (2026-08-17).
+
+## ADR-18 — Turn order is declared out-of-band, never assumed
+**Context:** thief-moves-first is the reference's observed behavior, NOT
+covered by the `wire_shape` lock or any signed term — two peers matching on
+every hash can still deadlock silently (kit SPEC §7, playbook connection
+contract). **Decision:** we play thief-first (unchanged) and STATE it
+explicitly in every first-contact message. **Status:** accepted (2026-08-17).
+
+## ADR-19 — Consensus scope: the reference 5-key row (kit #55 concurrence)
+**Context:** kit #55 (2026-08-13) reverted a 2026-08-04 error that added a
+sixth key (`tie`) to the consensus-signature row scope; every hash ever
+settled live reproduces only under the 5-key row. **Decision:** no change —
+our `reporting/emit.py::_symmetric` was built from the reference's
+`symmetric_outcome` and always kept exactly `{sub_game_number, roles, result,
+winner_group, score}`; the document row keeps `tie`, the hash row never had
+it. Recorded so nobody "fixes" us toward the withdrawn 6-key form.
+**Status:** accepted (2026-08-17).
+
+## ADR-20 — Email gate: dry-run + structural recipient gate (draft mode removed)
+**Context:** rule 30 grants a **send-only** Gmail scope, which cannot create
+drafts — our draft-default safety gate depended on a broader permission than
+the rules allow (kit WARNINGS §6; the same contradiction anrbj666's audit
+caught in the kit's own docs). **Decision:** replace `email.mode="draft"` with
+`dry_run` (build + log the exact MIME, transport untouched) and make the gate
+recipient-shaped: the lecturer's address is structurally unreachable — matched
+case-/whitespace-insensitively, including inside recipient lists — unless the
+run is doubly armed (config `counted=true` AND CLI `--counted`); an armed run
+that cannot deliver its report refuses to start. Disabled-default stays.
+**Alternatives:** keep drafts under the broader `gmail.compose` scope —
+rejected (documented deviation from rule 30 for no benefit). **Supersedes:**
+the draft-default requirement in `PRD_email_reporting.md` §3/AC-E4.
+**Status:** accepted (owner approved 2026-08-17); implementation in task 8.8.

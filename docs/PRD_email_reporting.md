@@ -41,11 +41,20 @@ functions keeps both correct.
 Portable Gmail OAuth **send-only** flow (this project ADDS this; the reference used
 a Windows-path `gg:email` skill — §36.6). Requirements:
 
-- **Draft-default, disabled-default.** `email.enabled=false` → no-op; `email.mode`
-  defaults to `draft` (create a Gmail draft, do not send). The draft/send interlock
-  is a **billing/scoring safety gate**: under the diversity rule only the *first*
-  meeting counts, so an accidental real send can burn the one counted game (SPEC
-  §6). A real send requires a deliberate, explicit human action.
+- **Dry-run-default, disabled-default** *(ADR-20, supersedes the draft default —
+  rule 30's send-only scope cannot create drafts, so a draft-based gate depended
+  on a permission the rules don't grant; kit WARNINGS §6)*. `email.enabled=false`
+  → no-op; `email.mode` defaults to `dry_run` (build + log the exact MIME,
+  transport untouched). The safety gate is **structural and recipient-shaped**:
+  the lecturer's address is unreachable — matched case-/whitespace-insensitively,
+  including inside recipient lists — unless the run is doubly armed (config
+  `counted=true` AND CLI `--counted`); an armed run that cannot deliver its
+  report refuses to start. Under the diversity rule only the *first* meeting
+  counts, so an accidental real send can burn the one counted game (SPEC §6).
+- **Body AND attachment.** The counted-series mail carries the result JSON as
+  the body **and the same file as the single named attachment** (rule 34's two
+  readings, both satisfied — kit SPEC §6.1); declaration/configs/logs are
+  repo-published via `links.github`, never mailed.
 - **Gatekeeper-routed.** Every Gmail API call goes through `ApiGatekeeper`
   (service `email`) — rate-limited, queued, logged (guideline §4). No call bypasses
   it.
@@ -65,9 +74,11 @@ a Windows-path `gg:email` skill — §36.6). Requirements:
   literal; a parsed body re-verifies. ✅
 - **AC-E3** — spec/token declaration is sourced from the sealed step-0 record and
   the summary (derived, not claimed). ✅
-- **AC-E4** — email defaults to disabled; when enabled, defaults to `draft`; a real
-  send needs explicit `email.mode="send"`; the injected transport means tests never
-  send and need no credentials. ✅
+- **AC-E4** — email defaults to disabled; when enabled, defaults to `dry_run`; a
+  real send needs explicit `email.mode="send"` AND the doubly-armed counted gate;
+  the lecturer's address is structurally unreachable otherwise; the injected
+  transport means tests never send and need no credentials. ⏳ re-scoped by
+  ADR-20 — was ✅ under the superseded draft default; re-verified at task 8.8.
 - **AC-E5** — every Gmail call (token refresh + draft/send) goes through the
   `ApiGatekeeper` (service `email`); a transport failure returns a structured
   reason and never raises past `send_report`. ✅

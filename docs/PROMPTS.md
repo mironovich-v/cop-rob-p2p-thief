@@ -402,3 +402,23 @@
   step with `apply_move(HOLD)` before the final send. A test that passes in isolation
   (single game) but hangs in the full suite (2-game series) is the tell — reproduce
   at the boundary, don't guess.
+
+## 2026-08-17 · Stage 8 · Planning · league-kit resync analysis + plan (D8)
+- **Context:** owner pulled the updated `copthief-league-protocol` (HEAD
+  `ad65576`, ~80 commits since our 2026-07-22 baseline — a real cross-team
+  campaign: two counted series, six audit passes, four best2934 WARNINGS).
+- **Goal:** learn the current normative surface and produce the adjustment list.
+- **Prompt summary:** two parallel reader subagents (full SPEC.md + INDEX; new
+  vectors + WARNINGS/GOVERNANCE/PLAYBOOK/EVIDENCE), then code-side verification
+  of every reported delta against `src/`.
+- **Output:** conformance re-run (6/6 CORE vectors still pass); confirmation our
+  5-key consensus scope already matches kit #55 and tie rule is `series_add`;
+  gap list → Stage 8 tasks 8.1–8.9 in `docs/TODO.md`; ADR-17..20;
+  `PRD_email_reporting` re-scoped (dry-run + recipient gate, owner approved);
+  OD-3 gains the 7-day OAuth-token timing constraint.
+- **Lesson:** the kit's live campaign turned several of our "done" behaviors
+  into named failure modes (silent rule-46/47 endings fork the game; step-keyed
+  dedup swallows equivocation evidence; a draft-based email gate needs a scope
+  rule 30 doesn't grant). Re-read a shared external contract before every
+  cross-team milestone — byte vectors passing does not mean behavior conforms.
+- **Approval:** owner approved Stage-8 plan-first + ADR-20 reversal (2026-08-17).

@@ -53,7 +53,8 @@
 | 2026-08-05 | PR (7.7a) | stage-7-email-wiring | 3242ec2 | Opus 4.8 · high | wire email step into SDK.run_peer (exact report_body, draft/disabled default) + end-to-end byte-path test | ~0.1 session | merged |
 | 2026-08-05 | PR (7.7b) | stage-7-readme | c1d106c | Opus 4.8 · high | full academic README (install/run/architecture/config/security/credits) | ~0.1 session | merged |
 | 2026-08-05 | PR (7.7c) | stage-7-rts-gate | bb57f65 | Opus 4.8 · high | RTS gate review (AC1–AC17 with evidence; 6-series verified) + docs/PROGRESS.md owner checklist | ~0.1 session | merged |
-| 2026-08-05 | PR (7.8) | stage-7-robustness | (pending) | Opus 4.8 · high | step-monotonic dedup (stale/dup/out-of-order, AC7) + fix latent caught-branch step-advance desync | ~0.2 session | in review |
+| 2026-08-05 | PR (7.8) | stage-7-robustness | bdfebd5 | Opus 4.8 · high | step-monotonic dedup (stale/dup/out-of-order, AC7) + fix latent caught-branch step-advance desync | ~0.2 session | merged |
+| 2026-08-17 | PR (D8) | stage-8-plan | (pending) | Fable 5 · high | league-kit resync analysis (2 reader agents + code cross-check) + Stage-8 plan, ADR-17..20, email-PRD re-scope | ~0.4 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

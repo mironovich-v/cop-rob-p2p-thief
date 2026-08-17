@@ -246,7 +246,7 @@ Decisions still open; **this section is updated the moment a decision is made**
 |---|---------------|-------------------|-----------|--------|
 | OD-1 | Public tunnel provider | Cloudflare named tunnel (default) vs ngrok | Stage 5 | OPEN (ADR-15 proposed) |
 | OD-2 | Student member IDs for artifacts | real IDs vs `id-0001` placeholders | before submission | OPEN (placeholders in use) |
-| OD-3 | Gmail sender account + OAuth owner | which account; who runs OAuth setup | Stage 7 (email) | OPEN |
+| OD-3 | Gmail sender account + OAuth owner | which account; who runs OAuth setup | before final send — **mint token ≤7 days before** (testing-mode refresh tokens expire; kit WARNINGS §6) | OPEN |
 | OD-4 | First interop opponent | ImreEyal sparring / reference peer / partner team | Stage 5 cross-play | OPEN |
 | OD-5 | Opt-in ENH features | none (default, CORE-only) vs specific ENH | any (negotiation-gated) | OPEN — default none |
 | OD-6 | LLM verbal provider for demos | `template` (default) vs ollama/claude_api | Stage 4 | OPEN — default template |
@@ -254,4 +254,8 @@ Decisions still open; **this section is updated the moment a decision is made**
 Resolved so far (see `docs/decisions.md`): ground-truth source (ADR-1), the five
 interop contradictions (ADR-2..6), package layout (ADR-7), Python 3.13 (ADR-8),
 league-kit external (ADR-9), three-repo topology (ADR-10), per-mechanism PRDs
-(ADR-11), LLM-verbal-only (ADR-12), config model (ADR-13).
+(ADR-11), LLM-verbal-only (ADR-12), config model (ADR-13), main bootstrap
+(ADR-14), domain-first build order (ADR-16), and — from the 2026-08-17 league-kit
+resync — tie rule `series_add` (ADR-17), turn order declared out-of-band
+(ADR-18), 5-key consensus scope concurrence (ADR-19), email dry-run +
+recipient-shaped gate replacing draft mode (ADR-20).

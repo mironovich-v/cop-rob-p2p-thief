@@ -145,6 +145,34 @@ Exit: four artifacts + report + Gmail draft + GUI + replay + two-repo export.
 | [x] | 7.8 | strict step-monotonic dedup (stale/duplicate/out-of-order); fix caught-branch step advance | `orchestration/{turn_handler,runtime}.py` | ~10 | AC7 | `test_turn_handler`, `test_runtime` (dup) |
 | [ ] | 7.9 | CI workflow: gate + kit `gen_vectors` drift check | `.github/workflows/` | ~40 | AC1 | CI run |
 
+## Stage 8 — League-Kit Resync (kit HEAD `ad65576`, re-read 2026-08-17)
+Exit: conformant against the updated `copthief-league-protocol` — all three
+capture families played and corroborated, delivery/audit hardened to the
+PROMOTED tables, §6.2 graded league fields emitted, negotiate declarative,
+email gate rule-30-conformant, new-vector conformance green. Context: the kit
+gained a real cross-team campaign (two counted series, six audit passes, four
+best2934 WARNINGS); our 6 CORE vectors still pass and our 5-key consensus
+scope already matches kit #55 — the gaps are behavioral, not byte-level.
+
+| Done | Task | Scope | Key files | ~LOC | Tests |
+|------|------|-------|-----------|------|-------|
+| [ ] | D8 | plan + ADR-17..20 + email-PRD update (this PR) | docs only | docs | — |
+| [ ] | 8.1 | rule-46/47 endings: thief detects barrier-on-own-cell + boxed-in (STAY doesn't rescue) and SENDS the concession final `claim_response={claim:[own cell],caught:true}`; cop settles CAPTURE on any thief `caught:true` | `domain/rules.py`, `orchestration/{turn_handler,runtime}.py` | ~120 | unit + 2-peer cornering integration |
+| [ ] | 8.2 | capture corroboration at audit: answer (cell = revealed trail end) vs concession (cell captured under cop's OWN barrier record); failure → `disputed_capture`, never counted clean; strict-parse-or-degrade | `orchestration/summary.py`, audit helper | ~140 | unit (answer/concession/void paths) |
+| [ ] | 8.3 | delivery-contract upgrade: dedup on COMMIT (`{step: commit}`), same-step-different-commit → loud equivocation, bounded reorder window (buffer ≤ window, violation past), deadline never renewed by tolerated traffic + checked on arrival laps | `orchestration/{turn_handler,runtime}.py` | ~130 | full `delivery_contract.json` table |
+| [ ] | 8.4 | audit live-binding: disclosed commit == commit that ARRIVED per step + completeness, then re-hash (WARNINGS §5d) | `interop/hashing.py`, `orchestration/summary.py` | ~60 | unit (bound/unbound/missing-step) |
+| [ ] | 8.5 | negotiate extras: declare `role`/`sub_game_number`/`game_uid` + locked-model hashes BESIDE terms; truth tables (refuse only both-declared-and-differ; omission/uncomparable → play); push-first + accept agreement from response body OR inbound push (WARNINGS §2b) | `interop/negotiation.py`, `orchestration/handshake.py`, `infra/mcp_*` | ~150 | pairing/uid truth tables |
+| [ ] | 8.6 | wire value validation before any state change: refuse empty timestamp, non-lowercase-hex commit, string smell intensities, negative step | `protocol/messages.py` | ~80 | `turn_message.json` refusal rows |
+| [ ] | 8.7 | §6.2 league fields (`games_played_including_this` null=unclaimed, `first_meeting_between_groups`, `diversity_reward_applied` derived — +10 never in totals) + `links.github` (rule 49) + committed rule-52 first-meeting ledger in settlement path | `reporting/*`, config | ~150 | unit (armed/disarmed, ledger advance) |
+| [ ] | 8.8 | email shape + gate: result JSON as body AND same file as single named attachment; replace draft-mode with `dry_run`; structural recipient gate (lecturer unreachable unless doubly-armed: config `counted` + CLI `--counted`) | `infra/{email_sender,gmail_client}.py`, `sdk` | ~150 | unit (gate matrix, MIME round-trip) |
+| [ ] | 8.9 | conformance tests for new vectors: `locked_model` (schema hash + refusal), `turn_message`, `delivery_contract`, `pairing_declaration`, `uid_declaration`; assert `game_id` too | `tests/conformance/` | ~150 (tests) | the new suites |
+
+Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
+its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
+are deliberately NOT implemented (opt-in / zero-implementation per kit
+governance). Ops items (declare turn order + `tie_rule=series_add` at first
+contact, playbook ladder) live in `docs/PROGRESS.md`, not code.
+
 ## RTS gate
 - [~] PRD §4 acceptance criteria (AC1–AC17): **engineering complete** — 14/17
   satisfied (AC7 closed); AC1 has a small CI dev follow-up (7.9); AC2/AC12/AC14 are

@@ -1,6 +1,24 @@
 # PROGRESS — current state, blockers, next steps
 
-_Last updated: 2026-08-05 (end of Stage 7 engineering)._
+_Last updated: 2026-08-17 (Stage 8 league-kit resync planned)._
+
+## Stage 8 in flight — league-kit resync (kit HEAD `ad65576`)
+
+The league kit was re-read in full on 2026-08-17 after a real cross-team
+campaign (two counted series; four new WARNINGS). Byte-level: all 6 CORE
+vectors still pass, and our 5-key consensus scope already matches kit #55.
+Behavioral gaps → Stage 8 in `docs/TODO.md` (8.1–8.9): rule-46/47 endings +
+concession final, capture corroboration, commit-keyed delivery contract,
+audit live-binding, negotiate declarations, wire value validation, §6.2
+graded league fields + `links.github` + rule-52 ledger, email body+attachment
+with a rule-30-conformant recipient gate (ADR-20), new-vector conformance
+tests. ADR-17..20 record the decisions. **Stage 8 must land before the
+counted cross-team game** — the gaps are conformance/disqualification-grade.
+
+First-contact obligations for the pairing (ops, not code): state turn order
+(thief-first) and `tie_rule: series_add` explicitly; constitution as a file;
+follow the kit playbook ladder (F1 one sub-game → F2 full friendly series +
+report-compare ritual → F3 re-prove on the counted bytes → counted).
 
 ## Where we are
 
@@ -31,12 +49,16 @@ self-contained submission repos.
    the real student IDs (then re-run the export).
 2. **Gmail OAuth (OD-3)** — provide `secrets/credentials.json` + `secrets/token.json`
    (send-only) and set `email.enabled = true`, `email.mode = "send"` only for the
-   deliberate final send. Default stays disabled/draft. Recipient is already fixed.
+   deliberate final send. Default stays disabled/dry-run (ADR-20). ⚠️ Google
+   testing-mode refresh tokens expire after ~7 days — mint the token at most a few
+   days before the final send. The Cloud project + consent screen +
+   `credentials.json` can be prepared any time.
 3. **Live tunnel run (AC12)** — start a peer behind the documented public tunnel and
    confirm the pre-match connectivity probe passes.
 4. **Cross-implementation game (AC2)** — play ≥1 game over the tunnel against another
    team / sparring peer; confirm it settles byte-identically with zero false
-   tamper-forfeits.
+   tamper-forfeits. **Blocked on Stage 8** (conformance gaps would risk zeroing
+   the one counted meeting); run the playbook friendly ladder first.
 5. **Screenshots (AC14)** — capture the live GUI + replay windows on a display
    (WSLg/X) for the submission (`PRD_gui_replay` §8 has the commands).
 6. **Export + push (AC13/AC14)** — `uv run python scripts/export_repos.py`, then push
