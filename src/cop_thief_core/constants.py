@@ -61,6 +61,7 @@ STAY = "STAY"  # config move-set token for a HOLD; not a Direction
 # Terminal-outcome tokens (anything else scores as a technical loss, 0/0).
 RESULT_CAPTURE = "capture"
 RESULT_SURVIVAL = "survival"
+RESULT_DISPUTED = "disputed_capture"  # capture whose audit corroboration failed
 
 NONCE_BYTES = 16  # secrets.token_hex(NONCE_BYTES) -> a 32-hex-char nonce
 

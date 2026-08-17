@@ -7,12 +7,23 @@ board result. Result totals are always DERIVED from the sealed log, never truste
 
 import time
 
+from cop_thief_core.constants import RESULT_CAPTURE, RESULT_DISPUTED, Role
 from cop_thief_core.interop import audit_records
+from cop_thief_core.orchestration.audit_checks import corroborate_capture
 from cop_thief_core.protocol import AuditPayload
 
 SKIPPED_AUDIT = {"passed": False, "verified_steps": 0, "failed_steps": [], "skipped": True}
 NO_AUDIT_RESULTS = ("timeout", "stopped")  # nobody / nothing to audit with
 TAMPER_FORFEIT = "tamper_forfeit"
+
+
+def _thief_caught_response(rt) -> dict | None:
+    """The thief's final ``caught: true`` response, as it arrived on the wire."""
+    for message in reversed(rt.handler.history):
+        response = message.get("claim_response")
+        if response and response.get("caught"):
+            return response
+    return None
 
 
 def snapshot(rt) -> dict:
@@ -36,9 +47,18 @@ def finish(rt) -> dict:
         mine = AuditPayload(sender=rt.role.value, records=rt.records, result_claim=result)
         theirs = rt._transport.exchange_audit(mine.to_dict())
         if theirs is not None:
-            audit = audit_records(AuditPayload.from_dict(theirs).records)
+            their_records = AuditPayload.from_dict(theirs).records
+            audit = audit_records(their_records)
             if not audit["passed"]:
                 result, winner = TAMPER_FORFEIT, rt.role.value
+            elif result == RESULT_CAPTURE and rt.role is Role.POLICE:
+                # SPEC §3.1: a thief-sent caught:true is corroborated, not believed.
+                response = _thief_caught_response(rt)
+                if response is not None:
+                    check = corroborate_capture(rt.state, rt.records, response, their_records)
+                    audit = {**audit, "capture_corroboration": check}
+                    if not check["corroborated"]:
+                        result, winner = RESULT_DISPUTED, None  # never counted clean
     return {
         "result": result,
         "winner": winner,

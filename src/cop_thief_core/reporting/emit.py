@@ -14,6 +14,7 @@ readable (indent=2); the byte-exact emailed body is derived separately (Stage 7.
 import json
 from pathlib import Path
 
+from cop_thief_core.constants import RESULT_DISPUTED
 from cop_thief_core.domain import scoring
 from cop_thief_core.reporting.artifact_helpers import ended_at, log_filename
 from cop_thief_core.reporting.artifact_schemas import DEFAULT_TIMEZONE
@@ -55,7 +56,9 @@ def _subgame_entry(summary, game_id, own_gid, opp_gid, scoring_cfg) -> dict:
         "ended_at": ended_at(summary["started_at"], summary["duration_seconds"]),
         "result": summary["result"],
         "winner_group": winner,
-        "tie": winner is None,
+        # A disputed/technical row has no winner but is NOT a tie (playbook shape:
+        # winner_group null, tie false); only a genuinely tied outcome sets tie.
+        "tie": winner is None and summary["result"] not in (RESULT_DISPUTED,),
         "tokens": {own_gid: summary["tokens_total"], opp_gid: 0},
         "score": score,
         "log_files": {own_gid: f"{own_gid}/{log_filename(game_id, number)}",

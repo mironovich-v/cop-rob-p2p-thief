@@ -449,3 +449,19 @@
 - **Lesson:** the 7.8 caught-branch fix (HOLD step-advance before the final)
   meant the concession path worked end-to-end on the FIRST integration run —
   hardening one path pre-paid the next feature that reused it.
+
+## 2026-08-17 · Stage 8 · Implementation · capture corroboration at audit (8.2)
+- **Output:** new `orchestration/audit_checks.py` — answer-vs-concession
+  detection (echo of my last MOVE claim vs any other cell), answer checked
+  against the revealed trail end, concession against MY OWN barrier record
+  (rule 46 walled / rule 47 enclosed), strict-parse-or-degrade
+  (`position` key → reference `state` string → degraded note, never an
+  accusation). `summary.finish` corroborates any thief `caught:true` after a
+  clean crypto audit; a voided check settles `disputed_capture` (winner null,
+  tie false via emit, 0/0 via existing scorer fallthrough) — dispute, not
+  tamper. 10 unit tests + settlement stub test + corroboration assertion in
+  the cornering integration. Cov 98.27%.
+- **Lesson:** scorer's "unknown result → 0/0" fallthrough and the playbook's
+  technical-row shape meant `disputed_capture` needed only a constants entry
+  and a one-line tie-flag fix in emit — the row shape was already designed
+  for results without winners.

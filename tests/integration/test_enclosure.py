@@ -65,3 +65,6 @@ def test_barrier_on_thief_cell_settles_capture_both_ways(
     # Both mutual audits verify the sealed chains cleanly.
     assert results["thief"]["audit"]["passed"] is True
     assert results["police"]["audit"]["passed"] is True
+    # 8.2: the cop corroborated the concession under its OWN barrier record.
+    check = results["police"]["audit"]["capture_corroboration"]
+    assert check == {"kind": "concession", "corroborated": True, "note": ""}
