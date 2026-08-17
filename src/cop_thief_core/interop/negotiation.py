@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 
 from cop_thief_core.exceptions import AgreementError
+from cop_thief_core.interop.extras import check_extras
 from cop_thief_core.interop.hashing import commit_of, new_nonce, verify
 
 _LIMITS_PATH = Path(__file__).resolve().parent / "limits.json"
@@ -57,24 +58,31 @@ def validate_minimums(terms: dict, limits: dict | None = None) -> None:
 class Negotiation:
     """One peer's side of the agreement handshake (sign + verify the terms)."""
 
-    def __init__(self, terms: dict, identity: dict | None = None) -> None:
+    def __init__(
+        self, terms: dict, identity: dict | None = None, extras: dict | None = None
+    ) -> None:
         self.terms = terms
         self.identity = identity or {}
+        self.extras = extras or {}  # role / sub_game_number / uid / model hashes
         self._nonce = new_nonce()
         self.peer_identity: dict = {}
 
     def signed(self) -> dict:
-        """My agreement message: terms + nonce + signature (identity is unsigned)."""
+        """My agreement message: terms + nonce + signature; identity and the
+        declared extras ride BESIDE the terms (unsigned — SPEC §7.2)."""
         return {
             "terms": self.terms,
             "nonce": self._nonce,
             "signature": commit_of(self.terms, self._nonce),
             "identity": self.identity,
+            **self.extras,
         }
 
     def verify_peer(self, message: dict) -> None:
-        """Raise on any mismatch: terms must value-equal ours; signature must verify."""
+        """Raise on any mismatch: terms must value-equal ours; signature must
+        verify; a both-declared extras contradiction refuses (omission never does)."""
         if message.get("terms") != self.terms:
             raise AgreementError("Opponent terms are not value-equal to ours")
         verify(message["terms"], message["nonce"], message["signature"])  # CryptoError on fail
+        check_extras(self.extras, message)
         self.peer_identity = message.get("identity", {})

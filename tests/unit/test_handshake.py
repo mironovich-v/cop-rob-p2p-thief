@@ -47,3 +47,72 @@ def test_handshake_refuses_mismatched_terms(police_config):
     opponent_reply = Negotiation({"board_size": 999}).signed()  # different terms
     with pytest.raises(AgreementError):
         run_handshake(_StubTransport(opponent_reply), police_config, {"group_id": "x"})
+
+
+# --- 8.5: extras beside the terms; refusal only on both-declared contradiction ---
+
+class _Overlay:
+    """Config proxy overriding a few dotted keys (e.g. the expected opponent)."""
+
+    def __init__(self, cfg, overrides):
+        self._cfg, self._overrides = cfg, overrides
+
+    def get(self, key, default=None):
+        if key in self._overrides:
+            return self._overrides[key]
+        return self._cfg.get(key, default)
+
+
+def _reply(cfg, extras=None, group_id="vm__fabi-thief"):
+    from cop_thief_core.interop.negotiation import terms_from_config
+    return Negotiation(
+        terms_from_config(cfg), identity={"group_id": group_id}, extras=extras or {}
+    ).signed()
+
+
+def test_handshake_declares_extras_beside_terms(police_config):
+    captured = {}
+
+    class _Capture(_StubTransport):
+        def exchange_agreement(self, signed):
+            captured.update(signed)
+            return self._reply
+
+    reply = _reply(police_config, extras={"role": "thief", "sub_game_number": 2})
+    run_handshake(_Capture(reply), police_config, {"group_id": "g"},
+                  role="police", sub_game_number=2)
+    assert captured["role"] == "police"
+    assert captured["sub_game_number"] == 2
+    assert len(captured["scent_model_sha256"]) == 64
+    assert "role" not in captured["terms"]  # extras never leak into the signed set
+
+
+def test_handshake_refuses_role_collision(police_config):
+    reply = _reply(police_config, extras={"role": "police"})
+    with pytest.raises(AgreementError, match="[Rr]ole"):
+        run_handshake(_StubTransport(reply), police_config, {"group_id": "g"},
+                      role="police", sub_game_number=1)
+
+
+def test_handshake_refuses_unexpected_opponent_group(police_config):
+    config = _Overlay(police_config, {"game.opponent_group_id": "imreeyal"})
+    reply = _reply(police_config, group_id="stray-team")
+    with pytest.raises(AgreementError, match="imreeyal"):
+        run_handshake(_StubTransport(reply), config, {"group_id": "vm__fabi"})
+
+
+def test_handshake_refuses_declared_uid_mismatch(police_config):
+    config = _Overlay(police_config, {"game.opponent_group_id": "imreeyal"})
+    reply = _reply(police_config, extras={"game_uid": "not-the-derived-uid"})
+    with pytest.raises(AgreementError, match="game_uid"):
+        run_handshake(_StubTransport(reply), config, {"group_id": "vm__fabi"})
+
+
+def test_handshake_plays_against_a_silent_peer(police_config):
+    # Omission never refuses: opponent declares no extras at all.
+    reply = _reply(police_config)
+    identity, game_id, _ = run_handshake(
+        _StubTransport(reply), police_config, {"group_id": "vm__fabi-police"},
+        role="police", sub_game_number=1)
+    assert identity["group_id"] == "vm__fabi-thief"
+    assert game_id == "vm__fabi-police-vs-vm__fabi-thief"

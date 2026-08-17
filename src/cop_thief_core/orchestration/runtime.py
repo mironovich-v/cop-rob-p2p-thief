@@ -83,7 +83,8 @@ class PeerRuntime:
     def run(self, skip_negotiation: bool = False) -> dict:
         if not skip_negotiation:
             self.peer_identity, self.game_id, self.game_uid = run_handshake(
-                self._transport, self._config, self._own_identity
+                self._transport, self._config, self._own_identity,
+                role=self.role.value, sub_game_number=self._sub_game_number,
             )
             self._started_monotonic = time.monotonic()
             self._listen({"type": "negotiated", "view": self.view()})

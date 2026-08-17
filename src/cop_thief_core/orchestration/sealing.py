@@ -26,6 +26,9 @@ def identity_from_config(cfg) -> dict:
         "repos": cfg.get("game.repos", {}),
         "mcp_servers": cfg.get("game.mcp_servers", {}),
         "llm_model": cfg.get("llm.model", "") or "cli-default",
+        # Rule-38 weight: the opponent's result artifact reads this exact key
+        # for games_played_including_this — a misspelling silently reads as 0.
+        "counted_games_played": cfg.get("game.counted_games_played", 0),
         "spec": collect_spec(),
     }
 

@@ -465,3 +465,20 @@
   technical-row shape meant `disputed_capture` needed only a constants entry
   and a one-line tie-flag fix in emit — the row shape was already designed
   for results without winners.
+
+## 2026-08-17 · Stage 8 · Implementation · negotiate extras + declarations (8.5)
+- **Output:** `interop/extras.py` (build + truth tables: refuse ONLY
+  both-declared-and-differ; bools/strings = silence; named refusals);
+  `interop/locked_models.py` + vendored `locked_models_data.json` (three
+  registry docs verbatim; our canonicalizer reproduces all three published
+  shas — conformance test pins doc equality AND hashes against the kit);
+  handshake declares role/sub_game_number/derived game_uid (when
+  `game.opponent_group_id` is configured) + model hashes, and refuses a stray
+  opponent group; identity gains `counted_games_played` (exact imreeyal §3.8
+  key); mcp_client reads the negotiate response body as well as the inbox
+  (WARNINGS §2b — we already pushed first). 16 new tests.
+- **Lesson:** the whole existing suite passed untouched after the change —
+  omission-never-refuses isn't just league politeness, it's what makes a
+  protocol extension deployable without a flag day in your own repo too.
+  Also: 150-line limit hit by embedded registry docs → moved them to a JSON
+  data file (byte-closer to the registry, loader stays 23 lines).

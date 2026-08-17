@@ -36,29 +36,33 @@ class McpTransport:
         self._audit_timeout = audit_send_timeout
         self._control_timeout = control_send_timeout
 
-    def _call(self, tool: str, argument: dict) -> None:
+    def _call(self, tool: str, argument: dict):
         key = "payload" if tool == "submit_audit" else "message"
 
         async def invoke():
             async with Client(self._opponent) as client:
-                await client.call_tool(tool, {key: argument})
+                result = await client.call_tool(tool, {key: argument})
+                return getattr(result, "data", None)
 
-        asyncio.run(invoke())
+        return asyncio.run(invoke())
 
-    def _call_with_retry(self, tool: str, argument: dict, timeout: float | None = None) -> None:
+    def _call_with_retry(self, tool: str, argument: dict, timeout: float | None = None):
         """Retry until the opponent's server is up (peers may start seconds apart)."""
         deadline = time.time() + (timeout if timeout is not None else self._connect_timeout)
         while True:
             try:
-                self._call(tool, argument)
-                return
+                return self._call(tool, argument)
             except Exception as exc:
                 if time.time() >= deadline:
                     raise SimulationError(f"Opponent MCP server unreachable: {exc}") from exc
                 time.sleep(self._retry)
 
     def exchange_agreement(self, signed: dict) -> dict:
-        self._call_with_retry("negotiate", signed)
+        # WARNINGS §2b: push first, then accept the agreement from EITHER place —
+        # a request/response peer answers in the body, a push peer dials back.
+        response = self._call_with_retry("negotiate", signed)
+        if isinstance(response, dict) and "terms" in response:
+            return response
         try:
             return self._inboxes.agreements.get(timeout=self._connect_timeout)
         except queue.Empty as exc:

@@ -75,3 +75,18 @@ def test_report_consensus_vectors():
         assert signature == vector["signature"]  # SPACED form
         assert signature != vector["compact_form_sha256"]  # NOT the compact §2 form
         assert verify_report(vector["signed_report"]) is True
+
+
+def test_locked_model_docs_match_registry():
+    """Our vendored registry docs (locked_models_data.json) must equal the kit's
+    published docs, and our production canonicalizer must reproduce the shas."""
+    from cop_thief_core.interop.locked_models import declared_docs, model_hashes
+
+    registered = {e["doc"]["name"]: e for e in _load("locked_model.json")["registered"]}
+    ours = declared_docs()
+    hashes = model_hashes()
+    for family, name in (("scent_model", "subtractive_chebyshev_v1"),
+                         ("wire_shape", "reference-v3"), ("info_mode", "belief")):
+        entry = registered[name]
+        assert ours[family] == entry["doc"]  # vendored copy has not drifted
+        assert hashes[f"{family}_sha256"] == entry["sha256"]  # our canonicalizer

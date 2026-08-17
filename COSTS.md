@@ -57,7 +57,8 @@
 | 2026-08-17 | PR (D8) | stage-8-plan | 152e747 | Fable 5 · high | league-kit resync analysis (2 reader agents + code cross-check) + Stage-8 plan, ADR-17..20, email-PRD re-scope | ~0.4 session | merged |
 | 2026-08-17 | PR (docs) | docs-pairing-imreeyal | cf7b811 | Fable 5 · high | record imreeyal first-contact verbatim + disposition map; fold 8.10/8.11 into Stage-8; OD-4 resolved (deadline 2026-08-20) | ~0.1 session | merged |
 | 2026-08-17 | PR (8.1) | stage-8-endings | 7a9c79a | Fable 5 · high | rule-46/47 enclosure endings + thief concession final (TDD; 10 tests incl. cornering integration) | ~0.2 session | merged |
-| 2026-08-17 | PR (8.2) | stage-8-corroboration | (pending) | Fable 5 · high | cop-side capture corroboration (answer/concession, disputed_capture settlement, strict-parse-or-degrade) | ~0.2 session | in review |
+| 2026-08-17 | PR (8.2) | stage-8-corroboration | 70ad429 | Fable 5 · high | cop-side capture corroboration (answer/concession, disputed_capture settlement, strict-parse-or-degrade) | ~0.2 session | merged |
+| 2026-08-17 | PR (8.5) | stage-8-negotiate-extras | (pending) | Fable 5 · high | negotiate extras + locked-model declarations + opponent-group guard + response-body agreement (16 tests) | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the
