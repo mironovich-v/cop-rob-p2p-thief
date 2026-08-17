@@ -67,3 +67,19 @@ def test_shipped_police_template_loads():
     assert cfg.get("smell.decay_per_step") == 0.10
     assert cfg.get("network.my_port") == 8802  # from private game.toml
     assert cfg.get("game.group_id") == "vm__fabi-police"
+
+
+def test_call_timeout_must_stay_under_signed_deadline(tmp_path):
+    # 8.11: a per-call cap at/above the signed response_timeout_sec must refuse
+    # to load — a retried 30s call breaches a 30s deadline while looking fine.
+    toml = MIN_TOML + 'call_timeout_seconds = 30\n'
+    shared = {**SHARED, "network_and_league": {"response_timeout_sec": 30}}
+    with pytest.raises(ConfigError, match="call_timeout"):
+        ConfigManager(_write(tmp_path, toml=toml, shared=shared))
+
+
+def test_call_timeout_under_deadline_loads(tmp_path):
+    toml = MIN_TOML + 'call_timeout_seconds = 10\n'
+    shared = {**SHARED, "network_and_league": {"response_timeout_sec": 30}}
+    cfg = ConfigManager(_write(tmp_path, toml=toml, shared=shared))
+    assert cfg.get("network.call_timeout_seconds") == 10

@@ -31,9 +31,11 @@ my_port = 8802
 opponent_url = "http://127.0.0.1:8801/mcp"
 turn_timeout_seconds = 180
 poll_interval_seconds = 0.5
-connect_timeout_seconds = 60
+connect_timeout_seconds = 150   # handshake patience: spans an opponent's inter-sub-game door gap
 retry_interval_seconds = 1.0
 audit_send_timeout_seconds = 10
+call_timeout_seconds = 10       # per-call cap: strictly < signed response_timeout_sec (30)
+handshake_repush_seconds = 5.0  # re-push the greeting until the game starts
 
 # [trash_talk] -- HOW the banter is generated. The MOVE is ALWAYS pure Python.
 # Default (this block absent) = "template": canned lines, 0 tokens, offline.

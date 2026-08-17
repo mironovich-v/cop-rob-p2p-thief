@@ -105,6 +105,19 @@ class ConfigManager:
             _deep_merge(self._game, _translate_shared(self._shared))
         else:
             self._shared = {}
+        self._check_timing()
+
+    def _check_timing(self) -> None:
+        """Refuse a per-call cap at/above the signed response deadline: one
+        delivered-but-unanswered push + a retry breaches the deadline while every
+        individual call looks fine (league pairing scar, imreeyal §3.5)."""
+        cap = self.get("network.call_timeout_seconds")
+        deadline = self._shared.get("network_and_league", {}).get("response_timeout_sec")
+        if cap is not None and deadline is not None and cap >= deadline:
+            raise ConfigError(
+                f"network.call_timeout_seconds={cap} must be strictly below the "
+                f"signed response_timeout_sec={deadline}"
+            )
 
     @staticmethod
     def _load_toml(path: Path) -> dict:

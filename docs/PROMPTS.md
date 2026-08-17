@@ -482,3 +482,17 @@
   protocol extension deployable without a flag day in your own repo too.
   Also: 150-line limit hit by embedded registry docs → moved them to a JSON
   data file (byte-closer to the registry, loader stays 23 lines).
+
+## 2026-08-17 · Stage 8 · Implementation · transport hardening (8.10 + 8.11)
+- **Output:** per-call timeout cap on every outbound MCP call (fastmcp Client
+  timeout; 10s < signed 30s; ConfigManager refuses a cap ≥ the signed
+  deadline); exchange_agreement re-pushes the greeting every
+  handshake_repush_seconds and its patience (connect_timeout 150s) spans the
+  opponent's legitimate inter-sub-game 502 gap — a down door no longer burns a
+  sub-game, and the ARRIVING negotiate opens it. Fresh Client per call means
+  no outbound session survives a boundary (imreeyal §3.4's two-evening scar) —
+  now stated in the code, not just true by accident. 5 new tests.
+- **Lesson:** an in-memory FastMCP tool doing a SYNC sleep blocks the event
+  loop, so a client-side timeout cannot preempt it — the timeout test needed
+  an async sleep to actually exercise cancellation. Worth remembering for any
+  fastmcp timeout testing.

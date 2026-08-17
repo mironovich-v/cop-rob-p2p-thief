@@ -51,6 +51,8 @@ class SimulationSdk:
             connect_timeout=cfg.get("network.connect_timeout_seconds", 60),
             retry_interval=cfg.get("network.retry_interval_seconds", 1.0),
             audit_send_timeout=cfg.get("network.audit_send_timeout_seconds", 10),
+            call_timeout=cfg.get("network.call_timeout_seconds", 10),
+            handshake_repush=cfg.get("network.handshake_repush_seconds", 5.0),
         )
 
     def run_peer(self, role: str, stub_llm: bool = True, transport=None,

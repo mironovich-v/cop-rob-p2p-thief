@@ -28,6 +28,8 @@ class McpTransport:
         retry_interval: float = 1.0,
         audit_send_timeout: float = 10.0,
         control_send_timeout: float = 2.0,
+        call_timeout: float = 10.0,
+        handshake_repush: float = 5.0,
     ) -> None:
         self._opponent = opponent  # URL string (real) or FastMCP object (in-memory)
         self._inboxes = inboxes
@@ -35,12 +37,19 @@ class McpTransport:
         self._retry = retry_interval
         self._audit_timeout = audit_send_timeout
         self._control_timeout = control_send_timeout
+        self._call_timeout = call_timeout  # per-call cap, strictly < signed deadline
+        self._repush = handshake_repush
 
     def _call(self, tool: str, argument: dict):
+        # A fresh Client per call: no outbound session survives a sub-game
+        # boundary, so a restarted opponent process is never dialed on a dead
+        # socket (imreeyal §3.4). The per-call timeout keeps one delivered-but-
+        # unanswered push from silently breaching the signed 30s deadline
+        # (imreeyal §3.5): timeout budget stays with the deadline, not the call.
         key = "payload" if tool == "submit_audit" else "message"
 
         async def invoke():
-            async with Client(self._opponent) as client:
+            async with Client(self._opponent, timeout=self._call_timeout) as client:
                 result = await client.call_tool(tool, {key: argument})
                 return getattr(result, "data", None)
 
@@ -60,13 +69,25 @@ class McpTransport:
     def exchange_agreement(self, signed: dict) -> dict:
         # WARNINGS §2b: push first, then accept the agreement from EITHER place —
         # a request/response peer answers in the body, a push peer dials back.
-        response = self._call_with_retry("negotiate", signed)
-        if isinstance(response, dict) and "terms" in response:
-            return response
-        try:
-            return self._inboxes.agreements.get(timeout=self._connect_timeout)
-        except queue.Empty as exc:
-            raise SimulationError("Opponent never sent its agreement") from exc
+        # The greeting is RE-pushed periodically (a push that landed in the
+        # opponent's dying previous process must not strand the window), and the
+        # overall patience spans their legitimate inter-sub-game door gap, during
+        # which their ARRIVING negotiate opens the sub-game (imreeyal §3.4/§3.16).
+        deadline = time.time() + self._connect_timeout
+        while True:
+            window = min(self._repush, max(deadline - time.time(), 0.1))
+            with contextlib.suppress(SimulationError):
+                response = self._call_with_retry("negotiate", signed, timeout=window)
+                if isinstance(response, dict) and "terms" in response:
+                    return response
+            wait = min(self._repush, max(deadline - time.time(), 0.05))
+            try:
+                return self._inboxes.agreements.get(timeout=wait)
+            except queue.Empty as exc:
+                if time.time() >= deadline:
+                    raise SimulationError(
+                        "Opponent never sent its agreement (and answered no push)"
+                    ) from exc
 
     def send_turn(self, message: dict) -> None:
         self._call_with_retry("receive_turn", message)

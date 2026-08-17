@@ -84,3 +84,56 @@ def test_send_turn_raises_when_opponent_unreachable():
     transport = McpTransport("http://127.0.0.1:1/mcp", PeerInboxes(), connect_timeout=0.0)
     with pytest.raises(SimulationError, match="unreachable"):
         transport.send_turn({"step": 1})
+
+
+# --- 8.10/8.11: per-call cap, handshake re-push, gap patience -----------------
+
+def _slow_server(delay_seconds: float, counter: list):
+    from fastmcp import FastMCP
+    mcp = FastMCP(name="slow-peer")
+
+    @mcp.tool
+    async def negotiate(message: dict) -> dict:
+        import asyncio as _asyncio
+        counter.append(1)
+        await _asyncio.sleep(delay_seconds)  # async: a per-call timeout can cancel it
+        return {"ok": True}
+
+    return mcp
+
+
+def test_per_call_timeout_caps_a_hung_call():
+    counter: list = []
+    transport = McpTransport(
+        _slow_server(3.0, counter), PeerInboxes(),
+        connect_timeout=1.0, retry_interval=0.1, call_timeout=0.3)
+    import time
+    start = time.monotonic()
+    with pytest.raises(SimulationError):
+        transport.exchange_agreement({"terms": {}})
+    assert time.monotonic() - start < 3.0  # never waited out the hung tool
+
+
+def test_handshake_repushes_until_agreement_arrives():
+    import threading
+    counter: list = []
+    inboxes = PeerInboxes()
+    transport = McpTransport(
+        _slow_server(0.0, counter), inboxes,
+        connect_timeout=10.0, retry_interval=0.05, handshake_repush=0.2)
+    threading.Timer(0.7, lambda: inboxes.agreements.put({"terms": {}})).start()
+    result = transport.exchange_agreement({"terms": {"board_size": 7}})
+    assert result == {"terms": {}}
+    assert len(counter) >= 2  # the greeting was re-pushed, not sent once
+
+
+def test_handshake_patience_spans_a_down_door():
+    # The opponent's door is DOWN (bad handle) for the whole first stretch; the
+    # arriving push (their runner dialing us) must still open the sub-game.
+    import threading
+    inboxes = PeerInboxes()
+    transport = McpTransport(
+        object(), inboxes,  # un-callable opponent handle = 502-style gap
+        connect_timeout=5.0, retry_interval=0.05, handshake_repush=0.2)
+    threading.Timer(0.5, lambda: inboxes.agreements.put({"terms": {}})).start()
+    assert transport.exchange_agreement({"terms": {}}) == {"terms": {}}
