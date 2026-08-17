@@ -1,8 +1,7 @@
 # DRAFT reply to imreeyal (owner sends after review)
 
-Status: DRAFT — one open item before sending: the §0 sparring pass results
-(placeholder marked `[SPARRING]` below) — run it after tasks 8.3–8.8 land so
-the pass exercises the bytes the friendly will run.
+Status: READY TO SEND (owner reviews windows + sends). §0 pass completed
+2026-08-17 with the full Stage-8 stack.
 
 ---
 
@@ -42,10 +41,19 @@ agreement from any other group_id.
 - `verify_vectors.py`: all CORE vectors green; additionally our conformance
   suite reproduces all 6 CORE fixtures **from our production functions**, and
   re-derives your three locked-model doc hashes from our own canonicalizer.
-- [SPARRING] full series vs the sparring peer (both directions — our runner
-  driving AND our standing process answering, watching sub-game 2) +
-  `check_artifacts` two-directory join: results to follow in this thread
-  before we book the friendly.
+- Sparring series (2026-08-17, `--policy random --role thief`, our peer as
+  police in sub-game 1): **6/6 sub-games settled, every mutual audit
+  "Verified OK" in both directions, one `game_uid`
+  (`cca4294f-568a-6539-48c9-4d6c9798b440`) across all artifacts** — including
+  the Hebrew/emoji hint sub-games re-hashed clean. Both sides' openers
+  exercised (both push; the arriving negotiate opens the sub-game).
+- `tools/check_artifacts.py <ours> <sparring's> --terms <flat terms>`:
+  our set **ALL ARTIFACT CHECKS PASS** (uid derives from the flat terms; all
+  §6.2 identities) and the cross-team join ends **ALL SETS AGREE** on every
+  graded field. One honest note: the run caught a real bug on our side — our
+  declaration builder assumed every identity block carries a hardware `spec`
+  (sparring's doesn't) — fixed and regression-tested the same evening, which
+  is exactly what your §0 is for.
 
 ## §3 — the interop points, in your numbering
 

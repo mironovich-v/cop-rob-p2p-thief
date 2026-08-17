@@ -599,3 +599,19 @@
   every signed term — the whole "byte-identical constitution" alignment came
   down to schema_version, agreed_between, num_games, and dropping a _note key.
   Building strictly from App F from day one is what made the pairing cheap.
+
+## 2026-08-17 · Stage 8 · Fix+Ops · §0 sparring pass + foreign-identity fix (8.13)
+- **Output:** live 6-sub-game series vs the kit's sparring peer (third
+  independent implementation): 6/6 settled, every mutual audit Verified OK
+  both directions, one game_uid; check_artifacts per-dir ALL PASS +
+  cross-team join ALL SETS AGREE. The first run crashed AFTER settlement:
+  `build_declaration` assumed every identity block carries `spec` — the
+  sparring peer's doesn't (and a live opponent's identity once arrived empty
+  for whole windows). `group_block` now degrades every identity key to
+  explicit placeholders; regression test added; re-run clean end-to-end.
+  Reply draft [SPARRING] filled → READY TO SEND.
+- **Lesson:** 313 green tests and 12 conformance suites did not catch a
+  KeyError that the FIRST live foreign peer found in minutes — self-play
+  fixtures inherit your own assumptions (every identity we ever built had
+  `spec`). The league's "play the sparring peer before you contact anyone"
+  rule exists precisely for this class.

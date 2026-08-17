@@ -171,6 +171,8 @@ scope already matches kit #55 — the gaps are behavioral, not byte-level.
 
 | [x] | 8.12 | imreeyal pairing readiness: `config/imreeyal/` (their constitution byte-identical, `agreed_between ["imreeyal","vm__fabi"]`, num_games 6; group_id `vm__fabi`, opponent guard, ngrok servers, friendly auto-fire recipients, tie_rule declared); real member names in all configs (OD-2); reply draft + derived ids (`imreeyal-vs-vm__fabi` / `0e07bcda-4bfd-3668-1fec-86833963b58c`) | `config/imreeyal/*`, `config/{police,thief}/game.toml`, `docs/pairing/` | config+docs | `test_config` (pairing pin) |
 
+| [x] | 8.13 | §0 sparring pass (imreeyal's checklist): full 6-sub-game series vs the kit sparring peer — 6/6 settled, all mutual audits OK both ways, one game_uid; `check_artifacts` per-dir ALL PASS + cross-team join ALL SETS AGREE; found+fixed: declaration builder crashed on a foreign identity without `spec` | `reporting/artifact_helpers.py` + throwaway config (scratchpad) | ~15 src | `test_artifacts` regression; live sparring run |
+
 Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
 its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
 are deliberately NOT implemented (opt-in / zero-implementation per kit

@@ -66,7 +66,8 @@
 | 2026-08-17 | PR (8.7) | stage-8-league-fields | merged | Fable 5 · high | graded league fields + links.github + committed rule-52 ledger in settlement path (7 tests) | ~0.15 session | merged |
 | 2026-08-17 | PR (8.8) | stage-8-email-gate | merged | Fable 5 · high | email body+attachment, reference subject, auto-fire, dry-run default, recipient-shaped double-arming gate (14 tests) | ~0.2 session | merged |
 | 2026-08-17 | PR (8.9) | stage-8-conformance | merged | Fable 5 · high | behavior-table conformance sweep (4 vector tables driven by production code); kit oracle 125/125, zero drift | ~0.1 session | merged |
-| 2026-08-17 | PR (8.12) | config-imreeyal-pairing | (pending) | Fable 5 · high | pairing config (constitution byte-identical, derived ids pinned), real member names, reply draft committed | ~0.1 session | in review |
+| 2026-08-17 | PR (8.12) | config-imreeyal-pairing | merged | Fable 5 · high | pairing config (constitution byte-identical, derived ids pinned), real member names, reply draft committed | ~0.1 session | merged |
+| 2026-08-17 | PR (8.13) | fix-foreign-identity | (pending) | Fable 5 · high | §0 sparring pass (6/6, audits OK, ALL SETS AGREE) + fix: declaration tolerates foreign identity without spec | ~0.2 session + 2 live series runs | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

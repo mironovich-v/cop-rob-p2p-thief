@@ -103,3 +103,21 @@ def test_all_artifacts_share_one_game_uid(police_config, thief_config):
     res = build_result(GAME_ID, GAME_UID, [GROUP_A, GROUP_B], [], {}, "sig")
     assert {a["game_uid"] for a in (decl, cfg, log, res)} == {GAME_UID}
     assert {a["links"]["declaration"] for a in (decl, cfg, log, res)} == {declaration_filename(GAME_ID)}
+
+
+def test_declaration_survives_a_foreign_identity_without_spec():
+    # The sparring peer's negotiate identity carries no `spec`/`members` keys —
+    # a settled series must still emit its declaration (found live, §0 run).
+    foreign = {"group_id": "sparring-local", "group_name": "sparring"}
+    own = {"group_id": "vm__fabi", "group_name": "VM-Fabi", "members": ["a"],
+           "repos": {}, "mcp_servers": {}, "llm_model": "template",
+           "spec": {"cpu_type": "x"}}
+    declaration = build_declaration(
+        GAME_ID, GAME_UID, "Asia/Jerusalem", "2026-08-17T20:00:00+00:00",
+        "2026-08-17T20:10:00+00:00", 6, 200000, own, foreign)
+    block = declaration["groups"]["group_2"]
+    assert block["group_id"] == "sparring-local"
+    assert block["members"] == []
+    assert block["llm_model"] == "undeclared"
+    assert set(block["hardware_spec"]) == {"cpu_type", "cpu_freq_mhz", "cpu_cores",
+                                           "ram_gb", "gpu_model", "vram_gb"}

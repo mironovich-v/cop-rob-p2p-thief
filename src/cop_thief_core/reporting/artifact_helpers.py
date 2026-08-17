@@ -67,15 +67,18 @@ def hardware_spec(spec: dict) -> dict:
 
 def group_block(identity: dict) -> dict:
     """One team's static declaration block, self-signed (consensus over the block
-    before its signature is inserted)."""
+    before its signature is inserted). A FOREIGN identity block may lack any key
+    (the sparring peer sends no ``spec``; a live opponent's block once arrived
+    empty for whole windows) — degrade to explicit placeholders, never crash a
+    settled series at the artifact step."""
     block = {
-        "group_id": identity["group_id"],
-        "group_name": identity["group_name"],
-        "members": identity["members"],
-        "repos": identity["repos"],
-        "mcp_servers": identity["mcp_servers"],
-        "llm_model": identity["llm_model"],
-        "hardware_spec": hardware_spec(identity["spec"]),
+        "group_id": identity.get("group_id", "unknown-group"),
+        "group_name": identity.get("group_name", "unknown"),
+        "members": identity.get("members", []),
+        "repos": identity.get("repos", {}),
+        "mcp_servers": identity.get("mcp_servers", {}),
+        "llm_model": identity.get("llm_model", "undeclared"),
+        "hardware_spec": hardware_spec(identity.get("spec") or {}),
     }
     block["signature"] = consensus_signature(block)
     return block
