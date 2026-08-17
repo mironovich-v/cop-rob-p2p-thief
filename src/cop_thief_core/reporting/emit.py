@@ -27,6 +27,12 @@ from cop_thief_core.reporting.artifacts import (
     declaration_filename,
     result_filename,
 )
+from cop_thief_core.reporting.league import (
+    advance_ledger,
+    first_meeting,
+    league_fields,
+    load_ledger,
+)
 from cop_thief_core.reporting.report_writer import consensus_signature
 
 
@@ -109,6 +115,17 @@ def emit_series(config, logs_dir, series) -> dict:
 
     agg = scoring.aggregate([sg["score"] for sg in sub_games], scoring_cfg["tie_score"])
     mutual = consensus_signature(_symmetric(game_id, agg, sub_games))
-    result = build_result(game_id, game_uid, sorted([own_gid, opp_gid]), sub_games, agg, mutual)
+    # SPEC §6.2 graded fields: armed by the run (counted), truthful in friendlies.
+    counted = bool(config.get("game.counted", False))
+    ledger_path = Path(config.get("game.ledger_path", "results/rule52_ledger.json"))
+    league = league_fields(
+        own_gid, opp_gid, config.get("game.counted_games_played", 0),
+        opp.get("counted_games_played"), counted,
+        first_meeting(load_ledger(ledger_path), opp_gid), agg["winner_group"])
+    github = {own_gid: own.get("repos", {}), opp_gid: opp.get("repos", {})}
+    result = build_result(game_id, game_uid, sorted([own_gid, opp_gid]), sub_games, agg,
+                          mutual, league=league, github=github)
     _write(own_dir, result_filename(game_id), result)
+    if counted:  # the settlement path advances the committed rule-52 evidence
+        advance_ledger(ledger_path, opp_gid, game_id)
     return result

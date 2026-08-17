@@ -537,3 +537,18 @@
   archive — the delivery contract and the audit binding are one data
   structure viewed at two times. Design findings compound when the same
   primitive serves both.
+
+## 2026-08-17 · Stage 8 · Implementation · league fields + ledger (8.7)
+- **Output:** new `reporting/league.py` — rule-52 ledger (load / first_meeting /
+  advance; committed at `results/rule52_ledger.json` with a .gitignore
+  exception) + the three graded §6.2 fields: `games_played_including_this`
+  (inclusive when counted, unbumped in friendlies, opponent null = UNCLAIMED
+  never 0), `first_meeting_between_groups` (always truthful),
+  `diversity_reward_applied` (DERIVED: counted AND first AND winner — both
+  files mark the winner true, never all-false-out-of-modesty). `links.github`
+  carries BOTH teams' repos (rule 49; opponent's read from their negotiate
+  identity). The counted settlement path advances the ledger before returning.
+- **Lesson:** the graded fields are ARMED BY THE RUN, not the calendar — the
+  friendly/counted split lives in one `bump = 1 if counted else 0` and one
+  gated `advance_ledger`, which keeps the truthfulness argument auditable in
+  two lines instead of scattered conditionals.

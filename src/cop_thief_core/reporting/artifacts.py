@@ -105,16 +105,22 @@ def build_log(summary: dict, game_id, game_uid, group_id, opponent_group_id) -> 
 
 
 def build_result(game_id, game_uid, group_ids, sub_games: list, aggregate_out: dict,
-                 mutual_sha256: str) -> dict:
-    """Template 4: the aggregated final result over all sub-games (both teams agree)."""
-    final_result = {**aggregate_out, "tokens_total_series": tokens_series(sub_games, group_ids)}
+                 mutual_sha256: str, league: dict | None = None,
+                 github: dict | None = None) -> dict:
+    """Template 4: the aggregated final result over all sub-games (both teams agree).
+
+    ``league`` merges the three graded SPEC §6.2 fields into final_result;
+    ``github`` rides in links (rule 49). Token columns legitimately differ
+    per-side; everything else in final_result must not."""
+    final_result = {**aggregate_out, "tokens_total_series": tokens_series(sub_games, group_ids),
+                    **(league or {})}
     return {
         "_schema": SCHEMA_RESULT,
         "schema_version": SCHEMA_VERSION,
         "report_type": "final_game_result",
         "game_id": game_id,
         "game_uid": game_uid,
-        "links": links(game_id),
+        "links": links(game_id, github),
         "timezone": DEFAULT_TIMEZONE,
         "groups": list(group_ids),
         "num_sub_games": len(sub_games),

@@ -62,7 +62,8 @@
 | 2026-08-17 | PR (8.10+8.11) | stage-8-transport | f080022 | Fable 5 · high | per-call timeout cap + config refusal; handshake re-push + door-gap patience; session-per-call documented | ~0.15 session | merged |
 | 2026-08-17 | PR (8.3) | stage-8-delivery | ff9ec12 | Fable 5 · high | delivery contract: commit-keyed dedup, loud equivocation, reorder buffer, flood rule, deadline discipline | ~0.2 session | merged |
 | 2026-08-17 | PR (8.6) | stage-8-wire-validation | 9381f65 | Fable 5 · high | wire value validation (turn_message refusal rows) + receive() refusal path before any state change | ~0.1 session | merged |
-| 2026-08-17 | PR (8.4) | stage-8-audit-binding | (pending) | Fable 5 · high | audit live-binding: disclosure bound to arrived commits + completeness (7 tests) | ~0.1 session | in review |
+| 2026-08-17 | PR (8.4) | stage-8-audit-binding | 23a5e24 | Fable 5 · high | audit live-binding: disclosure bound to arrived commits + completeness (7 tests) | ~0.1 session | merged |
+| 2026-08-17 | PR (8.7) | stage-8-league-fields | (pending) | Fable 5 · high | graded league fields + links.github + committed rule-52 ledger in settlement path (7 tests) | ~0.15 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

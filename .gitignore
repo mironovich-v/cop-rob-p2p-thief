@@ -72,6 +72,9 @@ notebooks/*.executed.ipynb
 # Game run outputs (generated — tracked intentionally only if required for grading)
 results/*
 !results/.gitkeep
+# Rule-52 first-meeting ledger: COMMITTED evidence (kit WARNINGS §5a) — a
+# counted series is not over until the ledger that proves it is pushed.
+!results/rule52_ledger.json
 logs/*
 !logs/.gitkeep
 # Stale/temp root-level report files — named match-run reports are tracked explicitly

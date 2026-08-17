@@ -27,16 +27,21 @@ def result_filename(game_id: str) -> str:
     return f"result_{game_id}.json"
 
 
-def links(game_id: str) -> dict:
+def links(game_id: str, github: dict | None = None) -> dict:
     """Shared links block: logical role -> filename. Per-sub-game files keep the
-    literal g<NN> placeholder because the sub_game_number varies per file."""
-    return {
+    literal g<NN> placeholder because the sub_game_number varies per file. The
+    result also carries ``github`` (rule 49): BOTH teams' repo URLs — how the
+    grader reaches the repo-published declaration/configs/logs (never mailed)."""
+    block = {
         "_remark": LINKS_REMARK,
         "declaration": declaration_filename(game_id),
         "config": f"config_{game_id}_g<NN>.json",
         "log": f"log_{game_id}_g<NN>.json",
         "result": result_filename(game_id),
     }
+    if github is not None:
+        block["github"] = github
+    return block
 
 
 def canonical_sha256(data) -> str:

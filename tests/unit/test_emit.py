@@ -66,3 +66,33 @@ def test_both_peers_agree_on_mutual_signature(tmp_path, police_config, thief_con
     thief = emit_series(thief_config, tmp_path / "t",
                         SeriesResult(thief_view, opp, own, GAME_ID, GAME_UID))
     assert police["mutual_agreement"]["sha256"] == thief["mutual_agreement"]["sha256"]
+
+
+def test_result_carries_league_fields_and_github_links(tmp_path, police_config, thief_config):
+    # Friendly (counted absent): truthful but disarmed — and repos for BOTH teams.
+    series = _series(police_config, thief_config)
+    result = emit_series(police_config, tmp_path, series)
+    own_gid = series.own_identity["group_id"]
+    opp_gid = series.peer_identity["group_id"]
+    final = result["final_result"]
+    assert final["games_played_including_this"] == {own_gid: 0, opp_gid: 0}
+    assert final["first_meeting_between_groups"] is True
+    assert final["diversity_reward_applied"] == {own_gid: False, opp_gid: False}
+    assert set(result["links"]["github"]) == {own_gid, opp_gid}
+    assert result["links"]["github"][own_gid]  # our repos block is non-empty
+
+
+def test_counted_run_bumps_counts_and_advances_ledger(tmp_path, police_config, thief_config):
+    ledger_path = tmp_path / "ledger.json"
+    police_config.override("game.counted", True)
+    police_config.override("game.ledger_path", str(ledger_path))
+    series = _series(police_config, thief_config)
+    result = emit_series(police_config, tmp_path, series)
+    own_gid = series.own_identity["group_id"]
+    opp_gid = series.peer_identity["group_id"]
+    final = result["final_result"]
+    assert final["games_played_including_this"][own_gid] == 1  # inclusive of this
+    assert final["diversity_reward_applied"][final["winner_group"]] is True
+    ledger = json.loads(ledger_path.read_text("utf-8"))
+    assert ledger["opponents"][opp_gid]["counted_series"] == 1  # committed evidence
+    police_config.override("game.counted", False)  # do not leak into other tests
