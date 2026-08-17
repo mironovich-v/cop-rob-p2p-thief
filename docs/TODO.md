@@ -143,7 +143,7 @@ Exit: four artifacts + report + Gmail draft + GUI + replay + two-repo export.
 | Done | Task | Scope | Key files | ~LOC | AC | Tests |
 |------|------|-------|-----------|------|-----|-------|
 | [x] | 7.8 | strict step-monotonic dedup (stale/duplicate/out-of-order); fix caught-branch step advance | `orchestration/{turn_handler,runtime}.py` | ~10 | AC7 | `test_turn_handler`, `test_runtime` (dup) |
-| [ ] | 7.9 | CI workflow: gate + kit `gen_vectors` drift check | `.github/workflows/` | ~40 | AC1 | CI run |
+| [x] | 7.9 | CI workflow: full gate (ruff, pytest+cov incl. conformance vs fetched kit, kit oracle, `gen_vectors` drift check) | `.github/workflows/gate.yml` | ~35 yaml | AC1 | CI run on this PR |
 
 ## Stage 8 — League-Kit Resync (kit HEAD `ad65576`, re-read 2026-08-17)
 Exit: conformant against the updated `copthief-league-protocol` — all three

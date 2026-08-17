@@ -615,3 +615,14 @@
   fixtures inherit your own assumptions (every identity we ever built had
   `spec`). The league's "play the sparring peer before you contact anyone"
   rule exists precisely for this class.
+
+## 2026-08-17 · Stage 7 follow-up · Chore · CI gate (7.9, AC1)
+- **Output:** `.github/workflows/gate.yml` — on every push/PR: uv sync, ruff
+  zero, full pytest with the ≥85 coverage gate (conformance suites included,
+  kit fetched via scripts/fetch_interop.sh), the kit's own verify_vectors
+  oracle, and the gen_vectors fixture-drift check. requirements_matrix AC1 →
+  DONE; PROGRESS refreshed to the true end-of-day state (Stage 8 complete,
+  §0 pass clean, reply ready).
+- **Lesson:** trivial in isolation; its value is that the drift check now
+  runs on someone ELSE'S schedule too — a kit update that regenerates
+  vectors breaks our CI before it breaks a window.

@@ -1,36 +1,36 @@
 # PROGRESS — current state, blockers, next steps
 
-_Last updated: 2026-08-17 (Stage 8 league-kit resync planned)._
+_Last updated: 2026-08-17 evening (Stage 8 COMPLETE; §0 sparring pass clean;
+reply to imreeyal ready to send)._
 
-## Stage 8 in flight — league-kit resync (kit HEAD `ad65576`)
+## Stage 8 COMPLETE — league-kit resync (kit HEAD `ad65576`)
 
-The league kit was re-read in full on 2026-08-17 after a real cross-team
-campaign (two counted series; four new WARNINGS). Byte-level: all 6 CORE
-vectors still pass, and our 5-key consensus scope already matches kit #55.
-Behavioral gaps → Stage 8 in `docs/TODO.md` (8.1–8.9): rule-46/47 endings +
-concession final, capture corroboration, commit-keyed delivery contract,
-audit live-binding, negotiate declarations, wire value validation, §6.2
-graded league fields + `links.github` + rule-52 ledger, email body+attachment
-with a rule-30-conformant recipient gate (ADR-20), new-vector conformance
-tests. ADR-17..20 record the decisions. **Stage 8 must land before the
-counted cross-team game** — the gaps are conformance/disqualification-grade.
+All 13 tasks (D8, 8.1–8.13) merged in one day: rule-46/47 endings + thief
+concession, capture corroboration (`disputed_capture`), commit-keyed delivery
+contract with loud equivocation + reorder window, audit live-binding to
+arrived commits, negotiate extras + locked-model hashes +
+`counted_games_played`, wire value validation, §6.2 graded league fields +
+`links.github` + committed rule-52 ledger, email body+attachment + auto-fire +
+recipient-shaped double-arming gate (ADR-20, `--counted`), MCP session
+lifecycle + 10s per-call cap, behavior-table conformance (every kit decision
+row answered by production code), pairing config (`config/imreeyal/`, derived
+ids pinned), and the §0 sparring pass fix (foreign identity without `spec`).
+Kit oracle 125/125, zero fixture drift. 315 tests, coverage ≥98%.
 
-First-contact obligations for the pairing (ops, not code): state turn order
-(thief-first) and `tie_rule: series_add` explicitly; constitution as a file;
-follow the kit playbook ladder (F1 one sub-game → F2 full friendly series +
-report-compare ritual → F3 re-prove on the counted bytes → counted).
+**§0 SPARRING PASS (2026-08-17): 6/6 sub-games settled vs the kit's sparring
+peer, every mutual audit Verified OK both directions, one `game_uid`;
+`check_artifacts` per-directory ALL PASS + cross-team join ALL SETS AGREE.**
 
-**PAIRING LIVE (2026-08-17): imreeyal first contact received — deadline
-2026-08-20.** Verbatim message + full disposition map:
-`docs/pairing/imreeyal_first_contact.md`. Their §3 dialect maps almost 1:1
-onto Stage 8 (now including 8.10 session lifecycle + 8.11 per-call timeout
-cap); already-conformant items: thief-first, tool/arg names, 10-key
-TurnMessage, per-sender steps, 0.8-peak after-one-decay scent form (league
-majority), consensus scope. Owner must supply the §1 answers (members, repo
-URLs, tunnel endpoints, llm_model, report-from email, time windows; counted
-count = 0) and run the kit sparring series (§0). Their hard gate before any
-counted series: one friendly report must arrive in THEIR inbox auto-fired at
-settlement.
+**PAIRING LIVE: imreeyal — deadline 2026-08-20.** First contact + disposition:
+`docs/pairing/imreeyal_first_contact.md`. Our reply is READY TO SEND:
+`docs/pairing/imreeyal_reply_draft.md` (owner reviews windows and sends).
+Pinned pairing ids: game_id `imreeyal-vs-vm__fabi`, game_uid
+`0e07bcda-4bfd-3668-1fec-86833963b58c`. Proposed: Aug 18 friendly ladder
+(their auto-fired-report gate → point `config/imreeyal` email at them),
+Aug 19 counted (T 21:00, doubly armed: `game.counted=true` + `--counted`,
+recipient = lecturer alone, set by hand before the T), Aug 20 backup.
+Window-day tunnel: `ngrok http 8802 --domain=cop-rob-p2p.ngrok.app
+--host-header=rewrite` (note: pairing config listens on 8802).
 
 ## Where we are
 

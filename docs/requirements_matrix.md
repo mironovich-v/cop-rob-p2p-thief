@@ -55,7 +55,7 @@
 
 | ID | Criterion | Status | Evidence |
 |----|-----------|--------|----------|
-| AC1 | CORE vectors reproduced by our code; zero kit drift | DONE-code (all 6 reproduced; `gen_vectors` CI drift check = dev follow-up) | `test_core_vectors` |
+| AC1 | CORE vectors reproduced by our code; zero kit drift | DONE (12 conformance tests incl. behavior tables; CI gate runs oracle + drift check every push) | `test_core_vectors`, `test_behavior_tables`, `.github/workflows/gate.yml` |
 | AC2 | Separate processes/dirs; no shared truth | DONE (role CLIs run as separate processes/config dirs; transport-only comms; snapshot has no opponent truth) | `test_agent_cli`, `test_live_apply` |
 | AC3 | Local E2E finishes + audits clean; totals derived | DONE (6-sub-game series verified: alternation, agree, audits pass; totals derived in emit) | `test_series`, `test_runtime` |
 | AC4 | Public endpoint via tunnel; ≥1 cross-impl game settles byte-identically | OWNER/runtime (probe + Host-header built/tested; live tunnel game is an owner run) | `test_connectivity`; live cross-team run log |

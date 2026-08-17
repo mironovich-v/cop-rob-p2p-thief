@@ -1,0 +1,33 @@
+# The quality gate + league-kit conformance (TODO 7.9, RTS AC1).
+# Mirrors the per-PR checklist: ruff-zero, coverage >=85, all conformance
+# suites against the fetched kit, the kit's own oracle, and the fixture
+# drift check (a regenerated vector tree must produce no diff).
+name: gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Install
+        run: uv sync
+      - name: Lint (zero tolerance)
+        run: uv run ruff check src/ tests/
+      - name: Fetch the league interop kit
+        run: ./scripts/fetch_interop.sh
+      - name: Tests + coverage gate (includes conformance vs the kit)
+        run: uv run pytest tests/ --cov=src --cov-fail-under=85 -q
+      - name: Kit oracle (byte-level reference)
+        working-directory: copthief-league-protocol
+        run: uv run python verify_vectors.py
+      - name: Kit fixture drift check
+        working-directory: copthief-league-protocol
+        run: |
+          uv run python gen_vectors.py
+          git diff --exit-code -- vectors/
