@@ -583,3 +583,19 @@
   them through the FULL receive path put the flood rule in front of the value
   checks and failed the accept rows. Behavior tables must be driven at the
   seam they specify; the composition of seams is its own (unit) test.
+
+## 2026-08-17 · Stage 8 · Config · imreeyal pairing readiness (8.12)
+- **Output:** `config/imreeyal/` — imreeyal's constitution adopted verbatim
+  (schema 1.2, num_games 6, `agreed_between ["imreeyal","vm__fabi"]`) over a
+  pairing game.toml: group_id `vm__fabi`, opponent-group guard, ngrok
+  mcp_servers, their URL as opponent, hardened network values, template LLM,
+  friendly auto-fire recipients (their inbox + ours; lecturer structurally
+  excluded), `tie_rule = "series_add"` declared. Real member names replace the
+  id-0001 placeholders everywhere (OD-2 closed). A pinning test derives and
+  freezes the pairing ids: game_id `imreeyal-vs-vm__fabi`, game_uid
+  `0e07bcda-4bfd-3668-1fec-86833963b58c` — the numbers both teams compare in
+  chat before any window. Reply draft committed with the derived ids filled.
+- **Lesson:** our shared game.json was already value-identical to theirs on
+  every signed term — the whole "byte-identical constitution" alignment came
+  down to schema_version, agreed_between, num_games, and dropping a _note key.
+  Building strictly from App F from day one is what made the pairing cheap.

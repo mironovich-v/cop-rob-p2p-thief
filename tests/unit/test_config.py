@@ -83,3 +83,24 @@ def test_call_timeout_under_deadline_loads(tmp_path):
     shared = {**SHARED, "network_and_league": {"response_timeout_sec": 30}}
     cfg = ConfigManager(_write(tmp_path, toml=toml, shared=shared))
     assert cfg.get("network.call_timeout_seconds") == 10
+
+
+def test_imreeyal_pairing_config_is_playable():
+    # The committed pairing config must load, clear the App-F floors, and
+    # derive the ids both teams compare in chat before any window.
+    from cop_thief_core.interop.game_ids import derive_game_ids
+    from cop_thief_core.interop.negotiation import terms_from_config, validate_minimums
+
+    cfg = ConfigManager(REPO_ROOT / "config" / "imreeyal")
+    terms = terms_from_config(cfg)
+    validate_minimums(terms)
+    game_id, game_uid = derive_game_ids(terms, "vm__fabi", "imreeyal")
+    assert game_id == "imreeyal-vs-vm__fabi"
+    assert game_uid == "0e07bcda-4bfd-3668-1fec-86833963b58c"
+    assert cfg.get("game.group_id") == "vm__fabi"
+    assert cfg.get("game.opponent_group_id") == "imreeyal"
+    assert cfg.get("game.num_games") == 6
+    assert cfg.get("game.counted") is False  # armed only on counted day
+    # The friendly recipients never include the lecturer.
+    lecturer = cfg.get("email.lecturer_address").strip().lower()
+    assert all(r.strip().lower() != lecturer for r in cfg.get("email.recipient"))

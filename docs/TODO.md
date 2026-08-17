@@ -169,6 +169,8 @@ scope already matches kit #55 — the gaps are behavioral, not byte-level.
 | [x] | 8.10 | MCP session lifecycle (imreeyal §3.4/3.16): fresh Client per call (no session survives a boundary — documented); handshake patience 150s spans the inter-sub-game door gap; greeting RE-pushed every 5s until the game starts; arriving negotiate opens the sub-game; role guard bound at runtime construction (pre-handshake, structural) | `infra/mcp_client.py`, `config/*/game.toml` | ~40 src | `test_mcp_client` (repush, down-door patience) |
 | [x] | 8.11 | per-call timeout cap 10s strictly < signed `response_timeout_sec` 30 (imreeyal §3.5); ConfigManager refuses to load a violating config | `infra/mcp_client.py`, `shared/config.py` | ~20 src | `test_mcp_client` (hung call capped), `test_config` (refusal) |
 
+| [x] | 8.12 | imreeyal pairing readiness: `config/imreeyal/` (their constitution byte-identical, `agreed_between ["imreeyal","vm__fabi"]`, num_games 6; group_id `vm__fabi`, opponent guard, ngrok servers, friendly auto-fire recipients, tie_rule declared); real member names in all configs (OD-2); reply draft + derived ids (`imreeyal-vs-vm__fabi` / `0e07bcda-4bfd-3668-1fec-86833963b58c`) | `config/imreeyal/*`, `config/{police,thief}/game.toml`, `docs/pairing/` | config+docs | `test_config` (pairing pin) |
+
 Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
 its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
 are deliberately NOT implemented (opt-in / zero-implementation per kit

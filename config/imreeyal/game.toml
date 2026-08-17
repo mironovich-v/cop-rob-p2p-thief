@@ -1,0 +1,60 @@
+# PAIRING config: vm__fabi vs imreeyal — one peer process, role alternation
+# (we are THIEF in sub-game 1; imreeyal plays police in the odd sub-games).
+# The signed shared constitution is game.json — byte-identical to imreeyal's
+# (their first-contact message, 2026-08-17), agreed_between the sorted pair.
+# Run: uv run python -m thief_agent --config config/imreeyal
+# Tunnel: ngrok http 8802 --domain=cop-rob-p2p.ngrok.app --host-header=rewrite
+version = "1.10"
+
+[game]
+group_name = "VM-Fabi"
+group_id = "vm__fabi"                 # binding on the wire — matches our §1 reply
+sub_game_number = 1
+members = ["Vasily Mironovich", "Fahed Bitar"]
+repos = { cop = "https://github.com/mironovich-v/cop-rob-p2p-police", thief = "https://github.com/mironovich-v/cop-rob-p2p-thief" }
+mcp_servers = { cop = "https://cop-rob-p2p.ngrok.app/mcp", thief = "https://cop-rob-p2p.ngrok.app/mcp" }
+opponent_group_id = "imreeyal"        # handshake refuses any other group
+counted = false                       # flip ONLY for the one counted series (+ --counted)
+counted_games_played = 0              # truthful: this pairing is our first
+tie_rule = "series_add"               # declared in the constitution chat (ADR-17)
+
+[belief]
+smell_trust_weight = 4.0
+
+[paths]
+logs_dir = "logs"
+
+[play]
+step_speed_seconds = 0.0              # headless: no GUI pacing between steps
+seed = 1234
+
+[network]
+my_port = 8802
+opponent_url = "https://cop.imreeyal.com/mcp"
+turn_timeout_seconds = 180
+poll_interval_seconds = 0.5
+connect_timeout_seconds = 150   # handshake patience: spans their inter-sub-game door gap
+retry_interval_seconds = 1.0
+audit_send_timeout_seconds = 10
+call_timeout_seconds = 10       # per-call cap: strictly < signed response_timeout_sec (30)
+handshake_repush_seconds = 5.0  # re-push the greeting until the game starts
+reorder_window = 1
+
+[trash_talk]
+provider = "template"           # llm_model: template — zero tokens, no LLM on the wire
+
+[llm]
+model = "template"
+step_deadline_seconds = 30
+short_prompt_threshold_seconds = 10
+
+[email]
+# Friendly posture: auto-fire the report into IMREEYAL's inbox at settlement
+# (their pre-counted gate) + our own copy. The lecturer stays structurally
+# unreachable unless doubly armed (game.counted AND --counted; ADR-20).
+# Counted day: recipient becomes the lecturer ALONE, set by hand before the T.
+recipient = ["imreeyal.copthief@gmail.com", "imree.c@gmail.com", "mironovichvasily@gmail.com"]
+lecturer_address = "rmisegal+uoh26finalgame@gmail.com"
+mode = "send"
+enabled = true
+timeout_seconds = 120

@@ -8,7 +8,7 @@ version = "1.10"
 group_name = "VM-Fabi"
 group_id = "vm__fabi-police"          # per-GROUP identity (roles alternate across sub-games)
 sub_game_number = 1
-members = ["id-0001", "id-0002"]      # TODO: replace with real student IDs before submission
+members = ["Vasily Mironovich", "Fahed Bitar"]
 repos = { cop = "https://github.com/mironovich-v/cop-rob-p2p-police", thief = "https://github.com/mironovich-v/cop-rob-p2p-thief" }
 mcp_servers = { cop = "http://127.0.0.1:8802/mcp", thief = "http://127.0.0.1:8801/mcp" }
 
