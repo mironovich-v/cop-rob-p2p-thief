@@ -17,6 +17,27 @@ class _SilentTransport:
         return None
 
 
+class _DuplicatingTransport:
+    """Wraps a transport and re-delivers each polled turn once — a network re-send.
+    A robust peer must ignore the duplicate and still settle correctly."""
+
+    def __init__(self, inner):
+        self._inner = inner
+        self._dup = None
+
+    def poll_turn(self, timeout):
+        if self._dup is not None:
+            msg, self._dup = self._dup, None
+            return msg
+        msg = self._inner.poll_turn(timeout)
+        if msg is not None:
+            self._dup = dict(msg)
+        return msg
+
+    def __getattr__(self, name):
+        return getattr(self._inner, name)
+
+
 def _run_match(thief, police) -> dict:
     results: dict = {}
 
@@ -104,3 +125,15 @@ def test_runtime_emits_live_event_stream(transport_pair, thief_config, police_co
             assert "commit" in event and len(event["commit"]) == 64
             assert not any("opp" in key or "enemy" in key for key in event["view"])
     assert events[-1]["summary"]["result"] in ("capture", "survival")
+
+
+def test_duplicate_deliveries_do_not_desync(transport_pair, thief_config, police_config):
+    """Every opponent turn delivered twice; the peer ignores the dups and the match
+    still finishes, agrees, and audits clean (AC7 stale/duplicate robustness)."""
+    thief_t, police_t = transport_pair
+    thief = PeerRuntime(Role.THIEF, thief_config, thief_t)
+    police = PeerRuntime(Role.POLICE, police_config, _DuplicatingTransport(police_t))
+    results = _run_match(thief, police)
+    assert results["thief"]["result"] == results["police"]["result"]
+    assert results["thief"]["result"] in ("capture", "survival")
+    assert results["police"]["audit"]["passed"] is True

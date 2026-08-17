@@ -138,11 +138,18 @@ Exit: four artifacts + report + Gmail draft + GUI + replay + two-repo export.
 | [x] | 7.7b | academic README (install/usage/architecture/run) | `README.md` | docs | — | manual |
 | [x] | 7.7c | RTS gate review (AC1–AC17) + PROGRESS owner checklist | `docs/PRD.md`, `docs/PROGRESS.md` | docs | — | manual submission checklist |
 
+## Post-engineering dev follow-ups (AC-hardening)
+
+| Done | Task | Scope | Key files | ~LOC | AC | Tests |
+|------|------|-------|-----------|------|-----|-------|
+| [x] | 7.8 | strict step-monotonic dedup (stale/duplicate/out-of-order); fix caught-branch step advance | `orchestration/{turn_handler,runtime}.py` | ~10 | AC7 | `test_turn_handler`, `test_runtime` (dup) |
+| [ ] | 7.9 | CI workflow: gate + kit `gen_vectors` drift check | `.github/workflows/` | ~40 | AC1 | CI run |
+
 ## RTS gate
-- [~] PRD §4 acceptance criteria (AC1–AC17): **engineering complete** — 13/17
-  satisfied; AC1 & AC7 have small dev follow-ups; AC2/AC12/AC14 are owner runtime +
-  submission actions (see `docs/PROGRESS.md`). Full RTS is declared once the owner
-  checklist is done.
+- [~] PRD §4 acceptance criteria (AC1–AC17): **engineering complete** — 14/17
+  satisfied (AC7 closed); AC1 has a small CI dev follow-up (7.9); AC2/AC12/AC14 are
+  owner runtime + submission actions (see `docs/PROGRESS.md`). Full RTS is declared
+  once the owner checklist is done.
 
 ## Cross-cutting (continuous)
 - [ ] Update `docs/requirements_matrix.md` status per merged slice.

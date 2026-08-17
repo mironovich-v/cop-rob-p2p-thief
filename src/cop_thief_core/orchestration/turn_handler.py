@@ -22,6 +22,7 @@ class IncomingOutcome:
     opponent_won: bool = False  # opponent raised a win claim
     win_type: str | None = None
     claim_response: dict | None = None  # honest answer to attach to my next message
+    ignored: bool = False  # stale / duplicate / out-of-order message — safely dropped
 
 
 class TurnHandler:
@@ -35,8 +36,15 @@ class TurnHandler:
         self.smell_field = smell_field
         self.rules = rules
         self.history: list[dict] = []  # every received message, for GUI / replay
+        self._last_step = 0  # highest opponent step folded in (monotonic guard)
 
     def process(self, message: TurnMessage) -> IncomingOutcome:
+        # Opponent steps arrive strictly increasing (1, 2, 3, …). Any step we have
+        # already seen or passed is stale / duplicate / out-of-order: drop it without
+        # mutating belief, smell, or history, so a network re-send never double-counts.
+        if message.step <= self._last_step:
+            return IncomingOutcome(ignored=True)
+        self._last_step = message.step
         self.history.append(message.to_dict())
         if message.barrier_placed:
             self.state.note_barrier(tuple(message.barrier_placed))

@@ -64,7 +64,7 @@ Definition of Done (§13) measurable. Boxes are checked here as criteria are met
 
 **Gameplay & reliability**
 - [x] AC6 — a full 6-sub-game series finishes and audits cleanly with role alternation. *(verified: 6/6 sub-games, alternating roles, agreeing results, all audits pass, shared `game_uid`; `test_series` covers 2-game alternation)*
-- [~] AC7 — safe under malformed / missing-required / unknown-field messages, timeouts, and tamper; the loop never stalls (HOLD fallback). *(`test_protocol`, `test_runtime` timeout, `test_audit`)* Explicit stale / duplicate / out-of-order / restart cases are a dev follow-up.
+- [x] AC7 — safe under malformed / missing-required / unknown-field / **stale / duplicate / out-of-order** messages, timeouts, and tamper; the loop never stalls (HOLD fallback). The handler folds each opponent step exactly once (strict step-monotonic guard); a dead peer fails closed (opponent times out). *(`test_turn_handler`, `test_runtime` dup-delivery + timeout, `test_protocol`, `test_audit`)* Mid-game restart-resume is out of scope (fail-closed by design).
 - [x] AC8 — no optional ENH features are implemented (CORE-only), so ENH is off by default; a CORE-only peer plays a full match. *(the whole suite is CORE)*
 
 **Reporting & UX**
@@ -82,9 +82,9 @@ Definition of Done (§13) measurable. Boxes are checked here as criteria are met
 - [x] AC16 — `uv` only; no hard-coded game/config params (via `CFG`); no secrets committed.
 - [x] AC17 — every mechanism has a dedicated PRD; `docs/PROMPTS.md` + `COSTS.md` updated on every PR; `docs/TODO.md` task boxes checked as work completes.
 
-**RTS status (2026-08-05):** engineering complete — 13 AC satisfied; AC1 & AC7 have small
-dev follow-ups; AC2 / AC12 / AC14 are owner runtime + submission actions. See
-`docs/PROGRESS.md` for the owner checklist.
+**RTS status (2026-08-05):** engineering complete — 14 AC satisfied (AC7 robustness
+closed); AC1 has a small CI dev follow-up; AC2 / AC12 / AC14 are owner runtime +
+submission actions. See `docs/PROGRESS.md` for the owner checklist.
 
 ## 5. Functional requirements
 

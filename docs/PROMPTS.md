@@ -388,3 +388,17 @@
   stale/dup/out-of-order/restart), 3 owner runtime/submission (AC2 live cross-impl
   game, AC12 live tunnel, AC14 screenshots/tag/push). Declaring "engineering RTS" and
   handing a precise owner checklist beats a blanket "done" that overstates readiness.
+
+## 2026-08-05 · Stage 7 · Implementation · step-monotonic dedup (AC7, 7.8)
+- **Output:** `TurnHandler` now folds each opponent step exactly once (strict
+  `step > _last_step` guard); stale / duplicate / out-of-order messages return
+  `IncomingOutcome(ignored=True)` with no belief/smell/history mutation, and the
+  runtime `continue`s (no extra turn). `test_turn_handler` (4) + a duplicating-
+  transport integration test. Cov 98.33%; `turn_handler` 100%.
+- **Lesson:** adding the guard EXPOSED a latent bug — the caught-branch final HOLD
+  reused the current step (it `_send`s without `apply_move`), so under strict
+  monotonicity the capture confirmation was dropped and multi-sub-game series
+  desynced (one peer "capture", the other "timeout" → 180s hang). Fix: advance the
+  step with `apply_move(HOLD)` before the final send. A test that passes in isolation
+  (single game) but hangs in the full suite (2-game series) is the tell — reproduce
+  at the boundary, don't guess.

@@ -106,12 +106,15 @@ class PeerRuntime:
                 continue
             deadline = time.monotonic() + timeout
             outcome = self.handler.process(TurnMessage.from_dict(incoming))
+            if outcome.ignored:
+                continue  # stale / duplicate: do not re-render or take an extra turn
             self._listen({"type": "incoming", "message": incoming, "view": self.view()})
             if outcome.i_won:
                 self._result = (RESULT_CAPTURE, Role.POLICE.value)
             elif outcome.opponent_won:
                 self._result = (outcome.win_type or RESULT_SURVIVAL, Role.THIEF.value)
             elif outcome.i_am_caught:
+                self.state.apply_move(MoveType.HOLD, None)  # final hold: advance the step
                 self._send(Decision(MoveType.HOLD, None, FINAL_CAUGHT_HINT, VERDICT_TRUTH),
                            outcome.claim_response, None, None)
                 self._result = (RESULT_CAPTURE, Role.POLICE.value)

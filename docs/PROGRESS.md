@@ -20,8 +20,8 @@ self-contained submission repos.
 
 | Bucket | ACs |
 |--------|-----|
-| ✅ Done (engineering) | AC3, AC4, AC5, AC6, AC8, AC9, AC10, AC11, AC13, AC15, AC16, AC17 |
-| ◑ Dev follow-up | AC1 (CI drift check), AC7 (stale/duplicate/out-of-order/restart tests) |
+| ✅ Done (engineering) | AC3, AC4, AC5, AC6, AC7, AC8, AC9, AC10, AC11, AC13, AC15, AC16, AC17 |
+| ◑ Dev follow-up | AC1 (CI drift check) |
 | ☐ Owner runtime / submission | AC2, AC12, AC14 |
 
 ## Owner actions to reach full submission (only these remain)
@@ -48,5 +48,6 @@ self-contained submission repos.
 ## Optional dev follow-ups (not blocking submission)
 
 - Wire a CI workflow running the gate + the kit `gen_vectors` drift check (AC1).
-- Add adversarial protocol tests for stale / duplicate / out-of-order steps and
-  crash-restart recovery (AC7).
+- _(done)_ Adversarial robustness: strict step-monotonic dedup drops stale /
+  duplicate / out-of-order opponent messages; a dead peer fails closed via timeout
+  (AC7). Mid-game restart-resume remains out of scope by design.
