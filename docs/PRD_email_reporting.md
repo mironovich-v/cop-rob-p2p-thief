@@ -75,10 +75,12 @@ a Windows-path `gg:email` skill — §36.6). Requirements:
 - **AC-E3** — spec/token declaration is sourced from the sealed step-0 record and
   the summary (derived, not claimed). ✅
 - **AC-E4** — email defaults to disabled; when enabled, defaults to `dry_run`; a
-  real send needs explicit `email.mode="send"` AND the doubly-armed counted gate;
-  the lecturer's address is structurally unreachable otherwise; the injected
-  transport means tests never send and need no credentials. ⏳ re-scoped by
-  ADR-20 — was ✅ under the superseded draft default; re-verified at task 8.8.
+  real send needs explicit `email.mode="send"`; the lecturer's address is
+  structurally unreachable (case-/whitespace-insensitive, incl. inside lists)
+  unless doubly armed (`game.counted` AND `--counted`); an armed run that cannot
+  deliver refuses to START; body == named attachment, reference subject form,
+  auto-fired at settlement; the injected transport means tests never send and
+  need no credentials. ✅ re-verified at task 8.8 (ADR-20).
 - **AC-E5** — every Gmail call (token refresh + draft/send) goes through the
   `ApiGatekeeper` (service `email`); a transport failure returns a structured
   reason and never raises past `send_report`. ✅

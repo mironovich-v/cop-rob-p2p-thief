@@ -552,3 +552,20 @@
   friendly/counted split lives in one `bump = 1 if counted else 0` and one
   gated `advance_ledger`, which keeps the truthfulness argument auditable in
   two lines instead of scattered conditionals.
+
+## 2026-08-17 · Stage 8 · Implementation · email shape + structural gate (8.8)
+- **Output:** ADR-20 implemented. build_raw grows a byte-identical named
+  attachment (body == attachment, one construction); deliver is send-only
+  (DRAFT_URL removed — rule 30's scope cannot draft); EmailSender defaults to
+  dry_run (builds the exact MIME, transport untouched, needs no creds) with a
+  recipient-shaped gate: the lecturer is unreachable — case-/whitespace-
+  insensitive, including inside recipient lists — unless doubly armed
+  (game.counted AND --counted; a mismatch refuses to start, and an armed run
+  that cannot deliver refuses to start: preflight_armed). SDK auto-fires at
+  settlement with the reference subject form (winner from the derived result,
+  never claimed). Config: recipient now empty by default, lecturer_address
+  explicit, mode dry_run. 14 tests across three files.
+- **Lesson:** deleting the draft path (not just disabling it) is the honest
+  implementation of "a send-only scope cannot create drafts" — a gate that
+  exists only in config can be un-configured; a code path that doesn't exist
+  cannot be reached by mistake.

@@ -23,9 +23,9 @@ class _CaptureHttp:
         self.raw = None
 
     def __call__(self, url, data, headers, timeout):
-        if "drafts" in url:
-            self.raw = json.loads(data)["message"]["raw"]
-            return 201, '{"id":"draft1"}'
+        if "send" in url:
+            self.raw = json.loads(data)["raw"]
+            return 200, '{"id":"sent1"}'
         return 200, '{"access_token":"AT"}'
 
 
@@ -56,19 +56,48 @@ def test_email_disabled_by_default(transport_pair, tmp_path):
     assert out["thief"]["email"] == {"sent": False, "reason": "disabled"}
 
 
-def test_injected_sender_drafts_the_exact_report_body(transport_pair, tmp_path):
+def test_friendly_send_autofires_exact_bytes_as_body_and_attachment(transport_pair, tmp_path):
+    # imreeyal's gate: the friendly report arrives from OUR filer, auto-fired at
+    # settlement — body AND identical named attachment, reference subject form.
     http = _CaptureHttp()
 
     def setup(sdk):
         sdk.config.override("email.enabled", True)
+        sdk.config.override("email.mode", "send")
+        sdk.config.override("email.recipient", "imreeyal.copthief@example.com")
         sdk.email_sender = EmailSender(
             sdk.config, credentials=GmailCredentials("c", "s", "r"), http=http)
 
     out, police_sdk = _play(transport_pair, tmp_path, setup)
-    assert out["police"]["email"] == {"sent": True, "mode": "draft", "id": "draft1"}
-    # the drafted MIME body decodes to EXACTLY report_body(build_report(final summary))
+    assert out["police"]["email"] == {"sent": True, "mode": "send", "id": "sent1"}
     decoded = email.message_from_bytes(
         base64.urlsafe_b64decode(http.raw), policy=email.policy.default)
     expected = report_body(build_report(
         out["police"]["summaries"][-1], terms_from_config(police_sdk.config)))
-    assert decoded.get_content().strip() == expected
+    winner = out["police"]["report"]["final_result"]["winner_group"] or "tie"
+    assert decoded["Subject"] == (
+        f"Police-Thief series result: winner {winner} (reported by "
+        f"{out['police']['summaries'][-1]['role']})")
+    assert decoded.get_body(preferencelist=("plain",)).get_content().strip() == expected
+    attachment = next(decoded.iter_attachments())
+    assert attachment.get_filename() == f"result_{out['police']['game_id']}.json"
+    assert attachment.get_content().decode("utf-8") == expected  # body == attachment
+
+
+def test_counted_arming_mismatch_refuses_to_start(tmp_path):
+    import pytest
+
+    from cop_thief_core.exceptions import SimulationError
+    sdk = SimulationSdk(REPO_ROOT / "config" / "police", workdir=tmp_path)
+    with pytest.raises(SimulationError, match="arming mismatch"):
+        sdk.run_peer("police", counted=True)  # CLI armed, config not — refuse
+
+
+def test_armed_run_without_delivery_path_refuses_to_start(tmp_path):
+    import pytest
+
+    from cop_thief_core.exceptions import SimulationError
+    sdk = SimulationSdk(REPO_ROOT / "config" / "police", workdir=tmp_path)
+    sdk.config.override("game.counted", True)  # doubly armed…
+    with pytest.raises(SimulationError):  # …but email cannot deliver: refuse early
+        sdk.run_peer("police", counted=True)

@@ -35,3 +35,18 @@ def test_credentials_token_overrides_app_identity():
     token_data = {"client_id": "TOK_ID", "client_secret": "TOK_SECRET", "refresh_token": "R2"}
     creds = credentials_from_dicts(cred_data, token_data)
     assert (creds.client_id, creds.client_secret) == ("TOK_ID", "TOK_SECRET")
+
+
+def test_build_raw_attachment_carries_the_exact_same_bytes():
+    # Rule 34's two readings, both satisfied: the result JSON is the BODY and
+    # the SAME file as the single named attachment (kit SPEC §6.1).
+    raw = build_raw("to@example.com", "subj", BODY, attachment_name="result_a-vs-b.json")
+    message = email.message_from_bytes(
+        base64.urlsafe_b64decode(raw), policy=email.policy.default)
+    assert message.is_multipart()
+    body_part = message.get_body(preferencelist=("plain",))
+    assert body_part.get_content().strip() == BODY
+    attachments = list(message.iter_attachments())
+    assert len(attachments) == 1
+    assert attachments[0].get_filename() == "result_a-vs-b.json"
+    assert attachments[0].get_content().decode("utf-8") == BODY  # byte-identical

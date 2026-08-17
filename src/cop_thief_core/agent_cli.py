@@ -19,6 +19,9 @@ def parse_args(role: str, argv=None) -> argparse.Namespace:
     parser.add_argument("--workdir", default=".", help="where the four artifacts are written")
     parser.add_argument("--real-llm", action="store_true",
                         help="use the configured banter provider instead of the stub")
+    parser.add_argument("--counted", action="store_true",
+                        help="CLI half of the double arming for the ONE counted series "
+                             "(config game.counted must agree; ADR-20)")
     return parser.parse_args(argv)
 
 
@@ -27,7 +30,8 @@ def run_role(role: str, argv=None, *, transport=None) -> dict:
     ``transport`` is injectable so tests drive it over the in-process FakeTransport."""
     args = parse_args(role, argv)
     sdk = SimulationSdk(args.config, workdir=args.workdir)
-    outcome = sdk.run_peer(role, stub_llm=not args.real_llm, transport=transport)
+    outcome = sdk.run_peer(role, stub_llm=not args.real_llm, transport=transport,
+                           counted=args.counted)
     summary = outcome["result"]
     print(f"[{role}] result={summary['result']} winner={summary['winner']} "
           f"game_uid={outcome['game_uid']} artifacts={outcome.get('artifacts_dir', '-')}")

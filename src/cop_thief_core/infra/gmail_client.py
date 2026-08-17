@@ -18,7 +18,6 @@ from email.message import EmailMessage
 from cop_thief_core.exceptions import ProviderError
 
 TOKEN_URI = "https://oauth2.googleapis.com/token"
-DRAFT_URL = "https://gmail.googleapis.com/gmail/v1/users/me/drafts"
 SEND_URL = "https://gmail.googleapis.com/gmail/v1/users/me/messages/send"
 _OK_STATUS = (200, 201)
 
@@ -45,12 +44,20 @@ def credentials_from_dicts(cred_data: dict, token_data: dict) -> GmailCredential
     )
 
 
-def build_raw(to: str, subject: str, body: str) -> str:
-    """base64url of a UTF-8 MIME message whose decoded content is exactly ``body``."""
+def build_raw(to: str, subject: str, body: str, attachment_name: str | None = None) -> str:
+    """base64url of a UTF-8 MIME message whose decoded content is exactly ``body``.
+
+    With ``attachment_name``, the SAME bytes also ride as the single named
+    attachment — rule 34's two readings (text body / JSON file), both satisfied
+    with one construction (kit SPEC §6.1); never a re-serialization."""
     message = EmailMessage()
     message["To"] = to
     message["Subject"] = subject
     message.set_content(body)
+    if attachment_name:
+        message.add_attachment(
+            body.encode("utf-8"), maintype="application", subtype="json",
+            filename=attachment_name)
     return base64.urlsafe_b64encode(message.as_bytes()).decode("ascii")
 
 
@@ -94,9 +101,8 @@ def fetch_access_token(creds: GmailCredentials, http, timeout) -> str:
     return token
 
 
-def deliver(creds: GmailCredentials, raw: str, mode: str, http, timeout) -> dict:
-    """Refresh a token, then create a draft (default) or send. Returns the API JSON."""
+def deliver(creds: GmailCredentials, raw: str, http, timeout) -> dict:
+    """Refresh a token, then SEND. Send-only by design (ADR-20): rule 30's
+    send-only scope cannot create drafts, so no draft path exists to misuse."""
     token = fetch_access_token(creds, http, timeout)
-    if mode == "send":
-        return _post_json(SEND_URL, token, {"raw": raw}, http, timeout)
-    return _post_json(DRAFT_URL, token, {"message": {"raw": raw}}, http, timeout)
+    return _post_json(SEND_URL, token, {"raw": raw}, http, timeout)

@@ -55,7 +55,11 @@ step_deadline_seconds = 30
 short_prompt_threshold_seconds = 10
 
 [email]
-recipient = "rmisegal+uoh26finalgame@gmail.com"
-mode = "draft"
+# ADR-20: dry-run default; the lecturer is structurally unreachable unless the
+# run is doubly armed (game.counted AND --counted). Friendly runs point
+# recipient at the pairing partner / ourselves — NEVER the lecturer.
+recipient = ""
+lecturer_address = "rmisegal+uoh26finalgame@gmail.com"
+mode = "dry_run"
 enabled = false
 timeout_seconds = 120
