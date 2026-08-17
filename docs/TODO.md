@@ -161,17 +161,29 @@ scope already matches kit #55 — the gaps are behavioral, not byte-level.
 | [ ] | 8.2 | capture corroboration at audit: answer (cell = revealed trail end) vs concession (cell captured under cop's OWN barrier record); failure → `disputed_capture`, never counted clean; strict-parse-or-degrade | `orchestration/summary.py`, audit helper | ~140 | unit (answer/concession/void paths) |
 | [ ] | 8.3 | delivery-contract upgrade: dedup on COMMIT (`{step: commit}`), same-step-different-commit → loud equivocation, bounded reorder window (buffer ≤ window, violation past), deadline never renewed by tolerated traffic + checked on arrival laps | `orchestration/{turn_handler,runtime}.py` | ~130 | full `delivery_contract.json` table |
 | [ ] | 8.4 | audit live-binding: disclosed commit == commit that ARRIVED per step + completeness, then re-hash (WARNINGS §5d) | `interop/hashing.py`, `orchestration/summary.py` | ~60 | unit (bound/unbound/missing-step) |
-| [ ] | 8.5 | negotiate extras: declare `role`/`sub_game_number`/`game_uid` + locked-model hashes BESIDE terms; truth tables (refuse only both-declared-and-differ; omission/uncomparable → play); push-first + accept agreement from response body OR inbound push (WARNINGS §2b) | `interop/negotiation.py`, `orchestration/handshake.py`, `infra/mcp_*` | ~150 | pairing/uid truth tables |
+| [ ] | 8.5 | negotiate extras: declare `role`/`sub_game_number`/`game_uid` + locked-model hashes BESIDE terms; `identity.counted_games_played` (int, exact key — imreeyal §3.8); truth tables (refuse only both-declared-and-differ; omission/uncomparable → play); push-first + accept agreement from response body OR inbound push (WARNINGS §2b) | `interop/negotiation.py`, `orchestration/handshake.py`, `infra/mcp_*` | ~150 | pairing/uid truth tables |
 | [ ] | 8.6 | wire value validation before any state change: refuse empty timestamp, non-lowercase-hex commit, string smell intensities, negative step | `protocol/messages.py` | ~80 | `turn_message.json` refusal rows |
 | [ ] | 8.7 | §6.2 league fields (`games_played_including_this` null=unclaimed, `first_meeting_between_groups`, `diversity_reward_applied` derived — +10 never in totals) + `links.github` (rule 49) + committed rule-52 first-meeting ledger in settlement path | `reporting/*`, config | ~150 | unit (armed/disarmed, ledger advance) |
-| [ ] | 8.8 | email shape + gate: result JSON as body AND same file as single named attachment; replace draft-mode with `dry_run`; structural recipient gate (lecturer unreachable unless doubly-armed: config `counted` + CLI `--counted`) | `infra/{email_sender,gmail_client}.py`, `sdk` | ~150 | unit (gate matrix, MIME round-trip) |
+| [ ] | 8.8 | email shape + gate: result JSON as body AND same file as single named attachment; reference subject format; **auto-fire at settlement** (rule 32 — no human in the loop; friendly recipient = the pairing partner); replace draft-mode with `dry_run`; structural recipient gate (lecturer unreachable unless doubly-armed: config `counted` + CLI `--counted`) | `infra/{email_sender,gmail_client}.py`, `sdk` | ~150 | unit (gate matrix, MIME round-trip) |
 | [ ] | 8.9 | conformance tests for new vectors: `locked_model` (schema hash + refusal), `turn_message`, `delivery_contract`, `pairing_declaration`, `uid_declaration`; assert `game_id` too | `tests/conformance/` | ~150 (tests) | the new suites |
+| [ ] | 8.10 | MCP session lifecycle (imreeyal §3.4/3.16): drop + reconnect the outbound session at every sub-game boundary; handshake patience spanning the opponent's ~2-min inter-sub-game 502 gap; accept the ARRIVING negotiate as the sub-game opener; bind the expected-sender/role guard at sub-game START | `infra/mcp_client.py`, `orchestration/{handshake,runtime}.py` | ~100 | unit + boundary integration |
+| [ ] | 8.11 | per-call timeout cap strictly < signed `response_timeout_sec` (imreeyal §3.5; theirs 10s < 30s); refuse to load a config violating it | `infra/mcp_client.py`, `shared/config.py` validation | ~50 | unit (cap honored, bad config refused) |
 
 Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
 its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
 are deliberately NOT implemented (opt-in / zero-implementation per kit
 governance). Ops items (declare turn order + `tie_rule=series_add` at first
 contact, playbook ladder) live in `docs/PROGRESS.md`, not code.
+
+**Pairing deadline pressure (2026-08-17):** imreeyal proposes friendlies then
+one counted series before the **20/08 deadline** — see
+`docs/pairing/imreeyal_first_contact.md` (verbatim message + disposition map).
+Priority order under the deadline: 8.1/8.2 (they audit enclosure captures) →
+8.5 (their handshake expects the extras) → 8.10/8.11 (their runner's session
+model) → 8.3/8.6/8.4 → 8.7/8.8 (report fields + auto-fire gate before the
+qualifying friendly) → 8.9. Also: align `config` constitution to theirs
+(setting "New York", starts, `agreed_between`) and run the kit sparring series
++ `check_artifacts` join (their §0).
 
 ## RTS gate
 - [~] PRD §4 acceptance criteria (AC1–AC17): **engineering complete** — 14/17

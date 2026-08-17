@@ -20,6 +20,18 @@ First-contact obligations for the pairing (ops, not code): state turn order
 follow the kit playbook ladder (F1 one sub-game → F2 full friendly series +
 report-compare ritual → F3 re-prove on the counted bytes → counted).
 
+**PAIRING LIVE (2026-08-17): imreeyal first contact received — deadline
+2026-08-20.** Verbatim message + full disposition map:
+`docs/pairing/imreeyal_first_contact.md`. Their §3 dialect maps almost 1:1
+onto Stage 8 (now including 8.10 session lifecycle + 8.11 per-call timeout
+cap); already-conformant items: thief-first, tool/arg names, 10-key
+TurnMessage, per-sender steps, 0.8-peak after-one-decay scent form (league
+majority), consensus scope. Owner must supply the §1 answers (members, repo
+URLs, tunnel endpoints, llm_model, report-from email, time windows; counted
+count = 0) and run the kit sparring series (§0). Their hard gate before any
+counted series: one friendly report must arrive in THEIR inbox auto-fired at
+settlement.
+
 ## Where we are
 
 All seven build stages are engineering-complete. The two-peer game plays end to

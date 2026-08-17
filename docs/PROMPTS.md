@@ -422,3 +422,18 @@
   rule 30 doesn't grant). Re-read a shared external contract before every
   cross-team milestone — byte vectors passing does not mean behavior conforms.
 - **Approval:** owner approved Stage-8 plan-first + ADR-20 reversal (2026-08-17).
+
+## 2026-08-17 · Stage 8 · Documentation · record imreeyal first contact (pairing)
+- **Context:** partner team imreeyal sent their first-contact pairing message
+  (5 counted series played; deadline 2026-08-20 disclosed).
+- **Goal:** preserve the message verbatim in-repo and fold its deltas into the
+  Stage-8 plan.
+- **Output:** `docs/pairing/imreeyal_first_contact.md` (verbatim + disposition
+  map); TODO gains 8.10 (MCP session lifecycle) + 8.11 (per-call timeout cap),
+  8.5/8.8 amended (`counted_games_played` identity field; auto-fire at
+  settlement); OD-4 resolved; PROGRESS pairing section + deadline priority.
+- **Lesson:** the pairing dialect confirmed several of our behaviors as
+  already-league-majority (thief-first, 0.8-peak scent form, consensus scope) —
+  verifying against our code BEFORE replying turned half their checklist into
+  "confirm in writing" instead of work.
+- **Approval:** owner asked to save the input; disposition map for owner review.

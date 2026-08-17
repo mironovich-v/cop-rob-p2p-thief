@@ -247,7 +247,7 @@ Decisions still open; **this section is updated the moment a decision is made**
 | OD-1 | Public tunnel provider | Cloudflare named tunnel (default) vs ngrok | Stage 5 | OPEN (ADR-15 proposed) |
 | OD-2 | Student member IDs for artifacts | real IDs vs `id-0001` placeholders | before submission | OPEN (placeholders in use) |
 | OD-3 | Gmail sender account + OAuth owner | which account; who runs OAuth setup | before final send — **mint token ≤7 days before** (testing-mode refresh tokens expire; kit WARNINGS §6) | OPEN |
-| OD-4 | First interop opponent | ImreEyal sparring / reference peer / partner team | Stage 5 cross-play | OPEN |
+| OD-4 | First interop opponent | ImreEyal sparring / reference peer / partner team | Stage 5 cross-play | RESOLVED 2026-08-17 — **imreeyal** first contact received; friendlies + one counted series before the **2026-08-20 deadline** (`docs/pairing/imreeyal_first_contact.md`) |
 | OD-5 | Opt-in ENH features | none (default, CORE-only) vs specific ENH | any (negotiation-gated) | OPEN — default none |
 | OD-6 | LLM verbal provider for demos | `template` (default) vs ollama/claude_api | Stage 4 | OPEN — default template |
 
