@@ -523,3 +523,17 @@
   line under the 150 cap that 8.3 had consumed — extracting a seam is often
   cheaper than compressing at the limit, and it put parse-refusal and
   table-refusal decisions in one auditable place.
+
+## 2026-08-17 · Stage 8 · Implementation · audit live-binding (8.4)
+- **Output:** `audit_records(records, arrived)` — for every step whose commit
+  ARRIVED live, the disclosed record must carry exactly that commit, and every
+  received step must be disclosed; steps never received (sealed step-0 spec)
+  stay self-verified. `TurnHandler.received_commits` exposes the binding
+  source (the same `{step: commit}` map 8.3's dedup already maintained);
+  `summary.finish` passes it; `bound_steps` lands in the audit record so a
+  vacuous binding is visible. A rewritten-and-resealed record — self-
+  consistent but not what crossed the wire — now settles tamper_forfeit.
+- **Lesson:** 8.3's commit-keyed dedup map turned out to BE the §5d binding
+  archive — the delivery contract and the audit binding are one data
+  structure viewed at two times. Design findings compound when the same
+  primitive serves both.

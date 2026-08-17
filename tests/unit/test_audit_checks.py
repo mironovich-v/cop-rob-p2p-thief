@@ -123,9 +123,11 @@ def _fake_police_rt(thief_final_cell):
     thief_records = [_sealed({"step": 1, "move": "HOLD:-", "position": thief_final_cell})]
     theirs = {"sender": "thief", "records": thief_records, "result_claim": "capture"}
     history = [{"step": 1, "claim_response": {"claim": thief_final_cell, "caught": True}}]
+    handler = SimpleNamespace(
+        history=history, received_commits={1: thief_records[0]["commit"]})
     return SimpleNamespace(
         _result=("capture", "police"), role=Role.POLICE, records=my_records,
-        state=state, handler=SimpleNamespace(history=history),
+        state=state, handler=handler,
         _transport=_FakeTransport(theirs), _tokens_total=0,
         _config=SimpleNamespace(get=lambda key, default=None: default or "vm__fabi"),
         _sub_game_number=1, _started_at="2026-08-17T00:00:00+03:00",

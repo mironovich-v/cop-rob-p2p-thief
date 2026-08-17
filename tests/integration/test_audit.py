@@ -53,3 +53,32 @@ def test_missing_opponent_audit_skips(police_config):
     summary = finish(_police_after_survival(police_config, _Silent()))
     assert summary["audit"]["skipped"] is True
     assert summary["result"] == "survival"  # no forfeit when the opponent never revealed
+
+
+def test_resealed_log_fails_live_binding(police_config):
+    # The thief's turn arrived live with commit X; at audit it discloses a
+    # rewritten, re-sealed record — self-consistent, but not what crossed the
+    # wire. The binding catches it (kit WARNINGS §5d).
+    live = _sealed({"step": 1, "position": [4, 3], "move": "MOVE:S"})
+    rewritten = _sealed({"step": 1, "position": [0, 0], "move": "MOVE:N"})
+    runtime = _police_after_survival(police_config, _AuditTransport([rewritten]))
+    runtime.handler.receive({
+        "step": 1, "sender": "thief", "hint": "", "smell_grid": {},
+        "commit": live["commit"], "timestamp": "2026-08-17T20:00:00+00:00"})
+    summary = finish(runtime)
+    assert summary["audit"]["passed"] is False
+    assert summary["audit"]["failed_steps"] == [1]
+    assert summary["audit"]["bound_steps"] == 1
+    assert summary["result"] == "tamper_forfeit"
+
+
+def test_live_bound_log_settles_normally(police_config):
+    live = _sealed({"step": 1, "position": [4, 3], "move": "MOVE:S"})
+    runtime = _police_after_survival(police_config, _AuditTransport([live]))
+    runtime.handler.receive({
+        "step": 1, "sender": "thief", "hint": "", "smell_grid": {},
+        "commit": live["commit"], "timestamp": "2026-08-17T20:00:00+00:00"})
+    summary = finish(runtime)
+    assert summary["audit"]["passed"] is True
+    assert summary["audit"]["bound_steps"] == 1
+    assert summary["result"] == "survival"

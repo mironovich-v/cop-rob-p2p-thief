@@ -38,20 +38,33 @@ def verify(payload: Any, nonce: str, commit: str) -> None:
         raise CryptoError(f"Commit mismatch: expected {commit[:16]}…, got {actual[:16]}…")
 
 
-def audit_records(records: list[dict]) -> dict:
-    """Post-game audit: re-verify every {payload, nonce, commit} record.
+def audit_records(records: list[dict], arrived: dict[int, str] | None = None) -> dict:
+    """Post-game audit: re-verify every {payload, nonce, commit} record, AND bind
+    the disclosure to the commits that ARRIVED live (kit WARNINGS §5d).
 
-    Both peers run this on the opponent's revealed log; any mismatch fails the
-    audit (the honest peer wins by technical decision — tamper_forfeit).
+    Self-consistency alone verifies a document against itself: a record
+    rewritten and re-sealed after the fact still hashes clean but cannot match
+    what crossed the wire. So for every step in ``arrived`` (step -> live
+    commit) the disclosed record must carry exactly that commit, and every
+    received step must be disclosed. Steps never received (e.g. the sealed
+    step-0 spec) are self-verified only. Any failure forfeits the game for the
+    discloser (the honest peer wins by technical decision — tamper_forfeit).
     """
-    failed: list[int] = []
+    crypto_failed: list[int] = []
+    disclosed: dict[int, str] = {}
     for record in records:
+        step = record.get("payload", {}).get("step", -1)
+        disclosed[step] = record.get("commit", "")
         try:
             verify(record["payload"], record["nonce"], record["commit"])
         except CryptoError:
-            failed.append(record["payload"].get("step", -1))
+            crypto_failed.append(step)
+    arrived = arrived or {}
+    unbound = [step for step, commit in arrived.items() if disclosed.get(step) != commit]
+    failed = sorted(set(crypto_failed) | set(unbound))
     return {
         "passed": not failed,
-        "verified_steps": len(records) - len(failed),
+        "verified_steps": len(records) - len(crypto_failed),
         "failed_steps": failed,
+        "bound_steps": len(arrived),
     }

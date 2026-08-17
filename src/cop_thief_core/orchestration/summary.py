@@ -48,7 +48,8 @@ def finish(rt) -> dict:
         theirs = rt._transport.exchange_audit(mine.to_dict())
         if theirs is not None:
             their_records = AuditPayload.from_dict(theirs).records
-            audit = audit_records(their_records)
+            # Bind the disclosure to the commits that ARRIVED during play (§5d).
+            audit = audit_records(their_records, rt.handler.received_commits)
             if not audit["passed"]:
                 result, winner = TAMPER_FORFEIT, rt.role.value
             elif result == RESULT_CAPTURE and rt.role is Role.POLICE:

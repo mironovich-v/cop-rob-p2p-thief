@@ -54,6 +54,11 @@ class TurnHandler:
     def _next(self) -> int:
         return max(self._played, default=0) + 1
 
+    @property
+    def received_commits(self) -> dict[int, str]:
+        """step -> commit that arrived live: the audit's binding source (§5d)."""
+        return dict(self._played)
+
     def receive(self, raw: dict) -> IncomingOutcome:
         """Parse + value-validate an inbound raw dict, then process it.
 
