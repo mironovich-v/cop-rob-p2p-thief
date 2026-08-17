@@ -3,11 +3,13 @@ FakeTransport (no central server — only message passing). PRD_orchestrator_fsm
 player_agents (TODO slice 2.5b)."""
 
 import threading
+import time
 
 import pytest
 
 from cop_thief_core.constants import Role
 from cop_thief_core.orchestration.runtime import PeerRuntime
+from cop_thief_core.protocol import TurnMessage
 
 
 class _SilentTransport:
@@ -137,3 +139,31 @@ def test_duplicate_deliveries_do_not_desync(transport_pair, thief_config, police
     assert results["thief"]["result"] == results["police"]["result"]
     assert results["thief"]["result"] in ("capture", "survival")
     assert results["police"]["audit"]["passed"] is True
+
+
+class _JunkFloodTransport:
+    """Delivers the SAME already-played duplicate on every poll — a flood of
+    tolerated junk that must never renew the turn deadline (SPEC §7.1)."""
+
+    def __init__(self, message):
+        self._message = message
+
+    def poll_turn(self, timeout):
+        return dict(self._message)
+
+    def exchange_audit(self, payload):
+        return None
+
+
+def test_junk_flood_never_renews_the_deadline(police_config):
+    police_config.override("network.turn_timeout_seconds", 0.6)
+    police_config.override("network.poll_interval_seconds", 0.05)
+    junk = {"step": 1, "sender": "thief", "hint": "", "smell_grid": {},
+            "commit": "a" * 64, "timestamp": "t", "barrier_placed": None,
+            "capture_claim": None, "claim_response": None, "win_claim": None}
+    runtime = PeerRuntime(Role.POLICE, police_config, _JunkFloodTransport(junk))
+    runtime.handler.process(TurnMessage.from_dict(junk))  # step 1 already played
+    start = time.monotonic()
+    summary = runtime.run(skip_negotiation=True)
+    assert summary["result"] == "timeout"  # the flood did not keep the game alive
+    assert time.monotonic() - start < 5.0

@@ -62,7 +62,8 @@ class PeerRuntime:
         self.smell = self._new_scent(size, config)
         self.my_scent = self._new_scent(size, config)
         self.rules = GameRules(config.get("rules.max_steps"))
-        self.handler = TurnHandler(self.state, self.belief, self.smell, self.rules)
+        self.handler = TurnHandler(self.state, self.belief, self.smell, self.rules,
+                                   reorder_window=config.get("network.reorder_window", 1))
         self.brain = brain or resolve_brain(config, role, llm, rng=random.Random(config.get("play.seed")))
         self._tokens_total = 0
         self._started_monotonic = time.monotonic()
@@ -101,14 +102,21 @@ class PeerRuntime:
         deadline = time.monotonic() + timeout
         while self._result is None:
             incoming = self._transport.poll_turn(poll)
-            if incoming is None:
-                if time.monotonic() > deadline:
-                    self._result = ("timeout", self.role.value)
+            # The deadline is one clock per EXPECTED message: evaluated on EVERY
+            # lap (a receiver that only checks on empty polls never checks under
+            # a flood), and never renewed by tolerated junk.
+            if time.monotonic() > deadline:
+                self._result = ("timeout", self.role.value)
                 continue
-            deadline = time.monotonic() + timeout
+            if incoming is None:
+                continue
             outcome = self.handler.process(TurnMessage.from_dict(incoming))
+            if outcome.settle:  # equivocation / flood: loud technical decision
+                self._result = (outcome.settle, self.role.value)
+                continue
             if outcome.ignored:
-                continue  # stale / duplicate: do not re-render or take an extra turn
+                continue  # absorbed / buffered / discarded: no state, no renewal
+            deadline = time.monotonic() + timeout
             self._listen({"type": "incoming", "message": incoming, "view": self.view()})
             if outcome.i_won:
                 self._result = (RESULT_CAPTURE, Role.POLICE.value)

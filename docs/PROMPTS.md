@@ -496,3 +496,17 @@
   loop, so a client-side timeout cannot preempt it — the timeout test needed
   an async sleep to actually exercise cancellation. Worth remembering for any
   fastmcp timeout testing.
+
+## 2026-08-17 · Stage 8 · Implementation · delivery contract (8.3)
+- **Output:** TurnHandler now implements the full SPEC §7.1 decision table:
+  dedup keys on the COMMIT (`{step: commit}`); a same-commit redelivery
+  absorbs; a different commit for a played step records equivocation evidence
+  and settles `tamper_forfeit`; one-ahead messages buffer and replay in step
+  order (reorder window 1); past the window → `technical_loss` (the flood
+  rule); below-next-never-played discards. Runtime checks the deadline on
+  EVERY lap and never renews it on tolerated junk — proven by a junk-flood
+  integration test that times out on schedule while fed duplicates.
+- **Lesson:** the 7.8 "forward jump accepted" test encoded a contract the
+  PROMOTED table later superseded — deleted deliberately with a comment, not
+  worked around. A test is a record of the contract AT THE TIME; when the
+  contract moves, the test moves with a citation.

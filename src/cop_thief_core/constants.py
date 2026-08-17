@@ -62,6 +62,8 @@ STAY = "STAY"  # config move-set token for a HOLD; not a Direction
 RESULT_CAPTURE = "capture"
 RESULT_SURVIVAL = "survival"
 RESULT_DISPUTED = "disputed_capture"  # capture whose audit corroboration failed
+RESULT_TAMPER = "tamper_forfeit"  # equivocation / failed audit — technical decision
+RESULT_TECHNICAL = "technical_loss"  # protocol violation (e.g. past the reorder window)
 
 NONCE_BYTES = 16  # secrets.token_hex(NONCE_BYTES) -> a 32-hex-char nonce
 
