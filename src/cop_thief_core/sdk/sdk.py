@@ -5,6 +5,7 @@ sends the official report (Gmail draft, disabled by default). The transport/serv
 are built once and reused; a real Claude LLM provider is wired in the language stage.
 """
 
+import json
 from pathlib import Path
 
 from cop_thief_core.constants import Role
@@ -12,7 +13,6 @@ from cop_thief_core.exceptions import SimulationError
 from cop_thief_core.infra.email_sender import EmailSender
 from cop_thief_core.interop.negotiation import terms_from_config, validate_minimums
 from cop_thief_core.reporting.emit import emit_series
-from cop_thief_core.reporting.report_builder import build_report, report_body
 from cop_thief_core.sdk.series import run_series
 from cop_thief_core.shared.config import ConfigManager
 
@@ -98,15 +98,18 @@ class SimulationSdk:
         return armed
 
     def _email_report(self, series, report: dict, armed: bool) -> dict:
-        """Auto-fire the official report at settlement (rule 32): the emailed body
-        is the EXACT hashed canonical bytes (`report_body`), also attached as the
-        result file; subject in the reference form. Dry-run/disabled by default."""
+        """Auto-fire the official report at settlement (rule 32). The mail IS the
+        RESULT ARTIFACT (league SPEC §6.1 settled convention: result-only mail —
+        the same bytes filed as result_<game_id>.json ride as the body AND the
+        single named attachment); subject in the reference form. The Hebrew
+        book-schema report stays a repo artifact, never mailed (§6.1 documented
+        tension, resolved by both league teams toward the results file)."""
         summary = series.summaries[-1]
-        signed = build_report(summary, terms_from_config(self.config))
+        body = json.dumps(report, ensure_ascii=False, indent=2)  # == the filed bytes
         winner = report["final_result"].get("winner_group") or "tie"
         subject = (f"Police-Thief series result: winner {winner} "
                    f"(reported by {summary['role']})")
         sender = self.email_sender or EmailSender(self.config)
-        return sender.send_report(report_body(signed), subject,
+        return sender.send_report(body, subject,
                                   attachment_name=f"result_{series.game_id}.json",
                                   armed=armed)

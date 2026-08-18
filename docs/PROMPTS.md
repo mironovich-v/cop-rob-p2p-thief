@@ -701,3 +701,20 @@
 - **Lesson:** ephemeral partner data (quick-tunnel URLs) in tracked config
   forces a choice between a dirty tree and committing garbage; an ignored
   overlay dissolves the dilemma.
+
+## 2026-08-18 · Live window · nis-yar1 friendly SETTLED + mail-content finding
+- **Settle:** attempt #3 (T 21:19) ran start-to-finish: 6/6 sub-games, every
+  mutual audit verified both ways, one game_uid (b38f33f3…), league fields in
+  perfect friendly posture, and the report-compare ritual's decisive check —
+  mutual_agreement.sha256 — BYTE-IDENTICAL across both teams' files
+  (c6450c67…). Game score 0-6 (their cornering cop + distance-keeping thief).
+- **Finding (ADR-21):** the compare also exposed that our mail carried the
+  Hebrew book-schema report while the league mails the RESULT artifact
+  (SPEC §6.1 result-only convention). Fixed: the mail body/attachment is now
+  byte-equal to the filed result_<game_id>.json; Hebrew report stays a repo
+  artifact. Caught in a FRIENDLY — exactly the ladder working — before any
+  counted mail reached the lecturer.
+- **Lesson:** the compare ritual checks documents, not just hashes: two teams
+  can agree on every settlement byte and still mail the grader two different
+  documents. "Body == attachment" was necessary but not sufficient — the
+  CONTENT had to be the settled one.

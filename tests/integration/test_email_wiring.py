@@ -11,8 +11,6 @@ from pathlib import Path
 
 from cop_thief_core.infra.email_sender import EmailSender
 from cop_thief_core.infra.gmail_client import GmailCredentials
-from cop_thief_core.interop.negotiation import terms_from_config
-from cop_thief_core.reporting.report_builder import build_report, report_body
 from cop_thief_core.sdk import SimulationSdk
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -72,8 +70,12 @@ def test_friendly_send_autofires_exact_bytes_as_body_and_attachment(transport_pa
     assert out["police"]["email"] == {"sent": True, "mode": "send", "id": "sent1"}
     decoded = email.message_from_bytes(
         base64.urlsafe_b64decode(http.raw), policy=email.policy.default)
-    expected = report_body(build_report(
-        out["police"]["summaries"][-1], terms_from_config(police_sdk.config)))
+    # SPEC §6.1 result-only mail: the body is the FILED result artifact bytes.
+    expected = json.dumps(out["police"]["report"], ensure_ascii=False, indent=2)
+    filed = (Path(police_sdk._workdir) / "logs"
+             / out["police"]["own_identity"]["group_id"]
+             / f"result_{out['police']['game_id']}.json").read_text("utf-8")
+    assert expected == filed  # mail bytes == the repo-filed artifact
     winner = out["police"]["report"]["final_result"]["winner_group"] or "tie"
     assert decoded["Subject"] == (
         f"Police-Thief series result: winner {winner} (reported by "

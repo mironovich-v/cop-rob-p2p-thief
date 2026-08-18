@@ -73,7 +73,9 @@
 | 2026-08-18 | PR (8.15) | fix-env-loading | 6175a77 | Fable 5 · high | stdlib .env loader (auto-fire would have stranded no_credentials) + live token-refresh preflight | ~0.05 session | merged |
 | 2026-08-18 | PR (docs) | docs-imreeyal-parity | 1f69d97 | Fable 5 · high | imreeyal round-2: parity FLIP (we are POLICE on odds), five scars verified in code, response draft + runbook fix | ~0.1 session | merged |
 | 2026-08-18 | PR (8.14 fix) | fix-role-split-handshake | 5c54f9e | Fable 5 · high | LIVE window finding: skip other-process greetings (PairingMismatchError, bounded); 2nd finding operational (burned windows -> kill+new T) | ~0.2 session + 1 burned window | merged |
-| 2026-08-18 | PR (overlay) | feat-local-overlay | (pending) | Fable 5 · high | git-ignored game.local.toml overlay so window-day tunnel URLs never dirty the tree (scar #5 clean-tree rule) | ~0.1 session | in review |
+| 2026-08-18 | PR (overlay) | feat-local-overlay | 3406628 | Fable 5 · high | git-ignored game.local.toml overlay so window-day tunnel URLs never dirty the tree (scar #5 clean-tree rule) | ~0.1 session | merged |
+| 2026-08-18 | PR (8.14 fix2) | fix-handshake-skip-budget | 36ea7be | Fable 5 · high | live finding #2: time-budget handshake skips (greeting backlog); fixed 150s sleeper test | ~0.15 session + 1 burned window | merged |
+| 2026-08-18 | PR (ADR-21) | fix-mail-result-file | (pending) | Fable 5 · high | friendly SETTLED (6/6, audits OK, mutual sha byte-identical); compare ritual caught mail carrying Hebrew report -> now mails the result artifact | ~0.15 session + 3 window attempts | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

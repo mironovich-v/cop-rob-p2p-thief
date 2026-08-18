@@ -171,3 +171,19 @@ that cannot deliver its report refuses to start. Disabled-default stays.
 rejected (documented deviation from rule 30 for no benefit). **Supersedes:**
 the draft-default requirement in `PRD_email_reporting.md` §3/AC-E4.
 **Status:** accepted (owner approved 2026-08-17); implementation in task 8.8.
+
+## ADR-21 — The mail IS the result artifact (result-only mail, SPEC §6.1)
+**Context:** the nis-yar1 friendly's report-compare revealed our auto-fired
+mail carried the Hebrew book-schema report (`build_report`) — the REFERENCE's
+reading of §9.3.3 — while the league's settled convention (kit SPEC §6.1,
+proven across every counted pairing) mails the RESULT ARTIFACT: "the result
+JSON as the body and the same file as the single named attachment"; the book's
+prose-vs-template tension was resolved by both league teams toward the results
+file. Our attachment was even NAMED result_<game_id>.json while carrying the
+Hebrew doc. **Decision:** the mail body = the exact bytes filed as
+`result_<game_id>.json` (indent-2, ensure_ascii=False — byte-equal to the
+repo-published artifact), same bytes attached. The Hebrew report remains a
+repo artifact, never mailed. **Supersedes:** the emailed-body clause of ADR-5/
+§36.3.4 (which pinned the SERIALIZER of the consensus signature — unchanged —
+but predated the league's settlement of the mail CONTENT).
+**Status:** accepted (2026-08-18, before any counted mail reached the grader).
