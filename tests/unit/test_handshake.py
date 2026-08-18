@@ -116,3 +116,37 @@ def test_handshake_plays_against_a_silent_peer(police_config):
         role="police", sub_game_number=1)
     assert identity["group_id"] == "vm__fabi-thief"
     assert game_id == "vm__fabi-police-vs-vm__fabi-thief"
+
+
+class _QueueTransport:
+    """Returns queued agreements in order — a role-split opponent whose OTHER
+    process's greeting lands first."""
+
+    def __init__(self, replies):
+        self._replies = list(replies)
+        self.pushes = 0
+
+    def exchange_agreement(self, signed):
+        self.pushes += 1
+        return self._replies.pop(0)
+
+
+def test_handshake_skips_the_other_windows_greeting(police_config):
+    # Their thief-process greeting (role collision for MY thief window) is
+    # skipped; the matching police greeting right behind it is accepted.
+    wrong = _reply(police_config, extras={"role": "thief", "sub_game_number": 2})
+    right = _reply(police_config, extras={"role": "police", "sub_game_number": 1})
+    transport = _QueueTransport([wrong, right])
+    identity, game_id, _ = run_handshake(
+        transport, police_config, {"group_id": "vm__fabi-police"},
+        role="thief", sub_game_number=1)
+    assert game_id == "vm__fabi-police-vs-vm__fabi-thief"
+    assert transport.pushes == 2  # re-pushed while waiting for the match
+
+
+def test_handshake_still_fails_loudly_on_a_true_collision(police_config):
+    from cop_thief_core.exceptions import PairingMismatchError
+    collide = [_reply(police_config, extras={"role": "thief"}) for _ in range(8)]
+    with pytest.raises(PairingMismatchError, match="[Rr]ole"):
+        run_handshake(_QueueTransport(collide), police_config,
+                      {"group_id": "g"}, role="thief", sub_game_number=1)

@@ -8,7 +8,7 @@ configured — the uid needs both group ids), and the locked-model hashes. A
 both-declared contradiction refuses at the handshake; omission never refuses.
 """
 
-from cop_thief_core.exceptions import AgreementError
+from cop_thief_core.exceptions import AgreementError, PairingMismatchError
 from cop_thief_core.interop.extras import build_extras
 from cop_thief_core.interop.game_ids import derive_game_ids
 from cop_thief_core.interop.locked_models import model_hashes
@@ -33,8 +33,20 @@ def run_handshake(
     declared_uid = derive_game_ids(terms, own_gid, expected)[1] if expected else None
     extras = build_extras(role, sub_game_number, declared_uid, model_hashes())
     negotiation = Negotiation(terms, identity=own_identity, extras=extras)
-    peer_message = transport.exchange_agreement(negotiation.signed())
-    negotiation.verify_peer(peer_message)
+    # A role-split opponent runs two fixed-role processes that BOTH greet this
+    # mailbox: a greeting whose role/sub-game contradicts ours belongs to a
+    # different window — refuse THAT AGREEMENT and keep waiting for the match
+    # (bounded, so a genuinely colliding pair still fails loudly, not forever).
+    for skipped in range(8):
+        peer_message = transport.exchange_agreement(negotiation.signed())
+        try:
+            negotiation.verify_peer(peer_message)
+            break
+        except PairingMismatchError:
+            if skipped == 7:
+                raise
+    else:  # pragma: no cover (loop always breaks or raises)
+        pass
     peer_identity = negotiation.peer_identity
     peer_gid = peer_identity.get("group_id", "unknown-group")
     if expected and peer_gid != expected:

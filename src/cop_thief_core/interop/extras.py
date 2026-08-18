@@ -7,7 +7,7 @@ other; omission or an uncomparable value is silence and plays on. Refusals name
 what was expected (SPEC §4) instead of only refusing.
 """
 
-from cop_thief_core.exceptions import AgreementError
+from cop_thief_core.exceptions import AgreementError, PairingMismatchError
 
 _HASH_KEYS = (
     "game_uid",
@@ -38,12 +38,12 @@ def check_extras(mine: dict, theirs: dict) -> None:
     """Raise AgreementError on a both-declared contradiction; silence plays."""
     my_role, their_role = mine.get("role"), theirs.get("role")
     if my_role in ("police", "thief") and their_role == my_role:
-        raise AgreementError(
+        raise PairingMismatchError(
             f"Role collision: both peers declare '{my_role}' — roles must be complementary"
         )
     my_sub, their_sub = mine.get("sub_game_number"), theirs.get("sub_game_number")
     if _comparable_int(my_sub) and _comparable_int(their_sub) and my_sub != their_sub:
-        raise AgreementError(
+        raise PairingMismatchError(
             f"Sub-game mismatch: we declare {my_sub}, opponent declares {their_sub}"
         )
     for key in _HASH_KEYS:

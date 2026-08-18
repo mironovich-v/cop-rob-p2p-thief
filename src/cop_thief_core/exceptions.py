@@ -32,3 +32,10 @@ class CryptoError(SimulationError):
 class AgreementError(SimulationError):
     """The pre-game agreement is invalid: mismatched, incomplete, or below an
     Appendix-F minimum — the peer must refuse to start."""
+
+
+class PairingMismatchError(AgreementError):
+    """A greeting for a DIFFERENT window (role/sub-game contradiction): with a
+    role-split opponent both fixed-role processes greet one mailbox, so this is
+    expected traffic to skip, not a window-fatal fault. Signature/terms/uid/
+    group failures stay plain AgreementError (fatal)."""
