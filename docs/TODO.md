@@ -175,6 +175,8 @@ scope already matches kit #55 — the gaps are behavioral, not byte-level.
 
 | [x] | 8.14 | nis-yar1 pairing readiness: role-split opponent support (`set_opponent` + per-sub-game dial of their fixed-role processes), `config/nis-yar1/` (constitution byte-identical — terms digest `a284082d…` confirmed both ways; ids pinned: `nis-yar1-vs-vm__fabi` / `b38f33f3-3ec8-be1d-a464-4fa5c9cb35df`), reply draft + league first-contact template | `infra/mcp_client.py`, `sdk/series.py`, `config/nis-yar1/*`, `docs/pairing/` | ~30 src | `test_mcp_client` (swap), `test_config` (pin) |
 
+| [x] | 8.15 | .env loader (stdlib, ~12 lines): `agent_cli.load_dotenv` sets Gmail secret paths unless the shell already exported them (shell wins) — pre-window catch: nothing loaded `.env`, so the auto-fired friendly report would have stranded as `no_credentials`; live token-refresh preflight passed | `agent_cli.py`, local `.env` (untracked) | ~12 src | `test_dotenv` (2); live OAuth refresh |
+
 Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
 its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
 are deliberately NOT implemented (opt-in / zero-implementation per kit

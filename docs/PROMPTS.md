@@ -643,3 +643,18 @@
   five-line feature — no session state meant swapping the dial target is
   trivially safe. The hard version of this feature was pre-paid by transport
   hygiene.
+
+## 2026-08-18 · Pairing prep · Fix · .env loading + email preflight (8.15)
+- **Output:** pre-window audit found that NOTHING loaded `.env` — EmailSender
+  reads the Gmail secret paths from os.environ, so the auto-fired friendly
+  report would have returned `no_credentials` at 17:00 with creds sitting
+  right there in `secrets/`. Added `agent_cli.load_dotenv` (stdlib, ~12
+  lines: KEY=VALUE, comments/`export `/quotes handled, shell always wins),
+  called at role startup; local `.env` created (paths only — untracked).
+  Live preflight: OAuth token refresh against Google succeeded — the 7-day
+  token is alive. Also fixed a test-file basename collision
+  (unit/test_agent_cli.py vs integration/) → tests/unit/test_dotenv.py.
+- **Lesson:** "creds are in ./secrets" and "the process can read them" are
+  two different facts separated by an environment variable nobody exports at
+  17:00 under window pressure. Preflight the FULL chain (env → parse →
+  refresh), not the file listing.

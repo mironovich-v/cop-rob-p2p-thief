@@ -8,8 +8,26 @@ opts into the configured banter provider (default: offline stub).
 """
 
 import argparse
+import os
+from pathlib import Path
 
 from cop_thief_core.sdk import SimulationSdk
+
+
+def load_dotenv(path: str | os.PathLike = ".env") -> None:
+    """Minimal stdlib .env loader: KEY=VALUE lines (quotes/`export ` stripped),
+    setting only variables the shell did NOT set — the shell always wins. The
+    report auto-fires at settlement, so a launch shell that forgot to export
+    the Gmail paths must not silently strand the mail as `no_credentials`."""
+    env_file = Path(path)
+    if not env_file.is_file():
+        return
+    for line in env_file.read_text(encoding="utf-8").splitlines():
+        line = line.strip().removeprefix("export ").strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        os.environ.setdefault(key.strip(), value.strip().strip("'\""))
 
 
 def parse_args(role: str, argv=None) -> argparse.Namespace:
@@ -29,6 +47,7 @@ def run_role(role: str, argv=None, *, transport=None) -> dict:
     """Parse args, play one series as ``role``, print the derived result, return it.
     ``transport`` is injectable so tests drive it over the in-process FakeTransport."""
     args = parse_args(role, argv)
+    load_dotenv()  # secrets paths from ./.env unless the shell already set them
     sdk = SimulationSdk(args.config, workdir=args.workdir)
     outcome = sdk.run_peer(role, stub_llm=not args.real_llm, transport=transport,
                            counted=args.counted)
