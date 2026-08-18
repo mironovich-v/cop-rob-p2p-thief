@@ -75,7 +75,8 @@
 | 2026-08-18 | PR (8.14 fix) | fix-role-split-handshake | 5c54f9e | Fable 5 · high | LIVE window finding: skip other-process greetings (PairingMismatchError, bounded); 2nd finding operational (burned windows -> kill+new T) | ~0.2 session + 1 burned window | merged |
 | 2026-08-18 | PR (overlay) | feat-local-overlay | 3406628 | Fable 5 · high | git-ignored game.local.toml overlay so window-day tunnel URLs never dirty the tree (scar #5 clean-tree rule) | ~0.1 session | merged |
 | 2026-08-18 | PR (8.14 fix2) | fix-handshake-skip-budget | 36ea7be | Fable 5 · high | live finding #2: time-budget handshake skips (greeting backlog); fixed 150s sleeper test | ~0.15 session + 1 burned window | merged |
-| 2026-08-18 | PR (ADR-21) | fix-mail-result-file | (pending) | Fable 5 · high | friendly SETTLED (6/6, audits OK, mutual sha byte-identical); compare ritual caught mail carrying Hebrew report -> now mails the result artifact | ~0.15 session + 3 window attempts | in review |
+| 2026-08-18 | PR (ADR-21) | fix-mail-result-file | 950ab89 | Fable 5 · high | friendly SETTLED (6/6, audits OK, mutual sha byte-identical); compare ritual caught mail carrying Hebrew report -> now mails the result artifact | ~0.15 session + 3 window attempts | merged |
+| 2026-08-18 | PR (ledger) | chore-counted-ledger | (pending) | Fable 5 · high | COUNTED SERIES #1 BANKED vs nis-yar1 (6/6, audits clean, armed fields correct, lecturer-only mail); ledger committed; imreeyal counter -> 1 | 3 windows + ~0.05 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

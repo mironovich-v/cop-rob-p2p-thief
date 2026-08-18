@@ -17,7 +17,7 @@ repos = { cop = "https://github.com/mironovich-v/cop-rob-p2p-police", thief = "h
 mcp_servers = { cop = "https://cop-rob-p2p.ngrok.app/mcp", thief = "https://cop-rob-p2p.ngrok.app/mcp" }
 opponent_group_id = "imreeyal"        # handshake refuses any other group
 counted = false                       # flip ONLY for the one counted series (+ --counted)
-counted_games_played = 0              # truthful: this pairing is our first
+counted_games_played = 1              # truthful: nis-yar1 counted series banked 2026-08-18
 tie_rule = "series_add"               # declared in the constitution chat (ADR-17)
 
 [belief]

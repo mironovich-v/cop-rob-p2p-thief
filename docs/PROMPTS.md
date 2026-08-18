@@ -718,3 +718,22 @@
   can agree on every settlement byte and still mail the grader two different
   documents. "Body == attachment" was necessary but not sufficient — the
   CONTENT had to be the settled one.
+
+## 2026-08-18 · COUNTED · nis-yar1 series BANKED (1 of 2)
+- **Settle (T 22:00, commit 950ab89, doubly armed):** 6/6 sub-games, every
+  mutual audit verified both directions, one game_uid (b38f33f3…), mutual sha
+  c6450c67… — and the re-friendly's full compare ritual had passed in both
+  directions minutes earlier (mail == filed artifact byte-identical, all
+  must-match fields agree). ARMED league fields correct: counts {vm__fabi: 1,
+  nis-yar1: 4}, first_meeting true, diversity to the winner (nis-yar1).
+  Report auto-fired to the lecturer ALONE. Score 0-6 (30-90) — settlement
+  quality, not points, was tonight's objective.
+- **Settlement path:** rule-52 ledger advanced and committed (this PR — "a
+  counted series is not over until the ledger that proves it is pushed");
+  counted artifacts archived (results/counted/nis-yar1-2026-08-18, publish
+  via the submission-repo export); overlay disarmed; imreeyal pairing's
+  counted_games_played bumped to 1 (truthful at their T).
+- **Lesson:** the evening produced 4 real interop fixes (greeting matching,
+  skip budget, mail content, foreign identity) — every one found by a live
+  peer, none by 324 green tests. The friendly ladder is the test suite that
+  matters; budget windows for it, not just code time.
