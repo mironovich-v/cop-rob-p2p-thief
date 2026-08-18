@@ -120,3 +120,20 @@ def test_nis_yar1_pairing_config_is_playable():
     # Role-split opponent: both per-role dial targets are configured.
     assert cfg.get("network.opponent_url_police")
     assert cfg.get("network.opponent_url_thief")
+
+
+def test_local_overlay_wins_without_dirtying_the_tree(tmp_path):
+    # Window-day values (an opponent's rotating quick-tunnel URLs) live in a
+    # git-ignored game.local.toml so every T is played on a CLEAN tree.
+    shared = {**SHARED, "network_and_league": {"response_timeout_sec": 30}}
+    _write(tmp_path, toml=MIN_TOML + 'opponent_url = "tracked"\n', shared=shared)
+    (tmp_path / "game.local.toml").write_text(
+        '[network]\nopponent_url = "https://live.example/mcp"\n', encoding="utf-8")
+    cfg = ConfigManager(tmp_path)
+    assert cfg.get("network.opponent_url") == "https://live.example/mcp"
+    assert cfg.get("network.my_port") == 8802  # non-overlaid keys untouched
+
+
+def test_missing_local_overlay_changes_nothing(tmp_path):
+    cfg = ConfigManager(_write(tmp_path))
+    assert cfg.get("network.my_port") == 8802

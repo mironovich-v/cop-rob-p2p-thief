@@ -677,3 +677,27 @@
   default, not a league law — a pairing's split is per-pairing precedent.
   Never promote a playbook default to a rule in outbound mail; state splits
   as proposals.
+
+## 2026-08-18 · Live window · nis-yar1 friendly attempt #1 — two findings
+- **Finding 1 (code, PR #62):** their two fixed-role processes BOTH greet our
+  single mailbox; our handshake consumed the thief-process greeting and
+  refused the whole window as a role collision. Fixed live:
+  PairingMismatchError (role/sub-game contradictions) is skipped — refuse the
+  AGREEMENT, keep waiting for the match, bounded at 8 so true collisions stay
+  loud. Signature/terms/uid/group failures remain fatal.
+- **Finding 2 (operational, no code):** while we patched INSIDE the open
+  window, their runner burned sub-games 1-2 by timeout and greeted for
+  sub-game 3 — our matcher correctly refused to join a series mid-way. Remedy
+  = the T-protocol itself: kill everything, name a new T. The league's
+  "never debug inside a window" rule is now a scar of ours, not just theirs.
+- **Lesson:** a refusal that fires correctly can still cost the window; the
+  DISCIPLINE (kill-and-rename-T immediately) is as load-bearing as the code.
+
+## 2026-08-18 · Chore · window-day local overlay (clean trees at every T)
+- **Output:** ConfigManager merges a git-ignored `game.local.toml` over the
+  tracked config; nis-yar1's rotating quick-tunnel URLs moved there and the
+  tracked file restored to placeholders — every T is now played on a CLEAN
+  pushed tree (both partners' scar #5) with zero per-window commits.
+- **Lesson:** ephemeral partner data (quick-tunnel URLs) in tracked config
+  forces a choice between a dirty tree and committing garbage; an ignored
+  overlay dissolves the dilemma.

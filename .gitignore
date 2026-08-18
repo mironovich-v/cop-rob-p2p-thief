@@ -69,6 +69,9 @@ notebooks/*.executed.ipynb
 *.onnx
 *.pkl
 
+# Window-day local config overlay (opponent quick-tunnel URLs etc.)
+config/*/game.local.toml
+
 # Game run outputs (generated — tracked intentionally only if required for grading)
 results/*
 !results/.gitkeep

@@ -15,6 +15,7 @@ from cop_thief_core.exceptions import ConfigError, ConfigVersionError
 from cop_thief_core.shared.version import SUPPORTED_CONFIG_VERSIONS
 
 GAME_FILE = "game.toml"
+LOCAL_FILE = "game.local.toml"  # git-ignored window-day overlay (tunnel URLs etc.)
 RATE_FILE = "rate_limits.json"
 SHARED_GAME_FILE = "game.json"
 
@@ -105,6 +106,11 @@ class ConfigManager:
             _deep_merge(self._game, _translate_shared(self._shared))
         else:
             self._shared = {}
+        local_path = self._dir / LOCAL_FILE
+        if local_path.is_file():
+            # Window-day locals (an opponent's rotating quick-tunnel URLs) ride
+            # a git-ignored overlay so every T is played on a CLEAN tree.
+            _deep_merge(self._game, self._load_toml(local_path))
         self._check_timing()
 
     def _check_timing(self) -> None:
