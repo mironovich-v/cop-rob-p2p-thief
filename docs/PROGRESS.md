@@ -25,10 +25,15 @@ peer, every mutual audit Verified OK both directions, one `game_uid`;
 `docs/pairing/imreeyal_first_contact.md`. Our reply is READY TO SEND:
 `docs/pairing/imreeyal_reply_draft.md` (owner reviews windows and sends).
 Pinned pairing ids: game_id `imreeyal-vs-vm__fabi`, game_uid
-`0e07bcda-4bfd-3668-1fec-86833963b58c`. Proposed: Aug 18 friendly ladder
-(their auto-fired-report gate → point `config/imreeyal` email at them),
-Aug 19 counted (T 21:00, doubly armed: `game.counted=true` + `--counted`,
-recipient = lecturer alone, set by hand before the T), Aug 20 backup.
+`0e07bcda-4bfd-3668-1fec-86833963b58c`. Confirmed by them 2026-08-18: ids re-derived
+independently and MATCH; **parity corrected — vm__fabi = POLICE in sub-games
+1/3/5 (launch `police_agent`, they open as thief)**; skip F1, go straight to
+the full 6-sub-game friendly (num_games is a signed term); friendly report to
+BOTH their addresses; their counted count is now 6. Windows: they're free this
+evening + tomorrow all day; counted (T ~21:00 Aug 19, doubly armed:
+`game.counted=true` + `--counted`, recipient = lecturer alone, set by hand
+before the T), Aug 20 backup. Archive friendly artifacts BEFORE the counted T;
+exchange exact playing commits on clean pushed trees at EVERY T.
 Window-day tunnel: `ngrok http 8802 --domain=cop-rob-p2p.ngrok.app
 --host-header=rewrite` (note: pairing config listens on 8802).
 

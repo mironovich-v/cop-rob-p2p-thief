@@ -70,7 +70,8 @@
 | 2026-08-17 | PR (8.13) | fix-foreign-identity | merged | Fable 5 · high | §0 sparring pass (6/6, audits OK, ALL SETS AGREE) + fix: declaration tolerates foreign identity without spec | ~0.2 session + 2 live series runs | merged |
 | 2026-08-17 | PR (7.9) | chore-ci-gate | c890a77 | Fable 5 · high | CI gate workflow (ruff, cov, conformance, kit oracle, drift check) + PROGRESS/matrix refresh (AC1 done) | ~0.05 session | merged |
 | 2026-08-18 | PR (8.14) | config-nis-yar1-pairing | merged | Fable 5 · high | role-split opponent dialing + nis-yar1 pairing config (digest verified, ids pinned) + reply draft + league template | ~0.15 session | merged |
-| 2026-08-18 | PR (8.15) | fix-env-loading | (pending) | Fable 5 · high | stdlib .env loader (auto-fire would have stranded no_credentials) + live token-refresh preflight | ~0.05 session | in review |
+| 2026-08-18 | PR (8.15) | fix-env-loading | 6175a77 | Fable 5 · high | stdlib .env loader (auto-fire would have stranded no_credentials) + live token-refresh preflight | ~0.05 session | merged |
+| 2026-08-18 | PR (docs) | docs-imreeyal-parity | (pending) | Fable 5 · high | imreeyal round-2: parity FLIP (we are POLICE on odds), five scars verified in code, response draft + runbook fix | ~0.1 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

@@ -658,3 +658,22 @@
   two different facts separated by an environment variable nobody exports at
   17:00 under window pressure. Preflight the FULL chain (env → parse →
   refresh), not the file listing.
+
+## 2026-08-18 · Pairing · imreeyal round 2 — parity flip + scar confirmations
+- **Context:** imreeyal confirmed our derived ids independently (and our
+  flat-terms sha), accepted every §3 declaration, but corrected §4: THEIR
+  natural split is thief-on-odds — so vm__fabi plays POLICE in sub-games
+  1/3/5 and THEY open sub-game 1. Launch command for their series flips to
+  police_agent. They skip F1 (num_games is a signed term — a 1-game series
+  would derive a different game_uid), want the friendly report to BOTH their
+  addresses (already configured), and posted five scars to confirm.
+- **Output:** all five scars verified in code before answering (global 1..6
+  numbering; one assembler/one result; survival horizon reads the thief's
+  OWN step counter — rules.thief_result(state.step_number), per-sender by
+  construction; archiving + commit-naming are runbook items). Config comment
+  + PROGRESS runbook flipped to police_agent; response draft with the exact
+  requested sentence + our game.json file sha (ff3004af…) for the byte-check.
+- **Lesson:** "alphabetically-first plays cop on odds" was the kit PLAYBOOK's
+  default, not a league law — a pairing's split is per-pairing precedent.
+  Never promote a playbook default to a rule in outbound mail; state splits
+  as proposals.

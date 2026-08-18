@@ -1,8 +1,10 @@
-# PAIRING config: vm__fabi vs imreeyal — one peer process, role alternation
-# (we are THIEF in sub-game 1; imreeyal plays police in the odd sub-games).
+# PAIRING config: vm__fabi vs imreeyal — one peer process, role alternation.
+# PARITY (imreeyal's correction, 2026-08-18): vm__fabi plays POLICE in the odd
+# sub-games (1,3,5); imreeyal is THIEF on odds — and as thief THEY open
+# sub-game 1 (thief takes the first turn of every sub-game).
 # The signed shared constitution is game.json — byte-identical to imreeyal's
 # (their first-contact message, 2026-08-17), agreed_between the sorted pair.
-# Run: uv run python -m thief_agent --config config/imreeyal
+# Run: uv run python -m police_agent --config config/imreeyal   <-- POLICE!
 # Tunnel: ngrok http 8802 --domain=cop-rob-p2p.ngrok.app --host-header=rewrite
 version = "1.10"
 
