@@ -626,3 +626,20 @@
 - **Lesson:** trivial in isolation; its value is that the drift check now
   runs on someone ELSE'S schedule too — a kit update that regenerates
   vectors breaks our CI before it breaks a window.
+
+## 2026-08-18 · Pairing · nis-yar1 readiness + role-split support (8.14)
+- **Output:** nis-yar1 answered the league call (3 counted series played;
+  every confirmation byte-perfect — their terms digest `a284082d…` reproduces
+  from our canonicalizer). Their topology is TWO fixed-role processes, the
+  exact "role-split opponent" case imreeyal warned about: added
+  `McpTransport.set_opponent` (safe mid-series — per-call sessions) and the
+  series runner now dials `network.opponent_url_<their-role>` at every
+  sub-game boundary; single-URL opponents unchanged. `config/nis-yar1/`
+  committed with quick-tunnel placeholders (their URLs arrive at T); ids
+  pinned by test. Reply draft proposes Aug 18 17:00 friendly / Aug 19 17:00
+  counted (imreeyal's evening slots kept free). League first-contact template
+  committed.
+- **Lesson:** the per-call-session design (8.10) made role-split support a
+  five-line feature — no session state meant swapping the dial target is
+  trivially safe. The hard version of this feature was pre-paid by transport
+  hygiene.

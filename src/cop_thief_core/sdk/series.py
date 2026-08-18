@@ -33,6 +33,16 @@ def role_for(natural: Role, sub_game_number: int) -> Role:
     return Role.THIEF if natural is Role.POLICE else Role.POLICE
 
 
+def _dial_opponent(config, transport, my_role: Role) -> None:
+    """Role-split opponents run two fixed-role processes: dial the one playing
+    the OPPOSITE of my role this sub-game (network.opponent_url_<their-role>).
+    Single-process opponents configure only opponent_url — nothing changes."""
+    their_role = Role.THIEF if my_role is Role.POLICE else Role.POLICE
+    url = config.get(f"network.opponent_url_{their_role.value}")
+    if url and hasattr(transport, "set_opponent"):
+        transport.set_opponent(url)
+
+
 def run_series(config, natural_role: Role, llm, transport, listener=None) -> SeriesResult:
     """Play the whole series (num_games sub-games) with role alternation."""
     own_identity = identity_from_config(config)
@@ -41,6 +51,7 @@ def run_series(config, natural_role: Role, llm, transport, listener=None) -> Ser
     peer_identity: dict = {}
     game_id = game_uid = None
     for sub_game_number in range(1, num_games + 1):
+        _dial_opponent(config, transport, role_for(natural_role, sub_game_number))
         runtime = PeerRuntime(
             role_for(natural_role, sub_game_number),
             config,

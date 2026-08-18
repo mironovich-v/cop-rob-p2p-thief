@@ -104,3 +104,19 @@ def test_imreeyal_pairing_config_is_playable():
     # The friendly recipients never include the lecturer.
     lecturer = cfg.get("email.lecturer_address").strip().lower()
     assert all(r.strip().lower() != lecturer for r in cfg.get("email.recipient"))
+
+
+def test_nis_yar1_pairing_config_is_playable():
+    from cop_thief_core.interop.game_ids import derive_game_ids
+    from cop_thief_core.interop.negotiation import terms_from_config, validate_minimums
+
+    cfg = ConfigManager(REPO_ROOT / "config" / "nis-yar1")
+    terms = terms_from_config(cfg)
+    validate_minimums(terms)
+    game_id, game_uid = derive_game_ids(terms, "vm__fabi", "nis-yar1")
+    assert game_id == "nis-yar1-vs-vm__fabi"
+    assert game_uid == "b38f33f3-3ec8-be1d-a464-4fa5c9cb35df"
+    assert cfg.get("game.opponent_group_id") == "nis-yar1"
+    # Role-split opponent: both per-role dial targets are configured.
+    assert cfg.get("network.opponent_url_police")
+    assert cfg.get("network.opponent_url_thief")

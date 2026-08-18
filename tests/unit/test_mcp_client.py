@@ -137,3 +137,16 @@ def test_handshake_patience_spans_a_down_door():
         connect_timeout=5.0, retry_interval=0.05, handshake_repush=0.2)
     threading.Timer(0.5, lambda: inboxes.agreements.put({"terms": {}})).start()
     assert transport.exchange_agreement({"terms": {}}) == {"terms": {}}
+
+
+def test_set_opponent_swaps_the_dial_target():
+    # Role-split opponents (two fixed-role processes) change the dialed URL
+    # every sub-game; per-call sessions make the swap safe mid-series.
+    counter_a: list = []
+    counter_b: list = []
+    transport = McpTransport(_slow_server(0.0, counter_a), PeerInboxes(),
+                             connect_timeout=2.0, retry_interval=0.05)
+    transport._call("negotiate", {"x": 1})
+    transport.set_opponent(_slow_server(0.0, counter_b))
+    transport._call("negotiate", {"x": 2})
+    assert (len(counter_a), len(counter_b)) == (1, 1)

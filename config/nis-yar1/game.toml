@@ -1,0 +1,64 @@
+# PAIRING config: vm__fabi vs nis-yar1 — one peer process on our side, role
+# alternation (nis-yar1 sorts first: they play police in the odd sub-games, so
+# we are THIEF in sub-game 1). THEY run TWO fixed-role processes on quick
+# tunnels — paste both URLs below when they send them at T, before launch.
+# Constitution byte-identical (terms digest a284082d…, confirmed both ways).
+# Run: uv run python -m thief_agent --config config/nis-yar1
+# Tunnel: ngrok http 8802 --domain=cop-rob-p2p.ngrok.app --host-header=rewrite
+version = "1.10"
+
+[game]
+group_name = "VM-Fabi"
+group_id = "vm__fabi"
+sub_game_number = 1
+members = ["Vasily Mironovich", "Fahed Bitar"]
+repos = { cop = "https://github.com/mironovich-v/cop-rob-p2p-police", thief = "https://github.com/mironovich-v/cop-rob-p2p-thief" }
+mcp_servers = { cop = "https://cop-rob-p2p.ngrok.app/mcp", thief = "https://cop-rob-p2p.ngrok.app/mcp" }
+opponent_group_id = "nis-yar1"
+counted = false                       # flip ONLY for the one counted series (+ --counted)
+counted_games_played = 0              # update if the imreeyal series settles first
+tie_rule = "series_add"
+
+[belief]
+smell_trust_weight = 4.0
+
+[paths]
+logs_dir = "logs"
+
+[play]
+step_speed_seconds = 0.0
+seed = 1234
+
+[network]
+my_port = 8802
+# Role-split opponent: their POLICE process is dialed in the sub-games they
+# play police (odd), their THIEF process in the even ones. Quick-tunnel URLs
+# arrive at T — PASTE both here before launch.
+opponent_url_police = "PASTE-THEIR-POLICE-URL-AT-T"
+opponent_url_thief = "PASTE-THEIR-THIEF-URL-AT-T"
+opponent_url = "PASTE-THEIR-POLICE-URL-AT-T"   # initial dial (sub-game 1: they are police)
+turn_timeout_seconds = 180
+poll_interval_seconds = 0.5
+connect_timeout_seconds = 150
+retry_interval_seconds = 1.0
+audit_send_timeout_seconds = 10
+call_timeout_seconds = 10
+handshake_repush_seconds = 5.0
+reorder_window = 1
+
+[trash_talk]
+provider = "template"
+
+[llm]
+model = "template"
+step_deadline_seconds = 30
+short_prompt_threshold_seconds = 10
+
+[email]
+# Friendly posture: auto-fire the report into nis-yar1's inbox + our copy.
+# Counted day: recipient becomes the lecturer ALONE, set by hand before the T.
+recipient = ["nissimderi123@gmail.com", "mironovichvasily@gmail.com"]
+lecturer_address = "rmisegal+uoh26finalgame@gmail.com"
+mode = "send"
+enabled = true
+timeout_seconds = 120

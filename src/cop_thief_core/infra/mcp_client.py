@@ -40,6 +40,12 @@ class McpTransport:
         self._call_timeout = call_timeout  # per-call cap, strictly < signed deadline
         self._repush = handshake_repush
 
+    def set_opponent(self, opponent) -> None:
+        """Swap the dial target (role-split opponents run two fixed-role
+        processes, so the dialed URL changes every sub-game). Safe mid-series:
+        every call opens a fresh Client, so no session survives the swap."""
+        self._opponent = opponent
+
     def _call(self, tool: str, argument: dict):
         # A fresh Client per call: no outbound session survives a sub-game
         # boundary, so a restarted opponent process is never dialed on a dead

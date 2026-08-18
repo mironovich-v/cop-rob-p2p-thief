@@ -173,6 +173,8 @@ scope already matches kit #55 — the gaps are behavioral, not byte-level.
 
 | [x] | 8.13 | §0 sparring pass (imreeyal's checklist): full 6-sub-game series vs the kit sparring peer — 6/6 settled, all mutual audits OK both ways, one game_uid; `check_artifacts` per-dir ALL PASS + cross-team join ALL SETS AGREE; found+fixed: declaration builder crashed on a foreign identity without `spec` | `reporting/artifact_helpers.py` + throwaway config (scratchpad) | ~15 src | `test_artifacts` regression; live sparring run |
 
+| [x] | 8.14 | nis-yar1 pairing readiness: role-split opponent support (`set_opponent` + per-sub-game dial of their fixed-role processes), `config/nis-yar1/` (constitution byte-identical — terms digest `a284082d…` confirmed both ways; ids pinned: `nis-yar1-vs-vm__fabi` / `b38f33f3-3ec8-be1d-a464-4fa5c9cb35df`), reply draft + league first-contact template | `infra/mcp_client.py`, `sdk/series.py`, `config/nis-yar1/*`, `docs/pairing/` | ~30 src | `test_mcp_client` (swap), `test_config` (pin) |
+
 Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
 its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
 are deliberately NOT implemented (opt-in / zero-implementation per kit
