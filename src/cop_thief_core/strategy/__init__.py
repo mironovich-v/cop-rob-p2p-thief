@@ -63,4 +63,5 @@ def resolve_brain(config, role: Role, llm=None, rng: random.Random | None = None
     rng = rng or random.Random()
     if trash is None:
         trash = resolve_trash_talk(config, rng, llm)
-    return resolve_brain_cls(config, role)(llm, rng=rng, trash=trash)
+    tactics = config.get("strategy.tactics") if config is not None else None
+    return resolve_brain_cls(config, role)(llm, rng=rng, trash=trash, tactics=tactics)

@@ -177,6 +177,8 @@ scope already matches kit #55 — the gaps are behavioral, not byte-level.
 
 | [x] | 8.15 | .env loader (stdlib, ~12 lines): `agent_cli.load_dotenv` sets Gmail secret paths unless the shell already exported them (shell wins) — pre-window catch: nothing loaded `.env`, so the auto-fired friendly report would have stranded as `no_credentials`; live token-refresh preflight passed | `agent_cli.py`, local `.env` (untracked) | ~12 src | `test_dotenv` (2); live OAuth refresh |
 
+| [x] | 8.16 | tactical brains v2 (counted-game forensics: v1 thief argmaxed distance → self-cornered at (6,6) every game; v1 police walled randomly): freedom-dominant thief scoring (exits veto corners, pessimistic distance, recent-trail anti-oscillation, random tie-breaks — a deterministic evader is pin-able), cornering police (rule-46 barrier strike / pocket sealing, never random walls); tunables in `[strategy.tactics]`; A/B: thief 0/5→3-4/5 survival, cop corners the kit's "uncatchable" greedy evader 3/3 — kit sparring series 0-6 → 3-3 (75-75) | `domain/{tactics (new),brains}.py`, `strategy/__init__.py` | ~100 src | `test_tactics` (9), `test_brains` updated; A/B + sparring benchmark |
+
 Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
 its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
 are deliberately NOT implemented (opt-in / zero-implementation per kit

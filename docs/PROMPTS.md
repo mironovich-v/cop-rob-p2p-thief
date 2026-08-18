@@ -737,3 +737,28 @@
   skip budget, mail content, foreign identity) — every one found by a live
   peer, none by 324 green tests. The friendly ladder is the test suite that
   matters; budget windows for it, not just code time.
+
+## 2026-08-18/19 · Night shift · tactical brains v2 (8.16)
+- **Forensics (owner's ask: "are we playing for real?"):** yes — legal, honest
+  moves throughout; the strategy was naive. The counted logs show the v1 thief
+  running STRAIGHT INTO (6,6) in all three thief sub-games (argmax of
+  distance-to-threat IS the corner) and oscillating until walled — captured
+  @12 every time; the v1 police placed 7 random walls and ping-ponged
+  (3,4)↔(2,4) against a distance-keeper (a chaser never closes; the game's
+  cop only wins by cornering).
+- **v2:** `domain/tactics.py` — thief: exits veto corners (freedom weight >
+  marginal distance), pessimistic distance (flee the cop's NEXT cells),
+  recent-trail penalty, RANDOM tie-breaks (all five A/B seeds had produced
+  the identical game — a deterministic evader is pin-able); police: barriers
+  only as a rule-46 strike on the belief peak or sealing a pocketed thief's
+  exits, never random, never self-stranding; tunables in the private
+  `[strategy.tactics]` table.
+- **Evidence:** A/B tournament (5 seeds/matchup): thief survival vs chaser
+  3/5→4/5, vs our own killer cop 0/5→3/5; cop corners the v1 self-cornerer
+  5/5 @12-13. Kit sparring benchmark (greedy policy, independent
+  implementation): **0-6 → 3-3 (75-75)** — our cop captured the greedy
+  exit-keeping evader 3/3 @13, the one the kit documents as uncatchable by
+  chasing. Weak side remains our thief vs an aggressive cornering cop.
+- **Lesson:** two one-line pathologies (argmax's corner optimum; deterministic
+  tie-breaks) cost more points than every protocol bug combined. Strategy
+  forensics on real logs beat intuition — the fix fell out of the trail data.

@@ -15,6 +15,12 @@ from dataclasses import dataclass
 from cop_thief_core.constants import VERDICT_TRUTH, Direction, MoveType, Role
 from cop_thief_core.domain.belief import BeliefGrid
 from cop_thief_core.domain.own_state import OwnGameState
+from cop_thief_core.domain.tactics import (
+    DEFAULTS,
+    police_barrier,
+    recent_trail,
+    thief_score,
+)
 
 
 @dataclass
@@ -45,10 +51,12 @@ class BrainBase:
 
     role: Role
 
-    def __init__(self, llm=None, rng: random.Random | None = None, trash=None) -> None:
+    def __init__(self, llm=None, rng: random.Random | None = None, trash=None,
+                 tactics: dict | None = None) -> None:
         self._llm = llm  # kept for an opt-in trash-talk provider; never used for a move
         self._rng = rng or random.Random()
         self._trash = trash or _NullTrash()
+        self._tactics = {**DEFAULTS, **(tactics or {})}
 
     def decide(
         self,
@@ -92,33 +100,42 @@ class BrainBase:
 
 
 class ThiefBrain(BrainBase):
-    """Evade: maximize distance from the believed cop cell, prefer unvisited."""
+    """Evade with exits: freedom-dominant scoring (capped distance from the
+    believed cop, exit count, recent-trail penalty) — never self-corner."""
 
     role = Role.THIEF
 
     def _pick_move(self, moves, state, belief):
         threat = belief.most_likely()
-        return max(
-            moves,
-            key=lambda m: (state.board.distance(m[1], threat), m[1] not in state.visited),
-        )
+        recent = recent_trail(state, self._tactics["recent_window"])
+        shuffled = list(moves)
+        self._rng.shuffle(shuffled)  # tie-break randomly: a deterministic evader is pin-able
+        return max(shuffled, key=lambda m: thief_score(
+            state.board, m[1], threat, state.barriers, recent, self._tactics))
 
 
 class PoliceBrain(BrainBase):
-    """Chase: minimize distance to the believed thief cell; occasionally wall."""
+    """Corner, don't just chase: barriers are spent only on a rule-46 strike or
+    sealing a pocketed thief; otherwise close distance without oscillating."""
 
     role = Role.POLICE
-    barrier_chance = 0.15  # basic default barrier rate; students can improve it
 
     def _decide_move(self, state, belief, barriers_max):
         moves = state.board.legal_moves(state.position, state.barriers)
         if not moves:
             return MoveType.HOLD, None
+        threat = belief.most_likely()
+        if state.my_barriers < barriers_max:
+            strike = police_barrier(state.board, state, threat, self._tactics)
+            if strike is not None:
+                return MoveType.BARRIER, strike
         direction, _ = self._pick_move(moves, state, belief)
-        if state.my_barriers < barriers_max and self._rng.random() < self.barrier_chance:
-            return MoveType.BARRIER, direction
         return MoveType.MOVE, direction
 
     def _pick_move(self, moves, state, belief):
         target = belief.most_likely()
-        return min(moves, key=lambda m: state.board.distance(m[1], target))
+        recent = recent_trail(state, self._tactics["recent_window"])
+        shuffled = list(moves)
+        self._rng.shuffle(shuffled)  # tie-break randomly: vary the approach vector
+        return min(shuffled, key=lambda m: (
+            state.board.distance(m[1], target), m[1] in recent))

@@ -22,6 +22,9 @@ class FixedRng:
     def random(self):
         return self._value
 
+    def shuffle(self, seq):
+        pass  # deterministic stub: tie-breaks keep the original move order
+
 
 def _belief_peaked_at(cell, size=5):
     belief = BeliefGrid(size, orthogonal=True)
@@ -51,11 +54,14 @@ def test_police_chases_believed_thief():
     assert state.board.distance(target, (0, 0)) < state.board.distance(state.position, (0, 0))
 
 
-def test_police_places_barrier_when_roll_hits():
+def test_police_barriers_are_tactical_never_random():
+    # v2 (counted-game forensics): random walls are gone — a barrier fires only
+    # as a rule-46 strike / pocket seal (covered in test_tactics); in the open
+    # the cop always closes distance, whatever the roll.
     state = _state(Role.POLICE)
-    brain = PoliceBrain(rng=FixedRng(0.0))  # roll < barrier_chance -> BARRIER
+    brain = PoliceBrain(rng=FixedRng(0.0))  # the roll no longer exists
     move_type, _ = brain._decide_move(state, _belief_peaked_at((0, 0)), 14)
-    assert move_type is MoveType.BARRIER
+    assert move_type is MoveType.MOVE
 
 
 def test_police_moves_when_barrier_budget_exhausted():
