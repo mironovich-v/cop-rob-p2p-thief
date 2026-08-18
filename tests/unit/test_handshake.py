@@ -90,8 +90,8 @@ def test_handshake_declares_extras_beside_terms(police_config):
 def test_handshake_refuses_role_collision(police_config):
     reply = _reply(police_config, extras={"role": "police"})
     with pytest.raises(AgreementError, match="[Rr]ole"):
-        run_handshake(_StubTransport(reply), police_config, {"group_id": "g"},
-                      role="police", sub_game_number=1)
+        run_handshake(_StubTransport(reply), _ZeroPatience(police_config),
+                      {"group_id": "g"}, role="police", sub_game_number=1)
 
 
 def test_handshake_refuses_unexpected_opponent_group(police_config):
@@ -144,9 +144,35 @@ def test_handshake_skips_the_other_windows_greeting(police_config):
     assert transport.pushes == 2  # re-pushed while waiting for the match
 
 
+class _ZeroPatience:
+    """Config proxy: no skip budget, so a mismatch raises immediately."""
+
+    def __init__(self, cfg):
+        self._cfg = cfg
+
+    def get(self, key, default=None):
+        if key == "network.connect_timeout_seconds":
+            return 0
+        return self._cfg.get(key, default)
+
+
 def test_handshake_still_fails_loudly_on_a_true_collision(police_config):
     from cop_thief_core.exceptions import PairingMismatchError
-    collide = [_reply(police_config, extras={"role": "thief"}) for _ in range(8)]
+    collide = [_reply(police_config, extras={"role": "thief"}) for _ in range(3)]
     with pytest.raises(PairingMismatchError, match="[Rr]ole"):
-        run_handshake(_QueueTransport(collide), police_config,
+        run_handshake(_QueueTransport(collide), _ZeroPatience(police_config),
                       {"group_id": "g"}, role="thief", sub_game_number=1)
+
+
+def test_handshake_survives_a_greeting_backlog(police_config):
+    # Sub-game-2 live failure: a queued backlog of the other process's stale
+    # re-pushed greetings must never exhaust the window — the budget is TIME.
+    backlog = [_reply(police_config, extras={"role": "police", "sub_game_number": 3})
+               for _ in range(25)]
+    match = _reply(police_config, extras={"role": "thief", "sub_game_number": 2})
+    transport = _QueueTransport(backlog + [match])
+    identity, game_id, _ = run_handshake(
+        transport, police_config, {"group_id": "vm__fabi-police"},
+        role="police", sub_game_number=2)
+    assert game_id == "vm__fabi-police-vs-vm__fabi-thief"
+    assert transport.pushes == 26  # drained the whole backlog, then matched

@@ -8,6 +8,8 @@ configured — the uid needs both group ids), and the locked-model hashes. A
 both-declared contradiction refuses at the handshake; omission never refuses.
 """
 
+import time
+
 from cop_thief_core.exceptions import AgreementError, PairingMismatchError
 from cop_thief_core.interop.extras import build_extras
 from cop_thief_core.interop.game_ids import derive_game_ids
@@ -34,19 +36,21 @@ def run_handshake(
     extras = build_extras(role, sub_game_number, declared_uid, model_hashes())
     negotiation = Negotiation(terms, identity=own_identity, extras=extras)
     # A role-split opponent runs two fixed-role processes that BOTH greet this
-    # mailbox: a greeting whose role/sub-game contradicts ours belongs to a
-    # different window — refuse THAT AGREEMENT and keep waiting for the match
-    # (bounded, so a genuinely colliding pair still fails loudly, not forever).
-    for skipped in range(8):
+    # mailbox — and re-push, so a sub-game boundary can find a BACKLOG of stale
+    # greetings queued for other windows. A contradicting greeting is refused
+    # AND SKIPPED; the budget for finding the match is TIME (the handshake
+    # patience), never a count — a queued backlog drains in milliseconds and
+    # must not exhaust the window (live sub-game-2 failure vs nis-yar1). A
+    # genuinely colliding pair still fails loudly when the patience expires.
+    deadline = time.monotonic() + config.get("network.connect_timeout_seconds", 60)
+    while True:
         peer_message = transport.exchange_agreement(negotiation.signed())
         try:
             negotiation.verify_peer(peer_message)
             break
         except PairingMismatchError:
-            if skipped == 7:
+            if time.monotonic() >= deadline:
                 raise
-    else:  # pragma: no cover (loop always breaks or raises)
-        pass
     peer_identity = negotiation.peer_identity
     peer_gid = peer_identity.get("group_id", "unknown-group")
     if expected and peer_gid != expected:
