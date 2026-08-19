@@ -1,6 +1,5 @@
 {
-  "_schema": "Agreed game configuration for one sub-game (Appendix F). Both teams hold byte-identical values, locked by config_sha256; the file name is unique per game.",
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "agreed_between": [
     "nis-yar1",
     "vm__fabi"
@@ -64,17 +63,5 @@
     "retry_backoff_sec": 5,
     "max_retries": 3,
     "queue_depth": 100
-  },
-  "game_id": "nis-yar1-vs-vm__fabi",
-  "game_uid": "b38f33f3-3ec8-be1d-a464-4fa5c9cb35df",
-  "sub_game_number": 1,
-  "links": {
-    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
-    "declaration": "declaration_nis-yar1-vs-vm__fabi.json",
-    "config": "config_nis-yar1-vs-vm__fabi_g<NN>.json",
-    "log": "log_nis-yar1-vs-vm__fabi_g<NN>.json",
-    "result": "result_nis-yar1-vs-vm__fabi.json"
-  },
-  "config_name": "config_nis-yar1-vs-vm__fabi_g01.json",
-  "config_sha256": "87d14e2431e41050b096515ea329ff0843fa1993abd37955b11291787a417105"
+  }
 }

@@ -1,0 +1,93 @@
+# Environment / secrets
+.env
+.env.*
+!.env-example
+secrets/
+*.pem
+*.key
+credentials.json
+token.json
+
+copthief-league-protocol/
+
+# LLM / API credentials (project-specific)
+gmail_token.json
+service_account.json
+*_oauth_token.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+reports/
+
+# Virtual environments
+.venv/
+venv/
+virtualenv/
+
+# Packaging / build
+build/
+dist/
+*.egg-info/
+__pypackages__/
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/*.executed.ipynb
+
+# Logs / local temp
+*.log
+!report_intergroup_local_test.log
+!report_dpomdp_local_example.log
+!report_remote_selfplay_match.log
+!report_bonus_real_match.log
+*.tmp
+*.bak
+.DS_Store
+
+# Local IDE/editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# WSL Windows metadata streams
+*:Zone.Identifier
+
+# Model / ML artifacts
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.pkl
+
+# Window-day local config overlay (opponent quick-tunnel URLs etc.)
+config/*/game.local.toml
+
+# Game run outputs (generated — tracked intentionally only if required for grading)
+results/*
+!results/.gitkeep
+# Rule-52 first-meeting ledger: COMMITTED evidence (kit WARNINGS §5a) — a
+# counted series is not over until the ledger that proves it is pushed.
+!results/rule52_ledger.json
+logs/*
+!logs/.gitkeep
+# Stale/temp root-level report files — named match-run reports are tracked explicitly
+report_bonus.json
+report_self_test.json
+
+# Data / input
+data/*
+!data/.gitkeep
+
+# Optional: generated assets can be ignored unless intentionally tracked.
+# assets/*
+# !assets/.gitkeep

@@ -1,0 +1,806 @@
+# PROMPTS — AI-Assisted Work Log
+
+> AI-assisted work log (guideline §7.3). **Standing rule: one entry per PR.**
+> Kinds: Planning · Implementation · Review/Audit · Fix · Submission.
+
+## 2026-07-21 · Stage -1 · Planning · Merge guidelines into CLAUDE.md
+- **Context/Goal:** fold every requirement from `software-project-guidelines.md`
+  into a comprehensive project `CLAUDE.md`.
+- **Output:** `CLAUDE.md` §1–§35 (operational layer + full engineering standard).
+- **Lesson:** the guideline is the global standard; CLAUDE.md is the execution
+  layer and may only add, never weaken. **Approved.**
+
+## 2026-07-21 · Stage -1 · Planning · Assess book + league kit
+- **Context/Goal:** read `police_thief_p2p.pdf` + `copthief-league-protocol/`;
+  decide if requirements are clear enough to start.
+- **Issue:** the Hebrew PDF text layer is not machine-readable (RTL scrambling);
+  only numbers/English/tables survive. Extracted Appendix-F binding table.
+- **Refinement:** owner supplied the lecturer's reference repo as ground truth.
+- **Lesson:** treat the reference code as the practical source of truth (ADR-1).
+
+## 2026-07-21 · Stage -1 · Review/Audit · Read reference implementation
+- **Context/Goal:** read all of `../Game-P2P-Cop-Chase` (~7.8k LOC) to pin the
+  spec. **Method:** 5 parallel explorer subagents (domain / peer+infra /
+  report+config / gui+strategy+tests / docs) + first-hand read of the interop core.
+- **Output:** confirmed params + the 4 interop serializations + MCP surface + FSM
+  + artifact scheme → pinned in `CLAUDE.md` §36; 5 contradictions resolved.
+- **Lesson:** parallel read agents cover a large repo fast; verify crown-jewel
+  constructions first-hand. **Approved.**
+
+## 2026-07-21 · Stage -1 · Implementation · Bootstrap repo (Stage-0, main)
+- **Goal:** generate the repo tree + agent-control files; seed empty `main`.
+- **Output:** commit `ff97425` (owner-authorized one-time direct-to-main); scaffold
+  builds, ruff clean, imports OK.
+- **Decision:** league kit kept external/git-ignored + fetch script (ADR-9).
+
+## 2026-07-21 · Stage -1 · Planning · PR #1 PRD + requirements matrix
+- **Goal:** master PRD + traceability matrix; expand PRDs per mechanism.
+- **Output:** `docs/PRD.md`, `docs/requirements_matrix.md`, 19 mechanism PRD stubs
+  (commit `db889f0`). **Refinement:** replaced the 7 stage stubs (ADR-11).
+
+## 2026-07-21 · Stage -1 · Planning · PR #2 PLAN + architecture + decisions
+- **Goal:** C4/design, runtime architecture, ADR log with the 5 contradictions.
+- **Output:** `docs/PLAN.md`, `docs/architecture.md`, `docs/decisions.md`
+  (ADR-1..15; commit `6a9792f`).
+
+## 2026-07-21 · Stage -1 · Planning · PR #3 TODO + PROMPTS + REVIEW_POLICY
+- **Goal:** decompose the 7 stages into PR-sized slices; process docs.
+- **Output:** `docs/TODO.md`, `docs/PROMPTS.md`, `docs/REVIEW_POLICY.md` (commit `3421a60`).
+
+## 2026-07-21 · Stage 1 · Planning · PR #4 Stage-1 design PRDs
+- **Output:** `PRD_game_state`, `PRD_scoring_league`, `PRD_config_constitution`
+  (commit `a833fbd`). Design gate before code.
+
+## 2026-07-21 · Stage 1 · Implementation · PR #5 board + constants (1.1)
+- **Output:** `constants.py`, `domain/board.py`, `test_board` (15). Cov 92%. Commit `3badbaa`.
+
+## 2026-07-21 · Stage 1 · Implementation · PR #6 own_state (1.2)
+- **Output:** `domain/own_state.py` + `directions_from_move_set`; `test_own_state`
+  (12). Cov 96%. Commit `e8e7b07`.
+
+## 2026-07-21 · Stage 1 · Implementation · PR #7 rules (1.3)
+- **Output:** `domain/rules.py` + result tokens; `test_rules` (6). Cov 96%. Commit `e432455`.
+
+## 2026-07-22 · Stage 1 · Implementation · PR #8 scoring (1.4)
+- **Output:** `domain/scoring.py`; `test_scoring` (8). Cov 97%. Commit `4e06278`.
+
+## 2026-07-22 · Stage 1 · Implementation · PR #9 config loader + templates (1.5)
+- **Output:** `shared/config.py`, `exceptions.py`, per-role config templates;
+  `test_config` (7). Cov 98%. Commit `84bd6a3`. Completes Stage 1.
+
+## 2026-07-22 · Stage 2 · Planning · Stage-2 design PRDs
+- **Output:** `mcp_protocol`, `gatekeeper_rate_limit`, `pregame_agreement`,
+  `orchestrator_fsm`, `player_agents` PRDs (branch `stage-2-design-prds`, in review).
+
+## 2026-07-22 · Stage -1 · Docs · Process & tracking upgrade
+- **Goal (owner request):** per-PR `PROMPTS.md`/`COSTS.md` rule; `TODO.md` task
+  checkboxes; `PRD.md` RTS acceptance + Open Decisions; `PLAN.md` Phase Plan.
+- **Output:** this PR (branch `docs-process-and-tracking`).
+- **Lesson:** encode tracking/transparency as standing gates, not ad-hoc habits.
+
+## 2026-07-22 · Stage 2 · Implementation · protocol schemas (2.1)
+- **Output:** `protocol/messages.py` (TurnMessage/ControlMessage/AuditPayload with
+  a defensive `to_dict`/`from_dict` mixin), `protocol/__init__` exports;
+  `test_protocol` (7). Cov 98%. Missing-required → TypeError; unknown fields ignored.
+- **Lesson:** tolerate extra inbound fields (cross-team payloads) but reject missing
+  required — robust interop without a rigid schema.
+
+## 2026-07-22 · Stage 2 · Implementation · gatekeeper + rate limiter (2.2)
+- **Output:** `shared/rate_limiter.py` (sliding-window token bucket + FIFO wait
+  queue, injectable clock), `shared/gatekeeper.py` (`execute` with transient
+  retry + call stats), `ProviderError`/`RateLimitError`; `test_rate_limiter` (4),
+  `test_gatekeeper` (4). Cov 98%.
+- **Lesson:** an injectable clock makes queue/timeout/window-slide tests
+  deterministic and instant (no real sleeping).
+
+## 2026-07-22 · Stage 2 · Implementation · interop primitives + CORE vectors (2.3a)
+- **Output:** `interop/canonical.py` (canonical_json/bytes), `interop/hashing.py`
+  (commit_of/verify/new_nonce), `interop/game_ids.py` (derive_game_ids);
+  `NONCE_BYTES`, `CryptoError`; `test_interop_primitives` (7) + **conformance**
+  `test_core_vectors` (4) loading the league fixtures. Cov 98%.
+- **Result:** OUR functions reproduce the CORE vectors byte-exactly —
+  `canonical_json` (Hebrew/emoji/float), `commit_reveal` reference form,
+  `terms_signature`, order-independent `game_uid`. 3 of 6 CORE surfaces done.
+- **Lesson:** conformance test skips gracefully if the (git-ignored) kit is not
+  fetched, keeping `pytest` green everywhere; unit tests keep coverage regardless.
+
+## 2026-07-22 · Stage 2 · Implementation · negotiation (2.3b)
+- **Output:** `interop/negotiation.py` — `terms_from_config` (14-key extraction),
+  `Negotiation` (sign/verify, unsigned identity), `validate_minimums` refusing
+  below-App-F-floor terms; App-F floors in `interop/limits.json` (data, not source
+  literals); `AgreementError`; `test_negotiation` (9). Cov 98%.
+- **Lesson:** keep the App-F floors as package DATA (`limits.json`) so the
+  no-hardcode grep stays clean and minimums can be raised (never lowered) by config.
+
+## 2026-07-22 · Stage 2 · Implementation · FastMCP server + client (2.4)
+- **Output:** `infra/mcp_server.py` (`PeerInboxes`, `build_peer_server` 4 tools,
+  `_ensure_port_free`, `start_peer_server`), `infra/mcp_client.py` (`McpTransport`:
+  exchange_agreement/send_turn/poll_turn/send_control/poll_control/drain/exchange_audit
+  + retry); `infra/__init__` (was missing). `test_mcp_server` (3) + `test_mcp_client`
+  (9). Cov 98%.
+- **Lesson:** fastmcp's in-memory `Client(server_object)` round-trips the real
+  server+client with NO network/port — deterministic tests without a live server.
+  (`start_peer_server` is the only network boundary; marked `# pragma: no cover`.)
+
+## 2026-07-23 · Stage 3 · Implementation · belief map (3.1)
+- **Context:** owner approved Option A (ADR-16) — build belief/brains/smell before
+  the runtime, so the runtime integrates real components once (no rework).
+- **Output:** `domain/belief.py` (`BeliefGrid`: uniform init, observe_smell,
+  diffuse (von Neumann/king), exclude, most_likely, degenerate reset);
+  `test_belief` (8). Cov 98%.
+- **Lesson:** diffusion neighbourhood must match the move set (4 vs 8) — passed in.
+
+## 2026-07-23 · Stage 3 · Implementation · brains + strategy seam (3.2)
+- **Output:** `domain/brains.py` (`Decision`, `BrainBase` with a null-trash default,
+  `ThiefBrain` flee, `PoliceBrain` chase+occasional-barrier), `strategy/__init__.py`
+  (`load_brain_cls`, `resolve_brain_cls`, `resolve_brain`); `VERDICT_TRUTH/LIE`;
+  `test_brains` (6) + `test_strategy` (7). Cov 98%.
+- **Lesson:** a `_NullTrash` default keeps brains decoupled from the (Stage-4)
+  trash-talk layer; a `BoomLLM` test asserts the LLM is never touched for a move.
+
+## 2026-07-23 · Stage 4 · Implementation · scent field + CORE vector (4.1)
+- **Output:** `domain/smell.py` (`SmellField`: radial Chebyshev emit, max-merge
+  absorb, subtractive decay clamp/round, snapshot wire form); `test_smell` (7) +
+  `test_pheromone_vectors` in conformance. Cov 98%.
+- **Result:** the `pheromone` CORE vector passes from our code — 5 of the 6 CORE
+  surfaces done; only `report_consensus` (Stage 6) remains.
+- **Lesson:** conformance compares decay via `intensity_at` (snapshot drops the
+  clamped 0.0 that the vector's `after` still lists).
+
+## 2026-07-23 · Stage 2 · Implementation · sealing + handshake + FakeTransport (2.5a)
+- **Output:** `interop/hashing.seal`; `orchestration/sealing.py` (now_iso,
+  identity_from_config, sealed_step_record, build_turn_message);
+  `orchestration/handshake.py` (`run_handshake` — exchange/verify/derive ids,
+  refuse below-minimum); `tests/conftest.py` FakeTransport + fixtures;
+  `test_sealing` (4) + `test_handshake` (2, incl. a threaded two-peer exchange).
+  Cov 98%. Runtime (2.5) split into 2.5a (this) / 2.5b (PeerRuntime FSM).
+- **Lesson:** host-spec `collect_spec` (sysinfo) is deferred to 6.1, so identity/
+  step records omit `spec` for now — added when Step-0 sealing lands.
+
+## 2026-07-23 · Stage 2 · Implementation · PeerRuntime FSM (2.5b)
+- **Output:** `orchestration/{runtime,turn_handler,summary}.py` (turn loop wiring
+  belief+smell+brain+sealing, capture/win claims, watchdog timeout, mutual audit →
+  tamper_forfeit); `interop.audit_records`; `FINAL_CAUGHT_HINT`; config `override`;
+  integration `tests/integration/test_runtime.py` (6). Cov 98%.
+- **Result:** two PeerRuntimes play a full sub-game in-process over FakeTransport —
+  both agree on result/winner, audits pass both ways, sealed per step, shared
+  game_uid derived, timeout handled. AC5 (no referee, results derived) met.
+- **Lesson:** dropped the GUI control channel + LLM token accounting for a focused
+  runtime; the reference's per-file split keeps each module ≤150 lines.
+
+## 2026-07-23 · Stage 2 · Implementation · SDK + series runner (2.6)
+- **Output:** `sdk/series.py` (`role_for` alternation, `run_series`, `SeriesResult`),
+  `sdk/sdk.py` (`SimulationSdk.run_peer` single entry, `StubLlm`, `_build_transport`
+  network boundary); `test_series` (role_for, 2-game series, SDK.run_peer). Cov 98%.
+  **Closes Stage 2.**
+- **Result:** a 2-sub-game series alternates roles, reuses one transport, and both
+  peers agree per sub-game and share one game_uid. Artifacts/report/email deferred
+  to the reporting stage; a real LLM provider to the language stage.
+- **Lesson:** num_games is a signed term, so a test must override it on BOTH
+  configs to keep the handshake terms value-equal.
+
+## 2026-07-23 · Stage 4 · Implementation · trash-talk template (4.2)
+- **Output:** `strategy/trash_talk.py` (`TrashTalk`: setting-keyed landmarks, thief
+  40% bluff, word-cap-before-wire), `strategy/talk_providers.py`
+  (`resolve_trash_talk`, template default); wired into `resolve_brain` (replaces the
+  null provider); `test_trash_talk` (7). Cov 98%.
+- **Lesson:** the verdict (truth/lie) is decided by the provider and sealed into the
+  commit; the opt-in LLM providers + deadline/parse fallback come in the next slice.
+
+## 2026-07-23 · Stage 4 · Implementation · opt-in LLM providers (4.3)
+- **Output:** `LlmTrashTalk` (every_n_steps gating, `_ask_bounded` worker-thread
+  deadline, template fallback on any error/timeout/parse); `resolve_trash_talk`
+  claude_cli/ollama/claude_api branches with lazy `anthropic`; `test_llm_provider`
+  (9, fake askers — no live model). Cov 98%. **Closes Stage 4.**
+- **Lesson:** the network askers are `# pragma: no cover`; `anthropic` stays an
+  OPTIONAL dep via lazy import, so `pyproject` is unchanged. Any LLM failure falls
+  back to the free template — the game never stalls.
+
+## 2026-07-23 · Stage 5 · Implementation · cloud tunnel + connectivity probe (5.1)
+- **Output:** `infra/connectivity.py` `probe_opponent` (harmless `list_tools` via
+  FastMCP Client — in-memory or URL); authored `docs/PRD_cloud_tunnel.md`
+  (Host-header HTTP-421 fix at the tunnel, not in code); `test_connectivity` (2).
+  Cov 98%. **Closes Stage 5.**
+- **Lesson:** the tunnel Host-header fix is config-only (Cloudflare
+  `httpHostHeader` / ngrok `--host-header=rewrite`); FastMCP's DNS-rebinding check
+  is never weakened. The probe is testable in-memory (reachable) + refused-URL.
+
+## 2026-07-23 · Stage 6 · Implementation · sysinfo + Step-0 record (6.1)
+- **Output:** `shared/sysinfo.py` `collect_spec` (portable, cached, stdlib-only —
+  unknown values stay 'unknown'); `orchestration/sealing.sealed_spec_record`
+  (Step-0 host-spec sealed record) wired into `PeerRuntime.records[0]` + identity
+  `spec`; authored `PRD_commit_reveal`; `test_sysinfo` (3). Cov 98%.
+- **Lesson:** the Step-0 record is sealed like any step and re-verified in the
+  mutual audit; the integration match still audits clean with it prepended.
+
+## 2026-07-23 · Stage 6 · Review/Audit · adversarial audit (6.2)
+- **Output:** `tests/integration/test_audit.py` (3): a valid opponent log settles
+  normally; a tampered record (flipped position → stale commit) forces
+  `tamper_forfeit` for the honest peer (`failed_steps == [1]`); a missing opponent
+  audit skips (no forfeit). Cov 99% on `finish`. FR-14 DONE.
+- **Lesson:** tamper_forfeit is board-independent — the honest peer wins by
+  technical decision regardless of the survival/capture result.
+
+## 2026-07-23 · Stage 6 · Implementation · report consensus signature (6.3)
+- **Output:** `reporting/report_writer.py` (`consensus_signature` SPACED form,
+  `sign_report` sign-then-insert under `חתימת_קונסנזוס_משותפת`, `verify_report`);
+  conformance `test_report_consensus_vectors`; `test_report_writer` (4); authored
+  `PRD_interop_serialization`. Cov 99%. **ALL 6 CORE surfaces now pass.** Closes Stage 6.
+- **Lesson:** the report signature is the deliberate 2nd (spaced) serializer; the
+  vector's `compact_form_sha256` proves the compact form would fail settlement.
+
+## 2026-07-24 · Stage 7 · Implementation · four JSON artifact builders (7.1)
+- **Output:** `reporting/{artifact_schemas,artifact_helpers,artifacts}.py` — pure
+  `build_{declaration,config_artifact,log,result}` (all share one `game_uid`,
+  cross-link via `links`); `config_sha256` = compact-canonical lock over terms;
+  `log`/`result` `mutual_agreement.sha256` = SPACED `consensus_signature`;
+  declaration group blocks self-signed with the six book hardware fields. Authored
+  `PRD_logging_audit_reporting` (AC-R1..R7); `test_artifacts` (6). Cov 98%.
+- **Lesson:** the two locks use different serializers on purpose — `config_sha256`
+  compact (App-F byte-identity), `mutual_agreement` spaced (report consensus) — so
+  the pure builders reuse the exact CORE-vector functions and can't drift.
+
+## 2026-07-25 · Stage 7 · Implementation · artifact emit-to-disk + SDK wiring (7.2)
+- **Output:** `reporting/emit.py` `emit_series` — writes declaration + result +
+  per-sub-game config/log into `<logs_dir>/<group_id>/`, deriving per-group scores
+  from `domain.scoring`; wired into `SimulationSdk.run_peer` (emits under workdir,
+  returns `report`+`artifacts_dir`). `test_emit` (3) + `test_series` now asserts 4
+  files on disk and cross-peer mutual-signature agreement. Cov 98.55%.
+- **Lesson:** the mutual signature must hash ONLY the symmetric outcome
+  (roles/result/score/aggregate) — never per-peer tokens or wall-clock timestamps —
+  so both peers, seeing mirrored roles, still produce byte-identical `sha256`.
+
+## 2026-07-25 · Stage 7 · Implementation · official emailed report body (7.3a)
+- **Context:** studying SPEC §5/§6 + the kit revealed TWO surfaces — the cross-peer
+  consensus SIGNATURE (spaced, Hebrew key; done 6.3) vs. the EMAILED report body.
+  Per §36 the v3.0.0 reference is ground truth: each team emails its own rich Hebrew
+  `build_report`, self-signed; the body must be exact hashed canonical bytes.
+- **Output:** `reporting/report_builder.py` — `build_report(summary, terms)` (book
+  ch.8 Hebrew schema, spec/token declaration from the sealed step-0 record,
+  sign-then-insert) + `report_body` (spaced canonical, never indent=2). Authored
+  `PRD_email_reporting` (AC-E1..E6). `test_report_builder` (5). Cov 98.56%.
+- **Lesson:** the emailed body reuses the SPACED consensus serializer (not compact),
+  keeps Hebrew literal (`ensure_ascii=False`), and a re-serialized/pretty email
+  nearly scored 0 in EX06 — so `report_body` returns the exact preimage-form bytes.
+
+## 2026-07-29 · Stage 7 · Implementation · Gmail send-only (raw-HTTPS) (7.3b)
+- **Goal (owner):** portable Gmail send-only OAuth, raw HTTPS, no new deps.
+- **Output:** `infra/gmail_client.py` (stdlib urllib/base64/email: refresh token →
+  create draft/send; injectable `http`; `credentials_from_dicts`) + `infra/
+  email_sender.py` (disabled/draft-default gates, gatekeeper-routed, structured
+  result, creds from git-ignored `secrets/` via env). `test_gmail_client` (3) +
+  `test_email_sender` (5, FakeHttp — never sends). Cov 98.28%.
+- **Lesson:** injecting the `http` callable makes the whole OAuth+Gmail path
+  offline-testable (token refresh, draft vs send URL, retry-then-give-up) with zero
+  network and zero credentials; `build_raw` MIME round-trips to the exact body bytes.
+
+## 2026-08-04 · Stage 7 · Implementation · live-GUI view-model (7.4a)
+- **Output:** `gui/game_mode.py` (`mode_and_model` / `mode_from_recorded_model`,
+  Table-22 verbal-mode labels) + `gui/live_apply.py` (`apply_event(state, event)`
+  dispatching runtime events onto a window protocol; `LiveState` clock). Authored
+  `PRD_gui_replay` (event schema + local-truth contract). `test_game_mode` (5) +
+  `test_live_apply` (7, FakeWindow — no Tk). Cov 98.28% (gui coverage-omitted).
+- **Lesson:** the local-truth boundary is STRUCTURAL, not a display convention —
+  `test_live_apply` asserts the runtime snapshot key-set carries no opponent
+  position/role, so the live board cannot leak truth even by mistake. Splitting the
+  pure view-model from the Tk shell keeps the graded invariant fully unit-tested.
+
+## 2026-08-05 · Stage 7 · Implementation · runtime live event stream (7.4b)
+- **Output:** `orchestration/runtime.py` now emits `moved` (after each sealed send)
+  and `game_over` (after `finish`) listener events, completing the live stream the
+  GUI consumes. Additive — listener defaults to no-op, so headless runs/tests are
+  unchanged. `test_runtime` gains an event-stream test (ordered
+  negotiated→moved…→game_over; no `moved` view carries opponent truth). Cov 98.29%.
+- **Lesson:** emitting the stream in the orchestration layer (tested) BEFORE the Tk
+  shell (7.4c, coverage-omit) keeps the local-truth boundary and event ordering
+  under real integration test, not just synthetic-event unit tests. runtime.py is
+  now 141 code lines — near the 150 cap; the next runtime change may need a split.
+
+## 2026-08-05 · Stage 7 · Implementation · live Tk shell (7.4c)
+- **Output:** `gui/board_view.py` (canvas: my truth + barriers + visited + belief
+  heatmap; cell_px injected from config), `gui/window.py` (PeerWindow chrome +
+  window protocol), `gui/player.py` (LivePeerApp: threads `sdk.run_peer`, queues
+  events, drains via the 7.4a view-model), `gui/__main__.py`
+  (`python -m cop_thief_core.gui`). Display-guarded `test_gui_shell` (2). Cov 98.29%.
+- **Lesson:** `DISPLAY=:0` (WSLg) is present here, so the smoke test builds a REAL
+  window and asserts labels/board — but it `pytest.importorskip`s tkinter and skips
+  on `TclError`, so headless CI stays green. No PIL/scrot for a PNG, so the committed
+  screenshot is an honest owner manual step; I verified the full LivePeerApp renders
+  end-to-end (board exported to PostScript) rather than fabricating an image.
+
+## 2026-08-05 · Stage 7 · Implementation · replay data layer (7.5a)
+- **Output:** `gui/replay_data.py` — `verify_record` (commit-reveal re-verification →
+  OK/TAMPERED via our production `hashing.verify`), `reconstruct_positions` (my
+  trajectory from sealed records, step-0 spec skipped), `opponent_positions` (the
+  OPPONENT's trajectory from its sibling revealed log), `normalize_log`,
+  `discover_subgames`, `subgame_log_path`. `test_replay_data` (5) +
+  `test_replay_normalize` (4), tests seal real records then tamper one. Cov 98.29%.
+- **Lesson:** full opponent truth is reconstructed ONLY in replay, ONLY from the
+  mutually-revealed sibling log under `logs/<opponent_group_id>/` — the same emit
+  layout 7.2 wrote. Re-verifying with the SAME production `verify` the live audit
+  uses means the replay can't "pass" a log the audit would reject.
+
+## 2026-08-05 · Stage 7 · Implementation · replay Tk viewer (7.5b)
+- **Output:** `gui/replay.py` (`ReplayApp`: play/pause/step/restart; draws both
+  revealed trajectories on one board; `barriers_from_state` parses the sealed state
+  string; per-step commit verify status) + `--replay` in `gui/__main__.py`.
+  `test_replay_view` (3: pure barrier-parse always runs; display-guarded ReplayApp
+  smoke × 2). Verified ReplayApp on a REAL emitted 34-step log. Cov 98.29%.
+- **Lesson:** our standardized log is leaner than the reference's (no received-smell
+  history), so replay honestly shows both trajectories + visited + parsed barriers +
+  commit integrity with a FLAT belief field, rather than faking a heatmap it has no
+  data for. The opponent overlay needs both sibling logs colocated (2-machine games
+  keep only their own until gathered) — documented, not silently empty.
+
+## 2026-08-05 · Stage 7 · Implementation · headless role CLI entry points (7.6a)
+- **Context:** the export (7.6b) needs runnable role entry points, but
+  `police_agent`/`thief_agent` `__main__` were Stage-2 stubs ("not yet implemented").
+- **Output:** `cop_thief_core/agent_cli.py` (`parse_args` + `run_role` → one series
+  via `SimulationSdk.run_peer`, prints derived result; `transport` injectable for
+  tests) + both role `__main__` filled as one-line delegates (DRY). `test_agent_cli`
+  (2, two peers over FakeTransport). `python -m police_agent --help` works. Cov 98.31%.
+- **Lesson:** putting the CLI logic in ONE tested `agent_cli` (not the coverage-omit
+  `__main__` files) satisfies "no business logic in CLI" (NFR-7) AND keeps it covered;
+  the role `__main__` stays a 1-liner, so police/thief never diverge.
+
+## 2026-08-05 · Stage 7 · Implementation · two-repo export + drift check (7.6b)
+- **Output:** `scripts/export_lib.py` (deterministic `content_hash`, filtered
+  `copy_tree` that never carries secrets/junk, per-role pyproject/README templates)
+  + `scripts/export_repos.py` (`export_role`/`export_all`: vendors core + role pkg +
+  both configs + tests, writes `core_manifest.json`, raises on core drift). Added
+  `scripts` to pytest pythonpath; excluded `test_export.py` from the vendored tree.
+  `test_export` (5). Verified the REAL exporter + ran 24 VENDORED tests standalone in
+  an isolated `uv --no-project` env. Cov 98.31%.
+- **Lesson:** hashing only the vendored `cop_thief_core/` subtree (not per-role files
+  like config/role package) makes the drift manifest identical across both exports —
+  the one line that proves both came from the same core. Keeping timestamps OUT of
+  the hashed content makes re-export byte-identical; excluding the exporter's own
+  test (it needs the workspace `scripts/` path) keeps each export self-contained.
+
+## 2026-08-05 · Stage 7 · Implementation · wire email step into SDK (7.7a)
+- **Output:** `SDK.run_peer` now builds the official report from the final sub-game
+  and sends the EXACT `report_body` bytes via `EmailSender` (draft/disabled by
+  default; injectable `email_sender` for tests). `test_email_wiring` (2): disabled
+  by default (no send); when an enabled sender is injected, a real 2-peer match's
+  drafted MIME body decodes to exactly `report_body(build_report(final_summary))`.
+  Cov 98.32%.
+- **Lesson:** an injectable `email_sender` on the SDK lets the wiring test prove the
+  end-to-end byte path (played match → report → MIME draft) with zero network, while
+  the default disabled/draft gate keeps every ordinary run and CI from ever sending.
+
+## 2026-08-05 · Stage 7 · Documentation · academic README (7.7b)
+- **Output:** replaced the Stage -1 README skeleton with the full academic README:
+  overview, `uv` install, ALL run commands (both role agents, live GUI, replay,
+  conformance, export), architecture (no central truth / SDK single entry /
+  commit-reveal / byte-exact interop / four artifacts), config, security, standards,
+  credits. Verified every referenced path/anchor resolves.
+- **Lesson:** the README is docs-only but user-facing — kept every command copy-paste
+  runnable and flagged member IDs as the one to-fill-before-submission item (OD-2),
+  so nothing in it overstates readiness.
+
+## 2026-08-05 · Stage 7 · Review · RTS gate review + owner checklist (7.7c)
+- **Output:** walked PRD §4 AC1–AC17 against the built system, marking each with its
+  test/evidence; verified two I was unsure of by running a real **6-sub-game series**
+  (AC6: alternation + agree + audits pass) and auditing adversarial coverage (AC7).
+  Rewrote PRD §4 + `requirements_matrix` AC rows; authored `docs/PROGRESS.md` (RTS
+  status + the exact owner checklist); condensed the TODO progress line.
+- **Lesson:** the honest split is 13 AC done, 2 dev follow-ups (AC1 CI drift, AC7
+  stale/dup/out-of-order/restart), 3 owner runtime/submission (AC2 live cross-impl
+  game, AC12 live tunnel, AC14 screenshots/tag/push). Declaring "engineering RTS" and
+  handing a precise owner checklist beats a blanket "done" that overstates readiness.
+
+## 2026-08-05 · Stage 7 · Implementation · step-monotonic dedup (AC7, 7.8)
+- **Output:** `TurnHandler` now folds each opponent step exactly once (strict
+  `step > _last_step` guard); stale / duplicate / out-of-order messages return
+  `IncomingOutcome(ignored=True)` with no belief/smell/history mutation, and the
+  runtime `continue`s (no extra turn). `test_turn_handler` (4) + a duplicating-
+  transport integration test. Cov 98.33%; `turn_handler` 100%.
+- **Lesson:** adding the guard EXPOSED a latent bug — the caught-branch final HOLD
+  reused the current step (it `_send`s without `apply_move`), so under strict
+  monotonicity the capture confirmation was dropped and multi-sub-game series
+  desynced (one peer "capture", the other "timeout" → 180s hang). Fix: advance the
+  step with `apply_move(HOLD)` before the final send. A test that passes in isolation
+  (single game) but hangs in the full suite (2-game series) is the tell — reproduce
+  at the boundary, don't guess.
+
+## 2026-08-17 · Stage 8 · Planning · league-kit resync analysis + plan (D8)
+- **Context:** owner pulled the updated `copthief-league-protocol` (HEAD
+  `ad65576`, ~80 commits since our 2026-07-22 baseline — a real cross-team
+  campaign: two counted series, six audit passes, four best2934 WARNINGS).
+- **Goal:** learn the current normative surface and produce the adjustment list.
+- **Prompt summary:** two parallel reader subagents (full SPEC.md + INDEX; new
+  vectors + WARNINGS/GOVERNANCE/PLAYBOOK/EVIDENCE), then code-side verification
+  of every reported delta against `src/`.
+- **Output:** conformance re-run (6/6 CORE vectors still pass); confirmation our
+  5-key consensus scope already matches kit #55 and tie rule is `series_add`;
+  gap list → Stage 8 tasks 8.1–8.9 in `docs/TODO.md`; ADR-17..20;
+  `PRD_email_reporting` re-scoped (dry-run + recipient gate, owner approved);
+  OD-3 gains the 7-day OAuth-token timing constraint.
+- **Lesson:** the kit's live campaign turned several of our "done" behaviors
+  into named failure modes (silent rule-46/47 endings fork the game; step-keyed
+  dedup swallows equivocation evidence; a draft-based email gate needs a scope
+  rule 30 doesn't grant). Re-read a shared external contract before every
+  cross-team milestone — byte vectors passing does not mean behavior conforms.
+- **Approval:** owner approved Stage-8 plan-first + ADR-20 reversal (2026-08-17).
+
+## 2026-08-17 · Stage 8 · Documentation · record imreeyal first contact (pairing)
+- **Context:** partner team imreeyal sent their first-contact pairing message
+  (5 counted series played; deadline 2026-08-20 disclosed).
+- **Goal:** preserve the message verbatim in-repo and fold its deltas into the
+  Stage-8 plan.
+- **Output:** `docs/pairing/imreeyal_first_contact.md` (verbatim + disposition
+  map); TODO gains 8.10 (MCP session lifecycle) + 8.11 (per-call timeout cap),
+  8.5/8.8 amended (`counted_games_played` identity field; auto-fire at
+  settlement); OD-4 resolved; PROGRESS pairing section + deadline priority.
+- **Lesson:** the pairing dialect confirmed several of our behaviors as
+  already-league-majority (thief-first, 0.8-peak scent form, consensus scope) —
+  verifying against our code BEFORE replying turned half their checklist into
+  "confirm in writing" instead of work.
+- **Approval:** owner asked to save the input; disposition map for owner review.
+
+## 2026-08-17 · Stage 8 · Implementation · rule-46/47 enclosure endings (8.1)
+- **Output:** `GameRules.is_enclosed` (barrier-on-own-cell OR no orthogonal
+  escape; STAY doesn't rescue); thief-side concession in `TurnHandler.process`
+  (unprompted `claim_response={"claim":[own cell],"caught":true}`, overriding a
+  simultaneous missed capture claim). Cop side needed ZERO changes — the
+  existing caught-branch settles CAPTURE on any thief `caught:true`. 10 new
+  tests incl. a 2-peer cornering integration (police walks (0,0)→(3,2), walls
+  (3,3); both settle capture, audits clean). Cov 98.34%.
+- **Lesson:** the 7.8 caught-branch fix (HOLD step-advance before the final)
+  meant the concession path worked end-to-end on the FIRST integration run —
+  hardening one path pre-paid the next feature that reused it.
+
+## 2026-08-17 · Stage 8 · Implementation · capture corroboration at audit (8.2)
+- **Output:** new `orchestration/audit_checks.py` — answer-vs-concession
+  detection (echo of my last MOVE claim vs any other cell), answer checked
+  against the revealed trail end, concession against MY OWN barrier record
+  (rule 46 walled / rule 47 enclosed), strict-parse-or-degrade
+  (`position` key → reference `state` string → degraded note, never an
+  accusation). `summary.finish` corroborates any thief `caught:true` after a
+  clean crypto audit; a voided check settles `disputed_capture` (winner null,
+  tie false via emit, 0/0 via existing scorer fallthrough) — dispute, not
+  tamper. 10 unit tests + settlement stub test + corroboration assertion in
+  the cornering integration. Cov 98.27%.
+- **Lesson:** scorer's "unknown result → 0/0" fallthrough and the playbook's
+  technical-row shape meant `disputed_capture` needed only a constants entry
+  and a one-line tie-flag fix in emit — the row shape was already designed
+  for results without winners.
+
+## 2026-08-17 · Stage 8 · Implementation · negotiate extras + declarations (8.5)
+- **Output:** `interop/extras.py` (build + truth tables: refuse ONLY
+  both-declared-and-differ; bools/strings = silence; named refusals);
+  `interop/locked_models.py` + vendored `locked_models_data.json` (three
+  registry docs verbatim; our canonicalizer reproduces all three published
+  shas — conformance test pins doc equality AND hashes against the kit);
+  handshake declares role/sub_game_number/derived game_uid (when
+  `game.opponent_group_id` is configured) + model hashes, and refuses a stray
+  opponent group; identity gains `counted_games_played` (exact imreeyal §3.8
+  key); mcp_client reads the negotiate response body as well as the inbox
+  (WARNINGS §2b — we already pushed first). 16 new tests.
+- **Lesson:** the whole existing suite passed untouched after the change —
+  omission-never-refuses isn't just league politeness, it's what makes a
+  protocol extension deployable without a flag day in your own repo too.
+  Also: 150-line limit hit by embedded registry docs → moved them to a JSON
+  data file (byte-closer to the registry, loader stays 23 lines).
+
+## 2026-08-17 · Stage 8 · Implementation · transport hardening (8.10 + 8.11)
+- **Output:** per-call timeout cap on every outbound MCP call (fastmcp Client
+  timeout; 10s < signed 30s; ConfigManager refuses a cap ≥ the signed
+  deadline); exchange_agreement re-pushes the greeting every
+  handshake_repush_seconds and its patience (connect_timeout 150s) spans the
+  opponent's legitimate inter-sub-game 502 gap — a down door no longer burns a
+  sub-game, and the ARRIVING negotiate opens it. Fresh Client per call means
+  no outbound session survives a boundary (imreeyal §3.4's two-evening scar) —
+  now stated in the code, not just true by accident. 5 new tests.
+- **Lesson:** an in-memory FastMCP tool doing a SYNC sleep blocks the event
+  loop, so a client-side timeout cannot preempt it — the timeout test needed
+  an async sleep to actually exercise cancellation. Worth remembering for any
+  fastmcp timeout testing.
+
+## 2026-08-17 · Stage 8 · Implementation · delivery contract (8.3)
+- **Output:** TurnHandler now implements the full SPEC §7.1 decision table:
+  dedup keys on the COMMIT (`{step: commit}`); a same-commit redelivery
+  absorbs; a different commit for a played step records equivocation evidence
+  and settles `tamper_forfeit`; one-ahead messages buffer and replay in step
+  order (reorder window 1); past the window → `technical_loss` (the flood
+  rule); below-next-never-played discards. Runtime checks the deadline on
+  EVERY lap and never renews it on tolerated junk — proven by a junk-flood
+  integration test that times out on schedule while fed duplicates.
+- **Lesson:** the 7.8 "forward jump accepted" test encoded a contract the
+  PROMOTED table later superseded — deleted deliberately with a comment, not
+  worked around. A test is a record of the contract AT THE TIME; when the
+  contract moves, the test moves with a citation.
+
+## 2026-08-17 · Stage 8 · Implementation · wire value validation (8.6)
+- **Output:** `validate_turn_values` implements every refusal row of the kit's
+  `turn_message.json`: empty timestamp, non-lowercase-64-hex commit (string
+  comparison), stringified smell intensities, negative/non-int/bool step,
+  invalid sender. New `TurnHandler.receive(raw)` parses + validates BEFORE any
+  state change; refused input returns ignored (never defaulted, never a crash)
+  and never renews the opponent's deadline; unknown keys stay tolerated (the
+  extension seam). 9 new tests.
+- **Lesson:** moving the parse out of the runtime loop into receive() freed a
+  line under the 150 cap that 8.3 had consumed — extracting a seam is often
+  cheaper than compressing at the limit, and it put parse-refusal and
+  table-refusal decisions in one auditable place.
+
+## 2026-08-17 · Stage 8 · Implementation · audit live-binding (8.4)
+- **Output:** `audit_records(records, arrived)` — for every step whose commit
+  ARRIVED live, the disclosed record must carry exactly that commit, and every
+  received step must be disclosed; steps never received (sealed step-0 spec)
+  stay self-verified. `TurnHandler.received_commits` exposes the binding
+  source (the same `{step: commit}` map 8.3's dedup already maintained);
+  `summary.finish` passes it; `bound_steps` lands in the audit record so a
+  vacuous binding is visible. A rewritten-and-resealed record — self-
+  consistent but not what crossed the wire — now settles tamper_forfeit.
+- **Lesson:** 8.3's commit-keyed dedup map turned out to BE the §5d binding
+  archive — the delivery contract and the audit binding are one data
+  structure viewed at two times. Design findings compound when the same
+  primitive serves both.
+
+## 2026-08-17 · Stage 8 · Implementation · league fields + ledger (8.7)
+- **Output:** new `reporting/league.py` — rule-52 ledger (load / first_meeting /
+  advance; committed at `results/rule52_ledger.json` with a .gitignore
+  exception) + the three graded §6.2 fields: `games_played_including_this`
+  (inclusive when counted, unbumped in friendlies, opponent null = UNCLAIMED
+  never 0), `first_meeting_between_groups` (always truthful),
+  `diversity_reward_applied` (DERIVED: counted AND first AND winner — both
+  files mark the winner true, never all-false-out-of-modesty). `links.github`
+  carries BOTH teams' repos (rule 49; opponent's read from their negotiate
+  identity). The counted settlement path advances the ledger before returning.
+- **Lesson:** the graded fields are ARMED BY THE RUN, not the calendar — the
+  friendly/counted split lives in one `bump = 1 if counted else 0` and one
+  gated `advance_ledger`, which keeps the truthfulness argument auditable in
+  two lines instead of scattered conditionals.
+
+## 2026-08-17 · Stage 8 · Implementation · email shape + structural gate (8.8)
+- **Output:** ADR-20 implemented. build_raw grows a byte-identical named
+  attachment (body == attachment, one construction); deliver is send-only
+  (DRAFT_URL removed — rule 30's scope cannot draft); EmailSender defaults to
+  dry_run (builds the exact MIME, transport untouched, needs no creds) with a
+  recipient-shaped gate: the lecturer is unreachable — case-/whitespace-
+  insensitive, including inside recipient lists — unless doubly armed
+  (game.counted AND --counted; a mismatch refuses to start, and an armed run
+  that cannot deliver refuses to start: preflight_armed). SDK auto-fires at
+  settlement with the reference subject form (winner from the derived result,
+  never claimed). Config: recipient now empty by default, lecturer_address
+  explicit, mode dry_run. 14 tests across three files.
+- **Lesson:** deleting the draft path (not just disabling it) is the honest
+  implementation of "a send-only scope cannot create drafts" — a gate that
+  exists only in config can be un-configured; a code path that doesn't exist
+  cannot be reached by mistake.
+
+## 2026-08-17 · Stage 8 · Tests · behavior-table conformance sweep (8.9)
+- **Output:** `tests/conformance/test_behavior_tables.py` — the kit's four
+  PROMOTED/PROPOSED decision tables driven row-by-row through OUR production
+  seams: delivery_contract arrivals (incl. the vector's window-2 receiver
+  state) through TurnHandler.process; turn_message validation rows through
+  validate_turn_values AND the receive refusal path; pairing/uid truth tables
+  through check_extras. game_id now asserted beside game_uid. Kit's own
+  verify_vectors.py: 125 checks / 15 fixtures ALL PASS; gen_vectors drift
+  check clean.
+- **Lesson:** the vector's validation rows use step 7 on purpose — driving
+  them through the FULL receive path put the flood rule in front of the value
+  checks and failed the accept rows. Behavior tables must be driven at the
+  seam they specify; the composition of seams is its own (unit) test.
+
+## 2026-08-17 · Stage 8 · Config · imreeyal pairing readiness (8.12)
+- **Output:** `config/imreeyal/` — imreeyal's constitution adopted verbatim
+  (schema 1.2, num_games 6, `agreed_between ["imreeyal","vm__fabi"]`) over a
+  pairing game.toml: group_id `vm__fabi`, opponent-group guard, ngrok
+  mcp_servers, their URL as opponent, hardened network values, template LLM,
+  friendly auto-fire recipients (their inbox + ours; lecturer structurally
+  excluded), `tie_rule = "series_add"` declared. Real member names replace the
+  id-0001 placeholders everywhere (OD-2 closed). A pinning test derives and
+  freezes the pairing ids: game_id `imreeyal-vs-vm__fabi`, game_uid
+  `0e07bcda-4bfd-3668-1fec-86833963b58c` — the numbers both teams compare in
+  chat before any window. Reply draft committed with the derived ids filled.
+- **Lesson:** our shared game.json was already value-identical to theirs on
+  every signed term — the whole "byte-identical constitution" alignment came
+  down to schema_version, agreed_between, num_games, and dropping a _note key.
+  Building strictly from App F from day one is what made the pairing cheap.
+
+## 2026-08-17 · Stage 8 · Fix+Ops · §0 sparring pass + foreign-identity fix (8.13)
+- **Output:** live 6-sub-game series vs the kit's sparring peer (third
+  independent implementation): 6/6 settled, every mutual audit Verified OK
+  both directions, one game_uid; check_artifacts per-dir ALL PASS +
+  cross-team join ALL SETS AGREE. The first run crashed AFTER settlement:
+  `build_declaration` assumed every identity block carries `spec` — the
+  sparring peer's doesn't (and a live opponent's identity once arrived empty
+  for whole windows). `group_block` now degrades every identity key to
+  explicit placeholders; regression test added; re-run clean end-to-end.
+  Reply draft [SPARRING] filled → READY TO SEND.
+- **Lesson:** 313 green tests and 12 conformance suites did not catch a
+  KeyError that the FIRST live foreign peer found in minutes — self-play
+  fixtures inherit your own assumptions (every identity we ever built had
+  `spec`). The league's "play the sparring peer before you contact anyone"
+  rule exists precisely for this class.
+
+## 2026-08-17 · Stage 7 follow-up · Chore · CI gate (7.9, AC1)
+- **Output:** `.github/workflows/gate.yml` — on every push/PR: uv sync, ruff
+  zero, full pytest with the ≥85 coverage gate (conformance suites included,
+  kit fetched via scripts/fetch_interop.sh), the kit's own verify_vectors
+  oracle, and the gen_vectors fixture-drift check. requirements_matrix AC1 →
+  DONE; PROGRESS refreshed to the true end-of-day state (Stage 8 complete,
+  §0 pass clean, reply ready).
+- **Lesson:** trivial in isolation; its value is that the drift check now
+  runs on someone ELSE'S schedule too — a kit update that regenerates
+  vectors breaks our CI before it breaks a window.
+
+## 2026-08-18 · Pairing · nis-yar1 readiness + role-split support (8.14)
+- **Output:** nis-yar1 answered the league call (3 counted series played;
+  every confirmation byte-perfect — their terms digest `a284082d…` reproduces
+  from our canonicalizer). Their topology is TWO fixed-role processes, the
+  exact "role-split opponent" case imreeyal warned about: added
+  `McpTransport.set_opponent` (safe mid-series — per-call sessions) and the
+  series runner now dials `network.opponent_url_<their-role>` at every
+  sub-game boundary; single-URL opponents unchanged. `config/nis-yar1/`
+  committed with quick-tunnel placeholders (their URLs arrive at T); ids
+  pinned by test. Reply draft proposes Aug 18 17:00 friendly / Aug 19 17:00
+  counted (imreeyal's evening slots kept free). League first-contact template
+  committed.
+- **Lesson:** the per-call-session design (8.10) made role-split support a
+  five-line feature — no session state meant swapping the dial target is
+  trivially safe. The hard version of this feature was pre-paid by transport
+  hygiene.
+
+## 2026-08-18 · Pairing prep · Fix · .env loading + email preflight (8.15)
+- **Output:** pre-window audit found that NOTHING loaded `.env` — EmailSender
+  reads the Gmail secret paths from os.environ, so the auto-fired friendly
+  report would have returned `no_credentials` at 17:00 with creds sitting
+  right there in `secrets/`. Added `agent_cli.load_dotenv` (stdlib, ~12
+  lines: KEY=VALUE, comments/`export `/quotes handled, shell always wins),
+  called at role startup; local `.env` created (paths only — untracked).
+  Live preflight: OAuth token refresh against Google succeeded — the 7-day
+  token is alive. Also fixed a test-file basename collision
+  (unit/test_agent_cli.py vs integration/) → tests/unit/test_dotenv.py.
+- **Lesson:** "creds are in ./secrets" and "the process can read them" are
+  two different facts separated by an environment variable nobody exports at
+  17:00 under window pressure. Preflight the FULL chain (env → parse →
+  refresh), not the file listing.
+
+## 2026-08-18 · Pairing · imreeyal round 2 — parity flip + scar confirmations
+- **Context:** imreeyal confirmed our derived ids independently (and our
+  flat-terms sha), accepted every §3 declaration, but corrected §4: THEIR
+  natural split is thief-on-odds — so vm__fabi plays POLICE in sub-games
+  1/3/5 and THEY open sub-game 1. Launch command for their series flips to
+  police_agent. They skip F1 (num_games is a signed term — a 1-game series
+  would derive a different game_uid), want the friendly report to BOTH their
+  addresses (already configured), and posted five scars to confirm.
+- **Output:** all five scars verified in code before answering (global 1..6
+  numbering; one assembler/one result; survival horizon reads the thief's
+  OWN step counter — rules.thief_result(state.step_number), per-sender by
+  construction; archiving + commit-naming are runbook items). Config comment
+  + PROGRESS runbook flipped to police_agent; response draft with the exact
+  requested sentence + our game.json file sha (ff3004af…) for the byte-check.
+- **Lesson:** "alphabetically-first plays cop on odds" was the kit PLAYBOOK's
+  default, not a league law — a pairing's split is per-pairing precedent.
+  Never promote a playbook default to a rule in outbound mail; state splits
+  as proposals.
+
+## 2026-08-18 · Live window · nis-yar1 friendly attempt #1 — two findings
+- **Finding 1 (code, PR #62):** their two fixed-role processes BOTH greet our
+  single mailbox; our handshake consumed the thief-process greeting and
+  refused the whole window as a role collision. Fixed live:
+  PairingMismatchError (role/sub-game contradictions) is skipped — refuse the
+  AGREEMENT, keep waiting for the match, bounded at 8 so true collisions stay
+  loud. Signature/terms/uid/group failures remain fatal.
+- **Finding 2 (operational, no code):** while we patched INSIDE the open
+  window, their runner burned sub-games 1-2 by timeout and greeted for
+  sub-game 3 — our matcher correctly refused to join a series mid-way. Remedy
+  = the T-protocol itself: kill everything, name a new T. The league's
+  "never debug inside a window" rule is now a scar of ours, not just theirs.
+- **Lesson:** a refusal that fires correctly can still cost the window; the
+  DISCIPLINE (kill-and-rename-T immediately) is as load-bearing as the code.
+
+## 2026-08-18 · Chore · window-day local overlay (clean trees at every T)
+- **Output:** ConfigManager merges a git-ignored `game.local.toml` over the
+  tracked config; nis-yar1's rotating quick-tunnel URLs moved there and the
+  tracked file restored to placeholders — every T is now played on a CLEAN
+  pushed tree (both partners' scar #5) with zero per-window commits.
+- **Lesson:** ephemeral partner data (quick-tunnel URLs) in tracked config
+  forces a choice between a dirty tree and committing garbage; an ignored
+  overlay dissolves the dilemma.
+
+## 2026-08-18 · Live window · nis-yar1 friendly SETTLED + mail-content finding
+- **Settle:** attempt #3 (T 21:19) ran start-to-finish: 6/6 sub-games, every
+  mutual audit verified both ways, one game_uid (b38f33f3…), league fields in
+  perfect friendly posture, and the report-compare ritual's decisive check —
+  mutual_agreement.sha256 — BYTE-IDENTICAL across both teams' files
+  (c6450c67…). Game score 0-6 (their cornering cop + distance-keeping thief).
+- **Finding (ADR-21):** the compare also exposed that our mail carried the
+  Hebrew book-schema report while the league mails the RESULT artifact
+  (SPEC §6.1 result-only convention). Fixed: the mail body/attachment is now
+  byte-equal to the filed result_<game_id>.json; Hebrew report stays a repo
+  artifact. Caught in a FRIENDLY — exactly the ladder working — before any
+  counted mail reached the lecturer.
+- **Lesson:** the compare ritual checks documents, not just hashes: two teams
+  can agree on every settlement byte and still mail the grader two different
+  documents. "Body == attachment" was necessary but not sufficient — the
+  CONTENT had to be the settled one.
+
+## 2026-08-18 · COUNTED · nis-yar1 series BANKED (1 of 2)
+- **Settle (T 22:00, commit 950ab89, doubly armed):** 6/6 sub-games, every
+  mutual audit verified both directions, one game_uid (b38f33f3…), mutual sha
+  c6450c67… — and the re-friendly's full compare ritual had passed in both
+  directions minutes earlier (mail == filed artifact byte-identical, all
+  must-match fields agree). ARMED league fields correct: counts {vm__fabi: 1,
+  nis-yar1: 4}, first_meeting true, diversity to the winner (nis-yar1).
+  Report auto-fired to the lecturer ALONE. Score 0-6 (30-90) — settlement
+  quality, not points, was tonight's objective.
+- **Settlement path:** rule-52 ledger advanced and committed (this PR — "a
+  counted series is not over until the ledger that proves it is pushed");
+  counted artifacts archived (results/counted/nis-yar1-2026-08-18, publish
+  via the submission-repo export); overlay disarmed; imreeyal pairing's
+  counted_games_played bumped to 1 (truthful at their T).
+- **Lesson:** the evening produced 4 real interop fixes (greeting matching,
+  skip budget, mail content, foreign identity) — every one found by a live
+  peer, none by 324 green tests. The friendly ladder is the test suite that
+  matters; budget windows for it, not just code time.
+
+## 2026-08-18/19 · Night shift · tactical brains v2 (8.16)
+- **Forensics (owner's ask: "are we playing for real?"):** yes — legal, honest
+  moves throughout; the strategy was naive. The counted logs show the v1 thief
+  running STRAIGHT INTO (6,6) in all three thief sub-games (argmax of
+  distance-to-threat IS the corner) and oscillating until walled — captured
+  @12 every time; the v1 police placed 7 random walls and ping-ponged
+  (3,4)↔(2,4) against a distance-keeper (a chaser never closes; the game's
+  cop only wins by cornering).
+- **v2:** `domain/tactics.py` — thief: exits veto corners (freedom weight >
+  marginal distance), pessimistic distance (flee the cop's NEXT cells),
+  recent-trail penalty, RANDOM tie-breaks (all five A/B seeds had produced
+  the identical game — a deterministic evader is pin-able); police: barriers
+  only as a rule-46 strike on the belief peak or sealing a pocketed thief's
+  exits, never random, never self-stranding; tunables in the private
+  `[strategy.tactics]` table.
+- **Evidence:** A/B tournament (5 seeds/matchup): thief survival vs chaser
+  3/5→4/5, vs our own killer cop 0/5→3/5; cop corners the v1 self-cornerer
+  5/5 @12-13. Kit sparring benchmark (greedy policy, independent
+  implementation): **0-6 → 3-3 (75-75)** — our cop captured the greedy
+  exit-keeping evader 3/3 @13, the one the kit documents as uncatchable by
+  chasing. Weak side remains our thief vs an aggressive cornering cop.
+- **Lesson:** two one-line pathologies (argmax's corner optimum; deterministic
+  tie-breaks) cost more points than every protocol bug combined. Strategy
+  forensics on real logs beat intuition — the fix fell out of the trail data.
+
+## 2026-08-18 · Evening · export ships the match evidence
+- **Context (owner's question):** why are the two submission repos empty while
+  the code lives in the workspace? Answer: ADR-10's three-repo topology — one
+  canonical core, two GENERATED self-contained trees, pushed at submission.
+  But the question exposed a timing gap: tonight's FILED counted report's
+  links.github already points at those repos, and rule 49 makes them the
+  grader's path to the declaration/configs/logs.
+- **Output:** export_repos now ships `results/rule52_ledger.json` +
+  `results/counted/**` in BOTH role trees (evidence test added); the first
+  real push to the submission repos is now an owner action ready to run.
+- **Lesson:** "submission step goes last" was right for CODE and wrong for
+  EVIDENCE — the moment a counted report is filed, the repos it references
+  are part of the graded record. Evidence publishing follows the FILING
+  clock, not the deadline clock.
+
+## 2026-08-19 · Governance · submission-repo publishing delegation (ADR-22)
+- **Context:** owner asked what permissions Claude needs to handle the two
+  submission repos. Technically none — the existing credential authenticates
+  against them (probed read-OK). What was missing was POLICY: CLAUDE.md §2.2
+  forbade foreign remotes. **Output:** scoped CLAUDE.md amendment + ADR-22 —
+  export/init/remote/push-to-main for the two GENERATED repos only; no
+  force-push, no deletions, no tags; every push names the source workspace
+  commit. Owner approval = merging the PR (the grant lives in the reviewed
+  record, not a chat message).
+
+## 2026-08-19 · Submission audit · exports stand alone for grading (8.18)
+- **Context (owner's question):** "what if grading only considers the
+  submitted repos?" Audit vs the lecturer's own reference layout (ships
+  docs/ + uv.lock + LICENSE at root) found our exports carried NO docs/, no
+  CLAUDE.md/COSTS.md, no LICENSE, no lockfile, and a short generated README —
+  a fail of the guideline's "missing ANY mandatory file" rule if graded alone.
+- **Output:** exports now ship the full docs/ tree, CLAUDE.md, COSTS.md, a
+  new MIT LICENSE (workspace lacked one too — reference is MIT), .gitignore,
+  the ACADEMIC README (role banner + full manual), their own generated
+  uv.lock (the workspace lock cannot match the export's pyproject), and the
+  WHOLE config tree incl. pairing constitutions (match provenance) with
+  game.local.toml overlays excluded (window URLs/arming never ship). The
+  exported tree's own test suite now passes standalone in-tree.
+- **Lesson:** "self-contained" had quietly meant "self-contained CODE" — a
+  grader walks documentation and process evidence too. Audit the artifact
+  from the GRADER's chair, not the builder's.
