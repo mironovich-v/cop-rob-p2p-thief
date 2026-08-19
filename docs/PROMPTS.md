@@ -787,3 +787,20 @@
   force-push, no deletions, no tags; every push names the source workspace
   commit. Owner approval = merging the PR (the grant lives in the reviewed
   record, not a chat message).
+
+## 2026-08-19 · Submission audit · exports stand alone for grading (8.18)
+- **Context (owner's question):** "what if grading only considers the
+  submitted repos?" Audit vs the lecturer's own reference layout (ships
+  docs/ + uv.lock + LICENSE at root) found our exports carried NO docs/, no
+  CLAUDE.md/COSTS.md, no LICENSE, no lockfile, and a short generated README —
+  a fail of the guideline's "missing ANY mandatory file" rule if graded alone.
+- **Output:** exports now ship the full docs/ tree, CLAUDE.md, COSTS.md, a
+  new MIT LICENSE (workspace lacked one too — reference is MIT), .gitignore,
+  the ACADEMIC README (role banner + full manual), their own generated
+  uv.lock (the workspace lock cannot match the export's pyproject), and the
+  WHOLE config tree incl. pairing constitutions (match provenance) with
+  game.local.toml overlays excluded (window URLs/arming never ship). The
+  exported tree's own test suite now passes standalone in-tree.
+- **Lesson:** "self-contained" had quietly meant "self-contained CODE" — a
+  grader walks documentation and process evidence too. Audit the artifact
+  from the GRADER's chair, not the builder's.

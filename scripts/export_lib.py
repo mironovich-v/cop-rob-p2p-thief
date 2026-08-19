@@ -14,7 +14,8 @@ from pathlib import Path
 EXCLUDE_DIRS = {"__pycache__", ".git", ".pytest_cache", ".ruff_cache", ".venv",
                 "secrets", "logs", "dist", "copthief-league-protocol"}
 EXCLUDE_SUFFIXES = {".pyc", ".pyo"}
-EXCLUDE_NAMES = {".env", ".coverage", "test_export.py"}
+EXCLUDE_NAMES = {".env", ".coverage", "test_export.py",
+                 "game.local.toml"}  # window-day overlay: URLs/arming, never shipped
 
 
 def iter_files(root: Path):

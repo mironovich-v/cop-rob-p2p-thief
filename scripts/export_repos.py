@@ -10,6 +10,7 @@ See docs/PRD_two_repo_export.md.
 """
 
 import argparse
+import contextlib
 import json
 import shutil
 import subprocess
@@ -41,8 +42,10 @@ def export_role(role: str, workspace: Path, dist_dir: Path, commit: str) -> dict
         shutil.rmtree(out)
     copy_tree(workspace / "src" / "cop_thief_core", out / "src" / "cop_thief_core")
     copy_tree(workspace / "src" / f"{role}_agent", out / "src" / f"{role}_agent")
-    for cfg_role in ROLES:  # both configs ship (local self-play + the test suite)
-        copy_tree(workspace / "config" / cfg_role, out / "config" / cfg_role)
+    # The WHOLE config tree ships: self-play configs plus the pairing
+    # constitutions (match-record provenance the counted artifacts reference).
+    # iter_files excludes game.local.toml (window-day URLs/arming overlays).
+    copy_tree(workspace / "config", out / "config")
     copy_tree(workspace / "tests", out / "tests")
     example = workspace / ".env-example"
     if example.is_file():
@@ -57,10 +60,21 @@ def export_role(role: str, workspace: Path, dist_dir: Path, commit: str) -> dict
     counted = workspace / "results" / "counted"
     if counted.is_dir():
         copy_tree(counted, out / "results" / "counted")
+    # A submission repo must STAND ALONE for grading: the guideline's mandatory
+    # documentation set, the AI-control files, the academic README, the license,
+    # and an .gitignore ship in BOTH trees (owner finding, 2026-08-19 — the
+    # lecturer's own reference ships docs/ + uv.lock + LICENSE at root).
+    copy_tree(workspace / "docs", out / "docs")
+    for name in ("CLAUDE.md", "COSTS.md", "LICENSE", ".gitignore"):
+        source = workspace / name
+        if source.is_file():
+            (out / name).write_bytes(source.read_bytes())
     (out / "pyproject.toml").write_text(pyproject_toml(role), encoding="utf-8")
     sibling = "thief" if role == "police" else "police"
-    (out / "README.md").write_text(
-        readme_md(role, REPOS[sibling], WORKSPACE_REPO), encoding="utf-8")
+    banner = readme_md(role, REPOS[sibling], WORKSPACE_REPO)
+    academic = (workspace / "README.md").read_text(encoding="utf-8")
+    (out / "README.md").write_text(  # role banner + the full academic manual
+        banner + "\n---\n\n" + academic, encoding="utf-8")
     manifest = {
         "role": role,
         "core_commit": commit,
@@ -74,10 +88,23 @@ def export_role(role: str, workspace: Path, dist_dir: Path, commit: str) -> dict
     return manifest
 
 
-def export_all(workspace: Path, dist_dir: Path, commit: str | None = None) -> dict:
+def lock_tree(out: Path) -> None:
+    """Generate the export's own uv.lock (matches ITS pyproject — the workspace
+    lock would not). Skipped gracefully when uv is unavailable (CI-safe)."""
+    with contextlib.suppress(subprocess.CalledProcessError, FileNotFoundError,
+                             OSError, subprocess.TimeoutExpired):
+        subprocess.run(["uv", "lock"], cwd=out, check=True,
+                       capture_output=True, timeout=120)
+
+
+def export_all(workspace: Path, dist_dir: Path, commit: str | None = None,
+               lock: bool = True) -> dict:
     """Export both roles; assert the vendored core is byte-identical across them."""
     commit = commit or git_commit(workspace)
     manifests = {role: export_role(role, workspace, dist_dir, commit) for role in ROLES}
+    if lock:
+        for role in ROLES:
+            lock_tree(dist_dir / f"{role}-agent")
     hashes = {role: manifest["core_sha256"] for role, manifest in manifests.items()}
     if len(set(hashes.values())) != 1:
         raise SystemExit(f"core drift between exports: {hashes}")

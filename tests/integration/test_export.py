@@ -83,3 +83,19 @@ def test_export_ships_the_match_evidence(exported):
         if (WORKSPACE / "results" / "counted").is_dir():  # banked 2026-08-18
             assert list((results / "counted").rglob("result_*.json")), (
                 f"{role}: counted evidence missing from the export")
+
+
+def test_export_stands_alone_for_grading(exported):
+    # If grading walks ONLY the submitted repos, every guideline-mandatory
+    # file must be there (owner finding vs the lecturer's reference layout).
+    dist, _ = exported
+    for role in ("police", "thief"):
+        out = dist / f"{role}-agent"
+        for required in ("docs/PRD.md", "docs/PLAN.md", "docs/TODO.md",
+                         "docs/PROMPTS.md", "docs/requirements_matrix.md",
+                         "docs/decisions.md", "docs/architecture.md",
+                         "CLAUDE.md", "COSTS.md", "LICENSE", ".gitignore"):
+            assert (out / required).is_file(), f"{role}: missing {required}"
+        readme = (out / "README.md").read_text(encoding="utf-8")
+        assert "cop_thief_core" in readme  # role banner present
+        assert len(readme) > 4000  # the full academic manual rides along
