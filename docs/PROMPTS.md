@@ -762,3 +762,18 @@
 - **Lesson:** two one-line pathologies (argmax's corner optimum; deterministic
   tie-breaks) cost more points than every protocol bug combined. Strategy
   forensics on real logs beat intuition — the fix fell out of the trail data.
+
+## 2026-08-18 · Evening · export ships the match evidence
+- **Context (owner's question):** why are the two submission repos empty while
+  the code lives in the workspace? Answer: ADR-10's three-repo topology — one
+  canonical core, two GENERATED self-contained trees, pushed at submission.
+  But the question exposed a timing gap: tonight's FILED counted report's
+  links.github already points at those repos, and rule 49 makes them the
+  grader's path to the declaration/configs/logs.
+- **Output:** export_repos now ships `results/rule52_ledger.json` +
+  `results/counted/**` in BOTH role trees (evidence test added); the first
+  real push to the submission repos is now an owner action ready to run.
+- **Lesson:** "submission step goes last" was right for CODE and wrong for
+  EVIDENCE — the moment a counted report is filed, the repos it references
+  are part of the graded record. Evidence publishing follows the FILING
+  clock, not the deadline clock.

@@ -47,6 +47,16 @@ def export_role(role: str, workspace: Path, dist_dir: Path, commit: str) -> dict
     example = workspace / ".env-example"
     if example.is_file():
         (out / ".env-example").write_bytes(example.read_bytes())
+    # Match evidence (rule 49 / WARNINGS §5a): the counted-series artifacts and
+    # the committed rule-52 ledger are what the filed reports' links.github
+    # promises the grader — they ship in BOTH role repos.
+    ledger = workspace / "results" / "rule52_ledger.json"
+    if ledger.is_file():
+        (out / "results").mkdir(parents=True, exist_ok=True)
+        (out / "results" / "rule52_ledger.json").write_bytes(ledger.read_bytes())
+    counted = workspace / "results" / "counted"
+    if counted.is_dir():
+        copy_tree(counted, out / "results" / "counted")
     (out / "pyproject.toml").write_text(pyproject_toml(role), encoding="utf-8")
     sibling = "thief" if role == "police" else "police"
     (out / "README.md").write_text(

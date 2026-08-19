@@ -70,3 +70,16 @@ def test_vendored_core_imports_standalone(exported):
     )
     assert result.returncode == 0, result.stderr
     assert "ok" in result.stdout
+
+
+def test_export_ships_the_match_evidence(exported):
+    # The filed counted reports' links.github promises the grader the four
+    # artifact kinds + the committed rule-52 ledger — BOTH role repos carry
+    # them (rule 49; kit WARNINGS §5a).
+    dist, _ = exported
+    for role in ("police", "thief"):
+        results = dist / f"{role}-agent" / "results"
+        assert (results / "rule52_ledger.json").is_file()
+        if (WORKSPACE / "results" / "counted").is_dir():  # banked 2026-08-18
+            assert list((results / "counted").rglob("result_*.json")), (
+                f"{role}: counted evidence missing from the export")
