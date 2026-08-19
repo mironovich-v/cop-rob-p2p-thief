@@ -804,3 +804,26 @@
 - **Lesson:** "self-contained" had quietly meant "self-contained CODE" — a
   grader walks documentation and process evidence too. Audit the artifact
   from the GRADER's chair, not the builder's.
+
+## 2026-08-19 · Source-of-truth audit · the book's submission rules (ADR-23)
+- **Context:** owner challenged whether our 3-repo topology matches the
+  LECTURER's fixed requirements — and correctly flagged that assignment.md is
+  our own derivative, not the source. The book PDF was read DIRECTLY
+  (pypdf; visual-order Hebrew decoded per-line): §9.3.3-9.4.1 (pp.94-97) and
+  Appendix C (pp.148-157).
+- **Findings:** rule 49 (two repos + README cross-links + 2 Moodle links + 4
+  JSON links) ✓; rule 50 (minimum contents: README/config/PRD/PLAN/TODO —
+  documents, not git history) ✓ since the standalone-export fix; rule 41
+  (documented submission tag) = owner end-step; rule 42 (academic report in
+  repo) ✓; **p.156: the per-game played commit is emailed and must be
+  checkable in GitHub — our played commits resolved only in the workspace**;
+  p.96 says teams "develop in two separate repos" (narrative; the binding
+  extraction is rules 49-50; the lecturer's own reference is a mono-repo).
+- **Output:** `workspace-history` branch pushed into BOTH submission repos
+  (full 70+-PR record; played commits now resolve in the submitted repos);
+  export README documents the branch; ADR-23 records the decision + owner's
+  delegation extension.
+- **Lesson:** we cited our own derivative (assignment.md) as authority for a
+  question about the AUTHOR's intent — always resolve challenges against the
+  named source of truth, even when the derivative was faithfully made. The
+  PDF was readable all along (visual-order Hebrew, reversible per-line).

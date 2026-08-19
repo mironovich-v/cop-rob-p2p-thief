@@ -80,7 +80,8 @@
 | 2026-08-18 | PR (8.16) | feat-tactical-brains | 65013a1 | Fable 5 · high | night shift: brains v2 from counted forensics; A/B tournament + kit-sparring benchmark 0-6 -> 3-3 | ~0.5 session + 3 benchmark series | merged |
 | 2026-08-18 | PR (export) | feat-export-evidence | merged | Fable 5 · high | export ships match evidence (counted artifacts + rule-52 ledger) — closes the links.github gap behind the filed counted report | ~0.1 session | merged |
 | 2026-08-19 | PR (ADR-22) | docs-submission-repo-delegation | 821bb68 | Fable 5 · high | scoped delegation: Claude may publish the generated dist trees to the two submission repos | ~0.05 session | merged |
-| 2026-08-19 | PR (8.18) | feat-export-standalone | (pending) | Fable 5 · high | submission repos STAND ALONE for grading: full docs/ + CLAUDE/COSTS/LICENSE/academic README/uv.lock/all configs (overlays excluded); standalone suite green in-tree | ~0.15 session | in review |
+| 2026-08-19 | PR (8.18) | feat-export-standalone | 3fd649f | Fable 5 · high | submission repos STAND ALONE for grading: full docs/ + CLAUDE/COSTS/LICENSE/academic README/uv.lock/all configs (overlays excluded); standalone suite green in-tree | ~0.15 session | merged |
+| 2026-08-19 | PR (ADR-23) | docs-history-mirror | (pending) | Fable 5 · high | book read DIRECTLY (pp.94-97,148-157): rules 41/49/50/p.156 verified; workspace-history mirrored into both submission repos; README explains it | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the
