@@ -847,3 +847,12 @@
 - **Lesson:** "self-contained" needed a RUNTIME proof, not just a pytest run —
   and the proof format (two cold clones, simultaneous start) is itself the
   best race detector we've run.
+## 2026-08-19 · Fix · per-sub-game brain seeding
+- **Context:** every sub-game re-seeded its brain rng from the same static
+  play.seed — the identical game replayed per role parity (the counted logs
+  show three byte-identical thief games; an opponent solves us once and wins
+  thrice). Found while preparing a 25-game statistical self-play run, which
+  would otherwise have produced 25 copies of one game.
+- **Output:** rng = Random(f"{seed}:{sub_game_number}") — varied across
+  sub-games, still fully deterministic given the config seed; test asserts
+  both properties.

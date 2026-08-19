@@ -63,7 +63,12 @@ class PeerRuntime:
         self.rules = GameRules(config.get("rules.max_steps"))
         self.handler = TurnHandler(self.state, self.belief, self.smell, self.rules,
                                    reorder_window=config.get("network.reorder_window", 1))
-        self.brain = brain or resolve_brain(config, role, llm, rng=random.Random(config.get("play.seed")))
+        # Seed varies PER SUB-GAME (deterministic given config seed): one static
+        # seed replayed the identical game every sub-game — a real opponent saw
+        # three identical thief games in a counted series; solve us once, win thrice.
+        self.brain = brain or resolve_brain(
+            config, role, llm,
+            rng=random.Random(f"{config.get('play.seed')}:{sub_game_number}"))
         self._tokens_total = 0
         self._started_monotonic = time.monotonic()
         self._started_at = now_iso()
