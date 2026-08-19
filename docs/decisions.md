@@ -199,3 +199,21 @@ may export and push the `dist/<role>-agent` trees to the two submission repos'
 push reports the source workspace commit. Rationale: the review gate is the
 workspace PR that produced the exported content — pushing the artifact adds no
 unreviewed material. **Status:** accepted (owner approves by merging this PR).
+
+
+## ADR-23 — Mirror the development history into the submission repos
+**Context:** the book (source of truth, read directly from
+`instructions/police_thief_p2p.pdf` on 2026-08-19) fixes the submission as two
+repos with mandated CONTENTS (rule 50: README/config/PRD/PLAN/TODO — documents,
+not history) and cross-links (rule 49), but p.156 requires the per-game played
+COMMIT to be checkable in GitHub, and p.96 phrases development as happening "in
+two separate repositories". Our played commits live in the canonical workspace
+(ADR-10 topology, which the lecturer's own mono-repo reference and his
+brief's "one canonical source, generated release repositories" language
+support). **Decision:** push the workspace `main` into BOTH submission repos as
+branch `workspace-history` (fast-forward updates on each republish; never
+rewritten): every declared match commit resolves inside the submitted repos,
+the examiner gets the full 70+-PR record without leaving them, and any strict
+reading of p.96 is satisfied — the development history is IN the submitted
+repos. Owner extended the ADR-22 delegation to cover this branch (2026-08-19).
+**Status:** accepted.

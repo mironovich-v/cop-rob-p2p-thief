@@ -12,6 +12,13 @@ uv run python -m thief_agent --config config/thief
 - Canonical workspace: https://github.com/mironovich-v/cop-rob-p2p
 - Sibling (police) repo: https://github.com/mironovich-v/cop-rob-p2p-police
 
+**Development history (book rules 41/49-50, p.156):** the branch
+`workspace-history` in THIS repository mirrors the canonical workspace's full
+development record (every PR, review, and played match commit). Commit hashes
+declared in match declarations/emails resolve here: `git log workspace-history`.
+`main` is the clean release line; the docs (`PRD`/`PLAN`/`TODO`/`PROMPTS`/
+`COSTS`) narrate the same development story per the submission guide.
+
 Do not edit vendored `cop_thief_core` here — change it in the workspace and
 re-run `scripts/export_repos.py`. No secrets are included; copy `.env-example`
 to `.env` locally for Gmail/LLM/tunnel credentials.
