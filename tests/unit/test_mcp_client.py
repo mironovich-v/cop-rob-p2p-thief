@@ -128,15 +128,31 @@ def test_handshake_repushes_until_agreement_arrives():
 
 
 def test_handshake_patience_spans_a_down_door():
-    # The opponent's door is DOWN (bad handle) for the whole first stretch; the
-    # arriving push (their runner dialing us) must still open the sub-game.
+    # The opponent's door is DOWN for the first stretch (their inter-sub-game
+    # gap); their arriving greeting opens the sub-game — and once their door is
+    # up, OUR greeting is delivered before we proceed (no half-handshake).
     import threading
+    counter: list = []
+    server = _slow_server(0.0, counter)
+    gate = {"open": False}
+    real_call = McpTransport._call
+
+    def gated_call(self, tool, argument):
+        if not gate["open"]:
+            raise ConnectionError("502: door still down")
+        return real_call(self, tool, argument)
+
     inboxes = PeerInboxes()
-    transport = McpTransport(
-        object(), inboxes,  # un-callable opponent handle = 502-style gap
-        connect_timeout=5.0, retry_interval=0.05, handshake_repush=0.2)
-    threading.Timer(0.5, lambda: inboxes.agreements.put({"terms": {}})).start()
+    transport = McpTransport(server, inboxes,
+                             connect_timeout=8.0, retry_interval=0.05,
+                             handshake_repush=0.2)
+    transport._call = gated_call.__get__(transport)
+    def arrive():
+        gate["open"] = True  # their process bound, then greeted us
+        inboxes.agreements.put({"terms": {}})
+    threading.Timer(0.6, arrive).start()
     assert transport.exchange_agreement({"terms": {}}) == {"terms": {}}
+    assert len(counter) >= 1  # our greeting landed once the door opened
 
 
 def test_set_opponent_swaps_the_dial_target():
@@ -150,3 +166,29 @@ def test_set_opponent_swaps_the_dial_target():
     transport.set_opponent(_slow_server(0.0, counter_b))
     transport._call("negotiate", {"x": 2})
     assert (len(counter_a), len(counter_b)) == (1, 1)
+
+
+def test_exchange_guarantees_one_delivered_greeting():
+    # Two-clone startup race: our pushes fail while their door is down; their
+    # greeting arrives and we must NOT proceed on a half-handshake — one
+    # successful delivery of OUR greeting is guaranteed before returning.
+    calls = {"fail": 3, "delivered": 0}
+
+    from fastmcp import FastMCP
+    mcp = FastMCP(name="late-door")
+
+    @mcp.tool
+    def negotiate(message: dict) -> dict:
+        if calls["fail"] > 0:
+            calls["fail"] -= 1
+            raise RuntimeError("door still down")
+        calls["delivered"] += 1
+        return {"ok": True}
+
+    inboxes = PeerInboxes()
+    inboxes.agreements.put({"terms": {"their": "greeting"}})  # theirs arrives first
+    transport = McpTransport(mcp, inboxes, connect_timeout=8.0,
+                             retry_interval=0.05, handshake_repush=0.2)
+    result = transport.exchange_agreement({"terms": {"ours": 1}})
+    assert result == {"terms": {"their": "greeting"}}
+    assert calls["delivered"] >= 1  # our greeting DID land before we proceeded

@@ -827,3 +827,23 @@
   question about the AUTHOR's intent — always resolve challenges against the
   named source of truth, even when the derivative was faithfully made. The
   PDF was readable all along (visual-order Hebrew, reversible per-line).
+
+## 2026-08-19 · Two-repo runtime proof + startup-race fix
+- **Owner's question:** can games run from the two role repos alone? Proof
+  attempted by cloning BOTH published repos fresh and playing them against
+  each other — which immediately caught a real race: our greeting pushes all
+  failed while the opponent's door was still binding; when THEIR greeting
+  arrived we stopped greeting and proceeded — half-handshake, they starve on
+  turns from a peer whose agreement they never saw (police died at patience;
+  thief settled `timeout` alone). Live windows never hit it because league
+  peers re-greet until game start.
+- **Fix:** exchange_agreement now guarantees at least ONE DELIVERED greeting
+  before proceeding — their arriving greeting proves their door is up, so we
+  deliver ours then; a door that never opens fails fast (an un-serveable
+  opponent means no game anyway). Down-door test updated to gap semantics.
+- **Proof (fixed trees):** two standalone exports played a full series against
+  each other — both sides settled identically, one game_uid, no workspace at
+  runtime. ANSWER: yes, the two role repos alone run real games.
+- **Lesson:** "self-contained" needed a RUNTIME proof, not just a pytest run —
+  and the proof format (two cold clones, simultaneous start) is itself the
+  best race detector we've run.
