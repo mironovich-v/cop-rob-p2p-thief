@@ -187,3 +187,15 @@ repo artifact, never mailed. **Supersedes:** the emailed-body clause of ADR-5/
 §36.3.4 (which pinned the SERIALIZER of the consensus signature — unchanged —
 but predated the league's settlement of the mail CONTENT).
 **Status:** accepted (2026-08-18, before any counted mail reached the grader).
+
+
+## ADR-22 — Delegate publishing of the generated submission repos
+**Context:** the two submission repos are generated build artifacts of this
+workspace (ADR-10); every byte in them is reviewed HERE before export. The
+owner does not want to run the init/remote/push mechanics by hand, and the
+existing GitHub credential already covers all three repos. **Decision:** Claude
+may export and push the `dist/<role>-agent` trees to the two submission repos'
+`main` (scope in CLAUDE.md §2.2): no force-push, no deletions, no tags; every
+push reports the source workspace commit. Rationale: the review gate is the
+workspace PR that produced the exported content — pushing the artifact adds no
+unreviewed material. **Status:** accepted (owner approves by merging this PR).

@@ -95,7 +95,18 @@ Allowed by standing project policy:
 - `git branch -d <branch-name>` (ONLY after the human confirms the PR is
   squash-merged)
 
-Claude MUST NOT:
+**Scoped delegation — generated submission repos (ADR-22, owner-approved):**
+For the two GENERATED submission repos ONLY (`cop-rob-p2p-police`,
+`cop-rob-p2p-thief`), Claude MAY: run `scripts/export_repos.py`; `git init`
+inside the `dist/<role>-agent` trees; add their respective remotes there;
+commit the export; and push to their `main`. These repos are build artifacts
+of this workspace (no PR flow of their own — review happens HERE, before the
+export). Still forbidden there: force-push, branch/repo deletion, history
+rewriting, tags (release/submission tags remain the owner's). Every push must
+be reported with the workspace commit it was exported from. The WORKSPACE
+rules below are unchanged.
+
+Claude MUST NOT (in this workspace repo):
 
 - commit directly to `main`
 - push directly to `main`

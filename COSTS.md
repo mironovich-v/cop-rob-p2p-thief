@@ -78,7 +78,8 @@
 | 2026-08-18 | PR (ADR-21) | fix-mail-result-file | 950ab89 | Fable 5 · high | friendly SETTLED (6/6, audits OK, mutual sha byte-identical); compare ritual caught mail carrying Hebrew report -> now mails the result artifact | ~0.15 session + 3 window attempts | merged |
 | 2026-08-18 | PR (ledger) | chore-counted-ledger | merged | Fable 5 · high | COUNTED SERIES #1 BANKED vs nis-yar1 (6/6, audits clean, armed fields correct, lecturer-only mail); ledger committed; imreeyal counter -> 1 | 3 windows + ~0.05 session | merged |
 | 2026-08-18 | PR (8.16) | feat-tactical-brains | 65013a1 | Fable 5 · high | night shift: brains v2 from counted forensics; A/B tournament + kit-sparring benchmark 0-6 -> 3-3 | ~0.5 session + 3 benchmark series | merged |
-| 2026-08-18 | PR (export) | feat-export-evidence | (pending) | Fable 5 · high | export ships match evidence (counted artifacts + rule-52 ledger) — closes the links.github gap behind the filed counted report | ~0.1 session | in review |
+| 2026-08-18 | PR (export) | feat-export-evidence | merged | Fable 5 · high | export ships match evidence (counted artifacts + rule-52 ledger) — closes the links.github gap behind the filed counted report | ~0.1 session | merged |
+| 2026-08-19 | PR (ADR-22) | docs-submission-repo-delegation | (pending) | Fable 5 · high | scoped delegation: Claude may publish the generated dist trees to the two submission repos | ~0.05 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

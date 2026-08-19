@@ -777,3 +777,13 @@
   EVIDENCE — the moment a counted report is filed, the repos it references
   are part of the graded record. Evidence publishing follows the FILING
   clock, not the deadline clock.
+
+## 2026-08-19 · Governance · submission-repo publishing delegation (ADR-22)
+- **Context:** owner asked what permissions Claude needs to handle the two
+  submission repos. Technically none — the existing credential authenticates
+  against them (probed read-OK). What was missing was POLICY: CLAUDE.md §2.2
+  forbade foreign remotes. **Output:** scoped CLAUDE.md amendment + ADR-22 —
+  export/init/remote/push-to-main for the two GENERATED repos only; no
+  force-push, no deletions, no tags; every push names the source workspace
+  commit. Owner approval = merging the PR (the grant lives in the reviewed
+  record, not a chat message).
