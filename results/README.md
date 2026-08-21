@@ -17,7 +17,15 @@ make new artifacts appear — add the next snapshot explicitly, the same way.
 | `counted/nis-yar1-2026-08-18/` | 2026-08-18 | nis-yar1 | **yes** (rule-52 series 1) | 6 sub-games, vm__fabi 30 – nis-yar1 90 |
 | `friendlies/nis-yar1-2026-08-18/` | 2026-08-18 | nis-yar1 | no | 6 sub-games, friendly |
 | `friendlies/nis-yar1-2026-08-18-refriendly/` | 2026-08-18 | nis-yar1 | no | 6 sub-games, re-friendly before the counted series |
-| `friendlies/il-nv-ai-2026-08-21/` | 2026-08-21 | il-nv-ai | no | 1 sub-game warm-up, vm__fabi 20 – il-nv-ai 5 |
+| `friendlies/il-nv-ai-2026-08-21/` | 2026-08-21 | il-nv-ai | no | 1 sub-game warm-up, we police, vm__fabi 20 – il-nv-ai 5 |
+| `friendlies/il-nv-ai-2026-08-21-game2/` | 2026-08-21 | il-nv-ai | no | 1 sub-game warm-up, roles swapped — we thief, il-nv-ai 20 – vm__fabi 5 |
+
+Every il-nv-ai warm-up shares one `game_uid`
+(`00aec465-1e83-befa-15ed-a5d427995ffc`): the uid derives from the 14 signed
+terms and the two group ids, and neither roles nor replays enter it. The
+per-run archives above are therefore the only place each run survives
+separately — `../logs/vm__fabi/` keeps just the latest run for a given
+`game_id`, because a re-run writes the same four filenames.
 
 Only the `counted/` set is a league game under rule 52; the ledger of counted
 series is `rule52_ledger.json`. The friendlies are qualifying/warm-up games that

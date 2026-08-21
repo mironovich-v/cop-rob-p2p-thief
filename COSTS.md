@@ -89,6 +89,7 @@
 | 2026-08-21 | Live warm-up + PR (fix) | fix-claimless-capture-final | (pending) | Fable 5 · high | il-nv-ai warm-up game 1: tunnel was down (unreachable); peer crashed at audit on their claimless `caught:true` final — degrade instead of KeyError | ~0.4 session | in review |
 | 2026-08-21 | PR (evidence) | chore-commit-match-evidence | (pending) | Fable 5 · high | commit played-match artifacts (league + self-play + both result sets, 170 files) as force-added snapshots; results/README provenance | ~0.2 session | in review |
 | 2026-08-21 | PR (fix) | fix-final-audit-ack | (pending) | Fable 5 · high | final submit_audit ack killed by daemon-thread exit (il-nv-ai live report, both runs); reproduced 15.0s no-ack -> 0.22s ack; shutdown grace | ~0.3 session | in review |
+| 2026-08-21 | Live warm-up | (main 0e463ce) | n/a | Fable 5 · high | il-nv-ai game 2, roles swapped (we thief): capture in 10 steps, 5-20, audit clean, consensus 1be7dd12 | ~0.1 session | evidence committed |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

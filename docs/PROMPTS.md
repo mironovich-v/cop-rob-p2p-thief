@@ -954,3 +954,18 @@
 - **Lesson:** a suppressed error on the send path hid a real defect on the
   receive path for the whole project. Worth asking, whenever we swallow a
   best-effort failure, what the peer on the other side would be logging.
+
+## 2026-08-21 · Live warm-up · il-nv-ai game 2 (roles swapped, we thief)
+- **Result:** capture for il-nv-ai in 10 steps, 5-20 to them; audit passed 9/9
+  verified and bound; consensus `1be7dd12…`; four artifacts written; first game
+  played on the ack-fix build (`0e463ce`).
+- **Two observations worth carrying forward.** (1) Their identity declares no
+  counted-games count — `games_played_including_this` came through as `null` for
+  il-nv-ai, so the submission form's "opponent's declared number of games" has to
+  be asked for out of band. (2) Our THIEF is the weak side, now against a second
+  independent opponent: caught in 10 steps here, captured 3/3 in the nis-yar1
+  counted series, while their thief lasted 15 steps against our police.
+- **Artifact collision:** a re-run against the same opponent rewrites the same
+  four filenames in `logs/<group>/`, since the name derives from `game_id`. The
+  per-run `results/friendlies/...` archives are what preserve each run; noted in
+  `results/README.md` so a future reader does not read the live dir as a history.
