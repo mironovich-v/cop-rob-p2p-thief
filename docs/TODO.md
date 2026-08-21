@@ -179,6 +179,8 @@ scope already matches kit #55 — the gaps are behavioral, not byte-level.
 
 | [x] | 8.16 | tactical brains v2 (counted-game forensics: v1 thief argmaxed distance → self-cornered at (6,6) every game; v1 police walled randomly): freedom-dominant thief scoring (exits veto corners, pessimistic distance, recent-trail anti-oscillation, random tie-breaks — a deterministic evader is pin-able), cornering police (rule-46 barrier strike / pocket sealing, never random walls); tunables in `[strategy.tactics]`; A/B: thief 0/5→3-4/5 survival, cop corners the kit's "uncatchable" greedy evader 3/3 — kit sparring series 0-6 → 3-3 (75-75) | `domain/{tactics (new),brains}.py`, `strategy/__init__.py` | ~100 src | `test_tactics` (9), `test_brains` updated; A/B + sparring benchmark |
 
+| [x] | 8.17 | capture corroboration degrades on an unreadable final (live il-nv-ai warm-up crash, 2026-08-21): their thief's `caught: true` final omits `claim` — SPEC §3.1 mandates the key, but our `corroborate_capture` indexed it unguarded and raised `KeyError` inside `finish()`, killing the peer AFTER a fully played sub-game (no artifacts emitted, whole game lost). Strict `_parsed_cell` (2-int sequence, `bool` excluded) → `kind: "unknown"` + degraded note; a malformed cell like `[3]` previously reached board math and raised `IndexError` too. Missing evidence is not proof of a lie: degrade, never accuse, never crash | `orchestration/audit_checks.py` | ~15 src | `test_audit_checks` (claimless final, 6 malformed shapes) |
+
 Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
 its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
 are deliberately NOT implemented (opt-in / zero-implementation per kit

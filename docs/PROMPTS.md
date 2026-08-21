@@ -884,3 +884,33 @@
   the swapped uncounted game 2; both sides fire within the same minute
   (their 65s connect patience); URL arrives at session start via the
   git-ignored overlay.
+
+## 2026-08-21 · Live warm-up · il-nv-ai game 1 crashed our peer at the audit
+- **Context:** first live il-nv-ai warm-up window. Owner asked to run a test
+  game. Two ops faults first: a peer left running since 15:58 while the ngrok
+  tunnel was DOWN (we were unreachable from outside the whole time — their
+  16:14 preflight would have hit ngrok's 404), and stdout buffering hid all
+  peer output (relaunched under `PYTHONUNBUFFERED=1` to make the window
+  observable). Their origin returned 16:28:34; handshake fired; a full
+  sub-game played in ~25s — then our process died.
+- **Goal:** diagnose the crash and make the peer survive a non-conforming
+  opponent final.
+- **Actual output:** `KeyError: 'claim'` in `corroborate_capture`, reached via
+  `runtime.run() -> finish()`. Their thief's game-ending `caught: true` final
+  carries no `claim` key. SPEC §3.1 mandates it
+  (`{"claim": [cell], "caught": true}`), so THEY are non-conforming — but the
+  same section's degradation contract is explicit that unparseable evidence
+  "gets the checks the evidence supports and a note for the one it cannot,
+  **never an accusation**". Our code indexed the key unguarded and crashed
+  the whole peer AFTER a completed sub-game: no artifacts emitted, game lost.
+  Fix: strict `_parsed_cell` + `kind: "unknown"` degraded verdict. Writing the
+  malformed-shape test surfaced a SECOND crash on the same path — a claim of
+  `[3]` flowed into `Board.step` and raised `IndexError` — so the guard had to
+  be a strict parse, not a `len`-blind `tuple()`.
+- **Lesson:** our own module docstring already promised "anything unparseable
+  degrades with a note rather than resolving to a cell" — the contract was
+  written, only the missing-key path never implemented it. Sparring against
+  the kit could never catch this: the kit is conforming and always sends
+  `claim`. Only a real foreign peer exercises the non-conforming branch,
+  which is exactly what an uncounted warm-up is for.
+- **Approval:** fix pushed on `fix-claimless-capture-final`; owner merges.
