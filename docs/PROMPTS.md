@@ -969,3 +969,36 @@
   four filenames in `logs/<group>/`, since the name derives from `game_id`. The
   per-run `results/friendlies/...` archives are what preserve each run; noted in
   `results/README.md` so a future reader does not read the live dir as a history.
+
+## 2026-08-21 · Strategy · why the thief loses (belief, not tactics)
+- **Context:** owner asked for a stronger thief after live losses (nis-yar1 3/3
+  in the counted series, il-nv-ai captured at step 10). Our own A/B bench claimed
+  3/5 survival, so the bench was not measuring the thing that was failing.
+- **Step 1 — a bench that reproduces the loss.** Added a `HerderCop` that
+  minimises the thief's reachable territory instead of merely closing distance.
+  Shipped thief vs herder: survival 1/10, MEDIAN 10 STEPS — the same step the
+  live opponent captured us on. The old bench's cop was simply too weak to be a
+  measuring stick.
+- **Step 2 — a wrong hypothesis, killed by measurement.** I expected the fault
+  to be the scoring function (distance uncapped => corner-seeking). A
+  territory-maximising thief scored 0/10 EVERYWHERE, worse than shipped. Then an
+  ORACLE test (shipped scoring, cop's true cell instead of belief) scored 6/10 vs
+  herder and 8/10 vs ours. That settles it: THE SCORING WAS NEVER THE PROBLEM.
+- **Step 3 — the actual bug.** The thief's only cop signal was scent, which by
+  construction marks where the cop WAS: instrumented, its believed threat matched
+  the cop's true cell on 3 of 14 turns, lagging 2-3 steps. Meanwhile
+  `runtime.py` sets the police `capture_claim` to its OWN position on every move
+  — the exact cell, on the wire, every turn — and `turn_handler` used it only to
+  answer "am I caught", never to update belief. The thief was fleeing a stale
+  ghost while the cop's coordinates sat unread in the same message.
+- **Output:** `ClaimTracker` (trust a claim only while claims walk like a cop:
+  reachable within the elapsed steps; first claim anchors only) +
+  `BeliefGrid.observe_declared`. Measured after: vs herder 1/10 -> 11/24 and
+  every game now reaches step 35 (was median 10); vs our police 5/10 -> 8/10,
+  matching the oracle exactly.
+- **Lesson:** the bench agreed with us and reality did not, so the bench was
+  wrong first. Build the adversary that reproduces the live failure BEFORE
+  theorising about fixes — my plausible theory was flatly wrong and one oracle
+  run cost less than a day of tuning weights would have.
+- **Follow-up:** `docs/PRD_strategy_brains.md` is still a stub; this evidence
+  belongs in it when that PRD is authored.

@@ -16,6 +16,7 @@ from dataclasses import dataclass
 
 from cop_thief_core.constants import RESULT_TAMPER, RESULT_TECHNICAL, Role
 from cop_thief_core.domain.belief import BeliefGrid
+from cop_thief_core.domain.claim_tracker import ClaimTracker
 from cop_thief_core.domain.own_state import OwnGameState
 from cop_thief_core.domain.rules import GameRules
 from cop_thief_core.domain.smell import SmellField
@@ -49,6 +50,7 @@ class TurnHandler:
         self._window = reorder_window  # 0 is nonconformant (retry race = violation)
         self._played: dict[int, str] = {}  # step -> commit that was applied
         self._buffer: dict[int, TurnMessage] = {}
+        self._claims = ClaimTracker()  # the cop's own declared cell, when credible
 
     @property
     def _next(self) -> int:
@@ -108,6 +110,14 @@ class TurnHandler:
         # Opponent moved: spread belief, then sharpen it with the fresh scent.
         self.belief.diffuse()
         self.belief.observe_smell(message.smell_grid)
+        # A cop claims co-location, so its claim names the cell it STANDS on —
+        # evidence about NOW, unlike scent, which marks where it was. Trusted
+        # only while the claims walk like a cop (ClaimTracker).
+        if message.capture_claim:
+            declared = self._claims.accept(
+                tuple(message.capture_claim), message.step, self.state.board)
+            if declared is not None:
+                self.belief.observe_declared(declared)
         self.smell_field.absorb(message.smell_grid)
         self.smell_field.decay_all()
 
