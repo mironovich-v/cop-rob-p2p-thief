@@ -1002,3 +1002,21 @@
   run cost less than a day of tuning weights would have.
 - **Follow-up:** `docs/PRD_strategy_brains.md` is still a stub; this evidence
   belongs in it when that PRD is authored.
+
+## 2026-08-21 · Strategy · the police was tactics-bound, not belief-bound
+- **Oracle first (the method that worked for the thief).** Gave the shipped
+  police the thief's TRUE cell: captures 2/16 vs the blind 3/16 — noise. So its
+  problem was NOT information, and the `BeliefGrid.exclude` channel I was about
+  to wire (dead code, never called) would have bought nothing. The oracle test
+  cost minutes and cancelled a day of work.
+- **The real limit.** A pursuer never closes on an equally fast evader by
+  chasing; distance is the wrong objective. Replaced the police's
+  distance-minimising step with a TERRITORY-minimising one — take the step that
+  leaves the thief the fewest cells it can reach before we can — keeping the
+  existing rule-46 strike / pocket-seal barrier logic untouched.
+- **Result:** captures 3/16 -> 8/16 against our (now much stronger) thief.
+- **The reversal worth acting on:** re-running the oracle AFTER the tactics fix
+  gives 16/16 captures in a median of 13 steps. Information was worthless to a
+  chasing cop and is decisive to a herding one — so the police's belief is now
+  the next lever, where an hour ago it was not. Order matters: fixing belief
+  first would have measured as no gain and been discarded.

@@ -91,6 +91,7 @@
 | 2026-08-21 | PR (fix) | fix-final-audit-ack | (pending) | Fable 5 · high | final submit_audit ack killed by daemon-thread exit (il-nv-ai live report, both runs); reproduced 15.0s no-ack -> 0.22s ack; shutdown grace | ~0.3 session | in review |
 | 2026-08-21 | Live warm-up | (main 0e463ce) | n/a | Fable 5 · high | il-nv-ai game 2, roles swapped (we thief): capture in 10 steps, 5-20, audit clean, consensus 1be7dd12 | ~0.1 session | evidence committed |
 | 2026-08-21 | PR (strategy) | feat-thief-reads-cop-claims | (pending) | Fable 5 · high | thief belief: read the cop's declared cell (capture_claim) instead of lagging scent; new HerderCop bench reproduces the live loss | ~0.6 session | in review |
+| 2026-08-21 | PR (strategy) | feat-herding-police | (pending) | Fable 5 · high | police herds (territory-minimising step) instead of chasing: captures 3/16 -> 8/16; oracle after the fix 16/16 => belief is now the next lever | ~0.3 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the
