@@ -95,6 +95,7 @@
 | 2026-08-21 | PR (strategy) | feat-read-the-scent-peak | (pending) | Fable 5 · high | scent-map PEAK is the sender's exact cell (35/35 vs belief 0/35); police captures 8/16 -> 16/16 | ~0.3 session | in review |
 | 2026-08-21 | PR (docs) | docs-strategy-prds | (pending) | Fable 5 · high | author the 4 stub PRDs (strategy_brains, belief_map, pheromone_scent, llm_verbal_layer) with today's measurements + rejected alternatives; zero stubs remain | ~0.3 session | in review |
 | 2026-08-21 | PR (evidence) | feat-persist-received-messages | (pending) | Fable 5 · high | file the opponent's applied turns on the log artifact (outside the signature); ~20 KB/game | ~0.2 session | in review |
+| 2026-08-21 | PR (config) | config-vibecode-pairing | (pending) | Fable 5 · high | vibecode pairing config (parity flip to police-on-odd, role-split static doors, ids pinned); scent-precision + parity questions answered from code | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

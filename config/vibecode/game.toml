@@ -1,0 +1,80 @@
+# PAIRING config: vm__fabi vs vibecode (Ron Marom, Amit Kuperminz).
+#
+# PARITY — agreed in writing, their option (a): vm__fabi plays POLICE on the ODD
+# sub-games (1/3/5) and thief on the even ones, because their driver plays the
+# fixed convention vibecode = thief on odd. This is the OPPOSITE of the
+# alphabetical league default ("vibecode" sorts before "vm__fabi"), so it is
+# stated here loudly: launch `police_agent`, never `thief_agent`, for this
+# pairing. A role clash refuses the window on both stacks.
+#
+# THEY ARE ROLE-SPLIT: two fixed-role processes behind a STATIC IP (no quick
+# tunnel, so the URLs below do not change between windows) — their police door
+# is dialed in the sub-games they play police (even), their thief door in the
+# odd ones. Their doors are up only inside an agreed window.
+#
+# Constitution: theirs is "yours verbatim" — byte-value-identical, terms digest
+# a284082d…, num_games 6 for BOTH the friendly and the counted series (agreed up
+# front, since num_games is a signed term). Derived ids:
+#   game_id  = vibecode-vs-vm__fabi
+#   game_uid = 6268e7d5-3ece-cb39-e25b-767cc8c3e735
+#
+# Run: uv run python -m police_agent --config config/vibecode
+# Tunnel: ngrok http 8802 --domain=cop-rob-p2p.ngrok.app --host-header=rewrite
+version = "1.10"
+
+[game]
+group_name = "VM-Fabi"
+group_id = "vm__fabi"
+sub_game_number = 1
+members = ["Vasily Mironovich", "Fahed Bitar"]
+repos = { cop = "https://github.com/mironovich-v/cop-rob-p2p-police", thief = "https://github.com/mironovich-v/cop-rob-p2p-thief" }
+mcp_servers = { cop = "https://cop-rob-p2p.ngrok.app/mcp", thief = "https://cop-rob-p2p.ngrok.app/mcp" }
+opponent_group_id = "vibecode"
+counted = false                       # flip ONLY for the one counted series (+ --counted)
+counted_games_played = 1              # truthful: nis-yar1 counted banked 2026-08-18
+tie_rule = "series_add"               # confirmed both ways
+
+[belief]
+smell_trust_weight = 4.0
+
+[paths]
+logs_dir = "logs"
+
+[play]
+step_speed_seconds = 0.0              # headless: no GUI pacing between steps
+seed = 1234
+
+[network]
+my_port = 8802
+# Role-split opponent on a STATIC IP. We are police on odd, so we dial their
+# THIEF door in the odd sub-games and their POLICE door in the even ones.
+opponent_url_police = "http://62.56.220.143:61224/mcp"
+opponent_url_thief = "http://62.56.220.143:61223/mcp"
+opponent_url = "http://62.56.220.143:61223/mcp"   # initial dial: sub-game 1, they are thief
+turn_timeout_seconds = 180
+poll_interval_seconds = 0.5
+connect_timeout_seconds = 150   # handshake patience: spans their inter-sub-game door gap
+retry_interval_seconds = 1.0
+audit_send_timeout_seconds = 10
+call_timeout_seconds = 10       # per-call cap: strictly < signed response_timeout_sec (30)
+handshake_repush_seconds = 5.0  # re-push the greeting until the game starts
+reorder_window = 1
+shutdown_grace_seconds = 5.0    # outlive the drain so their final submit_audit
+                                # ack is flushed, not killed by our exit
+
+[trash_talk]
+provider = "template"           # llm_model: template — zero tokens, no LLM on the wire
+
+[llm]
+model = "template"
+step_deadline_seconds = 30
+short_prompt_threshold_seconds = 10
+
+[email]
+# Friendly posture: operators only, both sides — never the lecturer.
+# Counted day: recipient becomes the lecturer ALONE, set by hand before T.
+recipient = ["agentsorch@gmail.com", "mironovichvasily@gmail.com"]
+lecturer_address = "rmisegal+uoh26finalgame@gmail.com"
+mode = "send"
+enabled = true
+timeout_seconds = 120

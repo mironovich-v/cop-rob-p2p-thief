@@ -1085,3 +1085,28 @@
   `capture_claim` and `smell_grid` — exactly the fields I could not check before.
 - **Cost measured:** ~0.56 KB per message, ~20 KB for a 35-step game, ~120 KB for
   a 6-sub-game series. Worth it.
+
+## 2026-08-21 · Pairing · vibecode (Ron Marom, Amit Kuperminz)
+- **Context:** new pairing, replying to our first contact with a line-by-line
+  verified response. Deadline moved to 24/08, and we still need counted series 2
+  of 2, so this is a live route.
+- **Their two technical asks, both ANSWERED FROM CODE rather than belief:**
+  (1) they transmit full-precision floats, not 3-decimal-rounded, and asked
+  whether 3 decimals is a requirement of our READER or a description of our
+  WRITER. Checked: `validate_turn_values` requires only that intensities be
+  numeric; `SmellField.absorb`, `observe_smell` and `peak_cell` all handle full
+  precision. Proven by feeding their exact float shape through the path. It is a
+  description of our writer — no change needed on either side.
+  (2) Parity: their driver plays the FIXED convention vibecode = thief on odd,
+  which contradicts the alphabetical league default ("vibecode" sorts first).
+  Their option (a) costs us nothing — `role_for` takes the natural role from the
+  entry point, so launching `police_agent` gives us police on 1/3/5. Same flip we
+  already did for imreeyal (#61). Accepted (a).
+- **Output:** `config/vibecode/` — constitution relabeled `agreed_between`
+  ["vibecode","vm__fabi"] (sorted), terms digest reproduces their
+  `a284082d…`, ids `vibecode-vs-vm__fabi` / `6268e7d5-3ece-cb39-e25b-767cc8c3e735`,
+  num_games 6 for BOTH friendly and counted, role-split dial to their two static
+  doors, counted_games_played 1 truthfully.
+- **Note:** they are 8 counted series in (6W-1L-1D) against our 1 — the most
+  experienced partner we have met. Their doors are down outside windows (probe
+  000), exactly as they stated.
