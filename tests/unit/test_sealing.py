@@ -55,3 +55,14 @@ def test_identity_from_config(police_config):
     identity = identity_from_config(police_config)
     assert identity["group_id"] == "vm__fabi-police"
     assert identity["members"]  # placeholder list present
+
+
+def test_identity_declares_the_playing_commit(police_config):
+    # il-nv-ai's --real-team gate refuses a negotiate whose
+    # identity.github_commit is null/empty/placeholder (book p.156 commit
+    # traceability, enforced by a live partner). In a git checkout the field
+    # carries rev-parse HEAD; standalone exports fall back to core_manifest.
+    identity = identity_from_config(police_config)
+    commit = identity["github_commit"]
+    assert isinstance(commit, str) and len(commit) == 40
+    int(commit, 16)  # 40-hex

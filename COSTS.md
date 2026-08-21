@@ -83,7 +83,8 @@
 | 2026-08-19 | PR (8.18) | feat-export-standalone | 3fd649f | Fable 5 · high | submission repos STAND ALONE for grading: full docs/ + CLAUDE/COSTS/LICENSE/academic README/uv.lock/all configs (overlays excluded); standalone suite green in-tree | ~0.15 session | merged |
 | 2026-08-19 | PR (ADR-23) | docs-history-mirror | 57f7803 | Fable 5 · high | book read DIRECTLY (pp.94-97,148-157): rules 41/49/50/p.156 verified; workspace-history mirrored into both submission repos; README explains it | ~0.2 session | merged |
 | 2026-08-19 | PR (fix) | fix-handshake-delivery | b09f084 | Fable 5 · high | two-clone proof caught a startup race (half-handshake); exchange now guarantees one DELIVERED greeting; standalone two-tree match settles identically | ~0.2 session + 2 proof matches | merged |
-| 2026-08-19 | PR (seed) | fix-per-subgame-seed | (pending) | Fable 5 · high | per-sub-game brain seeding (static seed = identical games per role; opponent solves once, wins thrice) | ~0.1 session | in review |
+| 2026-08-19 | PR (seed) | fix-per-subgame-seed | e1c56d6 | Fable 5 · high | per-sub-game brain seeding (static seed = identical games per role; opponent solves once, wins thrice) | ~0.1 session | merged |
+| 2026-08-21 | PR (identity) | feat-identity-commit | (pending) | Fable 5 · high | identity.github_commit (il-nv-ai hard gate; book p.156): env -> rev-parse -> core_manifest fallback | ~0.1 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

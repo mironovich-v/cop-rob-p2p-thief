@@ -856,3 +856,19 @@
 - **Output:** rng = Random(f"{seed}:{sub_game_number}") — varied across
   sub-games, still fully deterministic given the config seed; test asserts
   both properties.
+
+## 2026-08-21 · Pairing · il-nv-ai worksheet round 2 — identity commit gate
+- **Context:** il-nv-ai's reply confirmed every worksheet item (scent wire form
+  = ours incl. sparse maps; 180s as the binding turn deadline; roles: we
+  police game 1 + swap for an uncounted game 2) and surfaced one hard gate:
+  their --real-team preflight REFUSES a negotiate whose identity.github_commit
+  is null/missing — a field our identity never carried. Also a sharp catch by
+  them: our "signed 30s response deadline" phrasing — response_timeout_sec
+  lives in our constitution's network block but is NOT one of the 14 hashed
+  terms; it binds only our own per-call budget (10s cap), nothing on the wire.
+- **Output:** identity gains github_commit via playing_commit(): GIT_COMMIT
+  env -> git rev-parse HEAD -> vendored core_manifest.json (standalone export
+  trees) -> "unknown"; test pins 40-hex in a git checkout.
+- **Lesson:** every new partner's gate examines a different corner of the
+  identity block — declare everything the book names (p.156 commit
+  traceability existed all along; a partner finally enforced it).
