@@ -183,6 +183,8 @@ scope already matches kit #55 — the gaps are behavioral, not byte-level.
 
 | [x] | 8.18 | played-match evidence committed: `logs/*`+`results/*` were fully ignored, so no played game was in git (not even the counted nis-yar1 series). 170 artifact files force-added as deliberate SNAPSHOTS — ignore rules unchanged so routine runs stay out, next series added explicitly; `results/README.md` documents provenance, inter- vs intra-group split, and the il-nv-ai degraded-corroboration note | `results/README.md`, `.gitignore`, `logs/**`, `results/**` | artifacts (counted separately) | secret scan + no-absolute-path scan on all 170 |
 
+| [x] | 8.19 | final audit ack survives shutdown: the MCP server thread is `daemon=True`, so exiting the instant the runtime drained the audit inbox killed it mid-response — the opponent's `submit_audit` was received and acted on while THEY logged `audit_send_unacknowledged` (il-nv-ai, both runs 2026-08-21). Reproduced out-of-tree: no-ack at exactly 15.00s vs ack in 0.22s with a linger. `network.shutdown_grace_seconds` (5.0, all five peer configs) + `_linger_for_final_ack`; an injected transport owns no server and never waits | `sdk/sdk.py`, `config/*/game.toml` | ~15 src | `test_series` (owned-server lingers, injected does not) |
+
 Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
 its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
 are deliberately NOT implemented (opt-in / zero-implementation per kit

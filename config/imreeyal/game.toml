@@ -41,6 +41,8 @@ audit_send_timeout_seconds = 10
 call_timeout_seconds = 10       # per-call cap: strictly < signed response_timeout_sec (30)
 handshake_repush_seconds = 5.0  # re-push the greeting until the game starts
 reorder_window = 1
+shutdown_grace_seconds = 5.0  # outlive the drain so the opponent's final
+                              # submit_audit ack is flushed, not killed
 
 [trash_talk]
 provider = "template"           # llm_model: template — zero tokens, no LLM on the wire

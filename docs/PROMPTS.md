@@ -931,3 +931,26 @@
 - **Lesson:** an ignore rule written for noise control silently withheld the
   single most important piece of submission evidence. Worth checking, per
   deliverable, whether the thing a grader must SEE is actually tracked.
+
+## 2026-08-21 · Live finding · our final audit ack never reaches the opponent
+- **Context:** il-nv-ai reported that their `submit_audit` went unacknowledged
+  inside their 15s timeout in BOTH runs, and noted it was the exact point where
+  our peer died in run 1 — asking whether their payload arrives at all.
+- **Diagnosis:** it arrives and is fully acted on. The MCP server runs on a
+  `daemon=True` thread; the runtime drains the audit inbox, finishes, emits
+  artifacts and returns, and interpreter shutdown kills that thread mid-response.
+  The ack is lost after the audit was consumed — invisible on our side, an
+  `audit_send_unacknowledged` on theirs. `exchange_audit` already documented the
+  symmetric case ("the winner may exit right after reading its inbox") and
+  suppressed it for our own sends, so we had normalised the bug from the sending
+  side and never saw the receiving side.
+- **Reproduced before fixing** (`scratchpad/ack_race.py`, kept out of the repo):
+  server drains one audit then exits → client NO-ACK after exactly 15.00s,
+  matching their report; server lingers 2s → ACK `{'ok': True}` in 0.22s.
+- **Output:** `shutdown_grace_seconds` (config, 5.0 in all five peer configs);
+  `_linger_for_final_ack` holds an OWNED server open after the last sub-game. An
+  injected transport owns no server and must not pay the wait — that asymmetry is
+  the second test.
+- **Lesson:** a suppressed error on the send path hid a real defect on the
+  receive path for the whole project. Worth asking, whenever we swallow a
+  best-effort failure, what the peer on the other side would be logging.

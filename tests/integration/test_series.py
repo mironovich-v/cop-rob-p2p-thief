@@ -78,3 +78,26 @@ def test_sdk_run_peer_plays_series(transport_pair, tmp_path):
         assert any(f.startswith("result_") for f in files)
     assert results["thief"]["report"]["mutual_agreement"]["sha256"] == \
         results["police"]["report"]["mutual_agreement"]["sha256"]
+
+
+def test_injected_transport_never_lingers(tmp_path, monkeypatch):
+    """A test/GUI peer that brought its own transport owns no server, so there is
+    no ack to flush — it must not pay the shutdown grace."""
+    slept: list[float] = []
+    monkeypatch.setattr("cop_thief_core.sdk.sdk.time.sleep", slept.append)
+    sdk = SimulationSdk(REPO_ROOT / "config" / "police", workdir=tmp_path)
+    sdk._linger_for_final_ack(built_transport=False)
+    assert slept == []
+
+
+def test_owned_server_lingers_for_the_final_ack(tmp_path, monkeypatch):
+    """The final submit_audit ack is written by a DAEMON server thread: exiting the
+    instant the runtime drains the audit inbox drops it, and the opponent logs an
+    otherwise-clean game as audit_send_unacknowledged (il-nv-ai, both runs
+    2026-08-21). Reproduced at 15.0s client timeout; 0.22s ack with the grace."""
+    slept: list[float] = []
+    monkeypatch.setattr("cop_thief_core.sdk.sdk.time.sleep", slept.append)
+    sdk = SimulationSdk(REPO_ROOT / "config" / "police", workdir=tmp_path)
+    sdk._linger_for_final_ack(built_transport=True)
+    assert slept and slept[0] > 0
+    assert slept[0] == sdk.config.get("network.shutdown_grace_seconds", None)
