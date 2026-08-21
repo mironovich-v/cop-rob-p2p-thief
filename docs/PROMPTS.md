@@ -1043,3 +1043,24 @@
   write — our thief survives 0/24 against it. Expect to win our police sub-games
   and lose our thief sub-games against any opponent who does the same, i.e. a
   drawn series between two peers that both read the peak.
+
+## 2026-08-21 · Docs · author the four stub PRDs
+- **Context:** a dedicated PRD per algorithm is a mandatory deliverable
+  (guideline §1.3, final checklist §34). Four of twenty were still 4-line
+  placeholders — `strategy_brains`, `belief_map`, `pheromone_scent`,
+  `llm_verbal_layer` — and three of them cover exactly the mechanisms measured
+  and rewritten today, so the material was fresh and evidenced.
+- **Output:** all four authored to the house five-section shape (background,
+  requirements, constructions/interfaces, alternatives-with-rationale, success
+  criteria + named tests). They record the MEASUREMENTS, not just the design:
+  peak-vs-truth 35/35 against belief 0/35, thief 1/10 -> 11/24, police 3/16 ->
+  8/16 -> 16/16, and the discarded candidates (territory-thief 0/10; the
+  `exclude` channel measured worthless while tactics were wrong).
+- **Fact-checked the citations** rather than trusting them: `test_strategy_seam`
+  did not exist (it is `test_strategy`), and the claim that the verbal layer's
+  calls are gatekeeper-covered was softened — with only the template provider
+  wired, that layer makes no external calls at all.
+- **Lesson:** writing these immediately after the work was worth more than
+  writing them at submission time — the rejected alternatives and the "why the
+  obvious fix measured as zero" reasoning would have been unrecoverable a week
+  later, and those are the parts a reader cannot reconstruct from the code.
