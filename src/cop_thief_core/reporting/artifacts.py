@@ -96,6 +96,13 @@ def build_log(summary: dict, game_id, game_uid, group_id, opponent_group_id) -> 
         "links": links(game_id),
         "summary": log_summary,
         "records": records,
+        # `records` are what WE sealed. The opponent's messages arrived on the
+        # wire and were only ever held in memory, so a settled game could not be
+        # re-examined afterwards — we could not check a partner's claim semantics
+        # from our own archive (il-nv-ai, 2026-08-21). Kept OUT of the signed
+        # material on purpose: the mutual agreement below is over `records`
+        # alone, so filing our own evidence can never move a shared hash.
+        "received_messages": summary.get("history", []),
         "mutual_agreement": {
             "opponent_group_id": opponent_group_id,
             "sha256": consensus_signature(records),

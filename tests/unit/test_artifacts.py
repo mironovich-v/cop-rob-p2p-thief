@@ -121,3 +121,31 @@ def test_declaration_survives_a_foreign_identity_without_spec():
     assert block["llm_model"] == "undeclared"
     assert set(block["hardware_spec"]) == {"cpu_type", "cpu_freq_mhz", "cpu_cores",
                                            "ram_gb", "gpu_model", "vram_gb"}
+
+
+# --- the opponent's messages are evidence too ---------------------------------
+
+def test_log_persists_the_received_opponent_messages():
+    """`records` are what WE sealed; the opponent's messages arrived separately and
+    were only ever held in memory. Without them a settled game cannot be re-examined
+    afterwards — we could not check a partner's claim semantics from our own archive."""
+    summary = {**_summary(), "history": [{"step": 1, "sender": "thief",
+                                          "capture_claim": None, "hint": "hi"}]}
+    log = build_log(summary, GAME_ID, GAME_UID, GROUP_A, GROUP_B)
+    assert log["received_messages"] == summary["history"]
+
+
+def test_log_without_history_still_builds():
+    """Replays and older summaries carry no history — absence is not an error."""
+    log = build_log(_summary(), GAME_ID, GAME_UID, GROUP_A, GROUP_B)
+    assert log["received_messages"] == []
+
+
+def test_received_messages_do_not_move_the_consensus_hash():
+    """The per-sub-game mutual agreement is signed over `records` ALONE. If adding
+    our own evidence shifted it, two honest peers would disagree on a settled game."""
+    plain = build_log(_summary(), GAME_ID, GAME_UID, GROUP_A, GROUP_B)
+    withhist = build_log({**_summary(), "history": [{"step": 1, "sender": "thief"}]},
+                         GAME_ID, GAME_UID, GROUP_A, GROUP_B)
+    assert plain["mutual_agreement"]["sha256"] == withhist["mutual_agreement"]["sha256"]
+    assert withhist["mutual_agreement"]["sha256"] == consensus_signature(_summary()["records"])

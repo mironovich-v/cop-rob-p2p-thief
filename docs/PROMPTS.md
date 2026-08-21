@@ -1064,3 +1064,24 @@
   writing them at submission time — the rejected alternatives and the "why the
   obvious fix measured as zero" reasoning would have been unrecoverable a week
   later, and those are the parts a reader cannot reconstruct from the code.
+
+## 2026-08-21 · Artifacts · persist the opponent's messages as evidence
+- **Context:** when il-nv-ai's thief sent a `caught: true` final with no `claim`
+  key, I wanted to check what their claims looked like across the whole game —
+  and could not. `records` are what WE sealed; their messages lived only in
+  `handler.history`, in memory, and died with the process. A settled game was
+  not re-examinable from our own archive.
+- **Checked the risk BEFORE writing anything.** The log artifact is part of the
+  league's shared 4-artifact scheme and carries a `mutual_agreement` hash, so a
+  new key could in principle break agreement with a partner. It does not: the
+  per-sub-game signature is `consensus_signature(records)` — records alone — and
+  the series signature is over a symmetric aggregate view, not the log files.
+  There is also no strict key validation on our side. A regression test now pins
+  that invariant, because the day it stops holding, two honest peers would
+  disagree about a settled game.
+- **Output:** `received_messages` on the log artifact, deliberately outside the
+  signed material, with the schema description updated to say so. Verified in a
+  live self-play run, not just unit tests: 10 messages filed, carrying
+  `capture_claim` and `smell_grid` — exactly the fields I could not check before.
+- **Cost measured:** ~0.56 KB per message, ~20 KB for a 35-step game, ~120 KB for
+  a 6-sub-game series. Worth it.
