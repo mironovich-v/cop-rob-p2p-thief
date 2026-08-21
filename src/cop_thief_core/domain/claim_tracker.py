@@ -18,6 +18,26 @@ Nothing here assumes the opponent is honest; it assumes physics, and checks.
 from cop_thief_core.constants import Cell
 
 
+def peak_cell(smell_grid: dict | None) -> Cell | None:
+    """The freshest cell in a received scent map — the sender's current cell.
+
+    A peer deposits on the cell it stands on immediately before sending, so the
+    map's maximum IS that cell: measured 35/35 over a full game, against 0/35 for
+    the smeared belief estimate the same map produced. Parsing is strict — a
+    sparse or foreign map that cannot be read yields no sighting rather than a
+    guessed one, because a mis-read peak would aim the whole strategy at the
+    wrong cell.
+    """
+    best, best_value = None, 0.0
+    for key, value in (smell_grid or {}).items():
+        row, _, col = str(key).partition(",")
+        if not (row.strip().lstrip("-").isdigit() and col.strip().lstrip("-").isdigit()):
+            continue
+        if value > best_value:
+            best, best_value = (int(row), int(col)), value
+    return best
+
+
 class ClaimTracker:
     """Turns a sequence of capture claims into a trusted opponent position."""
 

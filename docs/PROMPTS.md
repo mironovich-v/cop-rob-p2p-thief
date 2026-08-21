@@ -1020,3 +1020,26 @@
   chasing cop and is decisive to a herding one — so the police's belief is now
   the next lever, where an hour ago it was not. Order matters: fixing belief
   first would have measured as no gain and been discarded.
+
+## 2026-08-21 · Strategy · the belief grid was destroying an exact observation
+- **Measurement first.** A peer deposits scent on the cell it stands on
+  immediately before sending, so the received map's PEAK is that cell. Probed
+  over a full game: peak == opponent's true cell **35/35**; our belief's estimate
+  == true cell **0/35**. The Bayesian smear (diffuse + multiplicative update)
+  was throwing away a perfect observation arriving every single turn.
+- **Output:** `peak_cell` (strict parse — a sparse/foreign map yields NO sighting
+  rather than a guessed one) fed through the same walks-like-a-peer trust check
+  as the cop's capture claims, then collapsed into belief.
+- **Result — police 8/16 -> 16/16 captures, median 10 steps**, beating the
+  oracle's 13 because the peak is fresher than the oracle snapshot.
+- **The asymmetry, stated honestly.** This change favours the PURSUER. The cop
+  badly needed the thief's cell and now has it exactly; the thief already had the
+  cop's cell from `capture_claim` on every cop move, so it gains only the barrier
+  turns. Our thief's bench numbers FELL (11/24 -> 0/24 vs herder, 5/10 -> 2/12 vs
+  greedy) purely because the bench's cops got the same upgrade — against a FIXED
+  real opponent our thief is strictly better informed than before, not worse.
+- **Strategic conclusion for the counted series:** on 7x7 with 14 barriers and 35
+  steps, a herding cop with an exact position appears to catch ANY evader we can
+  write — our thief survives 0/24 against it. Expect to win our police sub-games
+  and lose our thief sub-games against any opponent who does the same, i.e. a
+  drawn series between two peers that both read the peak.
