@@ -914,3 +914,20 @@
   `claim`. Only a real foreign peer exercises the non-conforming branch,
   which is exactly what an uncounted warm-up is for.
 - **Approval:** fix pushed on `fix-claimless-capture-final`; owner merges.
+
+## 2026-08-21 · Evidence · Commit the played-match artifacts
+- **Context:** owner asked to commit the game logs "so the lecturer could check
+  the games actually took place". `logs/*` and `results/*` were fully ignored —
+  only `rule52_ledger.json` was tracked — so NO played game was in git, including
+  the counted nis-yar1 series.
+- **Ambiguity resolved by asking:** "intra-group" could mean our own
+  police-vs-thief self-play (literal reading) or our group's match logs
+  (purpose reading). Owner: league + self-play + the results of both.
+- **Output:** 170 files force-added as evidence SNAPSHOTS — the ignore rules
+  stay in place so routine local runs never appear, and future series are added
+  explicitly the same way (documented in `.gitignore` and `results/README.md`).
+  Excluded four loose `result_… (1).json` browser-download duplicates from the
+  compare ritual: badly named, redundant with the archived sets.
+- **Lesson:** an ignore rule written for noise control silently withheld the
+  single most important piece of submission evidence. Worth checking, per
+  deliverable, whether the thing a grader must SEE is actually tracked.

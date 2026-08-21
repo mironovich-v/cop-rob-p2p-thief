@@ -1,0 +1,73 @@
+{
+  "_schema": "Static pre-game declaration for the whole series: team identity, members, repos, MCP URLs, hardware, model, token cap, and start/end times. Roles alternate across sub-games, so no role/sub_game_number appears here.",
+  "schema_version": "1.1",
+  "declaration_type": "pre_game_declaration",
+  "game_id": "vm__fabi-police-vs-vm__fabi-thief",
+  "game_uid": "2f30b769-88ac-c564-fb63-d7712e3c1346",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_vm__fabi-police-vs-vm__fabi-thief.json",
+    "config": "config_vm__fabi-police-vs-vm__fabi-thief_g<NN>.json",
+    "log": "log_vm__fabi-police-vs-vm__fabi-thief_g<NN>.json",
+    "result": "result_vm__fabi-police-vs-vm__fabi-thief.json"
+  },
+  "timezone": "Asia/Jerusalem",
+  "game_started_at": "2026-08-19T11:38:15.013688+00:00",
+  "game_ended_at": "2026-08-19T12:51:44.517772+00:00",
+  "num_sub_games": 25,
+  "max_tokens_per_game": 200000,
+  "groups": {
+    "group_1": {
+      "group_id": "vm__fabi-thief",
+      "group_name": "VM-Fabi",
+      "members": [
+        "Vasily Mironovich",
+        "Fahed Bitar"
+      ],
+      "repos": {
+        "cop": "https://github.com/mironovich-v/cop-rob-p2p-police",
+        "thief": "https://github.com/mironovich-v/cop-rob-p2p-thief"
+      },
+      "mcp_servers": {
+        "cop": "http://127.0.0.1:8802/mcp",
+        "thief": "http://127.0.0.1:8801/mcp"
+      },
+      "llm_model": "claude-opus-4-8[1m]",
+      "hardware_spec": {
+        "cpu_type": "x86_64",
+        "cpu_freq_mhz": "unknown",
+        "cpu_cores": 16,
+        "ram_gb": 15.5,
+        "gpu_model": "unknown",
+        "vram_gb": "unknown"
+      },
+      "signature": "ab0dbf548e242fe20fffc56a0133008f480d59db5ca15540c6d2595ad3456d89"
+    },
+    "group_2": {
+      "group_id": "vm__fabi-police",
+      "group_name": "VM-Fabi",
+      "members": [
+        "Vasily Mironovich",
+        "Fahed Bitar"
+      ],
+      "repos": {
+        "cop": "https://github.com/mironovich-v/cop-rob-p2p-police",
+        "thief": "https://github.com/mironovich-v/cop-rob-p2p-thief"
+      },
+      "mcp_servers": {
+        "cop": "http://127.0.0.1:8802/mcp",
+        "thief": "http://127.0.0.1:8801/mcp"
+      },
+      "llm_model": "claude-opus-4-8[1m]",
+      "hardware_spec": {
+        "cpu_type": "x86_64",
+        "cpu_freq_mhz": "unknown",
+        "cpu_cores": 16,
+        "ram_gb": 15.5,
+        "gpu_model": "unknown",
+        "vram_gb": "unknown"
+      },
+      "signature": "14863f4379814bd4be7404b02fcf68ae27890a312d228fd0c4c933fd3436c8b7"
+    }
+  }
+}

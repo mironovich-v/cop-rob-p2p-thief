@@ -181,6 +181,8 @@ scope already matches kit #55 — the gaps are behavioral, not byte-level.
 
 | [x] | 8.17 | capture corroboration degrades on an unreadable final (live il-nv-ai warm-up crash, 2026-08-21): their thief's `caught: true` final omits `claim` — SPEC §3.1 mandates the key, but our `corroborate_capture` indexed it unguarded and raised `KeyError` inside `finish()`, killing the peer AFTER a fully played sub-game (no artifacts emitted, whole game lost). Strict `_parsed_cell` (2-int sequence, `bool` excluded) → `kind: "unknown"` + degraded note; a malformed cell like `[3]` previously reached board math and raised `IndexError` too. Missing evidence is not proof of a lie: degrade, never accuse, never crash | `orchestration/audit_checks.py` | ~15 src | `test_audit_checks` (claimless final, 6 malformed shapes) |
 
+| [x] | 8.18 | played-match evidence committed: `logs/*`+`results/*` were fully ignored, so no played game was in git (not even the counted nis-yar1 series). 170 artifact files force-added as deliberate SNAPSHOTS — ignore rules unchanged so routine runs stay out, next series added explicitly; `results/README.md` documents provenance, inter- vs intra-group split, and the il-nv-ai degraded-corroboration note | `results/README.md`, `.gitignore`, `logs/**`, `results/**` | artifacts (counted separately) | secret scan + no-absolute-path scan on all 170 |
+
 Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
 its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
 are deliberately NOT implemented (opt-in / zero-implementation per kit

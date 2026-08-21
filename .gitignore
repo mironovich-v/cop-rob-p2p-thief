@@ -80,6 +80,10 @@ results/*
 !results/rule52_ledger.json
 logs/*
 !logs/.gitkeep
+# Played-match evidence under results/ and logs/ is force-added as deliberate
+# SNAPSHOTS (see results/README.md): those paths stay ignored here so routine
+# local runs never appear, while the committed sets remain tracked. To publish
+# the next played series, `git add -f` it explicitly — do not relax these rules.
 # Stale/temp root-level report files — named match-run reports are tracked explicitly
 report_bonus.json
 report_self_test.json
