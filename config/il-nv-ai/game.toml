@@ -1,0 +1,60 @@
+# PAIRING config: vm__fabi vs il-nv-ai — UNCOUNTED warm-up (their session
+# rules: no league reporting, no mail). num_games 1 per their 14-term hash
+# (b97de3f6…). Game 1: we are POLICE (launch police_agent); optional game 2
+# swaps roles (launch thief_agent). Their connect patience is 65s — both
+# sides press start within the SAME MINUTE. URL arrives at session start →
+# config/il-nv-ai/game.local.toml (git-ignored overlay).
+version = "1.10"
+
+[game]
+group_name = "VM-Fabi"
+group_id = "vm__fabi"                 # binding on the wire — matches our §1 reply
+sub_game_number = 1
+members = ["Vasily Mironovich", "Fahed Bitar"]
+repos = { cop = "https://github.com/mironovich-v/cop-rob-p2p-police", thief = "https://github.com/mironovich-v/cop-rob-p2p-thief" }
+mcp_servers = { cop = "https://cop-rob-p2p.ngrok.app/mcp", thief = "https://cop-rob-p2p.ngrok.app/mcp" }
+opponent_group_id = "il-nv-ai"
+counted = false                       # flip ONLY for the one counted series (+ --counted)
+counted_games_played = 1              # truthful: nis-yar1 counted banked 2026-08-18
+tie_rule = "series_add"               # declared in the constitution chat (ADR-17)
+
+[belief]
+smell_trust_weight = 4.0
+
+[paths]
+logs_dir = "logs"
+
+[play]
+step_speed_seconds = 0.0              # headless: no GUI pacing between steps
+seed = 1234
+
+[network]
+my_port = 8802
+opponent_url = "PASTE-THEIR-URL-AT-START"   # quick tunnel, arrives at session start
+turn_timeout_seconds = 180
+poll_interval_seconds = 0.5
+connect_timeout_seconds = 150   # handshake patience: spans their inter-sub-game door gap
+retry_interval_seconds = 1.0
+audit_send_timeout_seconds = 10
+call_timeout_seconds = 10       # per-call cap: strictly < signed response_timeout_sec (30)
+handshake_repush_seconds = 5.0  # re-push the greeting until the game starts
+reorder_window = 1
+
+[trash_talk]
+provider = "template"           # llm_model: template — zero tokens, no LLM on the wire
+
+[llm]
+model = "template"
+step_deadline_seconds = 30
+short_prompt_threshold_seconds = 10
+
+[email]
+# Friendly posture: auto-fire the report into IMREEYAL's inbox at settlement
+# (their pre-counted gate) + our own copy. The lecturer stays structurally
+# unreachable unless doubly armed (game.counted AND --counted; ADR-20).
+# Counted day: recipient becomes the lecturer ALONE, set by hand before the T.
+recipient = ""
+lecturer_address = "rmisegal+uoh26finalgame@gmail.com"
+mode = "dry_run"
+enabled = false                        # their session rules: no mail, at all
+timeout_seconds = 120

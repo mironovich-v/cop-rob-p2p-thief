@@ -137,3 +137,18 @@ def test_local_overlay_wins_without_dirtying_the_tree(tmp_path):
 def test_missing_local_overlay_changes_nothing(tmp_path):
     cfg = ConfigManager(_write(tmp_path))
     assert cfg.get("network.my_port") == 8802
+
+
+def test_il_nv_ai_pairing_config_is_playable():
+    from cop_thief_core.interop.game_ids import derive_game_ids
+    from cop_thief_core.interop.negotiation import terms_from_config, validate_minimums
+
+    cfg = ConfigManager(REPO_ROOT / "config" / "il-nv-ai")
+    terms = terms_from_config(cfg)
+    validate_minimums(terms)
+    game_id, game_uid = derive_game_ids(terms, "vm__fabi", "il-nv-ai")
+    assert game_id == "il-nv-ai-vs-vm__fabi"
+    assert game_uid == "00aec465-1e83-befa-15ed-a5d427995ffc"
+    assert cfg.get("game.num_games") == 1  # their 14-term hash pins num_games 1
+    assert cfg.get("email.enabled") is False  # their session rules: no mail, at all
+    assert cfg.get("game.counted") is False

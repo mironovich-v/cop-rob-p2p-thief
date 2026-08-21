@@ -872,3 +872,15 @@
 - **Lesson:** every new partner's gate examines a different corner of the
   identity block — declare everything the book names (p.156 commit
   traceability existed all along; a partner finally enforced it).
+
+## 2026-08-21 · Pairing · il-nv-ai final round + config (warm-up ready)
+- **Output:** their last gate (six-key terminal message) PROVEN in code by
+  building our exact concession message (all ten keys, real smell_grid, "You
+  got me." hint, lowercase 64-hex commit); their no-reason default maps our
+  concession to "capture" — closed both ways. `config/il-nv-ai/` committed:
+  num_games 1 (terms hash reproduces their pinned b97de3f6 byte-exact), ids
+  pinned (il-nv-ai-vs-vm__fabi / 00aec465-…), mail fully disabled per their
+  session rules, counted false. Launch: police_agent game 1; thief_agent for
+  the swapped uncounted game 2; both sides fire within the same minute
+  (their 65s connect patience); URL arrives at session start via the
+  git-ignored overlay.
