@@ -1132,3 +1132,31 @@
 - **Lesson:** the guard is only worth anything at the wiring, so the unit tests
   on the predicate are backed by two tests that call the real send path and
   assert nothing reached the lecturer.
+
+## 2026-08-22 · Counted · vibecode series banked (rule-52 series 2 of 2)
+- **Settled 16:28** — 6/6 sub-games, every audit verified BOTH directions, uid
+  `6268e7d5-…`, consensus `c307dc51…`. Lost 0-6 (30-90), which was expected and
+  did not matter: the requirement is `min_games_to_pass` = 2 and this is series
+  2 (nis-yar1 2026-08-18 was series 1).
+- **League fields exactly as agreed in writing:** counters vm__fabi 1→2 and
+  vibecode 8→9, first_meeting true, diversity flag on vibecode as winner,
+  totals untouched (flag-only). Ledger advanced and committed as rule-52
+  evidence — a counted series is not over until the ledger that proves it is
+  pushed.
+- **Both teams' reports compared and AGREE:** identical uid, consensus,
+  final_result and all six rows; differences confined to schema text, per-peer
+  timestamps, `log_files` path style and `github_commit`.
+- **Two gaps this exposed, neither blocking:**
+  (1) `agent_cli` prints the game result but DISCARDS the email outcome, so the
+  operator cannot see whether the counted report sent, nor recover the Gmail
+  message-id their runbook asks both teams to exchange within 15 minutes. Our
+  token is `gmail.send`-scoped, so the sent folder cannot be read back either —
+  confirmation had to come from the human checking Gmail. Worth printing and
+  persisting the send result before any further counted game.
+  (2) We leave `github_commit` null in the result rows while they populate it
+  for both teams; the book cares about commit traceability.
+- **Distinguishing counted from friendly:** the scores AND the consensus hash
+  are identical across all three vibecode series, because the play was
+  identical. Only `games_played_including_this` / `diversity_reward_applied`
+  separate them. Anyone comparing these files later must look at the league
+  counters, never the score.
