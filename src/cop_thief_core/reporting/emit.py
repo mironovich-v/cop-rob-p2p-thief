@@ -48,7 +48,7 @@ def _roles(own_gid: str, opp_gid: str, own_role: str) -> dict:
     return {own_gid: own_role, opp_gid: opp_role}
 
 
-def _subgame_entry(summary, game_id, own_gid, opp_gid, scoring_cfg) -> dict:
+def _subgame_entry(summary, game_id, own_gid, opp_gid, scoring_cfg, commits) -> dict:
     """One sub-game's row in the result: roles, outcome, per-group score, audit."""
     roles = _roles(own_gid, opp_gid, summary["role"])
     number = summary["sub_game_number"]
@@ -70,6 +70,9 @@ def _subgame_entry(summary, game_id, own_gid, opp_gid, scoring_cfg) -> dict:
         "log_files": {own_gid: f"{own_gid}/{log_filename(game_id, number)}",
                       opp_gid: f"{opp_gid}/{log_filename(game_id, number)}"},
         "audit": {"log_verified": passed, "tampered": not passed},
+        # Outside the consensus scope by design (see _symmetric): recording
+        # provenance must never move a hash two teams compare.
+        "github_commit": dict(commits),
     }
 
 
@@ -104,6 +107,7 @@ def emit_series(config, logs_dir, series) -> dict:
         ended_at(last["started_at"], last["duration_seconds"]),
         len(summaries), max_tokens, own, opp))
 
+    commits = {own_gid: own.get("github_commit"), opp_gid: opp.get("github_commit")}
     sub_games = []
     for summary in summaries:
         number = summary["sub_game_number"]
@@ -111,7 +115,8 @@ def emit_series(config, logs_dir, series) -> dict:
                build_config_artifact(config.shared, game_id, game_uid, number))
         _write(own_dir, log_filename(game_id, number),
                build_log(summary, game_id, game_uid, own_gid, opp_gid))
-        sub_games.append(_subgame_entry(summary, game_id, own_gid, opp_gid, scoring_cfg))
+        sub_games.append(
+            _subgame_entry(summary, game_id, own_gid, opp_gid, scoring_cfg, commits))
 
     agg = scoring.aggregate([sg["score"] for sg in sub_games], scoring_cfg["tie_score"])
     mutual = consensus_signature(_symmetric(game_id, agg, sub_games))

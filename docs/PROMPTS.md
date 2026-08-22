@@ -1160,3 +1160,26 @@
   identical. Only `games_played_including_this` / `diversity_reward_applied`
   separate them. Anyone comparing these files later must look at the league
   counters, never the score.
+
+## 2026-08-22 · Provenance · report the commit, and prove it is reachable
+- **Gap:** our four artifacts carried NO commit anywhere — the wire identity
+  declares one at negotiate but it never reached a file we submit, so a grader
+  holding only the two role repos could not tie a result to code. Partners
+  (vibecode) already populate this; we were the ones missing it.
+- **Reported:** `github_commit` now appears in the declaration group block (both
+  teams) and on every result sub-game row, matching the shape vibecode emit.
+- **CHECKED FIRST, because the rows feed a shared hash:** `_symmetric` picks
+  exactly five keys for the consensus signature, so a new row field cannot move
+  it. Pinned by a regression test — if that ever breaks, teams who already
+  settled a series with us would disagree about it.
+- **Verified, not just declared:** an ARMED run now refuses unless the playing
+  commit is reachable from `workspace-history` in every configured role repo.
+  Undecidable (remote tip is an object we do not hold) counts as NOT published —
+  the point is to refuse a claim we cannot stand behind. Friendlies are never
+  blocked; a network check must not cost a window.
+- **It caught a real drift on its first live run:** main was `6d090e2` while both
+  mirrors were still `c7dce1f`, so a counted run at that moment would have
+  declared an unresolvable commit. Exactly the failure it exists to prevent.
+- **Note on the repos:** the submission repos' `main` is the exported agent tree
+  and never contains workspace hashes; only `workspace-history` does. Checking
+  `main` would have produced a permanent false negative.
