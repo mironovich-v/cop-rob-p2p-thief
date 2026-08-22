@@ -30,6 +30,20 @@ def revealed_trail_end(records: list[dict]) -> Cell | None:
     return (int(match[1]), int(match[2])) if match else None
 
 
+def _parsed_cell(value) -> Cell | None:
+    """Strict parse of a claimed cell: a 2-int sequence, or nothing at all.
+
+    A looser parse would resolve a malformed claim to the WRONG cell and accuse
+    an honest peer (SPEC §3.1, "widen only what you CHECK"). `bool` is excluded
+    because it is an `int` subclass and no cell is ever True/False.
+    """
+    if isinstance(value, list | tuple) and len(value) == 2 and all(
+        isinstance(item, int) and not isinstance(item, bool) for item in value
+    ):
+        return (value[0], value[1])
+    return None
+
+
 def _my_last_claimed_cell(my_records: list[dict]) -> Cell | None:
     """The cell of my latest capture claim = my position on my last MOVE turn."""
     for record in reversed(my_records):
@@ -49,7 +63,17 @@ def corroborate_capture(
     Echoing my claimed cell = answer (co-location); naming any other cell =
     concession (rule 46/47). Both settle CAPTURE at play time; they differ HERE.
     """
-    cell = tuple(final_response["claim"])
+    cell = _parsed_cell(final_response.get("claim"))
+    if cell is None:
+        # A final that omits `claim` (or spells it unparseably) is non-conforming
+        # — SPEC §3.1 mandates the key. But an unreadable final is missing
+        # EVIDENCE, not proof of a lie: degrade with a note, never accuse, and
+        # never crash the peer mid-audit (live il-nv-ai warm-up, 2026-08-21).
+        return {
+            "kind": "unknown",
+            "corroborated": True,
+            "note": "degraded: final carries no parseable claim cell",
+        }
     kind = "answer" if cell == _my_last_claimed_cell(my_records) else "concession"
     if kind == "answer":
         end = revealed_trail_end(opponent_records)

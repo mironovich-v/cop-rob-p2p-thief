@@ -167,3 +167,16 @@ def test_junk_flood_never_renews_the_deadline(police_config):
     summary = runtime.run(skip_negotiation=True)
     assert summary["result"] == "timeout"  # the flood did not keep the game alive
     assert time.monotonic() - start < 5.0
+
+
+def test_each_sub_game_gets_its_own_brain_seed(police_config):
+    # One static seed made every sub-game identical — an opponent only had to
+    # solve us once per role. The stream must differ across sub-games and stay
+    # deterministic for a given (config seed, sub_game_number).
+    one = PeerRuntime(Role.POLICE, police_config, None, sub_game_number=1)
+    two = PeerRuntime(Role.POLICE, police_config, None, sub_game_number=2)
+    again = PeerRuntime(Role.POLICE, police_config, None, sub_game_number=1)
+    stream = lambda rt: [rt.brain._rng.random() for _ in range(4)]  # noqa: E731
+    first = stream(one)
+    assert first != stream(two)     # varied across sub-games
+    assert first == stream(again)   # still deterministic

@@ -15,6 +15,29 @@ def now_iso() -> str:
     return datetime.now(UTC).isoformat()
 
 
+def playing_commit() -> str:
+    """The exact commit this peer runs (il-nv-ai's --real-team gate refuses a
+    negotiate without it; book p.156 commit traceability). Resolution order:
+    GIT_COMMIT env override -> `git rev-parse HEAD` (workspace checkout) ->
+    the vendored core_manifest.json (standalone export trees) -> "unknown"."""
+    import json
+    import os
+    import subprocess
+    from contextlib import suppress
+    from pathlib import Path as _Path
+    if os.environ.get("GIT_COMMIT"):
+        return os.environ["GIT_COMMIT"]
+    with suppress(Exception):
+        done = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,
+                              text=True, check=True, timeout=5)
+        return done.stdout.strip()
+    with suppress(Exception):  # export tree: <root>/core_manifest.json
+        root = _Path(__file__).resolve().parents[3].parent
+        manifest = json.loads((root / "core_manifest.json").read_text("utf-8"))
+        return manifest["core_commit"]
+    return "unknown"
+
+
 def identity_from_config(cfg) -> dict:
     """This peer's static group identity, exchanged in the handshake (not signed).
     Roles alternate across sub-games, so identity is per-GROUP, not per-role.
@@ -29,6 +52,9 @@ def identity_from_config(cfg) -> dict:
         # Rule-38 weight: the opponent's result artifact reads this exact key
         # for games_played_including_this — a misspelling silently reads as 0.
         "counted_games_played": cfg.get("game.counted_games_played", 0),
+        # The playing commit (partner gates + book p.156 traceability): resolves
+        # in our repos' workspace-history branch / core_manifest chain.
+        "github_commit": playing_commit(),
         "spec": collect_spec(),
     }
 

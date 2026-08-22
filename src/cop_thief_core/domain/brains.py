@@ -19,6 +19,7 @@ from cop_thief_core.domain.tactics import (
     DEFAULTS,
     police_barrier,
     recent_trail,
+    territory,
     thief_score,
 )
 
@@ -115,8 +116,8 @@ class ThiefBrain(BrainBase):
 
 
 class PoliceBrain(BrainBase):
-    """Corner, don't just chase: barriers are spent only on a rule-46 strike or
-    sealing a pocketed thief; otherwise close distance without oscillating."""
+    """Corner, don't chase: barriers are spent only on a rule-46 strike or sealing
+    a pocketed thief, and every step shrinks the thief's reachable territory."""
 
     role = Role.POLICE
 
@@ -133,9 +134,19 @@ class PoliceBrain(BrainBase):
         return MoveType.MOVE, direction
 
     def _pick_move(self, moves, state, belief):
+        """Herd, don't chase: take the step that leaves the thief the least room.
+
+        Closing distance is the wrong objective — a pursuer never catches an
+        equally fast evader that way, and an oracle cop using distance captured
+        no more often than the blind one (2/16 vs 3/16). Shrinking the thief's
+        reachable territory is what converts knowing where it is into catching
+        it; distance only breaks ties between equally constricting steps.
+        """
         target = belief.most_likely()
         recent = recent_trail(state, self._tactics["recent_window"])
         shuffled = list(moves)
         self._rng.shuffle(shuffled)  # tie-break randomly: vary the approach vector
         return min(shuffled, key=lambda m: (
-            state.board.distance(m[1], target), m[1] in recent))
+            territory(state.board, target, m[1], state.barriers),
+            state.board.distance(m[1], target),
+            m[1] in recent))

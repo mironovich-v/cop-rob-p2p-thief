@@ -60,6 +60,17 @@ class BeliefGrid:
         self._probs = fresh
         self._normalize()
 
+    def observe_declared(self, cell: Cell) -> None:
+        """Collapse belief onto a cell the OPPONENT ITSELF declared standing on.
+
+        Scent is evidence about where the opponent was; a declaration is evidence
+        about where it is. When one arrives it supersedes the trail entirely —
+        the caller is responsible for having checked the declaration is credible
+        (see ``ClaimTracker``), because a collapse cannot be argued with later.
+        """
+        self._probs = [[0.0] * self._size for _ in range(self._size)]
+        self._probs[cell[0]][cell[1]] = 1.0
+
     def exclude(self, cell: Cell) -> None:
         """Rule out a cell (e.g. I stand here and no capture happened)."""
         self._probs[cell[0]][cell[1]] = 0.0

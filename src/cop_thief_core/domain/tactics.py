@@ -12,7 +12,11 @@ All knowledge used here is legal: own state, known barriers, and the BELIEF grid
 (scent + hints) — never the opponent's true position.
 """
 
+from collections import deque
+
 from cop_thief_core.constants import Cell, Direction
+
+_UNREACHABLE = float("inf")
 
 # Private strategy tunables (documented defaults; override via the private
 # game.toml [strategy.tactics] table — these are NOT signed game terms).
@@ -54,6 +58,33 @@ def thief_score(board, target: Cell, threat: Cell, barriers: set[Cell],
     )
     penalty = weights["recent_penalty"] if target in recent else 0.0
     return weights["freedom_weight"] * freedom + weights["distance_weight"] * distance - penalty
+
+
+def _step_distances(board, origin: Cell, barriers: set[Cell]) -> dict[Cell, int]:
+    """Breadth-first step distance from ``origin`` to every reachable free cell."""
+    distances = {origin: 0}
+    queue = deque([origin])
+    while queue:
+        cell = queue.popleft()
+        for nxt in board.neighbors(cell, barriers):
+            if nxt not in distances:
+                distances[nxt] = distances[cell] + 1
+                queue.append(nxt)
+    return distances
+
+
+def territory(board, evader: Cell, pursuer: Cell, barriers: set[Cell]) -> int:
+    """How many cells the evader reaches strictly before the pursuer — its room.
+
+    A pursuer never closes on an equally fast evader by chasing: distance is the
+    wrong objective. Territory is the right one, and it is what a cop actually
+    takes away when it herds toward an edge or spends a barrier. Measured: an
+    oracle cop with the thief's TRUE cell captured 2/16, no better than the
+    shipped 3/16 — so our police was never short of information, only of this.
+    """
+    to_evader = _step_distances(board, evader, barriers)
+    to_pursuer = _step_distances(board, pursuer, barriers)
+    return sum(1 for cell, d in to_evader.items() if d < to_pursuer.get(cell, _UNREACHABLE))
 
 
 def police_barrier(board, state, threat: Cell, weights: dict) -> Direction | None:

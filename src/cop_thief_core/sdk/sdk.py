@@ -6,6 +6,7 @@ are built once and reused; a real Claude LLM provider is wired in the language s
 """
 
 import json
+import time
 from pathlib import Path
 
 from cop_thief_core.constants import Role
@@ -13,6 +14,7 @@ from cop_thief_core.exceptions import SimulationError
 from cop_thief_core.infra.email_sender import EmailSender
 from cop_thief_core.interop.negotiation import terms_from_config, validate_minimums
 from cop_thief_core.reporting.emit import emit_series
+from cop_thief_core.sdk.filing import filable
 from cop_thief_core.sdk.series import run_series
 from cop_thief_core.shared.config import ConfigManager
 
@@ -67,6 +69,7 @@ class SimulationSdk:
         peer_role = Role(role)
         armed = self._arm(counted)
         validate_minimums(terms_from_config(self.config))  # fail fast before any server
+        built_transport = transport is None
         transport = transport or self._build_transport(peer_role)
         series = run_series(self.config, peer_role, self._build_llm(stub_llm), transport, listener)
         out = {
@@ -82,7 +85,23 @@ class SimulationSdk:
             out["report"] = emit_series(self.config, logs_dir, series)
             out["artifacts_dir"] = str(logs_dir / series.own_identity.get("group_id", ""))
             out["email"] = self._email_report(series, out["report"], armed)
+        self._linger_for_final_ack(built_transport)
         return out
+
+    def _linger_for_final_ack(self, built_transport: bool) -> None:
+        """Hold this peer's MCP server open briefly after the last sub-game.
+
+        The opponent's final ``submit_audit`` ack is written by a DAEMON server
+        thread. Exiting the instant the runtime drains the audit inbox kills that
+        thread mid-response, so the audit is fully received and acted on while the
+        sender sees nothing — an otherwise-clean game logged as
+        ``audit_send_unacknowledged`` (reported by il-nv-ai on both runs,
+        2026-08-21; reproduced at a 15.0s client timeout, and answered in 0.22s
+        once the server outlives the drain). Only a peer that OWNS its server has
+        an ack to flush; an injected transport has no server and must not wait.
+        """
+        if built_transport:
+            time.sleep(self.config.get("network.shutdown_grace_seconds", 5.0))
 
     def _arm(self, counted_cli: bool) -> bool:
         """Double arming (ADR-20): CLI --counted AND config game.counted must
@@ -104,6 +123,14 @@ class SimulationSdk:
         single named attachment); subject in the reference form. The Hebrew
         book-schema report stays a repo artifact, never mailed (§6.1 documented
         tension, resolved by both league teams toward the results file)."""
+        if armed:
+            # Rule 35: an incomplete or unverified series is one NOBODY files —
+            # two teams filing disagreeing reports of one game is the shape the
+            # rule zeroes. Friendlies are exempt on purpose (see sdk.filing).
+            may_file, reason = filable(
+                series.summaries, self.config.get("game.num_games"))
+            if not may_file:
+                return {"sent": False, "reason": f"withheld: {reason}"}
         summary = series.summaries[-1]
         body = json.dumps(report, ensure_ascii=False, indent=2)  # == the filed bytes
         winner = report["final_result"].get("winner_group") or "tie"

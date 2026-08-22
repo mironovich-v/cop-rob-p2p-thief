@@ -1,11 +1,9 @@
-# PAIRING config: vm__fabi vs imreeyal — one peer process, role alternation.
-# PARITY (imreeyal's correction, 2026-08-18): vm__fabi plays POLICE in the odd
-# sub-games (1,3,5); imreeyal is THIEF on odds — and as thief THEY open
-# sub-game 1 (thief takes the first turn of every sub-game).
-# The signed shared constitution is game.json — byte-identical to imreeyal's
-# (their first-contact message, 2026-08-17), agreed_between the sorted pair.
-# Run: uv run python -m police_agent --config config/imreeyal   <-- POLICE!
-# Tunnel: ngrok http 8802 --domain=cop-rob-p2p.ngrok.app --host-header=rewrite
+# PAIRING config: vm__fabi vs il-nv-ai — UNCOUNTED warm-up (their session
+# rules: no league reporting, no mail). num_games 1 per their 14-term hash
+# (b97de3f6…). Game 1: we are POLICE (launch police_agent); optional game 2
+# swaps roles (launch thief_agent). Their connect patience is 65s — both
+# sides press start within the SAME MINUTE. URL arrives at session start →
+# config/il-nv-ai/game.local.toml (git-ignored overlay).
 version = "1.10"
 
 [game]
@@ -15,9 +13,9 @@ sub_game_number = 1
 members = ["Vasily Mironovich", "Fahed Bitar"]
 repos = { cop = "https://github.com/mironovich-v/cop-rob-p2p-police", thief = "https://github.com/mironovich-v/cop-rob-p2p-thief" }
 mcp_servers = { cop = "https://cop-rob-p2p.ngrok.app/mcp", thief = "https://cop-rob-p2p.ngrok.app/mcp" }
-opponent_group_id = "imreeyal"        # handshake refuses any other group
+opponent_group_id = "il-nv-ai"
 counted = false                       # flip ONLY for the one counted series (+ --counted)
-counted_games_played = 1              # truthful: nis-yar1 counted series banked 2026-08-18
+counted_games_played = 1              # truthful: nis-yar1 counted banked 2026-08-18
 tie_rule = "series_add"               # declared in the constitution chat (ADR-17)
 
 [belief]
@@ -32,7 +30,7 @@ seed = 1234
 
 [network]
 my_port = 8802
-opponent_url = "https://cop.imreeyal.com/mcp"
+opponent_url = "PASTE-THEIR-URL-AT-START"   # quick tunnel, arrives at session start
 turn_timeout_seconds = 180
 poll_interval_seconds = 0.5
 connect_timeout_seconds = 150   # handshake patience: spans their inter-sub-game door gap
@@ -57,8 +55,8 @@ short_prompt_threshold_seconds = 10
 # (their pre-counted gate) + our own copy. The lecturer stays structurally
 # unreachable unless doubly armed (game.counted AND --counted; ADR-20).
 # Counted day: recipient becomes the lecturer ALONE, set by hand before the T.
-recipient = ["imreeyal.copthief@gmail.com", "imree.c@gmail.com", "mironovichvasily@gmail.com"]
+recipient = ""
 lecturer_address = "rmisegal+uoh26finalgame@gmail.com"
-mode = "send"
-enabled = true
+mode = "dry_run"
+enabled = false                        # their session rules: no mail, at all
 timeout_seconds = 120

@@ -18,7 +18,9 @@ SCHEMA_CONFIG = (
 )
 SCHEMA_LOG = (
     "Per-sub-game commit-reveal log for the replay viewer: every sealed step and the "
-    "mutual-audit result. Static team metadata lives in the declaration; join by game_uid."
+    "mutual-audit result, plus received_messages: the opponent turns this peer applied, "
+    "filed as evidence and never part of the signature. Static team metadata lives in "
+    "the declaration; join by game_uid."
 )
 SCHEMA_RESULT = (
     "Aggregated final result over all sub-games: per-group scores, the series "

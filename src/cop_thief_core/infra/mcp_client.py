@@ -80,20 +80,37 @@ class McpTransport:
         # overall patience spans their legitimate inter-sub-game door gap, during
         # which their ARRIVING negotiate opens the sub-game (imreeyal §3.4/§3.16).
         deadline = time.time() + self._connect_timeout
+        delivered = False  # did OUR greeting ever land on their door?
         while True:
             window = min(self._repush, max(deadline - time.time(), 0.1))
             with contextlib.suppress(SimulationError):
                 response = self._call_with_retry("negotiate", signed, timeout=window)
+                delivered = True
                 if isinstance(response, dict) and "terms" in response:
                     return response
             wait = min(self._repush, max(deadline - time.time(), 0.05))
             try:
-                return self._inboxes.agreements.get(timeout=wait)
+                theirs = self._inboxes.agreements.get(timeout=wait)
             except queue.Empty as exc:
                 if time.time() >= deadline:
                     raise SimulationError(
                         "Opponent never sent its agreement (and answered no push)"
                     ) from exc
+            else:
+                # Startup race (found by a two-clone live run): our pushes may
+                # ALL have failed against a door that came up after theirs was
+                # sent. Proceeding would half-handshake — they'd receive turns
+                # from a peer whose agreement they never saw, and starve. Their
+                # greeting proves their door is up: deliver ours before moving.
+                while not delivered and time.time() < deadline:
+                    with contextlib.suppress(SimulationError):
+                        self._call_with_retry("negotiate", signed, timeout=window)
+                        delivered = True
+                if not delivered:
+                    raise SimulationError(
+                        "Our agreement never reached the opponent (door never opened)"
+                    )
+                return theirs
 
     def send_turn(self, message: dict) -> None:
         self._call_with_retry("receive_turn", message)

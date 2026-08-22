@@ -97,6 +97,28 @@ def test_degraded_evidence_notes_but_never_accuses():
     assert "degraded" in verdict["note"]
 
 
+def test_claimless_final_degrades_instead_of_crashing():
+    """A peer whose caught:true final omits `claim` is non-conforming (SPEC
+    §3.1), but an unparseable final must degrade with a note — never raise, and
+    never accuse. Reproduces the live il-nv-ai warm-up crash of 2026-08-21."""
+    state, records = _cop(claimed=(3, 3))
+    verdict = corroborate_capture(
+        state, records, {"caught": True}, [_record(position=[3, 3])])
+    assert verdict["corroborated"] is True
+    assert "degraded" in verdict["note"]
+
+
+def test_malformed_claim_cell_degrades_rather_than_resolving():
+    """Strict parse: a claim that is not a 2-int cell resolves to no cell at all
+    (a loose parse would invent a way to accuse an honest peer)."""
+    state, records = _cop(claimed=(3, 3))
+    for bad in ([3], [3, 3, 3], ["3", "3"], "3,3", None, {}):
+        verdict = corroborate_capture(
+            state, records, {"claim": bad, "caught": True}, [_record(position=[3, 3])])
+        assert verdict["corroborated"] is True, bad
+        assert "degraded" in verdict["note"], bad
+
+
 # --- settlement: a voided corroboration is never counted clean ---------------
 
 class _FakeTransport:

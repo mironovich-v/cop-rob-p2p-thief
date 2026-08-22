@@ -827,3 +827,308 @@
   question about the AUTHOR's intent — always resolve challenges against the
   named source of truth, even when the derivative was faithfully made. The
   PDF was readable all along (visual-order Hebrew, reversible per-line).
+
+## 2026-08-19 · Two-repo runtime proof + startup-race fix
+- **Owner's question:** can games run from the two role repos alone? Proof
+  attempted by cloning BOTH published repos fresh and playing them against
+  each other — which immediately caught a real race: our greeting pushes all
+  failed while the opponent's door was still binding; when THEIR greeting
+  arrived we stopped greeting and proceeded — half-handshake, they starve on
+  turns from a peer whose agreement they never saw (police died at patience;
+  thief settled `timeout` alone). Live windows never hit it because league
+  peers re-greet until game start.
+- **Fix:** exchange_agreement now guarantees at least ONE DELIVERED greeting
+  before proceeding — their arriving greeting proves their door is up, so we
+  deliver ours then; a door that never opens fails fast (an un-serveable
+  opponent means no game anyway). Down-door test updated to gap semantics.
+- **Proof (fixed trees):** two standalone exports played a full series against
+  each other — both sides settled identically, one game_uid, no workspace at
+  runtime. ANSWER: yes, the two role repos alone run real games.
+- **Lesson:** "self-contained" needed a RUNTIME proof, not just a pytest run —
+  and the proof format (two cold clones, simultaneous start) is itself the
+  best race detector we've run.
+## 2026-08-19 · Fix · per-sub-game brain seeding
+- **Context:** every sub-game re-seeded its brain rng from the same static
+  play.seed — the identical game replayed per role parity (the counted logs
+  show three byte-identical thief games; an opponent solves us once and wins
+  thrice). Found while preparing a 25-game statistical self-play run, which
+  would otherwise have produced 25 copies of one game.
+- **Output:** rng = Random(f"{seed}:{sub_game_number}") — varied across
+  sub-games, still fully deterministic given the config seed; test asserts
+  both properties.
+
+## 2026-08-21 · Pairing · il-nv-ai worksheet round 2 — identity commit gate
+- **Context:** il-nv-ai's reply confirmed every worksheet item (scent wire form
+  = ours incl. sparse maps; 180s as the binding turn deadline; roles: we
+  police game 1 + swap for an uncounted game 2) and surfaced one hard gate:
+  their --real-team preflight REFUSES a negotiate whose identity.github_commit
+  is null/missing — a field our identity never carried. Also a sharp catch by
+  them: our "signed 30s response deadline" phrasing — response_timeout_sec
+  lives in our constitution's network block but is NOT one of the 14 hashed
+  terms; it binds only our own per-call budget (10s cap), nothing on the wire.
+- **Output:** identity gains github_commit via playing_commit(): GIT_COMMIT
+  env -> git rev-parse HEAD -> vendored core_manifest.json (standalone export
+  trees) -> "unknown"; test pins 40-hex in a git checkout.
+- **Lesson:** every new partner's gate examines a different corner of the
+  identity block — declare everything the book names (p.156 commit
+  traceability existed all along; a partner finally enforced it).
+
+## 2026-08-21 · Pairing · il-nv-ai final round + config (warm-up ready)
+- **Output:** their last gate (six-key terminal message) PROVEN in code by
+  building our exact concession message (all ten keys, real smell_grid, "You
+  got me." hint, lowercase 64-hex commit); their no-reason default maps our
+  concession to "capture" — closed both ways. `config/il-nv-ai/` committed:
+  num_games 1 (terms hash reproduces their pinned b97de3f6 byte-exact), ids
+  pinned (il-nv-ai-vs-vm__fabi / 00aec465-…), mail fully disabled per their
+  session rules, counted false. Launch: police_agent game 1; thief_agent for
+  the swapped uncounted game 2; both sides fire within the same minute
+  (their 65s connect patience); URL arrives at session start via the
+  git-ignored overlay.
+
+## 2026-08-21 · Live warm-up · il-nv-ai game 1 crashed our peer at the audit
+- **Context:** first live il-nv-ai warm-up window. Owner asked to run a test
+  game. Two ops faults first: a peer left running since 15:58 while the ngrok
+  tunnel was DOWN (we were unreachable from outside the whole time — their
+  16:14 preflight would have hit ngrok's 404), and stdout buffering hid all
+  peer output (relaunched under `PYTHONUNBUFFERED=1` to make the window
+  observable). Their origin returned 16:28:34; handshake fired; a full
+  sub-game played in ~25s — then our process died.
+- **Goal:** diagnose the crash and make the peer survive a non-conforming
+  opponent final.
+- **Actual output:** `KeyError: 'claim'` in `corroborate_capture`, reached via
+  `runtime.run() -> finish()`. Their thief's game-ending `caught: true` final
+  carries no `claim` key. SPEC §3.1 mandates it
+  (`{"claim": [cell], "caught": true}`), so THEY are non-conforming — but the
+  same section's degradation contract is explicit that unparseable evidence
+  "gets the checks the evidence supports and a note for the one it cannot,
+  **never an accusation**". Our code indexed the key unguarded and crashed
+  the whole peer AFTER a completed sub-game: no artifacts emitted, game lost.
+  Fix: strict `_parsed_cell` + `kind: "unknown"` degraded verdict. Writing the
+  malformed-shape test surfaced a SECOND crash on the same path — a claim of
+  `[3]` flowed into `Board.step` and raised `IndexError` — so the guard had to
+  be a strict parse, not a `len`-blind `tuple()`.
+- **Lesson:** our own module docstring already promised "anything unparseable
+  degrades with a note rather than resolving to a cell" — the contract was
+  written, only the missing-key path never implemented it. Sparring against
+  the kit could never catch this: the kit is conforming and always sends
+  `claim`. Only a real foreign peer exercises the non-conforming branch,
+  which is exactly what an uncounted warm-up is for.
+- **Approval:** fix pushed on `fix-claimless-capture-final`; owner merges.
+
+## 2026-08-21 · Evidence · Commit the played-match artifacts
+- **Context:** owner asked to commit the game logs "so the lecturer could check
+  the games actually took place". `logs/*` and `results/*` were fully ignored —
+  only `rule52_ledger.json` was tracked — so NO played game was in git, including
+  the counted nis-yar1 series.
+- **Ambiguity resolved by asking:** "intra-group" could mean our own
+  police-vs-thief self-play (literal reading) or our group's match logs
+  (purpose reading). Owner: league + self-play + the results of both.
+- **Output:** 170 files force-added as evidence SNAPSHOTS — the ignore rules
+  stay in place so routine local runs never appear, and future series are added
+  explicitly the same way (documented in `.gitignore` and `results/README.md`).
+  Excluded four loose `result_… (1).json` browser-download duplicates from the
+  compare ritual: badly named, redundant with the archived sets.
+- **Lesson:** an ignore rule written for noise control silently withheld the
+  single most important piece of submission evidence. Worth checking, per
+  deliverable, whether the thing a grader must SEE is actually tracked.
+
+## 2026-08-21 · Live finding · our final audit ack never reaches the opponent
+- **Context:** il-nv-ai reported that their `submit_audit` went unacknowledged
+  inside their 15s timeout in BOTH runs, and noted it was the exact point where
+  our peer died in run 1 — asking whether their payload arrives at all.
+- **Diagnosis:** it arrives and is fully acted on. The MCP server runs on a
+  `daemon=True` thread; the runtime drains the audit inbox, finishes, emits
+  artifacts and returns, and interpreter shutdown kills that thread mid-response.
+  The ack is lost after the audit was consumed — invisible on our side, an
+  `audit_send_unacknowledged` on theirs. `exchange_audit` already documented the
+  symmetric case ("the winner may exit right after reading its inbox") and
+  suppressed it for our own sends, so we had normalised the bug from the sending
+  side and never saw the receiving side.
+- **Reproduced before fixing** (`scratchpad/ack_race.py`, kept out of the repo):
+  server drains one audit then exits → client NO-ACK after exactly 15.00s,
+  matching their report; server lingers 2s → ACK `{'ok': True}` in 0.22s.
+- **Output:** `shutdown_grace_seconds` (config, 5.0 in all five peer configs);
+  `_linger_for_final_ack` holds an OWNED server open after the last sub-game. An
+  injected transport owns no server and must not pay the wait — that asymmetry is
+  the second test.
+- **Lesson:** a suppressed error on the send path hid a real defect on the
+  receive path for the whole project. Worth asking, whenever we swallow a
+  best-effort failure, what the peer on the other side would be logging.
+
+## 2026-08-21 · Live warm-up · il-nv-ai game 2 (roles swapped, we thief)
+- **Result:** capture for il-nv-ai in 10 steps, 5-20 to them; audit passed 9/9
+  verified and bound; consensus `1be7dd12…`; four artifacts written; first game
+  played on the ack-fix build (`0e463ce`).
+- **Two observations worth carrying forward.** (1) Their identity declares no
+  counted-games count — `games_played_including_this` came through as `null` for
+  il-nv-ai, so the submission form's "opponent's declared number of games" has to
+  be asked for out of band. (2) Our THIEF is the weak side, now against a second
+  independent opponent: caught in 10 steps here, captured 3/3 in the nis-yar1
+  counted series, while their thief lasted 15 steps against our police.
+- **Artifact collision:** a re-run against the same opponent rewrites the same
+  four filenames in `logs/<group>/`, since the name derives from `game_id`. The
+  per-run `results/friendlies/...` archives are what preserve each run; noted in
+  `results/README.md` so a future reader does not read the live dir as a history.
+
+## 2026-08-21 · Strategy · why the thief loses (belief, not tactics)
+- **Context:** owner asked for a stronger thief after live losses (nis-yar1 3/3
+  in the counted series, il-nv-ai captured at step 10). Our own A/B bench claimed
+  3/5 survival, so the bench was not measuring the thing that was failing.
+- **Step 1 — a bench that reproduces the loss.** Added a `HerderCop` that
+  minimises the thief's reachable territory instead of merely closing distance.
+  Shipped thief vs herder: survival 1/10, MEDIAN 10 STEPS — the same step the
+  live opponent captured us on. The old bench's cop was simply too weak to be a
+  measuring stick.
+- **Step 2 — a wrong hypothesis, killed by measurement.** I expected the fault
+  to be the scoring function (distance uncapped => corner-seeking). A
+  territory-maximising thief scored 0/10 EVERYWHERE, worse than shipped. Then an
+  ORACLE test (shipped scoring, cop's true cell instead of belief) scored 6/10 vs
+  herder and 8/10 vs ours. That settles it: THE SCORING WAS NEVER THE PROBLEM.
+- **Step 3 — the actual bug.** The thief's only cop signal was scent, which by
+  construction marks where the cop WAS: instrumented, its believed threat matched
+  the cop's true cell on 3 of 14 turns, lagging 2-3 steps. Meanwhile
+  `runtime.py` sets the police `capture_claim` to its OWN position on every move
+  — the exact cell, on the wire, every turn — and `turn_handler` used it only to
+  answer "am I caught", never to update belief. The thief was fleeing a stale
+  ghost while the cop's coordinates sat unread in the same message.
+- **Output:** `ClaimTracker` (trust a claim only while claims walk like a cop:
+  reachable within the elapsed steps; first claim anchors only) +
+  `BeliefGrid.observe_declared`. Measured after: vs herder 1/10 -> 11/24 and
+  every game now reaches step 35 (was median 10); vs our police 5/10 -> 8/10,
+  matching the oracle exactly.
+- **Lesson:** the bench agreed with us and reality did not, so the bench was
+  wrong first. Build the adversary that reproduces the live failure BEFORE
+  theorising about fixes — my plausible theory was flatly wrong and one oracle
+  run cost less than a day of tuning weights would have.
+- **Follow-up:** `docs/PRD_strategy_brains.md` is still a stub; this evidence
+  belongs in it when that PRD is authored.
+
+## 2026-08-21 · Strategy · the police was tactics-bound, not belief-bound
+- **Oracle first (the method that worked for the thief).** Gave the shipped
+  police the thief's TRUE cell: captures 2/16 vs the blind 3/16 — noise. So its
+  problem was NOT information, and the `BeliefGrid.exclude` channel I was about
+  to wire (dead code, never called) would have bought nothing. The oracle test
+  cost minutes and cancelled a day of work.
+- **The real limit.** A pursuer never closes on an equally fast evader by
+  chasing; distance is the wrong objective. Replaced the police's
+  distance-minimising step with a TERRITORY-minimising one — take the step that
+  leaves the thief the fewest cells it can reach before we can — keeping the
+  existing rule-46 strike / pocket-seal barrier logic untouched.
+- **Result:** captures 3/16 -> 8/16 against our (now much stronger) thief.
+- **The reversal worth acting on:** re-running the oracle AFTER the tactics fix
+  gives 16/16 captures in a median of 13 steps. Information was worthless to a
+  chasing cop and is decisive to a herding one — so the police's belief is now
+  the next lever, where an hour ago it was not. Order matters: fixing belief
+  first would have measured as no gain and been discarded.
+
+## 2026-08-21 · Strategy · the belief grid was destroying an exact observation
+- **Measurement first.** A peer deposits scent on the cell it stands on
+  immediately before sending, so the received map's PEAK is that cell. Probed
+  over a full game: peak == opponent's true cell **35/35**; our belief's estimate
+  == true cell **0/35**. The Bayesian smear (diffuse + multiplicative update)
+  was throwing away a perfect observation arriving every single turn.
+- **Output:** `peak_cell` (strict parse — a sparse/foreign map yields NO sighting
+  rather than a guessed one) fed through the same walks-like-a-peer trust check
+  as the cop's capture claims, then collapsed into belief.
+- **Result — police 8/16 -> 16/16 captures, median 10 steps**, beating the
+  oracle's 13 because the peak is fresher than the oracle snapshot.
+- **The asymmetry, stated honestly.** This change favours the PURSUER. The cop
+  badly needed the thief's cell and now has it exactly; the thief already had the
+  cop's cell from `capture_claim` on every cop move, so it gains only the barrier
+  turns. Our thief's bench numbers FELL (11/24 -> 0/24 vs herder, 5/10 -> 2/12 vs
+  greedy) purely because the bench's cops got the same upgrade — against a FIXED
+  real opponent our thief is strictly better informed than before, not worse.
+- **Strategic conclusion for the counted series:** on 7x7 with 14 barriers and 35
+  steps, a herding cop with an exact position appears to catch ANY evader we can
+  write — our thief survives 0/24 against it. Expect to win our police sub-games
+  and lose our thief sub-games against any opponent who does the same, i.e. a
+  drawn series between two peers that both read the peak.
+
+## 2026-08-21 · Docs · author the four stub PRDs
+- **Context:** a dedicated PRD per algorithm is a mandatory deliverable
+  (guideline §1.3, final checklist §34). Four of twenty were still 4-line
+  placeholders — `strategy_brains`, `belief_map`, `pheromone_scent`,
+  `llm_verbal_layer` — and three of them cover exactly the mechanisms measured
+  and rewritten today, so the material was fresh and evidenced.
+- **Output:** all four authored to the house five-section shape (background,
+  requirements, constructions/interfaces, alternatives-with-rationale, success
+  criteria + named tests). They record the MEASUREMENTS, not just the design:
+  peak-vs-truth 35/35 against belief 0/35, thief 1/10 -> 11/24, police 3/16 ->
+  8/16 -> 16/16, and the discarded candidates (territory-thief 0/10; the
+  `exclude` channel measured worthless while tactics were wrong).
+- **Fact-checked the citations** rather than trusting them: `test_strategy_seam`
+  did not exist (it is `test_strategy`), and the claim that the verbal layer's
+  calls are gatekeeper-covered was softened — with only the template provider
+  wired, that layer makes no external calls at all.
+- **Lesson:** writing these immediately after the work was worth more than
+  writing them at submission time — the rejected alternatives and the "why the
+  obvious fix measured as zero" reasoning would have been unrecoverable a week
+  later, and those are the parts a reader cannot reconstruct from the code.
+
+## 2026-08-21 · Artifacts · persist the opponent's messages as evidence
+- **Context:** when il-nv-ai's thief sent a `caught: true` final with no `claim`
+  key, I wanted to check what their claims looked like across the whole game —
+  and could not. `records` are what WE sealed; their messages lived only in
+  `handler.history`, in memory, and died with the process. A settled game was
+  not re-examinable from our own archive.
+- **Checked the risk BEFORE writing anything.** The log artifact is part of the
+  league's shared 4-artifact scheme and carries a `mutual_agreement` hash, so a
+  new key could in principle break agreement with a partner. It does not: the
+  per-sub-game signature is `consensus_signature(records)` — records alone — and
+  the series signature is over a symmetric aggregate view, not the log files.
+  There is also no strict key validation on our side. A regression test now pins
+  that invariant, because the day it stops holding, two honest peers would
+  disagree about a settled game.
+- **Output:** `received_messages` on the log artifact, deliberately outside the
+  signed material, with the schema description updated to say so. Verified in a
+  live self-play run, not just unit tests: 10 messages filed, carrying
+  `capture_claim` and `smell_grid` — exactly the fields I could not check before.
+- **Cost measured:** ~0.56 KB per message, ~20 KB for a 35-step game, ~120 KB for
+  a 6-sub-game series. Worth it.
+
+## 2026-08-21 · Pairing · vibecode (Ron Marom, Amit Kuperminz)
+- **Context:** new pairing, replying to our first contact with a line-by-line
+  verified response. Deadline moved to 24/08, and we still need counted series 2
+  of 2, so this is a live route.
+- **Their two technical asks, both ANSWERED FROM CODE rather than belief:**
+  (1) they transmit full-precision floats, not 3-decimal-rounded, and asked
+  whether 3 decimals is a requirement of our READER or a description of our
+  WRITER. Checked: `validate_turn_values` requires only that intensities be
+  numeric; `SmellField.absorb`, `observe_smell` and `peak_cell` all handle full
+  precision. Proven by feeding their exact float shape through the path. It is a
+  description of our writer — no change needed on either side.
+  (2) Parity: their driver plays the FIXED convention vibecode = thief on odd,
+  which contradicts the alphabetical league default ("vibecode" sorts first).
+  Their option (a) costs us nothing — `role_for` takes the natural role from the
+  entry point, so launching `police_agent` gives us police on 1/3/5. Same flip we
+  already did for imreeyal (#61). Accepted (a).
+- **Output:** `config/vibecode/` — constitution relabeled `agreed_between`
+  ["vibecode","vm__fabi"] (sorted), terms digest reproduces their
+  `a284082d…`, ids `vibecode-vs-vm__fabi` / `6268e7d5-3ece-cb39-e25b-767cc8c3e735`,
+  num_games 6 for BOTH friendly and counted, role-split dial to their two static
+  doors, counted_games_played 1 truthfully.
+- **Note:** they are 8 counted series in (6W-1L-1D) against our 1 — the most
+  experienced partner we have met. Their doors are down outside windows (probe
+  000), exactly as they stated.
+
+## 2026-08-22 · Reporting · withhold a counted report that is not 6/6 clean
+- **Context:** vibecode's counted runbook withholds automatically below 6/6
+  Verified OK and asked us to confirm an equivalent. We had none: our report is
+  built only after the whole series returns, so a CRASH files nothing — but if
+  all six settled and one audit FAILED we would still have filed, which is
+  exactly the rule-35 surface (two teams filing disagreeing reports of one game
+  is what the league zeroes). Declared the gap rather than papering over it, and
+  refused to build it in the fifteen minutes before the original T.
+- **Output:** `sdk/filing.filable(summaries, expected)` + a guard on the armed
+  send path. Withholds on a short series or any unverified/skipped audit, and
+  the reason NAMES the sub-game, because the operator's next move is to compare
+  that log with the opponent's.
+- **Two deliberate boundaries, both tested:** (1) ARMED runs only — a friendly
+  report must still fire from a ragged series, since at least one partner's gate
+  requires a friendly report at settlement; (2) a DISPUTED capture still files —
+  its crypto audit passed, and SPEC §3.1 says a voided corroboration is
+  "reported, never a unilateral rewrite: the logs decide", so suppressing it
+  would be the unilateral rewrite the SPEC forbids.
+- **Lesson:** the guard is only worth anything at the wiring, so the unit tests
+  on the predicate are backed by two tests that call the real send path and
+  assert nothing reached the lecturer.
