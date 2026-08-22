@@ -1247,3 +1247,26 @@
   own agents a matter of luck. The lecturer's own reference is a mono-repo
   playing both roles. Two days from the deadline, rebuilding would trade a
   documented design for duplicated code.
+
+## 2026-08-22 · Pairing · il-nv-ai counted-series preparation
+- **Verified from their four points, in code not by eye:** series shape matches
+  exactly (terms `a284082d…`, uid `566d2396-…` both reproduce with num_games 6);
+  the tie rule already behaves as the book's Table 18 says — a simulated level
+  series settles 65 apiece on the board to **67 each**, `series_tie: true`, no
+  winner, i.e. the 2-point award; our graded-field answer is **3** counted games
+  including this series (they declare 1), `first_meeting` true.
+- **Config updated:** num_games 1 -> 6, counted_games_played 1 -> 2, and the
+  header rewritten because THE ROLE PARITY INVERTS versus the warm-up — schedule
+  `kit_sorted_first_police_odd_v1` makes il-nv-ai police on odd, so we are THIEF
+  and must launch `thief_agent`. Launching the warm-up's `police_agent` would
+  refuse the window on both stacks.
+- **Two open items flagged rather than assumed:**
+  (1) their shared `game.json` is schema 1.2 / 911 bytes / canonical
+  `034a0687…`; ours is schema 1.3 / 1302 bytes / `c5f1f11b…`. The 14 SIGNED
+  TERMS agree (the uid proves it) but the FILE does not — we need their bytes to
+  adopt verbatim before anything counted.
+  (2) their rule-35 protocol is compare-then-send: exchange the six per-sub-game
+  hashes and the series hash BEFORE anyone mails. Our peer AUTO-FIRES at
+  settlement, so as-is we would mail first and compare second — the exact
+  ordering they are guarding against. Needs mail held in dry-run and a deferred
+  send of the identical filed bytes.

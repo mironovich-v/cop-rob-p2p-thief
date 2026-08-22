@@ -1,9 +1,29 @@
-# PAIRING config: vm__fabi vs il-nv-ai — UNCOUNTED warm-up (their session
-# rules: no league reporting, no mail). num_games 1 per their 14-term hash
-# (b97de3f6…). Game 1: we are POLICE (launch police_agent); optional game 2
-# swaps roles (launch thief_agent). Their connect patience is 65s — both
-# sides press start within the SAME MINUTE. URL arrives at session start →
-# config/il-nv-ai/game.local.toml (git-ignored overlay).
+# PAIRING config: vm__fabi vs il-nv-ai (Ilya + Nadav) — COUNTED SERIES.
+#
+# ROLE PARITY IS THE OPPOSITE OF THE WARM-UP. Schedule
+# `kit_sorted_first_police_odd_v1`: "il-nv-ai" sorts before "vm__fabi", so
+#   games 1,3,5 — il-nv-ai POLICE, vm__fabi THIEF
+#   games 2,4,6 — vm__fabi POLICE, il-nv-ai THIEF
+# Our natural role is therefore THIEF: launch `thief_agent`, NEVER police_agent.
+# A role clash refuses the window on both stacks.
+#
+# num_games 6 (was 1 for the warm-up), so the signed terms and derived ids move:
+#   terms sha256 a284082dfb1572236f1b614d29295a99625539c7d33a096f7f8921bafbc3d08d
+#   game_id      il-nv-ai-vs-vm__fabi
+#   game_uid     566d2396-e3e9-10ef-6f15-ef51ff64acba
+# All three confirmed identical by il-nv-ai before the window.
+#
+# OPEN: their shared game.json is Appendix-B schema 1.2, 911 bytes, canonical
+# sha256 034a068773dc3a26b41e67f1cce0f2c511d34582af76c790008b41479d1933fb. Ours
+# is schema 1.3 and hashes differently, so the FILE is not yet byte-identical
+# even though the 14 signed terms agree. Adopt their file verbatim when it
+# arrives (the precedent with every partner) before playing anything counted.
+#
+# They run ONE tunnel for the whole series (not role-split), sent once, and
+# write "GO game N" before each sub-game.
+#
+# Run: uv run python -m thief_agent --config config/il-nv-ai --counted
+# Tunnel: ngrok http 8802 --domain=cop-rob-p2p.ngrok.app --host-header=rewrite
 version = "1.10"
 
 [game]
@@ -15,7 +35,8 @@ repos = { cop = "https://github.com/mironovich-v/cop-rob-p2p-police", thief = "h
 mcp_servers = { cop = "https://cop-rob-p2p.ngrok.app/mcp", thief = "https://cop-rob-p2p.ngrok.app/mcp" }
 opponent_group_id = "il-nv-ai"
 counted = false                       # flip ONLY for the one counted series (+ --counted)
-counted_games_played = 1              # truthful: nis-yar1 counted banked 2026-08-18
+counted_games_played = 2              # nis-yar1 2026-08-18 + vibecode 2026-08-22;
+                                      # an armed run declares 3 including this series
 tie_rule = "series_add"               # declared in the constitution chat (ADR-17)
 
 [belief]
