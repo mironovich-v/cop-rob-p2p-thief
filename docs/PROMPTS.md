@@ -1380,3 +1380,34 @@
   would compute a different uid and never know why until a handshake failed.
 - **Kept the working file** (theirs + the key) so the repo stays playable, with
   the divergence stated in the config header rather than silently absorbed.
+
+## 2026-08-22 · Strategy · a night on the brains: one gain, five dead ends
+- **Mandate:** owner out, PR limits waived, "make the engine stronger".
+- **The target was the live cop failure** (vibecode friendlies: our cop shadowed
+  their thief for all 34 steps, sat at distance EXACTLY 2 on 29 of 35 turns,
+  never adjacent, 14 barriers unused). **I could not reproduce it**, after five
+  attempts, and that is the headline finding:
+  1. `StandoffThief` (safe-then-roomy) — our cop catches it 12/12 in 11 steps.
+  2. **Lagged belief** (their scent peak = previous cell, not current) — still
+     12/12. Disproved the "we chase a stale target" theory.
+  3. **Tied scent maxima** making our target flicker — the live maps have a
+     UNIQUE maximum on 35/35 turns. Disproved.
+  4. **Minimax cop** (minimise the thief's best REPLY territory) — measurably
+     WORSE: 6/12 against standoff versus the shipped 12/12. Discarded.
+  5. **A cop that can STAY** (it never does, so it cannot change distance
+     parity, and an evader holding even distance can never be landed on — the
+     live data is 29 even / 5 odd). Implemented and measured: no difference at
+     all. Discarded.
+  Also disproved a wall-based squeeze: barriers may only be placed ADJACENT TO
+  THE POLICE, and a wall there *increases* the thief's territory (9 -> 11 in the
+  live position) because it blocks our own approach more than its escape.
+- **What DID work, and shipped:** the evader had no notion of REACH — it would
+  step into a cell the cop simply walks onto next turn. `beyond_reach` makes
+  safety the first key and the existing score the second. Median survival against
+  our own cop 10 -> 12 steps. Four more elaborate evader designs (roomy, central,
+  parity-locking) measured NO BETTER than this one rule, so the simplest form
+  shipped.
+- **Judgement:** I did not ship the unvalidated cop changes. Two of the five
+  ideas measured worse, and pushing strategy we cannot reproduce a failure for,
+  days before a counted series, is how a working engine gets broken. The live
+  puzzle stays open and documented rather than "fixed" by guess.
