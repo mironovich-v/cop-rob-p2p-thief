@@ -1110,3 +1110,25 @@
 - **Note:** they are 8 counted series in (6W-1L-1D) against our 1 — the most
   experienced partner we have met. Their doors are down outside windows (probe
   000), exactly as they stated.
+
+## 2026-08-22 · Reporting · withhold a counted report that is not 6/6 clean
+- **Context:** vibecode's counted runbook withholds automatically below 6/6
+  Verified OK and asked us to confirm an equivalent. We had none: our report is
+  built only after the whole series returns, so a CRASH files nothing — but if
+  all six settled and one audit FAILED we would still have filed, which is
+  exactly the rule-35 surface (two teams filing disagreeing reports of one game
+  is what the league zeroes). Declared the gap rather than papering over it, and
+  refused to build it in the fifteen minutes before the original T.
+- **Output:** `sdk/filing.filable(summaries, expected)` + a guard on the armed
+  send path. Withholds on a short series or any unverified/skipped audit, and
+  the reason NAMES the sub-game, because the operator's next move is to compare
+  that log with the opponent's.
+- **Two deliberate boundaries, both tested:** (1) ARMED runs only — a friendly
+  report must still fire from a ragged series, since at least one partner's gate
+  requires a friendly report at settlement; (2) a DISPUTED capture still files —
+  its crypto audit passed, and SPEC §3.1 says a voided corroboration is
+  "reported, never a unilateral rewrite: the logs decide", so suppressing it
+  would be the unilateral rewrite the SPEC forbids.
+- **Lesson:** the guard is only worth anything at the wiring, so the unit tests
+  on the predicate are backed by two tests that call the real send path and
+  assert nothing reached the lecturer.

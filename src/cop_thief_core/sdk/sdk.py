@@ -14,6 +14,7 @@ from cop_thief_core.exceptions import SimulationError
 from cop_thief_core.infra.email_sender import EmailSender
 from cop_thief_core.interop.negotiation import terms_from_config, validate_minimums
 from cop_thief_core.reporting.emit import emit_series
+from cop_thief_core.sdk.filing import filable
 from cop_thief_core.sdk.series import run_series
 from cop_thief_core.shared.config import ConfigManager
 
@@ -122,6 +123,14 @@ class SimulationSdk:
         single named attachment); subject in the reference form. The Hebrew
         book-schema report stays a repo artifact, never mailed (§6.1 documented
         tension, resolved by both league teams toward the results file)."""
+        if armed:
+            # Rule 35: an incomplete or unverified series is one NOBODY files —
+            # two teams filing disagreeing reports of one game is the shape the
+            # rule zeroes. Friendlies are exempt on purpose (see sdk.filing).
+            may_file, reason = filable(
+                series.summaries, self.config.get("game.num_games"))
+            if not may_file:
+                return {"sent": False, "reason": f"withheld: {reason}"}
         summary = series.summaries[-1]
         body = json.dumps(report, ensure_ascii=False, indent=2)  # == the filed bytes
         winner = report["final_result"].get("winner_group") or "tie"
