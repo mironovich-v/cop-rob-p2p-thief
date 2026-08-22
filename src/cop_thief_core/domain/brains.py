@@ -17,6 +17,7 @@ from cop_thief_core.domain.belief import BeliefGrid
 from cop_thief_core.domain.own_state import OwnGameState
 from cop_thief_core.domain.tactics import (
     DEFAULTS,
+    beyond_reach,
     police_barrier,
     recent_trail,
     territory,
@@ -101,8 +102,9 @@ class BrainBase:
 
 
 class ThiefBrain(BrainBase):
-    """Evade with exits: freedom-dominant scoring (capped distance from the
-    believed cop, exit count, recent-trail penalty) — never self-corner."""
+    """Evade out of reach first, then with exits: safety dominates the
+    freedom/distance scoring, because a cell the cop can step onto next turn is
+    worth nothing however roomy it looks."""
 
     role = Role.THIEF
 
@@ -111,8 +113,11 @@ class ThiefBrain(BrainBase):
         recent = recent_trail(state, self._tactics["recent_window"])
         shuffled = list(moves)
         self._rng.shuffle(shuffled)  # tie-break randomly: a deterministic evader is pin-able
-        return max(shuffled, key=lambda m: thief_score(
-            state.board, m[1], threat, state.barriers, recent, self._tactics))
+        # Safety FIRST, score second. When every cell is reachable the key
+        # degrades to the score alone, so a cornered thief still plays its best.
+        return max(shuffled, key=lambda m: (
+            beyond_reach(state.board, m[1], threat, state.barriers),
+            thief_score(state.board, m[1], threat, state.barriers, recent, self._tactics)))
 
 
 class PoliceBrain(BrainBase):
