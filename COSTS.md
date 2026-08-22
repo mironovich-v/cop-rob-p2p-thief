@@ -106,6 +106,7 @@
 | 2026-08-22 | PR (export) | fix-export-results-evidence | (pending) | Fable 5 · high | export results/ from git ls-files (played_commits.md + results/README.md were never shipping); fix a pinned uid test I had claimed passing | ~0.2 session | in review |
 | 2026-08-22 | PR (publish) | fix-publish-force-adds-evidence | (pending) | Fable 5 · high | exported .gitignore hid results/* so `git add -A` published NO evidence; force-add + published-count printed | ~0.2 session | in review |
 | 2026-08-22 | PR (reporting) | feat-deferred-report-send | (pending) | Fable 5 · high | compare-then-send tool: sends filed bytes verbatim, re-applies the 6/6 guard, prints the message-id | ~0.3 session | in review |
+| 2026-08-22 | PR (interop) | fix-numeric-hardware-spec | (pending) | Fable 5 · high | numeric hardware declaration (il-nv-ai validator refused strings); tie-award fork researched in SPEC §6 | ~0.3 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the
