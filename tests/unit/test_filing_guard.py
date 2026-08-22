@@ -11,7 +11,7 @@ requires a friendly report to arrive at settlement.
 from pathlib import Path
 from types import SimpleNamespace
 
-from cop_thief_core.sdk.filing import filable
+from cop_thief_core.sdk.filing import filable, filable_report
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 REPORT = {"final_result": {"winner_group": "vibecode"}}
@@ -111,3 +111,31 @@ def test_friendly_still_sends_from_the_same_series(tmp_path):
     result = sdk._email_report(_ragged_series(), REPORT, armed=False)
     assert result["sent"] is True
     assert len(sdk.email_sender.sent) == 1
+
+
+# --- the same rule, applied to a filed result artifact ----------------------
+
+def _result(rows, num=6):
+    return {"num_sub_games": num,
+            "sub_games": [{"sub_game_number": n + 1,
+                           "audit": {"log_verified": ok, "tampered": not ok}}
+                          for n, ok in enumerate(rows)]}
+
+
+def test_filed_report_is_sendable_when_every_audit_verified():
+    ok, reason = filable_report(_result([True] * 6))
+    assert ok is True and reason == ""
+
+
+def test_filed_report_with_a_failed_audit_is_refused():
+    """The deferred send must apply the SAME rule as the auto-send — otherwise
+    it becomes a way to file exactly the report the guard exists to withhold."""
+    ok, reason = filable_report(_result([True, True, False, True, True, True]))
+    assert ok is False
+    assert "3" in reason
+
+
+def test_filed_report_with_missing_sub_games_is_refused():
+    ok, reason = filable_report(_result([True] * 4, num=6))
+    assert ok is False
+    assert "4" in reason and "6" in reason

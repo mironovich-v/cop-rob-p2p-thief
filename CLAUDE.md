@@ -583,6 +583,22 @@ cd copthief-league-protocol && uv run python gen_vectors.py && \
 uv run python scripts/export_repos.py   # produces dist/police-agent, dist/thief-agent
 ```
 
+### Counted series with a compare-then-send partner
+```bash
+# 1) arm the window with mail HELD, so settlement does not mail first
+#    (overlay: game.counted = true, email.mode = "dry_run", lecturer-only recipient)
+# 2) play the series
+# 3) exchange the per-sub-game hashes + the series hash with the opponent
+# 4) only then send the filed bytes, and report the message-id back:
+uv run python scripts/send_filed_report.py --config config/<pairing> \
+    --result logs/<group_id>/result_<game_id>.json --dry-run   # inspect first
+uv run python scripts/send_filed_report.py --config config/<pairing> \
+    --result logs/<group_id>/result_<game_id>.json
+```
+Sends the artifact's bytes verbatim (identical to what the auto-send would have
+mailed), re-applies the 6/6 withholding rule so it cannot be a bypass, and prints
+the Gmail message-id that partners ask to exchange within 15 minutes.
+
 ### Republish the submission repos (after EVERY merge to main)
 ```bash
 uv run bash scripts/publish_submissions.sh

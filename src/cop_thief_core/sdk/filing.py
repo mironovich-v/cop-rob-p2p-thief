@@ -35,3 +35,25 @@ def filable(summaries: list[dict], expected: int) -> tuple[bool, str]:
     if unverified:
         return False, f"audit not verified for sub-game(s) {', '.join(unverified)}"
     return True, ""
+
+
+def filable_report(result: dict) -> tuple[bool, str]:
+    """The same rule as :func:`filable`, applied to a FILED result artifact.
+
+    The deferred send (``scripts/send_filed_report.py``) reads an artifact from
+    disk rather than a live series, and it must not become a way to file exactly
+    the report the auto-send guard withheld — so the rule lives here once and
+    both paths call it.
+    """
+    sub_games = result.get("sub_games") or []
+    expected = result.get("num_sub_games")
+    if expected is None or len(sub_games) != expected:
+        return False, f"incomplete series: {len(sub_games)} of {expected} sub-games settled"
+    unverified = [
+        str(row.get("sub_game_number", "?"))
+        for row in sub_games
+        if not (row.get("audit") or {}).get("log_verified")
+    ]
+    if unverified:
+        return False, f"audit not verified for sub-game(s) {', '.join(unverified)}"
+    return True, ""
