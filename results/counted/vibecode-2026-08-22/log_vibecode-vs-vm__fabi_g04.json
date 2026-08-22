@@ -1,0 +1,899 @@
+{
+  "_schema": "Per-sub-game commit-reveal log for the replay viewer: every sealed step and the mutual-audit result, plus received_messages: the opponent turns this peer applied, filed as evidence and never part of the signature. Static team metadata lives in the declaration; join by game_uid.",
+  "schema_version": "1.1",
+  "game_id": "vibecode-vs-vm__fabi",
+  "game_uid": "6268e7d5-3ece-cb39-e25b-767cc8c3e735",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_vibecode-vs-vm__fabi.json",
+    "config": "config_vibecode-vs-vm__fabi_g<NN>.json",
+    "log": "log_vibecode-vs-vm__fabi_g<NN>.json",
+    "result": "result_vibecode-vs-vm__fabi.json"
+  },
+  "summary": {
+    "sub_game_number": 4,
+    "group_id": "vm__fabi",
+    "role": "thief",
+    "opponent_group_id": "vibecode",
+    "result": "capture",
+    "winner_role": "police",
+    "steps": 13,
+    "timezone": "Asia/Jerusalem",
+    "started_at": "2026-08-22T13:26:14.157662+00:00",
+    "ended_at": "2026-08-22T13:26:32.957662+00:00",
+    "duration_seconds": 18.8,
+    "tokens_total": 0,
+    "audit": {
+      "passed": true,
+      "verified_steps": 13,
+      "failed_steps": [],
+      "bound_steps": 12
+    }
+  },
+  "records": [
+    {
+      "payload": {
+        "step": 0,
+        "type": "system_spec",
+        "spec": {
+          "os": "Linux 6.6.87.2-microsoft-standard-WSL2",
+          "cpu_type": "x86_64",
+          "cpu_cores": 16,
+          "cpu_freq_mhz": "unknown",
+          "ram_gb": 15.5,
+          "gpu_model": "unknown",
+          "vram_gb": "unknown"
+        },
+        "model": "template",
+        "code_version": "1.0.0",
+        "group_name": "VM-Fabi",
+        "sub_game_number": 4
+      },
+      "nonce": "9d9a2bf749ce79a1413b6651d9083bc7",
+      "commit": "e6fea42324f4462c4b923b42e0e35851ba13c29ac54ded55a80f2fa16a71f84e"
+    },
+    {
+      "payload": {
+        "step": 1,
+        "state": "grid=7x7;self=[3, 4];barriers=[]",
+        "position": [
+          3,
+          4
+        ],
+        "move": "MOVE:E",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Catch me if you can - I'm slipping past Central Park!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "31be016e06b947a3a0978c5385724bb8",
+      "commit": "70be0d4dfcf766be8edc16c812d541efe0d7e3c7ae63fc40a533a952c4eb8b42"
+    },
+    {
+      "payload": {
+        "step": 2,
+        "state": "grid=7x7;self=[4, 4];barriers=[]",
+        "position": [
+          4,
+          4
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Catch me if you can - I'm slipping past Wall Street!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "db7851cf5a8dd633f1e0dbd7186ea3df",
+      "commit": "00f04498e10374326f5ea5ec223440e273acede2c9a777372559d7281e49cbd9"
+    },
+    {
+      "payload": {
+        "step": 3,
+        "state": "grid=7x7;self=[4, 5];barriers=[]",
+        "position": [
+          4,
+          5
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "c402320c9bc7a4d9cb48a7266ae4a253",
+      "commit": "9c1d713ddaf48ca5fd2d361111b6b563b05a8a39d2795f0b282e4a49e63bc015"
+    },
+    {
+      "payload": {
+        "step": 4,
+        "state": "grid=7x7;self=[5, 5];barriers=[]",
+        "position": [
+          5,
+          5
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "033d6c7ff009b0fede2d146b3e34c2cc",
+      "commit": "58c98ba852616ae789f49c02b752335614ab781d62c61d6d706960a6df5abc37"
+    },
+    {
+      "payload": {
+        "step": 5,
+        "state": "grid=7x7;self=[6, 5];barriers=[]",
+        "position": [
+          6,
+          5
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "71fbdc38539547194e776845db78d3c5",
+      "commit": "a7bf539caa7c5e24cb63f83d02a7dc510efcf94251b3914e1123f9a25e1cba57"
+    },
+    {
+      "payload": {
+        "step": 6,
+        "state": "grid=7x7;self=[6, 6];barriers=[]",
+        "position": [
+          6,
+          6
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Still one step ahead, near Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "8e6197cb29da432a04236d0cab1326e2",
+      "commit": "e94ed1903382c348f2dccf3b20e9f69c37df71d8a4370bfac12f96d5ddf01c4a"
+    },
+    {
+      "payload": {
+        "step": 7,
+        "state": "grid=7x7;self=[5, 6];barriers=[]",
+        "position": [
+          5,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Catch me if you can - I'm slipping past the East Village!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "e1229be72b881a468caacacc5de6f4a8",
+      "commit": "ff829cc8db248bc9232bb9067108fc3a7a5600f18941dd80adf44763bf5c7c08"
+    },
+    {
+      "payload": {
+        "step": 8,
+        "state": "grid=7x7;self=[4, 6];barriers=[]",
+        "position": [
+          4,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "2a5088bebec124a1dca6c2c37e41ce33",
+      "commit": "642d2c60d12e6d2c3da42fc8fb395a32888f84d2c645408febb49de8f1ecf7ed"
+    },
+    {
+      "payload": {
+        "step": 9,
+        "state": "grid=7x7;self=[3, 6];barriers=[]",
+        "position": [
+          3,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Still one step ahead, near Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "7257da7cd6a4626e8250ae8a41e625ef",
+      "commit": "248a9e5d9e6b224057cd5c0ae1835f8066df32eb745f691ae169c1b392ed0a86"
+    },
+    {
+      "payload": {
+        "step": 10,
+        "state": "grid=7x7;self=[2, 6];barriers=[]",
+        "position": [
+          2,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Too slow, officer - Central Park is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "64d0f173eac283b8fa7efab0300ab174",
+      "commit": "bd3468cbf1123397ce3bcaed6001db5dde25b60686a954319443022181c01d8b"
+    },
+    {
+      "payload": {
+        "step": 11,
+        "state": "grid=7x7;self=[1, 6];barriers=[]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Still one step ahead, near the Brooklyn Bridge.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "00b485386049385af0f1b101bc146dcd",
+      "commit": "922f788eec856edbe51883802b8b2fcbe961c8d1459438a1c53f91f3530ec73d"
+    },
+    {
+      "payload": {
+        "step": 12,
+        "state": "grid=7x7;self=[1, 5];barriers=[]",
+        "position": [
+          1,
+          5
+        ],
+        "move": "MOVE:W",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Still one step ahead, near Times Square.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "e9e0c615ef8aeb25b800414a5a15bb6a",
+      "commit": "98df10e62509f0331520c1bb0c99065073b7e1bc133fb73c4eb2b75a311d655a"
+    },
+    {
+      "payload": {
+        "step": 13,
+        "state": "grid=7x7;self=[1, 5];barriers=[]",
+        "position": [
+          1,
+          5
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You got me.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "ea603887083801a3c18decee16985b13",
+      "commit": "aa45f49e239b22ad5b1c5a488347388de055748346ea79c72ab0a5ab2e0f517a"
+    }
+  ],
+  "received_messages": [
+    {
+      "step": 1,
+      "sender": "police",
+      "hint": "Repositioning.",
+      "smell_grid": {
+        "0,0": 0.5,
+        "0,1": 0.5,
+        "0,2": 0.2,
+        "1,0": 0.8,
+        "1,1": 0.5,
+        "1,2": 0.2,
+        "2,0": 0.5,
+        "2,1": 0.5,
+        "2,2": 0.2,
+        "3,0": 0.2,
+        "3,1": 0.2,
+        "3,2": 0.2
+      },
+      "commit": "abc3500f1a5244fa231c361ceec9f7c8035e7759e34942cae147ac63bf3e058a",
+      "timestamp": "2026-08-22T13:26:22.949539+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        1,
+        0
+      ],
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 2,
+      "sender": "police",
+      "hint": "Repositioning.",
+      "smell_grid": {
+        "0,0": 0.4,
+        "0,1": 0.4,
+        "0,2": 0.2,
+        "1,0": 0.7,
+        "1,1": 0.5,
+        "1,2": 0.2,
+        "2,0": 0.8,
+        "2,1": 0.5,
+        "2,2": 0.2,
+        "3,0": 0.5,
+        "3,1": 0.5,
+        "3,2": 0.2,
+        "4,0": 0.2,
+        "4,1": 0.2,
+        "4,2": 0.2
+      },
+      "commit": "23845ff0aa4c9ce8d193559b0ca5ad4ee76a301a5cca0e78a8ffb75ec5d50e1f",
+      "timestamp": "2026-08-22T13:26:24.231321+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        2,
+        0
+      ],
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 3,
+      "sender": "police",
+      "hint": "Going south.",
+      "smell_grid": {
+        "0,0": 0.3,
+        "0,1": 0.3,
+        "0,2": 0.1,
+        "1,0": 0.6,
+        "1,1": 0.4,
+        "1,2": 0.2,
+        "2,0": 0.7,
+        "2,1": 0.5,
+        "2,2": 0.2,
+        "3,0": 0.8,
+        "3,1": 0.5,
+        "3,2": 0.2,
+        "4,0": 0.5,
+        "4,1": 0.5,
+        "4,2": 0.2,
+        "5,0": 0.2,
+        "5,1": 0.2,
+        "5,2": 0.2
+      },
+      "commit": "6eaf0d6d2ae76cf632a06422c52ea43615bbeee318f8a61693b590a6a0265106",
+      "timestamp": "2026-08-22T13:26:25.323310+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        3,
+        0
+      ],
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 4,
+      "sender": "police",
+      "hint": "Going right.",
+      "smell_grid": {
+        "0,0": 0.2,
+        "0,1": 0.2,
+        "1,0": 0.5,
+        "1,1": 0.3,
+        "1,2": 0.2,
+        "2,0": 0.6,
+        "2,1": 0.5,
+        "2,2": 0.5,
+        "3,0": 0.7,
+        "3,1": 0.8,
+        "3,2": 0.5,
+        "4,0": 0.5,
+        "4,1": 0.5,
+        "4,2": 0.5,
+        "5,0": 0.2,
+        "5,1": 0.2,
+        "5,2": 0.2,
+        "1,3": 0.2,
+        "2,3": 0.2,
+        "3,3": 0.2,
+        "4,3": 0.2,
+        "5,3": 0.2
+      },
+      "commit": "d38e5575b6fa8d14e5d33f3fe1accfcf071e3592bf26128fb33e133255ef9c66",
+      "timestamp": "2026-08-22T13:26:26.539481+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        3,
+        1
+      ],
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 5,
+      "sender": "police",
+      "hint": "Moving north.",
+      "smell_grid": {
+        "0,0": 0.1,
+        "0,1": 0.1,
+        "1,0": 0.4,
+        "1,1": 0.2,
+        "1,2": 0.1,
+        "2,0": 0.5,
+        "2,1": 0.4,
+        "2,2": 0.4,
+        "3,0": 0.6,
+        "3,1": 0.7,
+        "3,2": 0.5,
+        "4,0": 0.5,
+        "4,1": 0.8,
+        "4,2": 0.5,
+        "5,0": 0.5,
+        "5,1": 0.5,
+        "5,2": 0.5,
+        "1,3": 0.1,
+        "2,3": 0.2,
+        "3,3": 0.2,
+        "4,3": 0.2,
+        "5,3": 0.2,
+        "6,0": 0.2,
+        "6,1": 0.2,
+        "6,2": 0.2,
+        "6,3": 0.2
+      },
+      "commit": "7e4c3f5428c9aa796caf864e619a465e706670422184c45a0f5970dcc58365f5",
+      "timestamp": "2026-08-22T13:26:28.296596+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        4,
+        1
+      ],
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 6,
+      "sender": "police",
+      "hint": "Moving west.",
+      "smell_grid": {
+        "1,0": 0.3,
+        "1,1": 0.1,
+        "2,0": 0.4,
+        "2,1": 0.3,
+        "2,2": 0.3,
+        "3,0": 0.5,
+        "3,1": 0.6,
+        "3,2": 0.5,
+        "4,0": 0.4,
+        "4,1": 0.7,
+        "4,2": 0.8,
+        "5,0": 0.4,
+        "5,1": 0.5,
+        "5,2": 0.5,
+        "2,3": 0.2,
+        "3,3": 0.5,
+        "4,3": 0.5,
+        "5,3": 0.5,
+        "6,0": 0.2,
+        "6,1": 0.2,
+        "6,2": 0.2,
+        "6,3": 0.2,
+        "2,4": 0.2,
+        "3,4": 0.2,
+        "4,4": 0.2,
+        "5,4": 0.2,
+        "6,4": 0.2
+      },
+      "commit": "58e2d1f361e109a9332a7129fca5daf6982814d8d62c076684fac5b5d60fdf8c",
+      "timestamp": "2026-08-22T13:26:29.962645+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        4,
+        2
+      ],
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 7,
+      "sender": "police",
+      "hint": "Repositioning.",
+      "smell_grid": {
+        "1,0": 0.2,
+        "2,0": 0.3,
+        "2,1": 0.2,
+        "2,2": 0.2,
+        "3,0": 0.4,
+        "3,1": 0.5,
+        "3,2": 0.5,
+        "4,0": 0.3,
+        "4,1": 0.6,
+        "4,2": 0.7,
+        "5,0": 0.3,
+        "5,1": 0.4,
+        "5,2": 0.5,
+        "2,3": 0.2,
+        "3,3": 0.5,
+        "4,3": 0.8,
+        "5,3": 0.5,
+        "6,0": 0.1,
+        "6,1": 0.2,
+        "6,2": 0.2,
+        "6,3": 0.2,
+        "2,4": 0.2,
+        "3,4": 0.5,
+        "4,4": 0.5,
+        "5,4": 0.5,
+        "6,4": 0.2,
+        "2,5": 0.2,
+        "3,5": 0.2,
+        "4,5": 0.2,
+        "5,5": 0.2,
+        "6,5": 0.2
+      },
+      "commit": "4b7c5ba7425e89cafdd7eea5e9d216dc01e1375767a607ef78ad0297e88c9c7a",
+      "timestamp": "2026-08-22T13:26:31.993422+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        4,
+        3
+      ],
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 8,
+      "sender": "police",
+      "hint": "Moving west.",
+      "smell_grid": {
+        "1,0": 0.1,
+        "2,0": 0.2,
+        "2,1": 0.1,
+        "2,2": 0.2,
+        "3,0": 0.3,
+        "3,1": 0.4,
+        "3,2": 0.4,
+        "4,0": 0.2,
+        "4,1": 0.5,
+        "4,2": 0.6,
+        "5,0": 0.2,
+        "5,1": 0.3,
+        "5,2": 0.4,
+        "2,3": 0.2,
+        "3,3": 0.5,
+        "4,3": 0.7,
+        "5,3": 0.5,
+        "6,1": 0.1,
+        "6,2": 0.2,
+        "6,3": 0.2,
+        "2,4": 0.2,
+        "3,4": 0.5,
+        "4,4": 0.8,
+        "5,4": 0.5,
+        "6,4": 0.2,
+        "2,5": 0.2,
+        "3,5": 0.5,
+        "4,5": 0.5,
+        "5,5": 0.5,
+        "6,5": 0.2,
+        "2,6": 0.2,
+        "3,6": 0.2,
+        "4,6": 0.2,
+        "5,6": 0.2,
+        "6,6": 0.2
+      },
+      "commit": "5ef82c8dfe483f5504495743248b1bada9af6c41b7138fefbc081e2c46056461",
+      "timestamp": "2026-08-22T13:26:33.728652+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        4,
+        4
+      ],
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 9,
+      "sender": "police",
+      "hint": "Going down.",
+      "smell_grid": {
+        "2,0": 0.1,
+        "2,2": 0.2,
+        "3,0": 0.2,
+        "3,1": 0.3,
+        "3,2": 0.3,
+        "4,0": 0.1,
+        "4,1": 0.4,
+        "4,2": 0.5,
+        "5,0": 0.1,
+        "5,1": 0.2,
+        "5,2": 0.3,
+        "2,3": 0.5,
+        "3,3": 0.5,
+        "4,3": 0.6,
+        "5,3": 0.4,
+        "6,2": 0.1,
+        "6,3": 0.1,
+        "2,4": 0.5,
+        "3,4": 0.8,
+        "4,4": 0.7,
+        "5,4": 0.4,
+        "6,4": 0.1,
+        "2,5": 0.5,
+        "3,5": 0.5,
+        "4,5": 0.5,
+        "5,5": 0.4,
+        "6,5": 0.1,
+        "2,6": 0.2,
+        "3,6": 0.2,
+        "4,6": 0.2,
+        "5,6": 0.2,
+        "6,6": 0.1,
+        "1,2": 0.2,
+        "1,3": 0.2,
+        "1,4": 0.2,
+        "1,5": 0.2,
+        "1,6": 0.2
+      },
+      "commit": "a4fc145fbfc52ec54336e6600223506219d4c459c8257b1fecbb44f364d98300",
+      "timestamp": "2026-08-22T13:26:35.420095+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        3,
+        4
+      ],
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 10,
+      "sender": "police",
+      "hint": "Going right.",
+      "smell_grid": {
+        "2,2": 0.1,
+        "3,0": 0.1,
+        "3,1": 0.2,
+        "3,2": 0.2,
+        "4,1": 0.3,
+        "4,2": 0.4,
+        "5,1": 0.1,
+        "5,2": 0.2,
+        "2,3": 0.4,
+        "3,3": 0.4,
+        "4,3": 0.5,
+        "5,3": 0.3,
+        "2,4": 0.5,
+        "3,4": 0.7,
+        "4,4": 0.6,
+        "5,4": 0.3,
+        "2,5": 0.5,
+        "3,5": 0.8,
+        "4,5": 0.5,
+        "5,5": 0.3,
+        "2,6": 0.5,
+        "3,6": 0.5,
+        "4,6": 0.5,
+        "5,6": 0.2,
+        "1,2": 0.1,
+        "1,3": 0.2,
+        "1,4": 0.2,
+        "1,5": 0.2,
+        "1,6": 0.2
+      },
+      "commit": "850290629ebf15935a4fdf23bb26de436e0f616168c02402a2c8075c8edf1a42",
+      "timestamp": "2026-08-22T13:26:37.522771+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        3,
+        5
+      ],
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 11,
+      "sender": "police",
+      "hint": "Heading north.",
+      "smell_grid": {
+        "3,1": 0.1,
+        "3,2": 0.1,
+        "4,1": 0.2,
+        "4,2": 0.3,
+        "5,2": 0.1,
+        "2,3": 0.3,
+        "3,3": 0.3,
+        "4,3": 0.4,
+        "5,3": 0.2,
+        "2,4": 0.5,
+        "3,4": 0.6,
+        "4,4": 0.5,
+        "5,4": 0.2,
+        "2,5": 0.8,
+        "3,5": 0.7,
+        "4,5": 0.4,
+        "5,5": 0.2,
+        "2,6": 0.5,
+        "3,6": 0.5,
+        "4,6": 0.4,
+        "5,6": 0.1,
+        "1,3": 0.2,
+        "1,4": 0.5,
+        "1,5": 0.5,
+        "1,6": 0.5,
+        "0,3": 0.2,
+        "0,4": 0.2,
+        "0,5": 0.2,
+        "0,6": 0.2
+      },
+      "commit": "8319181773d7b4721b06c80d95dd1fe59964c1d10db35726f1f024190866c5fe",
+      "timestamp": "2026-08-22T13:26:39.217394+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        2,
+        5
+      ],
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 12,
+      "sender": "police",
+      "hint": "Heading north.",
+      "smell_grid": {
+        "4,1": 0.1,
+        "4,2": 0.2,
+        "2,3": 0.2,
+        "3,3": 0.2,
+        "4,3": 0.3,
+        "5,3": 0.1,
+        "2,4": 0.5,
+        "3,4": 0.5,
+        "4,4": 0.4,
+        "5,4": 0.1,
+        "2,5": 0.7,
+        "3,5": 0.6,
+        "4,5": 0.3,
+        "5,5": 0.1,
+        "2,6": 0.5,
+        "3,6": 0.4,
+        "4,6": 0.3,
+        "1,3": 0.2,
+        "1,4": 0.5,
+        "1,5": 0.8,
+        "1,6": 0.5,
+        "0,3": 0.2,
+        "0,4": 0.5,
+        "0,5": 0.5,
+        "0,6": 0.5
+      },
+      "commit": "d583f85eed564fdcb591c9806aadfc2924b0e0869c4739048f41ede19256e880",
+      "timestamp": "2026-08-22T13:26:39.605258+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        1,
+        5
+      ],
+      "claim_response": null,
+      "win_claim": null
+    }
+  ],
+  "mutual_agreement": {
+    "opponent_group_id": "vibecode",
+    "sha256": "1be15f924f4dc960f69a8e4f8cc50a28dde040418bdcee1c2451ca1f4f63b652",
+    "confirmed": true
+  }
+}

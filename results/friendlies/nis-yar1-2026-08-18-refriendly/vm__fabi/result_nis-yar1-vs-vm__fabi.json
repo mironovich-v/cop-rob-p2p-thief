@@ -1,0 +1,230 @@
+{
+  "_schema": "Aggregated final result over all sub-games: per-group scores, the series winner/tie, and the mutual-agreement signature. Both teams email their own copy.",
+  "schema_version": "1.1",
+  "report_type": "final_game_result",
+  "game_id": "nis-yar1-vs-vm__fabi",
+  "game_uid": "b38f33f3-3ec8-be1d-a464-4fa5c9cb35df",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_nis-yar1-vs-vm__fabi.json",
+    "config": "config_nis-yar1-vs-vm__fabi_g<NN>.json",
+    "log": "log_nis-yar1-vs-vm__fabi_g<NN>.json",
+    "result": "result_nis-yar1-vs-vm__fabi.json",
+    "github": {
+      "vm__fabi": {
+        "cop": "https://github.com/mironovich-v/cop-rob-p2p-police",
+        "thief": "https://github.com/mironovich-v/cop-rob-p2p-thief"
+      },
+      "nis-yar1": {
+        "cop": "https://github.com/NisoDeri/nis-yar1-cop",
+        "thief": "https://github.com/NisoDeri/nis-yar1-thief"
+      }
+    }
+  },
+  "timezone": "Asia/Jerusalem",
+  "groups": [
+    "nis-yar1",
+    "vm__fabi"
+  ],
+  "num_sub_games": 6,
+  "sub_games": [
+    {
+      "sub_game_number": 1,
+      "roles": {
+        "vm__fabi": "thief",
+        "nis-yar1": "police"
+      },
+      "started_at": "2026-08-18T18:44:02.339159+00:00",
+      "ended_at": "2026-08-18T18:44:14.539159+00:00",
+      "result": "capture",
+      "winner_group": "nis-yar1",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "nis-yar1": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "nis-yar1": 20
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_nis-yar1-vs-vm__fabi_g01.json",
+        "nis-yar1": "nis-yar1/log_nis-yar1-vs-vm__fabi_g01.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 2,
+      "roles": {
+        "vm__fabi": "police",
+        "nis-yar1": "thief"
+      },
+      "started_at": "2026-08-18T18:44:16.865100+00:00",
+      "ended_at": "2026-08-18T18:45:00.465100+00:00",
+      "result": "survival",
+      "winner_group": "nis-yar1",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "nis-yar1": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "nis-yar1": 10
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_nis-yar1-vs-vm__fabi_g02.json",
+        "nis-yar1": "nis-yar1/log_nis-yar1-vs-vm__fabi_g02.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 3,
+      "roles": {
+        "vm__fabi": "thief",
+        "nis-yar1": "police"
+      },
+      "started_at": "2026-08-18T18:45:02.667889+00:00",
+      "ended_at": "2026-08-18T18:45:13.867889+00:00",
+      "result": "capture",
+      "winner_group": "nis-yar1",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "nis-yar1": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "nis-yar1": 20
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_nis-yar1-vs-vm__fabi_g03.json",
+        "nis-yar1": "nis-yar1/log_nis-yar1-vs-vm__fabi_g03.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 4,
+      "roles": {
+        "vm__fabi": "police",
+        "nis-yar1": "thief"
+      },
+      "started_at": "2026-08-18T18:45:18.241770+00:00",
+      "ended_at": "2026-08-18T18:46:00.141770+00:00",
+      "result": "survival",
+      "winner_group": "nis-yar1",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "nis-yar1": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "nis-yar1": 10
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_nis-yar1-vs-vm__fabi_g04.json",
+        "nis-yar1": "nis-yar1/log_nis-yar1-vs-vm__fabi_g04.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 5,
+      "roles": {
+        "vm__fabi": "thief",
+        "nis-yar1": "police"
+      },
+      "started_at": "2026-08-18T18:46:34.133971+00:00",
+      "ended_at": "2026-08-18T18:46:46.033971+00:00",
+      "result": "capture",
+      "winner_group": "nis-yar1",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "nis-yar1": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "nis-yar1": 20
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_nis-yar1-vs-vm__fabi_g05.json",
+        "nis-yar1": "nis-yar1/log_nis-yar1-vs-vm__fabi_g05.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 6,
+      "roles": {
+        "vm__fabi": "police",
+        "nis-yar1": "thief"
+      },
+      "started_at": "2026-08-18T18:46:53.153324+00:00",
+      "ended_at": "2026-08-18T18:47:36.853324+00:00",
+      "result": "survival",
+      "winner_group": "nis-yar1",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "nis-yar1": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "nis-yar1": 10
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_nis-yar1-vs-vm__fabi_g06.json",
+        "nis-yar1": "nis-yar1/log_nis-yar1-vs-vm__fabi_g06.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    }
+  ],
+  "final_result": {
+    "total_score": {
+      "nis-yar1": 90,
+      "vm__fabi": 30
+    },
+    "sub_games_won": {
+      "nis-yar1": 6,
+      "vm__fabi": 0
+    },
+    "ties": 0,
+    "winner_group": "nis-yar1",
+    "series_tie": false,
+    "tokens_total_series": {
+      "nis-yar1": 0,
+      "vm__fabi": 0
+    },
+    "games_played_including_this": {
+      "vm__fabi": 0,
+      "nis-yar1": 3
+    },
+    "first_meeting_between_groups": true,
+    "diversity_reward_applied": {
+      "vm__fabi": false,
+      "nis-yar1": false
+    }
+  },
+  "mutual_agreement": {
+    "sha256": "c6450c670f0fc8e58b18f0e64974b021cd526249c4bcd96436a6d191445c9256",
+    "confirmed": true
+  }
+}

@@ -1289,3 +1289,24 @@
   counted-series uid and records why. The lesson is narrow and worth keeping:
   a config change moves derived ids, so "no source changed" is NOT "tests
   unaffected", and a checklist entry is a claim, not a formality.
+
+## 2026-08-22 · Publishing · the evidence was never actually in the submission repos
+- **Found by VERIFYING the push instead of trusting it:** listed `results/` in
+  the published police repo and got two files — `.gitkeep` and the ledger. The
+  counted artifacts, the friendlies, `played_commits.md` and `results/README.md`
+  were all absent, and had been for every republish today.
+- **Cause:** the export copies the workspace `.gitignore`, which contains
+  `results/*`. In the export tree `git add -A` therefore skipped every evidence
+  file silently; only the two explicitly-negated paths survived. The signal was
+  there and I read past it — an earlier publish printed "police staged: 4" when
+  it should have staged dozens.
+- **Why the previous fix did not catch it:** #90 made the EXPORT copy the right
+  files into `dist/`, and I verified `dist/` — the export was correct and the
+  PUBLISH dropped them one step later. Verifying the intermediate artifact is
+  not verifying the deliverable.
+- **Fix:** `git add -f results` in the publish script, matching what the
+  workspace itself does for the same files, plus the published results-file
+  COUNT printed on every run so a silent drop cannot recur unseen.
+- **Lesson:** check the thing you actually ship, in the place it ships to. Three
+  layers existed to keep the repos current and none of them looked inside the
+  published tree.

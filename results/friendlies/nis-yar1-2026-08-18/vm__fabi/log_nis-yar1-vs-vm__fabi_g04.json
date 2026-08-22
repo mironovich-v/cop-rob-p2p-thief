@@ -1,0 +1,945 @@
+{
+  "_schema": "Per-sub-game commit-reveal log for the replay viewer: every sealed step and the mutual-audit result. Static team metadata lives in the declaration; join by game_uid.",
+  "schema_version": "1.1",
+  "game_id": "nis-yar1-vs-vm__fabi",
+  "game_uid": "b38f33f3-3ec8-be1d-a464-4fa5c9cb35df",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_nis-yar1-vs-vm__fabi.json",
+    "config": "config_nis-yar1-vs-vm__fabi_g<NN>.json",
+    "log": "log_nis-yar1-vs-vm__fabi_g<NN>.json",
+    "result": "result_nis-yar1-vs-vm__fabi.json"
+  },
+  "summary": {
+    "sub_game_number": 4,
+    "group_id": "vm__fabi",
+    "role": "police",
+    "opponent_group_id": "nis-yar1",
+    "result": "survival",
+    "winner_role": "thief",
+    "steps": 34,
+    "timezone": "Asia/Jerusalem",
+    "started_at": "2026-08-18T18:20:19.169277+00:00",
+    "ended_at": "2026-08-18T18:21:02.169277+00:00",
+    "duration_seconds": 43.0,
+    "tokens_total": 0,
+    "audit": {
+      "passed": true,
+      "verified_steps": 36,
+      "failed_steps": [],
+      "bound_steps": 35
+    }
+  },
+  "records": [
+    {
+      "payload": {
+        "step": 0,
+        "type": "system_spec",
+        "spec": {
+          "os": "Linux 6.6.87.2-microsoft-standard-WSL2",
+          "cpu_type": "x86_64",
+          "cpu_cores": 16,
+          "cpu_freq_mhz": "unknown",
+          "ram_gb": 15.5,
+          "gpu_model": "unknown",
+          "vram_gb": "unknown"
+        },
+        "model": "template",
+        "code_version": "1.0.0",
+        "group_name": "VM-Fabi",
+        "sub_game_number": 4
+      },
+      "nonce": "fdd974ee10a094aededa28c134ed9e76",
+      "commit": "a85de0583b6ff11810f04fbe91f5f25dd00ef4a236aebaeee783010b57ec4dff"
+    },
+    {
+      "payload": {
+        "step": 1,
+        "state": "grid=7x7;self=[1, 0];barriers=[]",
+        "position": [
+          1,
+          0
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "56d77895ca1400eba1cd50fec46886d5",
+      "commit": "2e241c971d95ca59f7e2f7994468c9a32311f97b4dfc9b8f60e65e93eb357773"
+    },
+    {
+      "payload": {
+        "step": 2,
+        "state": "grid=7x7;self=[1, 0];barriers=[[2, 0]]",
+        "position": [
+          1,
+          0
+        ],
+        "move": "BARRIER:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "23dd7d681c3089636307129aa7680f6d",
+      "commit": "f2764e7edc39e9373e143bb988253c7276ad9c11a5fe7d78c13c8103c90142b9"
+    },
+    {
+      "payload": {
+        "step": 3,
+        "state": "grid=7x7;self=[1, 1];barriers=[[2, 0]]",
+        "position": [
+          1,
+          1
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Times Square.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "cc5bbd35b2497a101b6941d3d66107b2",
+      "commit": "6c18a38360d73f3ec087723ff8379636f081c4f7df1a526316f652d32322d954"
+    },
+    {
+      "payload": {
+        "step": 4,
+        "state": "grid=7x7;self=[2, 1];barriers=[[2, 0]]",
+        "position": [
+          2,
+          1
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "5635c1292b3dc21712cd2e6c0049d970",
+      "commit": "6a32387b0efcd9b68b42784fbc05586638177350b578f34cded06aebc30bb081"
+    },
+    {
+      "payload": {
+        "step": 5,
+        "state": "grid=7x7;self=[2, 1];barriers=[[2, 0], [3, 1]]",
+        "position": [
+          2,
+          1
+        ],
+        "move": "BARRIER:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at Times Square.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "01eaad174f616efae7744b3c315217f6",
+      "commit": "1e8ce34089e37152f9e4755860f7b5c90be560bba4b2bc4fa72093b5d34383cd"
+    },
+    {
+      "payload": {
+        "step": 6,
+        "state": "grid=7x7;self=[2, 2];barriers=[[2, 0], [3, 1]]",
+        "position": [
+          2,
+          2
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "5d99ced07b30d65e36b01ce693f283c7",
+      "commit": "0ab699e37fd23066f00b3c6409175d7240b84e6d013862b31064502fe58faada"
+    },
+    {
+      "payload": {
+        "step": 7,
+        "state": "grid=7x7;self=[2, 2];barriers=[[2, 0], [3, 1], [3, 2]]",
+        "position": [
+          2,
+          2
+        ],
+        "move": "BARRIER:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "c81fccdfc122dbbfabd1bce74201b59b",
+      "commit": "9184c5f66b8f7dba4f0d6894bb509a2b315a88d40c82f1d11b12aa81d46674bf"
+    },
+    {
+      "payload": {
+        "step": 8,
+        "state": "grid=7x7;self=[2, 3];barriers=[[2, 0], [3, 1], [3, 2]]",
+        "position": [
+          2,
+          3
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "e1e415b3ea2a2ccf64e5f1795ec9818a",
+      "commit": "2e549dfd843c4f62c944dc9dcfba6024b197c119629bdac31ab455f58693ca4d"
+    },
+    {
+      "payload": {
+        "step": 9,
+        "state": "grid=7x7;self=[3, 3];barriers=[[2, 0], [3, 1], [3, 2]]",
+        "position": [
+          3,
+          3
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "194cb0a179a65e35c72bb171741f991e",
+      "commit": "74beb2d5d4898ab8da88067048182e1c463c9cbf3720312c01e89bcedc891501"
+    },
+    {
+      "payload": {
+        "step": 10,
+        "state": "grid=7x7;self=[4, 3];barriers=[[2, 0], [3, 1], [3, 2]]",
+        "position": [
+          4,
+          3
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "29ae12ebd7eaaac23ce37f42cdb72c65",
+      "commit": "acc94bf89fe9c11f4871604216563e58271078f31c9c655fc787c3e55ebe409f"
+    },
+    {
+      "payload": {
+        "step": 11,
+        "state": "grid=7x7;self=[5, 3];barriers=[[2, 0], [3, 1], [3, 2]]",
+        "position": [
+          5,
+          3
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Times Square.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "563f4db212fa19f0b2758ea6f1e64f50",
+      "commit": "8967fce5529a9200e59585d22e9c81aa9da7df4d61c375826066f6e1587e49aa"
+    },
+    {
+      "payload": {
+        "step": 12,
+        "state": "grid=7x7;self=[5, 4];barriers=[[2, 0], [3, 1], [3, 2]]",
+        "position": [
+          5,
+          4
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "bb28172986f94cbc8d363bdd2dcc7e2a",
+      "commit": "244e24dc0591926cd96fd63e1c29958bd393e4b9678efc1907149125ba56fef8"
+    },
+    {
+      "payload": {
+        "step": 13,
+        "state": "grid=7x7;self=[5, 5];barriers=[[2, 0], [3, 1], [3, 2]]",
+        "position": [
+          5,
+          5
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "8c08c55d05dfb994cdab3fb641d7110f",
+      "commit": "a9ff38f5d977e31223c66c1f2400ccb6b776ad5ebdc68c5903cdc9f081de5bf6"
+    },
+    {
+      "payload": {
+        "step": 14,
+        "state": "grid=7x7;self=[4, 5];barriers=[[2, 0], [3, 1], [3, 2]]",
+        "position": [
+          4,
+          5
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "403fce0f9cfd38c581f892a79f9820bd",
+      "commit": "2b87f7dabfcb73b229a6ad2ab6dee6c5180f8650e0cb322afa8c2bc11ab01263"
+    },
+    {
+      "payload": {
+        "step": 15,
+        "state": "grid=7x7;self=[4, 6];barriers=[[2, 0], [3, 1], [3, 2]]",
+        "position": [
+          4,
+          6
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "f9783c6fe924f12a5dfbf85d228d0ac9",
+      "commit": "747a0f517fd874a062b5cd55d7ea9e659c9d358e07d38e29c3c7916f6f5da9e0"
+    },
+    {
+      "payload": {
+        "step": 16,
+        "state": "grid=7x7;self=[3, 6];barriers=[[2, 0], [3, 1], [3, 2]]",
+        "position": [
+          3,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Times Square.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "6e9f75857abdb14b5d5312b4723101b6",
+      "commit": "02d2749a89650d37fdc3b552621dc82610119142579191e449587c1299a70d28"
+    },
+    {
+      "payload": {
+        "step": 17,
+        "state": "grid=7x7;self=[2, 6];barriers=[[2, 0], [3, 1], [3, 2]]",
+        "position": [
+          2,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "dc2fb1bf9e7f4ae98a89372279a4f07c",
+      "commit": "33a29a10df5dbc67faa6b264c24a082676e1abd58b85c996f9187e2e91e44bb5"
+    },
+    {
+      "payload": {
+        "step": 18,
+        "state": "grid=7x7;self=[1, 6];barriers=[[2, 0], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "55f575911a204f0b80fd42d796ce7af3",
+      "commit": "04d4f91dc3b0aa68fe8ddf26c8821c2dd5bdf666bceb75a6a3ba5cf2b567f87b"
+    },
+    {
+      "payload": {
+        "step": 19,
+        "state": "grid=7x7;self=[1, 6];barriers=[[2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "BARRIER:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "73560bb635d66ed7cc2f7e9fce3c90d6",
+      "commit": "ac7353333ed90b0bde48b442b4e1dd86a80ba0d6b0c990eeabd4c207b9a90f9b"
+    },
+    {
+      "payload": {
+        "step": 20,
+        "state": "grid=7x7;self=[1, 6];barriers=[[1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "BARRIER:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "4d1c6bac1d493523f54a342ac8840596",
+      "commit": "ea63d302559d3d42bcedb6126c4a77ab87844a4fd97414e94bf70ecf3a360595"
+    },
+    {
+      "payload": {
+        "step": 21,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "BARRIER:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around the Brooklyn Bridge.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "e6be736faf41503b657dd42858a8e7eb",
+      "commit": "59dfb40937d3a003d2c8ec4de066bd8c36b67b4b69fc99286f306523090c410b"
+    },
+    {
+      "payload": {
+        "step": 22,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "cd3effd7f2783c742f25c36500b8d70c",
+      "commit": "fa9baba27c699669aa722cb444b31a4efb37483249f36feb8f6db01f7a1756ee"
+    },
+    {
+      "payload": {
+        "step": 23,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "adbb8d9c26c8002f64f7e81bf26868ea",
+      "commit": "40c1114daf2eb77226b92a512eb0f153086a76b14838ee8ba3c57f9b84189c9f"
+    },
+    {
+      "payload": {
+        "step": 24,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "1ba90e7aa67e1ab12fb91bd2d29a4ec9",
+      "commit": "f5022d97860f8b85a2db117b13af7a1778ce39a33e711af7adb6eb6eb2aee657"
+    },
+    {
+      "payload": {
+        "step": 25,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "339d10d3bb6af011cd2b6692b03206a8",
+      "commit": "56aabf5382d1860aadf4ab0de77d98022b3a09c66e23f371fec5a063437e11fc"
+    },
+    {
+      "payload": {
+        "step": 26,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "fb16b690e773f27aaedd709dfcf0e414",
+      "commit": "17253416a03805dd8f3aa4ead3f6d3472b697d90aa40e1cbdd2e74477a467fd4"
+    },
+    {
+      "payload": {
+        "step": 27,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "421121de32dcef251476e99e30fc3130",
+      "commit": "60cf48bfed84e2992e4dfc3bf0bda19a809040fe2d36c4da3124a72a10e7298c"
+    },
+    {
+      "payload": {
+        "step": 28,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "dfd056e4d14d911ddb8facd2b7fa07de",
+      "commit": "46392b332d2efc3830f3817a311464e06aaf8443cfa099900fa6b0c04b0e68e7"
+    },
+    {
+      "payload": {
+        "step": 29,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "c73f62d8d8e25c7b9abd72b6d24b3691",
+      "commit": "a350816658ab121f27f19a0e7dab054264b8a6e06c3824e21355e7c8aab17afc"
+    },
+    {
+      "payload": {
+        "step": 30,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near Times Square.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "345c244fa42c1761f456a066f52aa497",
+      "commit": "7afb6b58c4480b79fd009a9f77f080d5b71be73b54dcaaeaf97e516b14d6b4f8"
+    },
+    {
+      "payload": {
+        "step": 31,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near the Brooklyn Bridge.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "b046408f80f260d5ad1f7448f413ae8a",
+      "commit": "cedd9035930e94baa305ad9cb05feb84243b9021c5771ad7b4747f9b5de1ed3a"
+    },
+    {
+      "payload": {
+        "step": 32,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near the Brooklyn Bridge.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "87211619c8e975dc473b29b7044f18e0",
+      "commit": "c62804c66b62917ddec47a161f417d69c618441530d73ee1155bd58663908591"
+    },
+    {
+      "payload": {
+        "step": 33,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "250bfcda72752fc6251215c6b6af65eb",
+      "commit": "2a1fcf4e8ee8e089a022315606a28c05b73159432de34417a88f65ac621ccf12"
+    },
+    {
+      "payload": {
+        "step": 34,
+        "state": "grid=7x7;self=[1, 6];barriers=[[0, 6], [1, 5], [2, 0], [2, 6], [3, 1], [3, 2]]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "18021fb6ad68a05354167ecb99c33f27",
+      "commit": "628f876e1c0a019e7dd486441911070960ae2230967034e0f6ca7144338a7007"
+    }
+  ],
+  "mutual_agreement": {
+    "opponent_group_id": "nis-yar1",
+    "sha256": "2d97d1fbe034041f170607f65fd6831acf0873d6ca464b9090e797f17bdbf281",
+    "confirmed": true
+  }
+}
