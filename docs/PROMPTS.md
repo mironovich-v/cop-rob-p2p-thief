@@ -1310,3 +1310,27 @@
 - **Lesson:** check the thing you actually ship, in the place it ships to. Three
   layers existed to keep the repos current and none of them looked inside the
   published tree.
+
+## 2026-08-22 · Reporting · deferred send for compare-then-send partners
+- **Need:** il-nv-ai require the six per-sub-game hashes and the series hash to
+  be exchanged BEFORE anyone mails (rule 35 zeroes both teams if the reports
+  disagree). Our peer auto-fires at settlement — the opposite order.
+- **Output:** `scripts/send_filed_report.py` sends an already-filed result
+  artifact after the comparison. Two properties it had to have: it sends the
+  FILE'S BYTES verbatim (the artifact and the auto-send body are the same
+  `json.dumps(..., ensure_ascii=False, indent=2)` call, so sending the file
+  removes any re-serialisation question — ADR-21), and it re-applies
+  `filable_report`, the same withholding rule as the auto-send, so it cannot
+  become a way to file the very report the guard refused.
+- **Also closes the message-id gap** from the vibecode counted series: the tool
+  prints the Gmail id, which the auto-send path discards and which partners ask
+  to exchange within 15 minutes.
+- **Fidelity detail worth the extra step:** the subject's role is derived from
+  the LAST sub-game's roles in the artifact, exactly as the auto-send takes it
+  from the last summary — not defaulted. Checking that also corrected something
+  I had told the owner: the vibecode counted mail was "(reported by thief)", not
+  "police" as I said when asking them to look in Sent — we were thief in
+  sub-game 6 under that parity.
+- **Verified against real artifacts, both paths:** clean send dry-runs at exit 0
+  with the right subject/consensus/byte-count; a doctored 5-of-6 artifact is
+  REFUSED naming sub-game 3, exit 1.
