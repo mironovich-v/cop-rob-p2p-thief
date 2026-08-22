@@ -4,6 +4,10 @@
     "nis-yar1": {
       "counted_series": 1,
       "last_game_id": "nis-yar1-vs-vm__fabi"
+    },
+    "vibecode": {
+      "counted_series": 1,
+      "last_game_id": "vibecode-vs-vm__fabi"
     }
   }
 }

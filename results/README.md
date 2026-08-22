@@ -15,6 +15,7 @@ make new artifacts appear — add the next snapshot explicitly, the same way.
 | Set | Date | Opponent | Counted | Outcome |
 | --- | --- | --- | --- | --- |
 | `counted/nis-yar1-2026-08-18/` | 2026-08-18 | nis-yar1 | **yes** (rule-52 series 1) | 6 sub-games, vm__fabi 30 – nis-yar1 90 |
+| `counted/vibecode-2026-08-22/` | 2026-08-22 | vibecode | **yes** (rule-52 series 2) | 6 sub-games, vm__fabi 30 – vibecode 90; includes vibecode's own copy for the byte-diff |
 | `friendlies/nis-yar1-2026-08-18/` | 2026-08-18 | nis-yar1 | no | 6 sub-games, friendly |
 | `friendlies/nis-yar1-2026-08-18-refriendly/` | 2026-08-18 | nis-yar1 | no | 6 sub-games, re-friendly before the counted series |
 | `friendlies/il-nv-ai-2026-08-21/` | 2026-08-21 | il-nv-ai | no | 1 sub-game warm-up, we police, vm__fabi 20 – il-nv-ai 5 |
@@ -27,7 +28,8 @@ per-run archives above are therefore the only place each run survives
 separately — `../logs/vm__fabi/` keeps just the latest run for a given
 `game_id`, because a re-run writes the same four filenames.
 
-Only the `counted/` set is a league game under rule 52; the ledger of counted
+Only the `counted/` sets are league games under rule 52 — two of them, which is
+`min_games_to_pass`; the ledger of counted
 series is `rule52_ledger.json`. The friendlies are qualifying/warm-up games that
 partners required before agreeing to a counted series.
 
