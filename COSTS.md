@@ -103,6 +103,7 @@
 | 2026-08-22 | PR (docs) | docs-single-core-provenance | (pending) | Fable 5 · high | document why one core = one reported commit; reject per-role export commits as false provenance; de-stale the intro | ~0.1 session | in review |
 | 2026-08-22 | PR (compliance) | docs-separation-compliance | (pending) | Fable 5 · high | book re-read from the PDF: separation is PROCESS-level, two repos are the submission form; cited README section + ADR-24 | ~0.3 session | in review |
 | 2026-08-22 | PR (config) | config-il-nv-ai-counted | (pending) | Fable 5 · high | il-nv-ai counted prep: num_games 6, parity INVERTS (we are thief), counted count -> 2; verified terms/uid/tie against their message | ~0.2 session | in review |
+| 2026-08-22 | PR (export) | fix-export-results-evidence | (pending) | Fable 5 · high | export results/ from git ls-files (played_commits.md + results/README.md were never shipping); fix a pinned uid test I had claimed passing | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

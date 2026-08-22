@@ -148,7 +148,12 @@ def test_il_nv_ai_pairing_config_is_playable():
     validate_minimums(terms)
     game_id, game_uid = derive_game_ids(terms, "vm__fabi", "il-nv-ai")
     assert game_id == "il-nv-ai-vs-vm__fabi"
-    assert game_uid == "00aec465-1e83-befa-15ed-a5d427995ffc"
-    assert cfg.get("game.num_games") == 1  # their 14-term hash pins num_games 1
-    assert cfg.get("email.enabled") is False  # their session rules: no mail, at all
-    assert cfg.get("game.counted") is False
+    # COUNTED series (2026-08-22): num_games moved 1 -> 6, which moves the signed
+    # terms and therefore the uid. Both values were confirmed identical by
+    # il-nv-ai before the window; the warm-up uid was 00aec465-….
+    assert game_uid == "566d2396-e3e9-10ef-6f15-ef51ff64acba"
+    assert cfg.get("game.num_games") == 6
+    assert cfg.get("game.counted") is False  # armed only by the window overlay
+    # We are THIEF on odd sub-games here (kit_sorted_first_police_odd_v1 puts
+    # il-nv-ai first), the OPPOSITE of the warm-up: launch thief_agent.
+    assert cfg.get("game.counted_games_played") == 2  # nis-yar1 + vibecode banked

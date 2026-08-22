@@ -35,6 +35,18 @@ def git_commit(workspace: Path) -> str:
         return "unknown"
 
 
+
+def _tracked_under(workspace: Path, directory: str) -> list[str]:
+    """Repo-relative paths of the git-TRACKED files under ``directory``.
+
+    Evidence lives behind `.gitignore` and is force-added deliberately, so
+    "tracked" is exactly the set we chose to publish — a more honest rule than
+    any hand-maintained list, which is what went stale here.
+    """
+    result = subprocess.run(["git", "ls-files", "--", directory], cwd=workspace,
+                            capture_output=True, text=True, check=False)
+    return [line for line in result.stdout.splitlines() if line.strip()]
+
 def export_role(role: str, workspace: Path, dist_dir: Path, commit: str) -> dict:
     """Build one self-contained role export and return its manifest."""
     out = dist_dir / f"{role}-agent"
@@ -53,13 +65,16 @@ def export_role(role: str, workspace: Path, dist_dir: Path, commit: str) -> dict
     # Match evidence (rule 49 / WARNINGS §5a): the counted-series artifacts and
     # the committed rule-52 ledger are what the filed reports' links.github
     # promises the grader — they ship in BOTH role repos.
-    ledger = workspace / "results" / "rule52_ledger.json"
-    if ledger.is_file():
-        (out / "results").mkdir(parents=True, exist_ok=True)
-        (out / "results" / "rule52_ledger.json").write_bytes(ledger.read_bytes())
-    counted = workspace / "results" / "counted"
-    if counted.is_dir():
-        copy_tree(counted, out / "results" / "counted")
+    # Export every TRACKED file under results/ — not a hand-listed subset. The
+    # first version copied only the ledger and counted/, which silently dropped
+    # played_commits.md and results/README.md: the two documents written FOR a
+    # grader holding just this repo. Driving the copy from `git ls-files` means
+    # anything we deliberately track ships, and the untracked scratch copies in
+    # results/ (browser-downloaded compare files) never do.
+    for relative in _tracked_under(workspace, "results"):
+        target = out / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((workspace / relative).read_bytes())
     # A submission repo must STAND ALONE for grading: the guideline's mandatory
     # documentation set, the AI-control files, the academic README, the license,
     # and an .gitignore ship in BOTH trees (owner finding, 2026-08-19 — the
