@@ -1202,3 +1202,24 @@
   (remember it), and the armed-run gate (catch it). The gate is a safety net —
   it refuses a counted series against an unpublished commit — but it fires at
   fire time, which is the worst moment to discover the problem.
+
+## 2026-08-22 · Docs · why we name ONE commit where partners name two
+- **Owner question:** shouldn't we report the role repo's commit per sub-game,
+  since the role changes each sub-game?
+- **Answer: no, and reporting it would be false.** We run a single canonical
+  core; `police_agent`/`thief_agent` are entry points and the role is a launch
+  flag, so one binary and one commit execute for the whole series. Teams whose
+  cop and thief are separate codebases (vibecode: cop `043e4fd`, thief
+  `038ec0a`) legitimately report two — different code really runs. Our single
+  value is architectural, not under-reporting.
+- **Specifically rejected:** naming the submission repos' own `main` commits per
+  role. Those are export commits generated AFTER a series, on a branch with its
+  own history; no code from them ever executed. It would look more precise while
+  asserting something untrue.
+- **What the docs now show:** the provenance chain resolving from either
+  direction without the core repo — artifact `github_commit` and each repo's
+  `core_manifest.core_commit` both point at the executed workspace commit, which
+  resolves on `workspace-history` in both repos.
+- **Also fixed a doc that had gone stale within a day:** the file still opened
+  by saying our artifacts carry no commit field, which #89 had already changed.
+  It now scopes itself to the series played before that landed.

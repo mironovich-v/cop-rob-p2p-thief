@@ -1,10 +1,10 @@
 # Played-commit map — which code played which series
 
-Our artifacts do not carry a `github_commit` field (the wire identity declares
-one at negotiate, but it is not written into the four JSON artifacts). This file
-is therefore the authoritative record of **which commit of ours played which
-series**, so a grader holding only the two submission repositories can tie a
-result to code without the workspace repo.
+Since 2026-08-22 our artifacts carry `github_commit` themselves — in the
+declaration group block and on every result sub-game row — so a series played
+from then on states its own commit. **The series below were played before that
+landed**, and this file is the record for them, so a grader holding only the two
+submission repositories can still tie those results to code.
 
 **Every commit listed here is reachable in both submission repositories on the
 `workspace-history` branch**, which mirrors the workspace repo
@@ -13,6 +13,40 @@ there; the `main` branch of each submission repo is the exported agent tree,
 which has its own history and does **not** contain these hashes.
 
 Provenance is stated per row and is not uniform — read it.
+
+## Why we name ONE commit where some teams name two
+
+We run a **single canonical core**. `police_agent` and `thief_agent` are entry
+points into the same code, and the role for a sub-game is a launch flag — so the
+same binary plays both roles and one commit executes for the whole series. The
+commit named below is that commit.
+
+Teams whose cop and thief are separate codebases in separate repositories
+legitimately report a different commit per role, because different code really
+does run. vibecode do exactly that (cop `043e4fd`, thief `038ec0a` on
+2026-08-22). The difference between their two values and our one is
+**architectural, not under-reporting**.
+
+We deliberately do **not** report the submission repos' own `main` commits per
+role (e.g. police `ba7af5f`, thief `b971834`). Those are export commits produced
+by `scripts/export_repos.py` *after* a series, on a branch with its own history;
+no code from them ever executed. Naming them per sub-game would look more precise
+while asserting something false.
+
+The chain resolves from either direction, and neither requires the core repo:
+
+```
+our artifact  github_commit ─────────────► <workspace commit>
+                                              ▲          ▲
+police repo  core_manifest.core_commit ───────┘          │
+thief  repo  core_manifest.core_commit ──────────────────┘
+
+<workspace commit> resolves on `workspace-history` in BOTH submission repos.
+```
+
+Each export also carries `role`, `repo`, `sibling_repo` and `workspace_repo` in
+`core_manifest.json`, so a grader landing in one role repo can reach the executed
+commit and the sibling repo without being told where to look.
 
 ## Counted series (rule 52)
 
