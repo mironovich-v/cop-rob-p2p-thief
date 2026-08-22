@@ -250,6 +250,13 @@ sequence in order:
    squash-merged.
 9. **Cleanup:** after confirmation, `git switch main`, `git pull --ff-only`,
    `git branch -d <branch-name>`.
+10. **Republish the submission repos:** `uv run bash scripts/publish_submissions.sh`.
+    MANDATORY after EVERY merge to main — no exceptions, including docs-only
+    merges. The two submission repos are generated exports that do NOT track
+    main, so between a merge and this step the commit we declare on the wire is
+    unresolvable in the repos we actually submit (rule 53: the lecturer
+    rev-parses). The armed-run gate refuses a counted series in that state, but
+    that is a safety net, not a substitute for this step.
 
 #### 2.9.1 Commit Message Format
 
@@ -575,6 +582,16 @@ cd copthief-league-protocol && uv run python gen_vectors.py && \
 ```bash
 uv run python scripts/export_repos.py   # produces dist/police-agent, dist/thief-agent
 ```
+
+### Republish the submission repos (after EVERY merge to main)
+```bash
+uv run bash scripts/publish_submissions.sh
+```
+Exports, pushes each role tree to its repo `main`, mirrors workspace main onto
+`workspace-history` in both, then verifies the playing commit resolves there and
+exits non-zero if it does not. `main` is the exported agent tree;
+`workspace-history` is where playing commits resolve — never look for a workspace
+hash on `main`.
 
 ### Security check for secrets
 ```bash
