@@ -13,10 +13,12 @@ from cop_thief_core.constants import Role
 from cop_thief_core.exceptions import SimulationError
 from cop_thief_core.infra.email_sender import EmailSender
 from cop_thief_core.interop.negotiation import terms_from_config, validate_minimums
+from cop_thief_core.orchestration.sealing import playing_commit
 from cop_thief_core.reporting.emit import emit_series
 from cop_thief_core.sdk.filing import filable
 from cop_thief_core.sdk.series import run_series
 from cop_thief_core.shared.config import ConfigManager
+from cop_thief_core.shared.provenance import check_published, git_is_ancestor, git_ls_remote
 
 
 class StubLlm:
@@ -114,7 +116,26 @@ class SimulationSdk:
         armed = counted_cli and counted_cfg
         if armed:
             (self.email_sender or EmailSender(self.config)).preflight_armed()
+            self._require_published_commit()
         return armed
+
+    def _require_published_commit(self) -> None:
+        """Refuse an armed run whose playing commit is not in the submitted repos.
+
+        We name the two role repositories on the wire and in every artifact, and
+        a grader resolves the declared commit there. A commit that never left
+        this machine makes the whole series unverifiable, and a counted series
+        is the one that cannot be replayed — so this refuses BEFORE the first
+        move rather than discovering it at grading. Friendlies are never blocked:
+        a network check must not cost a window.
+        """
+        status = check_published(
+            playing_commit(), self.config.get("game.repos", {}) or {},
+            git_ls_remote, git_is_ancestor)
+        if not status["published"]:
+            raise SimulationError(
+                f"armed counted run: playing commit is not published — "
+                f"{status['detail']}. Re-export and push the submission repos first.")
 
     def _email_report(self, series, report: dict, armed: bool) -> dict:
         """Auto-fire the official report at settlement (rule 32). The mail IS the

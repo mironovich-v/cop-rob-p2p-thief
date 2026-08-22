@@ -79,6 +79,10 @@ def group_block(identity: dict) -> dict:
         "mcp_servers": identity.get("mcp_servers", {}),
         "llm_model": identity.get("llm_model", "undeclared"),
         "hardware_spec": hardware_spec(identity.get("spec") or {}),
+        # Commit traceability: the wire identity declares it, but until now it
+        # never reached an artifact, so a grader holding only the submitted
+        # repos could not tie a result to code. A foreign block may omit it.
+        "github_commit": identity.get("github_commit"),
     }
     block["signature"] = consensus_signature(block)
     return block

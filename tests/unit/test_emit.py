@@ -96,3 +96,37 @@ def test_counted_run_bumps_counts_and_advances_ledger(tmp_path, police_config, t
     ledger = json.loads(ledger_path.read_text("utf-8"))
     assert ledger["opponents"][opp_gid]["counted_series"] == 1  # committed evidence
     police_config.override("game.counted", False)  # do not leak into other tests
+
+
+def test_artifacts_carry_the_playing_commit_of_both_teams(tmp_path, police_config, thief_config):
+    """Commit traceability: a grader holding only the submitted repos must be able
+    to tie a result to code. Previously the wire identity declared a commit and no
+    artifact recorded it, so the mapping existed nowhere we submit."""
+    series = _series(police_config, thief_config)
+    series.own_identity["github_commit"] = "a" * 40
+    series.peer_identity["github_commit"] = "b" * 40
+    result = emit_series(police_config, tmp_path, series)
+    own_gid = series.own_identity["group_id"]
+    opp_gid = series.peer_identity["group_id"]
+
+    for row in result["sub_games"]:
+        assert row["github_commit"] == {own_gid: "a" * 40, opp_gid: "b" * 40}
+
+    declaration = json.loads((tmp_path / own_gid / f"declaration_{GAME_ID}.json").read_text())
+    blocks = {b["group_id"]: b for b in declaration["groups"].values()}
+    assert blocks[own_gid]["github_commit"] == "a" * 40
+    assert blocks[opp_gid]["github_commit"] == "b" * 40
+
+
+def test_the_commit_field_does_not_move_the_consensus_signature(tmp_path, police_config,
+                                                                thief_config):
+    """The mutual signature is scoped to roles/result/score, so recording a commit
+    must not change a hash two teams compare. If this ever fails, partners who
+    settled a series with us would disagree about it."""
+    bare = _series(police_config, thief_config)
+    before = emit_series(police_config, tmp_path / "a", bare)["mutual_agreement"]["sha256"]
+    stamped = _series(police_config, thief_config)
+    stamped.own_identity["github_commit"] = "a" * 40
+    stamped.peer_identity["github_commit"] = "b" * 40
+    after = emit_series(police_config, tmp_path / "b", stamped)["mutual_agreement"]["sha256"]
+    assert before == after
