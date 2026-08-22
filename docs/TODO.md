@@ -215,6 +215,8 @@ scope already matches kit #55 — the gaps are behavioral, not byte-level.
 
 | [x] | 8.37 | numeric hardware declaration: we emitted `"cpu_freq_mhz": "unknown"` / `"vram_gb": "unknown"`, which il-nv-ai's declaration validator refuses — a quantity is not prose, and as sent our declaration could not be loaded at all. `/proc/cpuinfo` gives 2918.4 MHz (WSL2 exposes no cpufreq sysfs and lscpu prints no max-MHz row), absence is 0, and an absent GPU is declared `"none"` rather than claiming ignorance about a device we deliberately do not subprocess-probe. Fixed at the source so the ARTIFACTS carry numbers, not just the message we paste | `shared/sysinfo.py` | ~25 src | `test_sysinfo` (4 added, 7 total) |
 
+| [x] | 8.38 | adopt il-nv-ai's constitution — and find that it omits a SIGNED term. Their 911-byte schema-1.2 file reproduces `034a0687…` exactly, but its `pheromones` block lacks `pheromone_min_center_intensity`, one of the 14 signed terms, so our loader refuses it and the file cannot reproduce the terms hash they themselves cite. Proved the internal default instead of asking them to guess: their file + `"pheromone_min_center_intensity": 0.5` = 948 bytes, sha256 `b9c20e38…`, reproducing BOTH declared values (terms `a284082d…`, uid `566d2396-…`). Kept the working file so the repo stays playable; they must adopt the 948-byte version for the configs to be byte-identical | `config/il-nv-ai/{game.json,game.toml}` | config | 389 passed; hashes verified both ways |
+
 Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
 its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
 are deliberately NOT implemented (opt-in / zero-implementation per kit

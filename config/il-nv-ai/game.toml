@@ -13,11 +13,15 @@
 #   game_uid     566d2396-e3e9-10ef-6f15-ef51ff64acba
 # All three confirmed identical by il-nv-ai before the window.
 #
-# OPEN: their shared game.json is Appendix-B schema 1.2, 911 bytes, canonical
-# sha256 034a068773dc3a26b41e67f1cce0f2c511d34582af76c790008b41479d1933fb. Ours
-# is schema 1.3 and hashes differently, so the FILE is not yet byte-identical
-# even though the 14 signed terms agree. Adopt their file verbatim when it
-# arrives (the precedent with every partner) before playing anything counted.
+# CONSTITUTION: their file adopted, PLUS the one key it was missing.
+# Their 911-byte schema-1.2 file (sha256 034a0687...) omits
+# `pheromone_min_center_intensity`, which is one of the 14 SIGNED terms — so our
+# loader refuses it outright, and the file cannot reproduce the very terms hash
+# they cite. Adding the key back at 0.5 gives 948 bytes,
+# sha256 b9c20e3821087cfe0836e7c94b8d37e5bbb3e2b39e56aee3252025fe5d15654a, which
+# DOES reproduce both of their declared values (terms a284082d..., uid
+# 566d2396-...), proving 0.5 is the value they default internally.
+# OPEN: they must adopt this 948-byte file for the configs to be byte-identical.
 #
 # They run ONE tunnel for the whole series (not role-split), sent once, and
 # write "GO game N" before each sub-game.

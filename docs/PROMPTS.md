@@ -1360,3 +1360,23 @@
 - **Lesson:** a partner's stricter validator found a real weakness in our
   declaration. "Unknown" was easy to write and impossible for anyone else to
   consume.
+
+## 2026-08-22 · Interop · their constitution omits a SIGNED term
+- **Adopted il-nv-ai's file verbatim first** — 911 bytes, sha256 `034a0687…`
+  reproduced exactly on our side, so their bytes were received intact.
+- **Then it failed to load:** `Missing required agreed term(s):
+  ['min_center_intensity']`. Their schema-1.2 `pheromones` block carries
+  center/decay/grid but NOT `pheromone_min_center_intensity`, which is one of the
+  14 SIGNED terms. So the file cannot reproduce the very terms hash they cite —
+  they must be defaulting the value internally and hashing something the shared
+  file does not contain.
+- **Proved the default rather than asking them to guess:** their file plus
+  `"pheromone_min_center_intensity": 0.5` is 948 bytes, sha256 `b9c20e38…`, and
+  reproduces BOTH declared values — terms `a284082d…` and uid `566d2396-…`. So
+  0.5 is what they default, and the fix is one key.
+- **Why this matters beyond us:** a "byte-identical shared config" that omits a
+  signed term is only byte-identical by accident — any partner deriving terms
+  from the file alone refuses it, and any partner defaulting a DIFFERENT value
+  would compute a different uid and never know why until a handshake failed.
+- **Kept the working file** (theirs + the key) so the repo stays playable, with
+  the divergence stated in the config header rather than silently absorbed.

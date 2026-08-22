@@ -107,6 +107,7 @@
 | 2026-08-22 | PR (publish) | fix-publish-force-adds-evidence | (pending) | Fable 5 · high | exported .gitignore hid results/* so `git add -A` published NO evidence; force-add + published-count printed | ~0.2 session | in review |
 | 2026-08-22 | PR (reporting) | feat-deferred-report-send | (pending) | Fable 5 · high | compare-then-send tool: sends filed bytes verbatim, re-applies the 6/6 guard, prints the message-id | ~0.3 session | in review |
 | 2026-08-22 | PR (interop) | fix-numeric-hardware-spec | (pending) | Fable 5 · high | numeric hardware declaration (il-nv-ai validator refused strings); tie-award fork researched in SPEC §6 | ~0.3 session | in review |
+| 2026-08-22 | PR (interop) | config-adopt-il-nv-ai-constitution | (pending) | Fable 5 · high | adopted their 911B constitution; it omits the signed term min_center_intensity — proved 0.5 and the 948B file that reproduces their hashes | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the
