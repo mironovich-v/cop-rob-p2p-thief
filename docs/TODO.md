@@ -213,6 +213,8 @@ scope already matches kit #55 — the gaps are behavioral, not byte-level.
 
 | [x] | 8.36 | deferred report send for compare-then-send partners (il-nv-ai rule-35 ordering: exchange the six per-sub-game hashes and the series hash BEFORE anyone mails; our peer auto-fires at settlement, the opposite order). `scripts/send_filed_report.py` sends an already-filed artifact's BYTES VERBATIM (artifact and auto-send body are the same `json.dumps(indent=2)` call, so no re-serialisation question — ADR-21) and re-applies `filable_report`, the same 6/6 rule, so it cannot bypass the guard. Prints the Gmail message-id, closing the gap the vibecode counted exposed. Subject role derived from the last sub-game's roles, as the auto-send does | `scripts/send_filed_report.py` (new), `sdk/filing.py`, `CLAUDE.md` §11 | ~90 | `test_filing_guard` (3 added, 11 total); verified live on real artifacts, refusal exits 1 |
 
+| [x] | 8.37 | numeric hardware declaration: we emitted `"cpu_freq_mhz": "unknown"` / `"vram_gb": "unknown"`, which il-nv-ai's declaration validator refuses — a quantity is not prose, and as sent our declaration could not be loaded at all. `/proc/cpuinfo` gives 2918.4 MHz (WSL2 exposes no cpufreq sysfs and lscpu prints no max-MHz row), absence is 0, and an absent GPU is declared `"none"` rather than claiming ignorance about a device we deliberately do not subprocess-probe. Fixed at the source so the ARTIFACTS carry numbers, not just the message we paste | `shared/sysinfo.py` | ~25 src | `test_sysinfo` (4 added, 7 total) |
+
 Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
 its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
 are deliberately NOT implemented (opt-in / zero-implementation per kit

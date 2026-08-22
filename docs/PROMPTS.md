@@ -1334,3 +1334,29 @@
 - **Verified against real artifacts, both paths:** clean send dry-runs at exit 0
   with the right subject/consensus/byte-count; a doctored 5-of-6 artifact is
   REFUSED naming sub-game 3, exit 1.
+
+## 2026-08-22 · Interop · the tie-award dispute, and numeric hardware
+- **il-nv-ai raised two match-voiding items.** Both were checked against sources
+  rather than argued from preference.
+- **(1) Where the tie award lives.** They proposed `total_score` = board sum with
+  the award in a separate field, reasoning that the six rows must sum to the
+  total. Checked: SPEC §6 documents this as a KNOWN book-versus-reference
+  contradiction and names THREE live behaviours — `series_add` (the kit's, and
+  ours), `series_replace`, `per_subgame` (the reference's) — adjudicated by
+  course staff under the academic-freedom clause so that either is implementable
+  **provided the choice is documented and declared**. It also says explicitly:
+  *"Agree it before the first window, like the scent model."* We declared
+  `series_add` in `config/il-nv-ai` and in writing; the lecturer's reference
+  adds per-sub-game rows that then sum, which is a different question again. So
+  this is not our bug and not theirs — it is the documented fork, and it needs
+  agreeing, which is what we will ask for.
+- **(2) Numeric hardware — their validator is right and we were wrong.** We
+  emitted `"cpu_freq_mhz": "unknown"` and `"vram_gb": "unknown"`; a quantity is
+  not prose, and their loader refuses strings. Fixed at the source rather than
+  only in the message we send: `/proc/cpuinfo` supplies 2918.4 MHz (WSL2 exposes
+  no cpufreq sysfs and lscpu prints no max-MHz row there), absence is 0, and an
+  absent GPU is declared "none" instead of claiming ignorance about a device we
+  deliberately do not probe.
+- **Lesson:** a partner's stricter validator found a real weakness in our
+  declaration. "Unknown" was easy to write and impossible for anyone else to
+  consume.
