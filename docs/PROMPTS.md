@@ -1183,3 +1183,22 @@
 - **Note on the repos:** the submission repos' `main` is the exported agent tree
   and never contains workspace hashes; only `workspace-history` does. Checking
   `main` would have produced a permanent false negative.
+
+## 2026-08-22 · Process · republishing the submission repos is now step 10
+- **Owner instruction:** never forget to update the police and thief repos every
+  time something merges to main.
+- **Why it kept being forgotten:** the submission repos are GENERATED exports
+  that do not track main, so every merge silently moves main ahead of them. It
+  had drifted 11 PRs before anyone noticed, and it drifted again twice today
+  within minutes of a merge.
+- **Made structural rather than remembered:** `scripts/publish_submissions.sh`
+  does the whole thing in one command — export, push each role tree to its repo
+  `main`, mirror workspace main onto `workspace-history` in both, then VERIFY the
+  playing commit resolves and exit non-zero if not. Added to the CLAUDE.md git
+  workflow loop as step 10, mandatory after every merge including docs-only ones.
+- **Refuses a dirty tree**, because publishing from a workspace with uncommitted
+  tracked changes would put unreviewed content into a submission repo.
+- **Three layers now, deliberately:** the script (do it), step 10 of the loop
+  (remember it), and the armed-run gate (catch it). The gate is a safety net —
+  it refuses a counted series against an unpublished commit — but it fires at
+  fire time, which is the worst moment to discover the problem.

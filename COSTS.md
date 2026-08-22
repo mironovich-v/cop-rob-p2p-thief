@@ -99,6 +99,7 @@
 | 2026-08-22 | PR (reporting) | feat-withhold-unclean-counted-report | (pending) | Fable 5 · high | rule-35 filing guard: an armed run withholds below 6/6 verified; friendly still fires; disputed capture still files | ~0.2 session | in review |
 | 2026-08-22 | Counted series | (main cabcb07) | n/a | Fable 5 · high | vibecode counted banked: 6/6, audits clean both ways, 30-90, ledger advanced -> rule-52 series 2 of 2, min_games_to_pass MET | ~0.4 session | banked |
 | 2026-08-22 | PR (provenance) | feat-report-and-verify-playing-commit | (pending) | Fable 5 · high | github_commit in declaration + result rows (outside consensus scope, pinned); armed run refuses an unpublished playing commit | ~0.4 session | in review |
+| 2026-08-22 | PR (process) | chore-publish-submissions-script | (pending) | Fable 5 · high | one-command submission republish + step 10 of the git loop; verified live (both mirrors -> c0aa29a, gate green) | ~0.2 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the
