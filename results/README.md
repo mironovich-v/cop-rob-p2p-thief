@@ -48,6 +48,14 @@ directories — one artifact set per side, which is why the same games appear
 twice. These prove the engine plays itself end to end with clean mutual audits;
 they are not league games and carry no league score.
 
+## Which code played which series
+
+Our artifacts carry no `github_commit` field, so `played_commits.md` in this
+directory is the authoritative map from series to commit, with provenance stated
+per row. Every commit it lists resolves on the `workspace-history` branch of both
+submission repositories — not on their `main`, which is the exported agent tree
+with its own history.
+
 ## Verifying a set
 
 Each `log_*_gNN.json` carries sealed commit–reveal `records` and a
