@@ -217,3 +217,43 @@ the examiner gets the full 70+-PR record without leaving them, and any strict
 reading of p.96 is satisfied — the development history is IN the submitted
 repos. Owner extended the ADR-22 delegation to cover this branch (2026-08-19).
 **Status:** accepted.
+
+## ADR-24 — Separation is at the PROCESS level; two repos are the submission form
+**Context:** the book was re-read directly from `instructions/police_thief_p2p.pdf`
+on 2026-08-22 (160 pp., Hebrew visual-order text reversed per line) to answer one
+question honestly: *is each role required to be RUN from its own repository?*
+The binding rules table and §2.4.2 (p. 31) settle it.
+
+- **Rule 1** (sanction: *total failure*) — run thief and police code in two
+  completely separate **processes** (`תהליכים`), under separate config
+  directories. §2.4.2 states the rationale: the hazard is *local development* on
+  one machine; in the league the peers are on different machines anyway.
+- **Rule 2** (sanction: *immediate disqualification*) — never share memory or
+  variables; §2.4.2 forbids *"importing a shared module that holds live state"*.
+- **Rule 49** — **submit** (`מגישים`) two separate cross-linked repos.
+- **Rule 50** — each repo carries README/config/PRD/PLAN/TODO, whose stated
+  purpose is *"to let the examiner reconstruct the way of working"*.
+
+**Finding:** no rule requires a game to be *run from* a submission repository.
+The mandatory separation is of **processes and live state**; two repositories are
+the mandated **submission form**, not a mandated development topology.
+
+**Decision:** keep the ADR-10 topology. Run `police_agent` and `thief_agent` as
+two independent OS processes with separate config dirs, ports, logs and private
+state (rule 1), sharing no live state (rule 2); submit two generated,
+self-contained, cross-linked repos (rules 49–50); regenerate and push them after
+every merge to `main` (workflow step 10) so they never lag the code that plays.
+
+**Rationale for not developing in two repos** — ch. 9.4 (p. 96) *describes*
+development as happening "in two separate repositories", while binding rule 49
+says *submit*. Two independently developed codebases would duplicate the domain,
+interop, protocol, orchestration and audit layers, which the engineering
+guideline forbids ("never manually duplicate shared modules") and which would
+turn byte-exact interoperability between our own agents into luck. The lecturer's
+reference implementation is itself a single mono-repo playing both roles. The
+`workspace-history` mirror (ADR-23) puts the complete development record inside
+both submitted repos, which is what rule 50's stated purpose asks for.
+
+**Reported where a grader will read it:** the academic `README.md` carries this
+with the citations, and it is exported into both submission repos.
+**Status:** accepted.

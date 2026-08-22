@@ -1223,3 +1223,27 @@
 - **Also fixed a doc that had gone stale within a day:** the file still opened
   by saying our artifacts carry no commit field, which #89 had already changed.
   It now scopes itself to the series played before that landed.
+
+## 2026-08-22 · Compliance · is each role required to RUN from its own repo?
+- **Owner asked for an honest answer from the BOOK, not our derived docs.** Read
+  `instructions/police_thief_p2p.pdf` directly — 160 pages, Hebrew visual-order
+  text reversed per line with pypdf (the technique that worked on 2026-08-19).
+- **Answer: no.** Binding rule 1 (sanction *total failure*) requires the two
+  codes to run in separate **processes** (`תהליכים`) under separate config dirs;
+  rule 2 forbids sharing memory/variables, and §2.4.2 (p. 31) narrows that to
+  *"importing a shared module that holds live state"*. Rule 49 says **submit**
+  (`מגישים`) two repos; rule 50 lists their required contents. Nothing requires a
+  game to be RUN from a submission repository.
+- **The honest tension, not hidden:** ch. 9.4 (p. 96) *describes* development as
+  happening "in two separate repositories" — we develop in one core and generate
+  two. Binding rule says submit; prose says develops.
+- **Output:** a cited compliance section in the academic README (which exports
+  into BOTH submission repos, so the grader reads it there) plus ADR-24. Each
+  rule is quoted, matched to what we do, and the divergence is stated with its
+  motivation rather than left to be discovered.
+- **Why not "fix" the architecture instead:** two independently developed
+  codebases would duplicate domain/interop/protocol/orchestration/audit, which
+  the guideline forbids outright, and would make byte-exact interop between our
+  own agents a matter of luck. The lecturer's own reference is a mono-repo
+  playing both roles. Two days from the deadline, rebuilding would trade a
+  documented design for duplicated code.
