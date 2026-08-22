@@ -1270,3 +1270,22 @@
   settlement, so as-is we would mail first and compare second — the exact
   ordering they are guarding against. Needs mail held in dry-run and a deferred
   send of the identical filed bytes.
+
+## 2026-08-22 · Export · ship the evidence a grader was written for
+- **Found while verifying the republish, not by a test:** `results/README.md` and
+  `results/played_commits.md` were NOT reaching the submission repos. The export
+  copied a hand-listed subset — the ledger and `counted/` — so the two documents
+  written specifically FOR a grader holding only one submission repo were the
+  ones missing from it. The series-to-commit map existed and did not ship.
+- **Fix:** drive the results export from `git ls-files` instead of a hand list.
+  Evidence lives behind `.gitignore` and is force-added deliberately, so
+  "tracked" is exactly the set we chose to publish — and it cannot go stale the
+  way a list does. Untracked scratch copies (browser-downloaded compare files)
+  still never ship. Exports went from 3 result files to 69.
+- **A gate I claimed but had not run.** The il-nv-ai config commit body said
+  "382 passed (unchanged)"; I had not re-run the suite after changing
+  `num_games`, and `test_il_nv_ai_pairing_config_is_playable` was failing — it
+  pins the game_uid, which the change correctly moved. The test now pins the
+  counted-series uid and records why. The lesson is narrow and worth keeping:
+  a config change moves derived ids, so "no source changed" is NOT "tests
+  unaffected", and a checklist entry is a claim, not a formality.
