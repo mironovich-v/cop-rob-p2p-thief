@@ -1,0 +1,12 @@
+# COUNTED ARMING — T = 2026-08-23 16:10:00 Asia/Jerusalem, agreed in writing.
+# ADR-20 double arming: this half sets game.counted; the CLI must pass --counted.
+# Recipient is the LECTURER ALONE, matched line-for-line with imreeyal.
+# Patience long: we come up early and hold; they bind at T.
+[game]
+counted = true
+
+[email]
+recipient = ["rmisegal+uoh26finalgame@gmail.com"]
+
+[network]
+connect_timeout_seconds = 2400

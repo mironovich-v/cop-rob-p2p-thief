@@ -45,6 +45,12 @@ def finish(rt) -> dict:
     audit = SKIPPED_AUDIT
     if result not in NO_AUDIT_RESULTS:
         mine = AuditPayload(sender=rt.role.value, records=rt.records, result_claim=result)
+        # The g3 seam of the 2026-08-23 counted attempt died exactly here: our
+        # peer held for the opponent's audit that never arrived while they had
+        # already moved on to g4. Say so before blocking.
+        listen = getattr(rt, "_listen", None)  # ``rt`` is duck-typed in unit tests
+        if listen is not None:
+            listen({"type": "audit_wait", "sub_game": rt._sub_game_number, "result": result})
         theirs = rt._transport.exchange_audit(mine.to_dict())
         if theirs is not None:
             their_records = AuditPayload.from_dict(theirs).records

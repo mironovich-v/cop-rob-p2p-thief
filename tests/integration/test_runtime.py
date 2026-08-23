@@ -119,7 +119,11 @@ def test_runtime_emits_live_event_stream(transport_pair, thief_config, police_co
     _run_match(thief, police)
 
     kinds = [event["type"] for event in events]
-    assert kinds[0] == "negotiated"
+    # The stream now opens by announcing the blocking handshake, so a peer that
+    # never gets an agreement still says what it is waiting for (2026-08-23).
+    assert kinds[0] == "handshake_wait"
+    assert kinds[1] == "negotiated"
+    assert "audit_wait" in kinds
     assert kinds[-1] == "game_over"
     assert "moved" in kinds
     for event in events:

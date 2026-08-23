@@ -50,8 +50,16 @@ def run_series(config, natural_role: Role, llm, transport, listener=None) -> Ser
     summaries: list[dict] = []
     peer_identity: dict = {}
     game_id = game_uid = None
+    announce = listener or (lambda event: None)
     for sub_game_number in range(1, num_games + 1):
-        _dial_opponent(config, transport, role_for(natural_role, sub_game_number))
+        my_role = role_for(natural_role, sub_game_number)
+        _dial_opponent(config, transport, my_role)
+        # Which door this sub-game dials is half of every seam post-mortem we
+        # have had to run, so it is recorded before the sub-game starts.
+        their_role = Role.THIEF if my_role is Role.POLICE else Role.POLICE
+        announce({"type": "sub_game_open", "sub_game": sub_game_number, "of": num_games,
+                  "role": my_role.value,
+                  "dial": config.get(f"network.opponent_url_{their_role.value}")})
         runtime = PeerRuntime(
             role_for(natural_role, sub_game_number),
             config,
@@ -61,7 +69,10 @@ def run_series(config, natural_role: Role, llm, transport, listener=None) -> Ser
             sub_game_number=sub_game_number,
             listener=listener,
         )
-        summaries.append(runtime.run())
+        summary = runtime.run()
+        summaries.append(summary)
+        announce({"type": "sub_game_done", "sub_game": sub_game_number,
+                  "result": summary["result"], "steps": summary["steps"]})
         peer_identity = runtime.peer_identity or peer_identity
         game_id, game_uid = runtime.game_id, runtime.game_uid
     return SeriesResult(summaries, own_identity, peer_identity, game_id, game_uid)

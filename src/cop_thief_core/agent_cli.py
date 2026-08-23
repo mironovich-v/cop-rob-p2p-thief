@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 
 from cop_thief_core.sdk import SimulationSdk
+from cop_thief_core.shared.progress import progress_listener
 
 
 def load_dotenv(path: str | os.PathLike = ".env") -> None:
@@ -50,7 +51,7 @@ def run_role(role: str, argv=None, *, transport=None) -> dict:
     load_dotenv()  # secrets paths from ./.env unless the shell already set them
     sdk = SimulationSdk(args.config, workdir=args.workdir)
     outcome = sdk.run_peer(role, stub_llm=not args.real_llm, transport=transport,
-                           counted=args.counted)
+                           listener=progress_listener(), counted=args.counted)
     summary = outcome["result"]
     print(f"[{role}] result={summary['result']} winner={summary['winner']} "
           f"game_uid={outcome['game_uid']} artifacts={outcome.get('artifacts_dir', '-')}")

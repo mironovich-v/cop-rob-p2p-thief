@@ -1509,3 +1509,30 @@
 - **Lesson:** two independent implementations filing the same game is a better
   detector than either side's tests. Neither suite could see this; the diff saw
   it immediately.
+
+## 2026-08-23 · Observability · a stalled peer must say where it stopped
+- **The failure that forced it:** two counted attempts with imreeyal aborted at
+  the same g3→g4 seam, and in both the peer's log was **zero bytes** after
+  thirty minutes. `run_role` calls `sdk.run_peer(...)`, which plays the WHOLE
+  six-sub-game series, and only then prints one line — so a peer stuck in a
+  sub-game is silent by design, not by accident.
+- **Why "just add prints" was not the fix:** stdout redirected to a file is
+  block-buffered at 8 KB, and a stuck peer is stopped with SIGTERM, which
+  discards the buffer. That is exactly why the one crash traceback we *did*
+  recover came through — stderr is not block-buffered. Progress therefore goes
+  to stderr AND flushes every line.
+- **What it cost us:** we diagnosed our own position twice by reading the
+  opponent's inbound `sub_game_number` in the ngrok inspector. We could not
+  answer "what did your process do after g3?" without a forensic dig, and an
+  hour of the exchange was spent arguing over which side stalled.
+- **Design choice:** ride the EXISTING listener seam (the GUI already consumes
+  it) rather than add a second mechanism; the GUI dispatcher ignores unknown
+  event types, so new seam events are safe. Announce BEFORE each blocking call —
+  a line printed after `run_handshake` returns would never have been written.
+- **What the evidence then showed, once the seam was named:** the g3 audit from
+  imreeyal never arrived at our door at all (g1 and g2 audits both did), so our
+  peer was still holding in `exchange_audit` while they had moved on to g4. That
+  answers their "when was your last greeting push?" — there was never one.
+- **Lesson:** an agent that blocks on a partner must narrate its own state
+  machine. Absence of output is not evidence of health, and a post-mortem that
+  depends on the other team's packet log is not a post-mortem we control.
