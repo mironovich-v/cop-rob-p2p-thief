@@ -113,7 +113,8 @@
 | 2026-08-23 | PR (interop) | fix-appendix-b-config-scope | (pending) | Fable 5 · high | Appendix B != signed terms: min_center is not in the book; adopt their 911B file, fill the term from the SPEC default | ~0.3 session | in review |
 | 2026-08-23 | PR (config) | config-imreeyal-refresh | (pending) | Fable 5 · high | imreeyal: stale counted count 1->2, and role-split doors added (we dialled their cop door in every sub-game) | ~0.1 session | in review |
 | 2026-08-23 | PR (reporting) | fix-subgame-start-timestamp | (pending) | Fable 5 · high | filed started_at was the peer launch, not the sub-game open (15-min error vs imreeyal); caught by cross-diff | ~0.1 session | in review |
-| 2026-08-23 | PR (observability) | fix-peer-progress-logging | (pending) | Fable 5 · high | peer wrote a 0-byte log for 30 min across TWO aborted counted attempts; announce every seam, flushed, on stderr | ~0.3 session + 2 void windows | in review |
+| 2026-08-23 | PR (observability) | fix-peer-progress-logging | 959ed1d | Fable 5 · high | peer wrote a 0-byte log for 30 min across TWO aborted counted attempts; announce every seam, flushed, on stderr | ~0.3 session + 2 void windows | merged (#104) |
+| 2026-08-23 | PR (reliability) | fix-bounded-audit-wait | (pending) | Fable 5 · high | audit wait shared connect_timeout (2400s armed) — a missing g3 audit hung us 40 min; separate budget, 120s x2 with one re-send | ~0.3 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the

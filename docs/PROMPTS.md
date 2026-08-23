@@ -1536,3 +1536,29 @@
 - **Lesson:** an agent that blocks on a partner must narrate its own state
   machine. Absence of output is not evidence of health, and a post-mortem that
   depends on the other team's packet log is not a post-mortem we control.
+
+## 2026-08-23 · Reliability · courtesy at the start became hang time at the end
+- **The wedge, found by adding the log first:** `exchange_audit` waited for the
+  opponent's audit with `timeout=self._connect_timeout` — the SAME value we
+  raise to 2400s so a partner can bring its doors up unhurried. When imreeyal's
+  g3 audit never arrived (counted attempt two), our peer sat forty minutes in
+  silence while their forty g4 greetings hit a peer that was still, correctly,
+  finishing g3.
+- **Verified before believing either side:** their agent suggested the audit was
+  "likely already in your queue". An exhaustive scan of every request to our
+  door between 17:24 and 17:36 found exactly ONE mentioning an audit — g2's, at
+  17:24:29 — and zero requests with uncaptured bodies. It never arrived.
+- **Why one number for two budgets was the real defect:** the handshake wants a
+  LONG patience (it is how we let a partner fire when ready); the audit wait
+  wants a SHORT one (a missing message should cost minutes, not the window).
+  Sharing the value meant every increase in courtesy silently bought a longer
+  hang. They are separate budgets now: `network.audit_wait_seconds`, default
+  120s, two windows with one re-send between them — ~4 minutes, not 40.
+- **Deliberately NOT changed:** what a peer does after the wait expires. Today
+  it still settles with `SKIPPED_AUDIT`, as before. Filing an unaudited sub-game
+  in a counted series is a protocol question, not a local one, and imreeyal have
+  not yet agreed a rule — so the timeout is made LOUD (`audit_timeout` progress
+  line) rather than given new settlement semantics unilaterally.
+- **Lesson:** observability first was the right order. The log did not fix
+  anything, but it turned "which side stalled?" into a one-line answer and
+  pointed straight at the shared timeout underneath.
