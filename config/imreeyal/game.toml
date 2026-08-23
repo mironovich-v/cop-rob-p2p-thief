@@ -17,7 +17,8 @@ repos = { cop = "https://github.com/mironovich-v/cop-rob-p2p-police", thief = "h
 mcp_servers = { cop = "https://cop-rob-p2p.ngrok.app/mcp", thief = "https://cop-rob-p2p.ngrok.app/mcp" }
 opponent_group_id = "imreeyal"        # handshake refuses any other group
 counted = false                       # flip ONLY for the one counted series (+ --counted)
-counted_games_played = 1              # truthful: nis-yar1 counted series banked 2026-08-18
+counted_games_played = 2              # nis-yar1 2026-08-18 + vibecode 2026-08-22;
+                                      # an armed run declares 3 including this series
 tie_rule = "series_add"               # declared in the constitution chat (ADR-17)
 
 [belief]
@@ -32,7 +33,13 @@ seed = 1234
 
 [network]
 my_port = 8802
-opponent_url = "https://cop.imreeyal.com/mcp"
+# ROLE-SPLIT: imreeyal run two doors. We are POLICE on odd, so THEY are thief
+# on odd — dial their THIEF door in 1/3/5 and their POLICE door in 2/4/6.
+# The single-URL config dialled their cop door in every sub-game, which is the
+# wrong end for half the series.
+opponent_url_thief = "https://thief.imreeyal.com/mcp"
+opponent_url_police = "https://cop.imreeyal.com/mcp"
+opponent_url = "https://thief.imreeyal.com/mcp"   # initial dial: sub-game 1, they are thief
 turn_timeout_seconds = 180
 poll_interval_seconds = 0.5
 connect_timeout_seconds = 150   # handshake patience: spans their inter-sub-game door gap

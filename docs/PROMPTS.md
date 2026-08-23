@@ -1465,3 +1465,24 @@
   as fixing their side. The disagreement was really about which document governs
   which object, and only reading the book settled it. Two partners' validators
   disagreeing is a scope question before it is a bug.
+
+## 2026-08-23 · Pairing · imreeyal refresh before playing
+- **Two gaps found by checking the config rather than assuming it was ready**
+  (it was written 2026-08-18 and never played):
+  (1) `counted_games_played` still read 1 — we have since banked TWO counted
+  series (nis-yar1, vibecode), so an armed run would have UNDER-declared our
+  count in a graded field both teams publish;
+  (2) only ONE of their two doors was configured. imreeyal run
+  `cop.imreeyal.com` and `thief.imreeyal.com`, and we play POLICE on odd — so
+  they are THIEF on odd and we must dial their thief door in 1/3/5. The single
+  URL pointed at their cop door for every sub-game, i.e. the wrong end for half
+  the series. That would have failed the handshake mid-series, not at the start.
+- **Also worth flagging to them:** our stack has changed enormously since the
+  2026-08-18 agreement — claimless-final degradation, the audit-ack shutdown
+  grace, belief from declared cells and the scent peak, a herding police, the
+  rule-35 filing guard, and two brain changes. Their gate expects a friendly
+  report auto-fired at settlement, which our config still honours (mail enabled,
+  both their addresses plus our copy).
+- **Lesson:** a pairing config that has never been exercised is not "ready" —
+  it is untested. Both faults were invisible until someone read it against the
+  current facts.

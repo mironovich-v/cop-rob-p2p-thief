@@ -111,6 +111,7 @@
 | 2026-08-22 | PR (strategy) | feat-thief-avoids-reachable-cells | (pending) | Fable 5 · high | overnight brains work: evader reach-avoidance (10 -> 12 steps); FIVE cop hypotheses tested and disproved, none shipped | ~1.5 session | in review |
 | 2026-08-22 | PR (strategy) | feat-police-breaks-parity-stall | (pending) | Fable 5 · high | cop can STAY to break a parity lock (fires at live steps 10-30, no bench regression); depth-8/12 evader search proven worthless | ~1.5 session | in review |
 | 2026-08-23 | PR (interop) | fix-appendix-b-config-scope | (pending) | Fable 5 · high | Appendix B != signed terms: min_center is not in the book; adopt their 911B file, fill the term from the SPEC default | ~0.3 session | in review |
+| 2026-08-23 | PR (config) | config-imreeyal-refresh | (pending) | Fable 5 · high | imreeyal: stale counted count 1->2, and role-split doors added (we dialled their cop door in every sub-game) | ~0.1 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the
