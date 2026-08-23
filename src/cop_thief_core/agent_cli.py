@@ -9,8 +9,10 @@ opts into the configured banter provider (default: offline stub).
 
 import argparse
 import os
+import sys
 from pathlib import Path
 
+from cop_thief_core.exceptions import AuditTimeoutError
 from cop_thief_core.sdk import SimulationSdk
 from cop_thief_core.shared.progress import progress_listener
 
@@ -50,8 +52,14 @@ def run_role(role: str, argv=None, *, transport=None) -> dict:
     args = parse_args(role, argv)
     load_dotenv()  # secrets paths from ./.env unless the shell already set them
     sdk = SimulationSdk(args.config, workdir=args.workdir)
-    outcome = sdk.run_peer(role, stub_llm=not args.real_llm, transport=transport,
-                           listener=progress_listener(), counted=args.counted)
+    try:
+        outcome = sdk.run_peer(role, stub_llm=not args.real_llm, transport=transport,
+                               listener=progress_listener(), counted=args.counted)
+    except AuditTimeoutError as stopped:
+        # A stated reason, not a traceback: the series is over, the sub-game is
+        # void, and NOTHING is filed (no artifacts, no report, no mail).
+        print(f"[{role}] SERIES STOPPED — {stopped}", file=sys.stderr, flush=True)
+        raise SystemExit(2) from stopped
     summary = outcome["result"]
     print(f"[{role}] result={summary['result']} winner={summary['winner']} "
           f"game_uid={outcome['game_uid']} artifacts={outcome.get('artifacts_dir', '-')}")

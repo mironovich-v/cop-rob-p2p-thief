@@ -1562,3 +1562,24 @@
 - **Lesson:** observability first was the right order. The log did not fix
   anything, but it turned "which side stalled?" into a one-line answer and
   pointed straight at the shared timeout underneath.
+
+## 2026-08-23 · Protocol · a lost audit voids the sub-game and stops the series
+- **Agreed, not invented:** imreeyal chose option A and showed why from their
+  own code — when an opponent audit never arrives, THEIR window settles
+  `audit_ok=false` and their driver plays on, and their filing guard refuses
+  only a PARTIAL series, not a flagged one. So "settle unverified" on our side
+  means they file, our 6/6 guard withholds: one report, one silence — the exact
+  rule-35 shape that zeroes both teams.
+- **Why A needs no code from them:** we stop, so g4–g6 never open, their
+  handshake patience expires into a partial series, and their own guard refuses
+  to file. Same answer on both sides by construction.
+- **Implementation:** `AuditTimeoutError` from `finish()`; the CLI prints a
+  stated reason and exits 2. The exception propagates before `emit_series`, so
+  no artifacts, no report, no mail — verified by reading the path, not assumed.
+- **Accepted risk, stated:** the MIRROR case (OUR audit failing to reach THEM)
+  is not closed by either option without code on their side — they would flag
+  and continue while we saw nothing wrong. Both of today's losses were in the
+  other direction and their inbound audit path held all day.
+- **Lesson:** when two implementations must agree, prefer the option that is
+  safe UNILATERALLY. A rule that needs both sides to change is a rule that can
+  half-land.

@@ -1,7 +1,10 @@
 """Adversarial audit: a tampered opponent log forces tamper_forfeit for the honest
 peer, regardless of the board result (PRD_commit_reveal, TODO slice 6.2)."""
 
+import pytest
+
 from cop_thief_core.constants import Role
+from cop_thief_core.exceptions import AuditTimeoutError
 from cop_thief_core.interop import seal
 from cop_thief_core.orchestration.runtime import PeerRuntime
 from cop_thief_core.orchestration.summary import finish
@@ -45,14 +48,20 @@ def test_tampered_opponent_log_forces_forfeit(police_config):
     assert summary["winner"] == "police"  # the honest peer wins by technical decision
 
 
-def test_missing_opponent_audit_skips(police_config):
+def test_missing_opponent_audit_voids_the_sub_game_and_stops(police_config):
+    """Option A, agreed with imreeyal 2026-08-23 after two dead counted windows.
+
+    Settling unverified and playing on would file a report their 6/6 guard
+    withholds — one report, one silence, the rule-35 shape that zeroes both
+    teams. Stopping needs nothing from the opponent: their windows never open
+    and their own partial-series guard refuses to file either.
+    """
     class _Silent:
         def exchange_audit(self, payload):
             return None
 
-    summary = finish(_police_after_survival(police_config, _Silent()))
-    assert summary["audit"]["skipped"] is True
-    assert summary["result"] == "survival"  # no forfeit when the opponent never revealed
+    with pytest.raises(AuditTimeoutError, match="VOID"):
+        finish(_police_after_survival(police_config, _Silent()))
 
 
 def test_resealed_log_fails_live_binding(police_config):
