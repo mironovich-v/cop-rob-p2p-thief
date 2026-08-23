@@ -8,6 +8,7 @@ board result. Result totals are always DERIVED from the sealed log, never truste
 import time
 
 from cop_thief_core.constants import RESULT_CAPTURE, RESULT_DISPUTED, Role
+from cop_thief_core.exceptions import AuditTimeoutError
 from cop_thief_core.interop import audit_records
 from cop_thief_core.orchestration.audit_checks import corroborate_capture
 from cop_thief_core.protocol import AuditPayload
@@ -52,25 +53,31 @@ def finish(rt) -> dict:
         if listen is not None:
             listen({"type": "audit_wait", "sub_game": rt._sub_game_number, "result": result})
         theirs = rt._transport.exchange_audit(mine.to_dict())
-        if theirs is None and listen is not None:
-            # Loud, not silent: a sub-game that settles without the opponent's
-            # audit is exactly what must never pass unnoticed in a counted run.
-            listen({"type": "audit_timeout", "sub_game": rt._sub_game_number,
-                    "result": result})
-        if theirs is not None:
-            their_records = AuditPayload.from_dict(theirs).records
-            # Bind the disclosure to the commits that ARRIVED during play (§5d).
-            audit = audit_records(their_records, rt.handler.received_commits)
-            if not audit["passed"]:
-                result, winner = TAMPER_FORFEIT, rt.role.value
-            elif result == RESULT_CAPTURE and rt.role is Role.POLICE:
-                # SPEC §3.1: a thief-sent caught:true is corroborated, not believed.
-                response = _thief_caught_response(rt)
-                if response is not None:
-                    check = corroborate_capture(rt.state, rt.records, response, their_records)
-                    audit = {**audit, "capture_corroboration": check}
-                    if not check["corroborated"]:
-                        result, winner = RESULT_DISPUTED, None  # never counted clean
+        if theirs is None:
+            # Option A (agreed with imreeyal, 2026-08-23): VOID the sub-game and
+            # stop, never settle unverified. Proceeding would file a report the
+            # opponent's 6/6 guard withholds — one report, one silence, which is
+            # the rule-35 shape that zeroes both teams.
+            if listen is not None:
+                listen({"type": "audit_timeout", "sub_game": rt._sub_game_number,
+                        "result": result})
+            raise AuditTimeoutError(
+                f"sub-game {rt._sub_game_number}: the opponent's audit never arrived; "
+                f"the sub-game is VOID and the series stops (nothing is filed)"
+            )
+        their_records = AuditPayload.from_dict(theirs).records
+        # Bind the disclosure to the commits that ARRIVED during play (§5d).
+        audit = audit_records(their_records, rt.handler.received_commits)
+        if not audit["passed"]:
+            result, winner = TAMPER_FORFEIT, rt.role.value
+        elif result == RESULT_CAPTURE and rt.role is Role.POLICE:
+            # SPEC §3.1: a thief-sent caught:true is corroborated, not believed.
+            response = _thief_caught_response(rt)
+            if response is not None:
+                check = corroborate_capture(rt.state, rt.records, response, their_records)
+                audit = {**audit, "capture_corroboration": check}
+                if not check["corroborated"]:
+                    result, winner = RESULT_DISPUTED, None  # never counted clean
     return {
         "result": result,
         "winner": winner,

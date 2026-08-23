@@ -71,7 +71,11 @@ def test_the_wait_is_not_the_connect_timeout():
     assert transport._audit_wait != transport._connect_timeout
 
 
-def test_a_missing_audit_is_announced_not_swallowed():
+def test_a_missing_audit_is_announced_then_voids_the_sub_game():
+    """Announced AND fatal: the series stops rather than settling unverified."""
+    import pytest
+
+    from cop_thief_core.exceptions import AuditTimeoutError
     from cop_thief_core.orchestration.summary import finish
     events = []
     rt = types.SimpleNamespace(
@@ -84,6 +88,7 @@ def test_a_missing_audit_is_announced_not_swallowed():
         _tokens_total=0, _config=types.SimpleNamespace(get=lambda *a: "vm__fabi"),
         _started_at="2026-08-23T14:24:33Z", _started_monotonic=0.0,
     )
-    finish(rt)
+    with pytest.raises(AuditTimeoutError, match="VOID"):
+        finish(rt)
     assert [e["type"] for e in events] == ["audit_wait", "audit_timeout"]
     assert events[-1]["sub_game"] == 3
