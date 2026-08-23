@@ -16,14 +16,32 @@ from cop_thief_core.interop.hashing import commit_of, new_nonce, verify
 _LIMITS_PATH = Path(__file__).resolve().parent / "limits.json"
 
 
+# Terms an Appendix-B shared config may legitimately omit, with the value the
+# kit SPEC documents as the default. Everything else stays mandatory.
+APP_B_OPTIONAL_TERMS = {"min_center_intensity": 0.5}
+
+
 def terms_from_config(cfg) -> dict:
-    """The signed-terms subset — everything both peers MUST match on."""
+    """The signed-terms subset — everything both peers MUST match on.
+
+    Appendix B and the signed terms are DIFFERENT SCOPES. The book defines
+    exactly three ``pheromone_*`` keys (center_intensity, decay, grid_size) and
+    the string ``min_center`` appears nowhere in it, so a conforming Appendix-B
+    config legitimately omits ``min_center_intensity`` — and a partner's
+    Appendix-B validator rejects a file that adds it (il-nv-ai, 2026-08-23,
+    verified against the PDF). The term itself belongs to the reference-v3
+    negotiation body, where the kit SPEC states ``default 0.5`` and the pinned
+    CORE ``game_uid`` vector carries 0.5. So it is filled from that documented
+    default when the shared file omits it — never invented, and never
+    overriding a value a partner does supply.
+    """
     terms = {
         "board_size": cfg.get("board.size"),
         "smell_grid_size": cfg.get("smell.grid_size"),
         "decay_per_step": cfg.get("smell.decay_per_step"),
         "emit_intensity": cfg.get("smell.emit_intensity"),
-        "min_center_intensity": cfg.get("smell.min_center_intensity"),
+        "min_center_intensity": cfg.get(
+            "smell.min_center_intensity", APP_B_OPTIONAL_TERMS["min_center_intensity"]),
         "max_steps": cfg.get("rules.max_steps"),
         "barriers_max": cfg.get("rules.barriers_max"),
         "setting": cfg.get("play.setting"),

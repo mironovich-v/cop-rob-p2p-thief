@@ -1441,3 +1441,27 @@
 - **Honest limit:** this removes a structural inability; it does not prove we
   would have won that game, because their thief may answer the flip. We still
   cannot reproduce their evader.
+
+## 2026-08-23 · Interop · Appendix B and the signed terms are different scopes
+- **il-nv-ai were right and we were wrong**, with a citation we checked against
+  the PDF rather than taking on trust: the book defines exactly THREE
+  `pheromone_*` keys (center_intensity, decay, grid_size, all on one page) and
+  the string `min_center` appears NOWHERE in it. Our 948-byte "fix" added a key
+  the book does not define, so their Appendix-B validator was right to refuse it
+  — and right to refuse relabelling a non-Appendix-B file as Appendix B.
+- **Where the term actually lives:** the reference-v3 negotiation body. The kit
+  SPEC states `min_center_intensity` **default 0.5** and the pinned CORE
+  `game_uid` vector carries 0.5 inside the terms. So the value was never in doubt
+  — only its home was.
+- **Our bug:** `terms_from_config` extracted all fourteen signed terms from
+  `game.json`, conflating the shared FILE with the negotiation BODY. That works
+  only for a config that happens to carry all fourteen, which Appendix B does not.
+- **Fix:** `APP_B_OPTIONAL_TERMS` — min_center_intensity alone may be absent, and
+  is then filled from the documented default. An explicit value still wins, so a
+  partner who does supply it is never silently overridden, and every other
+  missing term is still refused. Their 911-byte file adopted verbatim; the terms
+  hash and uid both still reproduce.
+- **Lesson:** we twice proposed *adding* a key to their file and twice framed it
+  as fixing their side. The disagreement was really about which document governs
+  which object, and only reading the book settled it. Two partners' validators
+  disagreeing is a scope question before it is a bug.
