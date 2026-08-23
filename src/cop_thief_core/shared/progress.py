@@ -32,6 +32,7 @@ _EVENTS = {
     "handshake_wait": ("waiting for opponent agreement", ("sub_game", "role")),
     "negotiated": ("agreement signed", ("sub_game",)),
     "audit_wait": ("waiting for opponent audit", ("sub_game", "result")),
+    "audit_timeout": ("NO OPPONENT AUDIT — settling unverified", ("sub_game", "result")),
     "sub_game_done": ("settled", ("sub_game", "result", "steps")),
 }
 

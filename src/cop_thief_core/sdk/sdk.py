@@ -58,6 +58,9 @@ class SimulationSdk:
             audit_send_timeout=cfg.get("network.audit_send_timeout_seconds", 10),
             call_timeout=cfg.get("network.call_timeout_seconds", 10),
             handshake_repush=cfg.get("network.handshake_repush_seconds", 5.0),
+            # Deliberately NOT connect_timeout: a long handshake patience must
+            # not become a long silent hang when an audit goes missing.
+            audit_wait=cfg.get("network.audit_wait_seconds", 120.0),
         )
 
     def run_peer(self, role: str, stub_llm: bool = True, transport=None,

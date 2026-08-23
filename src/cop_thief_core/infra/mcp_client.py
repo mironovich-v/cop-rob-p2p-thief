@@ -30,6 +30,7 @@ class McpTransport:
         control_send_timeout: float = 2.0,
         call_timeout: float = 10.0,
         handshake_repush: float = 5.0,
+        audit_wait: float = 120.0,
     ) -> None:
         self._opponent = opponent  # URL string (real) or FastMCP object (in-memory)
         self._inboxes = inboxes
@@ -39,6 +40,7 @@ class McpTransport:
         self._control_timeout = control_send_timeout
         self._call_timeout = call_timeout  # per-call cap, strictly < signed deadline
         self._repush = handshake_repush
+        self._audit_wait = audit_wait
 
     def set_opponent(self, opponent) -> None:
         """Swap the dial target (role-split opponents run two fixed-role
@@ -143,10 +145,29 @@ class McpTransport:
 
     def exchange_audit(self, payload: dict) -> dict | None:
         """Best-effort send (the winner may exit right after reading its inbox);
-        then always check whether THEIR audit already sits in my inbox."""
+        then wait a BOUNDED time for theirs, re-sending ours once.
+
+        This wait used to be bounded by ``connect_timeout``, the same value that
+        buys a partner time to bring its doors up. Armed for the imreeyal
+        counted window that was 2400s, so when their g3 audit never arrived
+        (2026-08-23) our peer sat forty minutes in silence while their g4
+        greetings piled up unanswered — courtesy at the start had become hang
+        time at the end. The two are now separate budgets: a missing audit costs
+        one bounded wait, not the whole window.
+
+        The re-send exists because the audit is a push from each side: if their
+        first attempt died in flight, a peer that is still listening gets
+        another chance to answer before we give up.
+        """
         with contextlib.suppress(SimulationError):
             self._call_with_retry("submit_audit", payload, timeout=self._audit_timeout)
-        try:
-            return self._inboxes.audits.get(timeout=self._connect_timeout)
-        except queue.Empty:
-            return None
+        for attempt in (1, 2):
+            try:
+                return self._inboxes.audits.get(timeout=self._audit_wait)
+            except queue.Empty:
+                if attempt == 2:
+                    return None
+                with contextlib.suppress(SimulationError):  # re-request, then wait again
+                    self._call_with_retry("submit_audit", payload,
+                                          timeout=self._audit_timeout)
+        return None

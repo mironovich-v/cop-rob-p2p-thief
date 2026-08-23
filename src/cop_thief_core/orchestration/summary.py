@@ -52,6 +52,11 @@ def finish(rt) -> dict:
         if listen is not None:
             listen({"type": "audit_wait", "sub_game": rt._sub_game_number, "result": result})
         theirs = rt._transport.exchange_audit(mine.to_dict())
+        if theirs is None and listen is not None:
+            # Loud, not silent: a sub-game that settles without the opponent's
+            # audit is exactly what must never pass unnoticed in a counted run.
+            listen({"type": "audit_timeout", "sub_game": rt._sub_game_number,
+                    "result": result})
         if theirs is not None:
             their_records = AuditPayload.from_dict(theirs).records
             # Bind the disclosure to the commits that ARRIVED during play (§5d).
