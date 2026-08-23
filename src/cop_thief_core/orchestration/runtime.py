@@ -87,12 +87,18 @@ class PeerRuntime:
 
     def run(self, skip_negotiation: bool = False) -> dict:
         if not skip_negotiation:
+            # Announced BEFORE the call blocks: both 2026-08-23 aborts stalled
+            # inside the handshake, and a line printed after it returns would
+            # never have been written.
+            self._listen({"type": "handshake_wait", "sub_game": self._sub_game_number,
+                          "role": self.role.value})
             self.peer_identity, self.game_id, self.game_uid = run_handshake(
                 self._transport, self._config, self._own_identity,
                 role=self.role.value, sub_game_number=self._sub_game_number,
             )
             self._mark_game_start()
-            self._listen({"type": "negotiated", "view": self.view()})
+            self._listen({"type": "negotiated", "view": self.view(),
+                          "sub_game": self._sub_game_number})
         if self.role is Role.THIEF:
             self._take_turn(None)
         self._turn_loop()
