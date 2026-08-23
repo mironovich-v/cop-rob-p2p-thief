@@ -91,7 +91,7 @@ class PeerRuntime:
                 self._transport, self._config, self._own_identity,
                 role=self.role.value, sub_game_number=self._sub_game_number,
             )
-            self._started_monotonic = time.monotonic()
+            self._mark_game_start()
             self._listen({"type": "negotiated", "view": self.view()})
         if self.role is Role.THIEF:
             self._take_turn(None)
@@ -99,6 +99,18 @@ class PeerRuntime:
         summary = finish(self)
         self._listen({"type": "game_over", "view": self.view(), "summary": summary})
         return summary
+
+    def _mark_game_start(self) -> None:
+        """Stamp the sub-game's start at the moment it OPENS, not at launch.
+
+        A peer may hold in the handshake for a long time waiting for the
+        opponent's doors — fifteen minutes in the imreeyal window of
+        2026-08-23. Only the monotonic clock used to be reset here, so the
+        filed `started_at` (and `ended_at`, which is derived from it) carried
+        the launch time and reported a sub-game that began before the agreed T.
+        """
+        self._started_monotonic = time.monotonic()
+        self._started_at = now_iso()
 
     def _turn_loop(self) -> None:
         timeout = self._config.get("network.turn_timeout_seconds")

@@ -225,6 +225,8 @@ scope already matches kit #55 — the gaps are behavioral, not byte-level.
 
 | [x] | 8.42 | imreeyal pairing refresh before first play: the config was written 2026-08-18 and never exercised, and had two faults. `counted_games_played` still read 1 though we have banked TWO counted series since, so an armed run would have under-declared a graded field both teams publish. And only one of their two doors was configured — they run `cop.` and `thief.imreeyal.com`, we play POLICE on odd, so they are THIEF on odd and we must dial their thief door in 1/3/5; the single URL aimed at their cop door for the whole series, which would have failed mid-series rather than at the start | `config/imreeyal/game.toml` | config | 405 passed; dial map verified per role |
 
+| [x] | 8.43 | filed `started_at` was the PEER LAUNCH, not the sub-game open: our imreeyal g1 reported 12:12:16Z against their correct 12:27:06Z — the fifteen minutes our peer spent holding in the handshake for their doors. `_started_monotonic` was already reset post-handshake so `duration_seconds` was right, but the wall-clock stamp never was, and `ended_at` derives from it, so both ends of every filed row were shifted earlier. The error GROWS with how long we courteously hold, and a counted report starting before the agreed T is a discrepancy an auditor may question. Caught by the two-implementation cross-diff, which neither side's tests could see | `orchestration/runtime.py` | ~12 src | `test_start_timestamp` (2) |
+
 Dependencies: 8.2 needs 8.1; the rest are independent (8.9 lands with or after
 its behaviors). ENH vectors (`joint_seed`, `derive_starts`) and `smell_binding`
 are deliberately NOT implemented (opt-in / zero-implementation per kit

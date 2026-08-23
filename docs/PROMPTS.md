@@ -1486,3 +1486,26 @@
 - **Lesson:** a pairing config that has never been exercised is not "ready" —
   it is untested. Both faults were invisible until someone read it against the
   current facts.
+
+## 2026-08-23 · Reporting · a sub-game starts when it opens, not when we launch
+- **Caught by the cross-diff, not by a test:** our imreeyal g1 filed
+  `started_at` 12:12:16Z against their 12:27:06Z. Theirs was right — that was the
+  agreed T. Ours was when the PEER LAUNCHED, and it then held in the handshake
+  for fifteen minutes waiting for their doors.
+- **Why only half of it was wrong:** `_started_monotonic` was already reset after
+  the handshake, so `duration_seconds` was correct all along. The wall-clock
+  `_started_at` was stamped once at construction and never refreshed — and
+  `ended_at` is derived from it, so BOTH ends of every filed row were shifted
+  earlier by the hold.
+- **Why it matters beyond tidiness:** we hold deliberately (a long patience is
+  how we let a partner fire when ready), so the error grows with how courteous
+  we are. A counted report whose start time precedes the agreed T by a quarter
+  of an hour is exactly the discrepancy an auditor is entitled to question, and
+  the counted series is the one that cannot be replayed.
+- **Also surfaced in the same diff, THEIR side:** their filed rows record our
+  commit as `"unknown"` while we read theirs (`f5a64c06…`) correctly. Raised with
+  them; rule 53 has the lecturer rev-parse the played commit from the filed
+  report, so it needs closing before a counted series rather than after.
+- **Lesson:** two independent implementations filing the same game is a better
+  detector than either side's tests. Neither suite could see this; the diff saw
+  it immediately.
