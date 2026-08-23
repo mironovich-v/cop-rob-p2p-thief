@@ -1411,3 +1411,33 @@
   ideas measured worse, and pushing strategy we cannot reproduce a failure for,
   days before a counted series, is how a working engine gets broken. The live
   puzzle stays open and documented rather than "fixed" by guess.
+
+## 2026-08-22 · Strategy · deeper search is worthless; a parity flip is not
+- **Settled the evader question with a negative result.** Built a depth-limited
+  minimax evader (memoised, O(1) leaves, distance-based pursuer model) and ran
+  depth 8 and depth 12 against our own cop. Both produce EXACTLY the shipped
+  one-ply outcome: 12 steps, 0/10 survival. Looking further ahead does not help
+  — capture is forced on 7x7 against a competent pursuer, and the horizon does
+  not change it. A naive first attempt also taught a cost lesson: calling
+  `territory()` (0.136 ms) at every node made depth 6 ~11M nodes and it never
+  finished, which is also why a search evader could never meet a 30s step
+  deadline.
+- **So the thief is at its practical ceiling** and further evader work has no
+  measurable payoff. Recorded so nobody re-runs it.
+- **The cop, though, had a structural gap.** Every move changes the Manhattan
+  distance by one, so an evader holding an EVEN distance before our move can
+  never be landed on by a cop that always moves — and ours never used STAY,
+  which is in the agreed move set. Measured on the live game: best reachable
+  territory read 27, 21, 19, 14, 11, 9 and then 21 for twenty-eight straight
+  turns while the cop shuttled between two cells, distance even on 29 of 34.
+- **Trigger tightened after a false positive.** The first version keyed on flat
+  territory alone and fired inside an existing test that reuses one brain across
+  fresh states. That was an artifact, but it exposed a real risk (a straight
+  approach can plateau briefly), so the rule now needs all three signals:
+  REVISITING our own recent cells, flat territory, and even distance.
+- **Validated against the recorded game, not just the bench:** replayed live g1
+  and the HOLD fires at steps 10, 14, 18, 22, 26, 30 — six parity flips inside
+  the deadlock. Bench unchanged at 12/12, so it costs nothing.
+- **Honest limit:** this removes a structural inability; it does not prove we
+  would have won that game, because their thief may answer the flip. We still
+  cannot reproduce their evader.

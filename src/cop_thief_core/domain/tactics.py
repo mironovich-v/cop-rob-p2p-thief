@@ -29,6 +29,7 @@ DEFAULTS = {
     "recent_penalty": 5.0,  # oscillation killer
     "recent_window": 6,  # how many of my own last cells count as "recent"
     "pocket_exits": 2,  # thief-exit count at/below which the police seals
+    "stall_window": 4,  # equal best-territory readings that mean "no progress"
 }
 
 
