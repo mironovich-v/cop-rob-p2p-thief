@@ -1,6 +1,6 @@
 {
-  "core_commit": "2db98faefe7a564bcf325237de6e2082d7bba73e",
-  "core_sha256": "6996dbdaf556735cb6777f3c03fc2accc7270c418b70495da853a6dcb59201e4",
+  "core_commit": "022c99baa9a75ee625842b99c29e40810247490d",
+  "core_sha256": "4a1ae18ff939fc16c1e8ed361c3799d8c4eabbabe050421cf8a3e431728e1630",
   "repo": "https://github.com/mironovich-v/cop-rob-p2p-thief",
   "role": "thief",
   "sibling_repo": "https://github.com/mironovich-v/cop-rob-p2p-police",

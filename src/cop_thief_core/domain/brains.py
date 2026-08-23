@@ -126,6 +126,34 @@ class PoliceBrain(BrainBase):
 
     role = Role.POLICE
 
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self._best_history: list[int] = []  # best reachable territory per turn
+        self._just_held = False
+
+    def _parity_locked(self, state, threat) -> bool:
+        """Are we circling an evader we can never land on?
+
+        Three signals together, because any one alone gives false positives:
+        we are REVISITING our own recent cells (the live pathology was a
+        two-cell ping-pong), the best reachable territory has not improved, and
+        the distance is EVEN. Every move changes the Manhattan distance by one,
+        so an evader holding an even distance before our move cannot be landed
+        on by a cop that always moves — and STAY, which is in the agreed move
+        set, is the only way out.
+
+        Live (vibecode g1): best territory read 27, 21, 19, 14, 11, 9 and then
+        21 for twenty-eight straight turns while the cop shuttled between two
+        cells, distance even on 29 of 34 turns, 14 barriers unused.
+        """
+        window = self._tactics["stall_window"]
+        if len(self._best_history) < window or len(set(self._best_history[-window:])) != 1:
+            return False  # still making progress
+        visited = [tuple(entry["position"]) for entry in state.log[-window:]]
+        if len(visited) < window or len(set(visited)) == len(visited):
+            return False  # not circling — a straight approach may plateau briefly
+        return (state.board.distance(state.position, threat) % 2) == 0
+
     def _decide_move(self, state, belief, barriers_max):
         moves = state.board.legal_moves(state.position, state.barriers)
         if not moves:
@@ -135,6 +163,15 @@ class PoliceBrain(BrainBase):
             strike = police_barrier(state.board, state, threat, self._tactics)
             if strike is not None:
                 return MoveType.BARRIER, strike
+        self._best_history.append(min(
+            territory(state.board, threat, target, state.barriers)
+            for _, target in moves))
+        # Hold ONCE to flip the parity; holding again would just stall the hunt.
+        if not self._just_held and self._parity_locked(state, threat):
+            self._just_held = True
+            self._best_history.clear()
+            return MoveType.HOLD, None
+        self._just_held = False
         direction, _ = self._pick_move(moves, state, belief)
         return MoveType.MOVE, direction
 
