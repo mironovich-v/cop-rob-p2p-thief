@@ -64,6 +64,7 @@ commit and the sibling repo without being told where to look.
 | 2026-08-21 ~17:17 | il-nv-ai (game 2, we thief) | `0e463ce` | Declared at fire; verified from `playing_commit()` before launch. |
 | 2026-08-21 21:19 / 21:38 | vibecode (friendlies 1–2) | `1c0c56ee5167b8abd77b57813c77ea7f4d8bc41d` | **Recorded** in vibecode's result artifact. |
 | 2026-08-22 16:09 | vibecode (friendly, both sides rebuilt) | `cabcb074f7ce9e5851a050630d95b3a8bdeb01ba` | **Recorded** in vibecode's result artifact. |
+| 2026-08-23 20:20 | **imreeyal (COUNTED series 3)** | `eae0d7096f211ec2e2c7a278b3d80240ad7ac018` | **Recorded in our own artifact** (both sides' commits present); theirs `f5a64c06`. |
 
 ## Keeping this current
 

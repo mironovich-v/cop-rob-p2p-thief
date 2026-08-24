@@ -1583,3 +1583,38 @@
 - **Lesson:** when two implementations must agree, prefer the option that is
   safe UNILATERALLY. A rule that needs both sides to change is a rule that can
   half-land.
+
+## 2026-08-24 · Strategy · the move we never had, and the walls that cost us the game
+- **Input:** imreeyal's post-league strategy debrief (their tenth and final
+  counted series was ours, so nothing was left to protect). Kept OUT of git —
+  it sits in the git-ignored `secrets/` directory beside the OAuth files.
+- **The forensic that settled it.** Rather than trust either side's theory, the
+  losing sub-game was reconstructed from our own sealed log plus the scent peaks
+  in their turn messages. At step 10 we stood in the corner (6,6), their cop at
+  (5,5): staying was safe at distance 2, and BOTH remaining steps were inside
+  the cop's reach. We stepped into one and died. `_decide_move` only ever offered
+  `board.legal_moves`, so HOLD was never in the option set — although STAY is a
+  signed term of the move set and our own POLICE already used it. A cornered
+  evader was structurally forced to die.
+- **What measurement refused.** Their §2 fix 1 (territory-based `wall_gain`) is
+  identically ZERO over 840 turns: a wall may only be placed beside the cop, so
+  it lands in the cop's own Voronoi region and cannot shrink the thief's. The
+  same argument kills wall-sealing an escape. And their §1 fix 3 (stochastic
+  top-k) measured strictly worse for us (384/512 caught vs 365). Good advice is
+  still a hypothesis; three of their five suggestions were adopted, two refused
+  with numbers.
+- **The biggest single win was deleting behaviour, not adding it.** Barriers
+  cost the cop its move, and a wall can never capture anything a step could not
+  capture more cheaply. With walls off the cop went from 0/32 to 32/32 against
+  every competent evader. Live corroboration: we burned 5–9 walls a window and
+  converted nothing; they used zero and won three.
+- **Method fix, from their §4.** The old 12-seed self-play bench was measuring
+  our own blind spots. Now: six opponent arms (including reconstructions of
+  THEIR two designs from their described algorithms, never from friendly tapes —
+  they warned those were played with decoy brains), 96+ unseen seeds, whole
+  distributions, and a champion gate that runs in the unit suite.
+- **Result:** cop 0% -> 100% capture against every competent evader arm; thief
+  caught 0/288 across all pursuer arms and belief lags, from up to 91/96.
+- **Lesson:** the debrief was worth more than the games. But every claim in it
+  had to be re-derived locally before it earned a line of code, and the two that
+  did not survive were exactly the two that sounded most authoritative.

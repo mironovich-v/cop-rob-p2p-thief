@@ -30,6 +30,9 @@ DEFAULTS = {
     "recent_window": 6,  # how many of my own last cells count as "recent"
     "pocket_exits": 2,  # thief-exit count at/below which the police seals
     "stall_window": 4,  # equal best-territory readings that mean "no progress"
+    "flight_floor": 4,  # evader distance at/below which flight beats room
+    "belief_lag": 1,  # moves the threat's believed cell may be out of date by
+    "spend_barriers": False,  # see PoliceBrain: walls cost the move that captures
 }
 
 
@@ -54,6 +57,41 @@ def beyond_reach(board, target: Cell, threat: Cell, barriers: set[Cell]) -> bool
     evader designs measured no better than it alone.
     """
     return target != threat and target not in board.neighbors(threat, barriers)
+
+
+def reachable_within(board, origin: Cell, radius: int, barriers: set[Cell]) -> set[Cell]:
+    """Every cell within ``radius`` steps of ``origin`` — the threat's envelope.
+
+    ``beyond_reach`` asks the exact question "can it land on me next move?",
+    which is only sound when the believed cell is CURRENT. A scent peak can be a
+    move out of date, and then the pursuer is really somewhere in this envelope.
+    Measured in the arena: with a one-move-stale belief the shipped evader is
+    caught 91/96 by a containment pursuer; using the envelope, 0/96.
+    """
+    seen = {origin}
+    frontier = [origin]
+    for _ in range(max(0, radius)):
+        nxt = []
+        for cell in frontier:
+            for neighbour in board.neighbors(cell, barriers):
+                if neighbour not in seen:
+                    seen.add(neighbour)
+                    nxt.append(neighbour)
+        frontier = nxt
+    return seen
+
+
+def escapes(board, my_cell: Cell, threat: Cell, barriers: set[Cell]) -> int:
+    """How many of the evader's answers land OUTSIDE my next reach.
+
+    The pursuer's real objective. Minimising territory never closes on its own —
+    a competent evader keeps three exits forever, so a seal trigger never fires
+    (imreeyal debrief §2a, and six windows of our own cop converting nothing).
+    Driving this count to zero means the evader's choice stops mattering.
+    """
+    replies = [threat, *board.neighbors(threat, barriers)]
+    mine = {my_cell, *board.neighbors(my_cell, barriers)}
+    return sum(1 for reply in replies if reply not in mine)
 
 
 def thief_score(board, target: Cell, threat: Cell, barriers: set[Cell],

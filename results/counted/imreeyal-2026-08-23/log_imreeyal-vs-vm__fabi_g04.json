@@ -1,0 +1,779 @@
+{
+  "_schema": "Per-sub-game commit-reveal log for the replay viewer: every sealed step and the mutual-audit result, plus received_messages: the opponent turns this peer applied, filed as evidence and never part of the signature. Static team metadata lives in the declaration; join by game_uid.",
+  "schema_version": "1.1",
+  "game_id": "imreeyal-vs-vm__fabi",
+  "game_uid": "0e07bcda-4bfd-3668-1fec-86833963b58c",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_imreeyal-vs-vm__fabi.json",
+    "config": "config_imreeyal-vs-vm__fabi_g<NN>.json",
+    "log": "log_imreeyal-vs-vm__fabi_g<NN>.json",
+    "result": "result_imreeyal-vs-vm__fabi.json"
+  },
+  "summary": {
+    "sub_game_number": 4,
+    "group_id": "vm__fabi",
+    "role": "thief",
+    "opponent_group_id": "imreeyal",
+    "result": "capture",
+    "winner_role": "police",
+    "steps": 12,
+    "timezone": "Asia/Jerusalem",
+    "started_at": "2026-08-23T17:30:29.990696+00:00",
+    "ended_at": "2026-08-23T17:32:18.290696+00:00",
+    "duration_seconds": 108.3,
+    "tokens_total": 0,
+    "audit": {
+      "passed": true,
+      "verified_steps": 12,
+      "failed_steps": [],
+      "bound_steps": 11
+    }
+  },
+  "records": [
+    {
+      "payload": {
+        "step": 0,
+        "type": "system_spec",
+        "spec": {
+          "os": "Linux 6.6.87.2-microsoft-standard-WSL2",
+          "cpu_type": "x86_64",
+          "cpu_cores": 16,
+          "cpu_freq_mhz": 2918.4,
+          "ram_gb": 15.5,
+          "gpu_model": "none",
+          "vram_gb": 0
+        },
+        "model": "template",
+        "code_version": "1.0.0",
+        "group_name": "VM-Fabi",
+        "sub_game_number": 4
+      },
+      "nonce": "291fefd73b108a37e9773c7430c13186",
+      "commit": "8a49db13ed98e68e8ca97f7c5c63f269b504ac92571718992ea673087f9ffde6"
+    },
+    {
+      "payload": {
+        "step": 1,
+        "state": "grid=7x7;self=[3, 4];barriers=[]",
+        "position": [
+          3,
+          4
+        ],
+        "move": "MOVE:E",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Catch me if you can - I'm slipping past Central Park!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "384bb729ddb4e4db940652cd9fc88a77",
+      "commit": "e5fd9091ad5ae5334b07e23690336fc76823c1635450a0aba02625e266a25a51"
+    },
+    {
+      "payload": {
+        "step": 2,
+        "state": "grid=7x7;self=[4, 4];barriers=[]",
+        "position": [
+          4,
+          4
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Catch me if you can - I'm slipping past Wall Street!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "fc6cdd24c2e05bc1093195784e6a0d3c",
+      "commit": "24294c6883484144827def05cffe5a726d0f7debf9ad9ef9e957e89856ba5244"
+    },
+    {
+      "payload": {
+        "step": 3,
+        "state": "grid=7x7;self=[4, 5];barriers=[]",
+        "position": [
+          4,
+          5
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "452617bcb6de0cc61018fd2536787645",
+      "commit": "3295707b35002ad69f1d1cf8af832ce71df5ff555393f948d56f446ba12f8597"
+    },
+    {
+      "payload": {
+        "step": 4,
+        "state": "grid=7x7;self=[5, 5];barriers=[]",
+        "position": [
+          5,
+          5
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "be6d9494384f2346ce2d2875432b9607",
+      "commit": "db62204aeb816fc081daabd39c48cc44dbd73db6bdb97ac42d8bbef64fada946"
+    },
+    {
+      "payload": {
+        "step": 5,
+        "state": "grid=7x7;self=[6, 5];barriers=[]",
+        "position": [
+          6,
+          5
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "0e2ec1d4194cc7d2340e1491196147aa",
+      "commit": "8469fa2b64b02d737d72889fccca8a802193c0dc55998777fa00ce85d0d52dab"
+    },
+    {
+      "payload": {
+        "step": 6,
+        "state": "grid=7x7;self=[6, 6];barriers=[]",
+        "position": [
+          6,
+          6
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Still one step ahead, near Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "274b02e2bfe71c94e0232d599aac6c8f",
+      "commit": "a0f67808fa048ce31b1f7cc1867f584aacf441b75bbb76977e196e4e248edd1d"
+    },
+    {
+      "payload": {
+        "step": 7,
+        "state": "grid=7x7;self=[5, 6];barriers=[]",
+        "position": [
+          5,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Catch me if you can - I'm slipping past the East Village!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "30d9c4d7bda673d37a1808b922de2dd9",
+      "commit": "6fdaab3c7c5fe9423562b92127cf382fb5a4cb7e3913e298985790d9c982d305"
+    },
+    {
+      "payload": {
+        "step": 8,
+        "state": "grid=7x7;self=[4, 6];barriers=[]",
+        "position": [
+          4,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "2699a8074e0c144b52b616d1a307a598",
+      "commit": "319a4b8ff26df2d1c7dbb2193bdb10ca0ed0bd7dd5e1cf3a644b76095caccc9c"
+    },
+    {
+      "payload": {
+        "step": 9,
+        "state": "grid=7x7;self=[5, 6];barriers=[]",
+        "position": [
+          5,
+          6
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Still one step ahead, near Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "7b027d49e968d74b517df79dd2aecb70",
+      "commit": "04c4752ba21b324ea0a1d692138da071d83f68b1b2346a4f26031ba5d6c9b86b"
+    },
+    {
+      "payload": {
+        "step": 10,
+        "state": "grid=7x7;self=[6, 6];barriers=[]",
+        "position": [
+          6,
+          6
+        ],
+        "move": "MOVE:S",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Too slow, officer - Central Park is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "ccd67e4a49c91b741e1dfabc7d176280",
+      "commit": "cb67b5de8defa84afbd648064b99bd535a697598b9758e46e59488dc8b771e51"
+    },
+    {
+      "payload": {
+        "step": 11,
+        "state": "grid=7x7;self=[6, 5];barriers=[]",
+        "position": [
+          6,
+          5
+        ],
+        "move": "MOVE:W",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Catch me if you can - I'm slipping past Harlem!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "836c037ebb28179d085e076d96f4c50d",
+      "commit": "fbd388d0dcf456313a808d7de1347f0c86254cbf272aed96b56cbe4ffd1e5485"
+    },
+    {
+      "payload": {
+        "step": 12,
+        "state": "grid=7x7;self=[6, 5];barriers=[]",
+        "position": [
+          6,
+          5
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You got me.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "7fec63694d0355fdc244e861249123a2",
+      "commit": "3cb68422582e0a1845dd2411d0dfadbb28b5e4cf24dcb52f610cc4f2977c17d1"
+    }
+  ],
+  "received_messages": [
+    {
+      "step": 1,
+      "sender": "police",
+      "hint": "They say the crowds near Central Park hide anyone.",
+      "smell_grid": {
+        "0,0": 0.5,
+        "0,1": 0.8,
+        "0,2": 0.5,
+        "0,3": 0.2,
+        "1,0": 0.5,
+        "1,1": 0.5,
+        "1,2": 0.5,
+        "1,3": 0.2,
+        "2,0": 0.2,
+        "2,1": 0.2,
+        "2,2": 0.2,
+        "2,3": 0.2
+      },
+      "commit": "939fda6126098069a4b21422cd20af400afbcb5933131622eef0f418ae58ae9d",
+      "timestamp": "2026-08-23T17:30:30.955653+00:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 2,
+      "sender": "police",
+      "hint": "I heard sirens somewhere around Central Park.",
+      "smell_grid": {
+        "0,0": 0.4,
+        "0,1": 0.7,
+        "0,2": 0.8,
+        "0,3": 0.5,
+        "1,0": 0.4,
+        "1,1": 0.5,
+        "1,2": 0.5,
+        "1,3": 0.5,
+        "2,0": 0.2,
+        "2,1": 0.2,
+        "2,2": 0.2,
+        "2,3": 0.2,
+        "0,4": 0.2,
+        "1,4": 0.2,
+        "2,4": 0.2
+      },
+      "commit": "6c84f5cdd7816a5e3fdbf34cf06bbd1ab3a82e92d4864997bb0f4c0c1c6475d8",
+      "timestamp": "2026-08-23T17:30:32.310573+00:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 3,
+      "sender": "police",
+      "hint": "The shadows by Central Park feel busy tonight.",
+      "smell_grid": {
+        "0,0": 0.3,
+        "0,1": 0.6,
+        "0,2": 0.7,
+        "0,3": 0.5,
+        "1,0": 0.3,
+        "1,1": 0.5,
+        "1,2": 0.8,
+        "1,3": 0.5,
+        "2,0": 0.2,
+        "2,1": 0.5,
+        "2,2": 0.5,
+        "2,3": 0.5,
+        "0,4": 0.2,
+        "1,4": 0.2,
+        "2,4": 0.2,
+        "3,0": 0.2,
+        "3,1": 0.2,
+        "3,2": 0.2,
+        "3,3": 0.2,
+        "3,4": 0.2
+      },
+      "commit": "0cf1cfc3dc7141512bd29de9f2e3a1316da0cecb463751b83f9038a36de536a7",
+      "timestamp": "2026-08-23T17:30:33.719986+00:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 4,
+      "sender": "police",
+      "hint": "Word is, keep an eye on Central Park.",
+      "smell_grid": {
+        "0,0": 0.2,
+        "0,1": 0.5,
+        "0,2": 0.6,
+        "0,3": 0.5,
+        "1,0": 0.2,
+        "1,1": 0.4,
+        "1,2": 0.7,
+        "1,3": 0.8,
+        "2,0": 0.1,
+        "2,1": 0.4,
+        "2,2": 0.5,
+        "2,3": 0.5,
+        "0,4": 0.5,
+        "1,4": 0.5,
+        "2,4": 0.5,
+        "3,0": 0.1,
+        "3,1": 0.2,
+        "3,2": 0.2,
+        "3,3": 0.2,
+        "3,4": 0.2,
+        "0,5": 0.2,
+        "1,5": 0.2,
+        "2,5": 0.2,
+        "3,5": 0.2
+      },
+      "commit": "0023fcad01d451b2f3205a91b32b75c0058e1f6f1617881ec6027eb4d111ba15",
+      "timestamp": "2026-08-23T17:30:35.321810+00:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 5,
+      "sender": "police",
+      "hint": "Someone was asking about Central Park just now.",
+      "smell_grid": {
+        "0,0": 0.1,
+        "0,1": 0.4,
+        "0,2": 0.5,
+        "0,3": 0.5,
+        "1,0": 0.1,
+        "1,1": 0.3,
+        "1,2": 0.6,
+        "1,3": 0.7,
+        "2,1": 0.3,
+        "2,2": 0.4,
+        "2,3": 0.5,
+        "0,4": 0.5,
+        "1,4": 0.8,
+        "2,4": 0.5,
+        "3,1": 0.1,
+        "3,2": 0.2,
+        "3,3": 0.2,
+        "3,4": 0.2,
+        "0,5": 0.5,
+        "1,5": 0.5,
+        "2,5": 0.5,
+        "3,5": 0.2,
+        "0,6": 0.2,
+        "1,6": 0.2,
+        "2,6": 0.2,
+        "3,6": 0.2
+      },
+      "commit": "ecfef421476e175e7fa142d676f44b5bbf72d11f99f07e94810e0abb5c96e688",
+      "timestamp": "2026-08-23T17:30:36.890520+00:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 6,
+      "sender": "police",
+      "hint": "All roads seem to lead to Central Park.",
+      "smell_grid": {
+        "0,1": 0.3,
+        "0,2": 0.4,
+        "0,3": 0.4,
+        "1,1": 0.2,
+        "1,2": 0.5,
+        "1,3": 0.6,
+        "2,1": 0.2,
+        "2,2": 0.3,
+        "2,3": 0.5,
+        "0,4": 0.4,
+        "1,4": 0.7,
+        "2,4": 0.8,
+        "3,2": 0.2,
+        "3,3": 0.5,
+        "3,4": 0.5,
+        "0,5": 0.4,
+        "1,5": 0.5,
+        "2,5": 0.5,
+        "3,5": 0.5,
+        "0,6": 0.2,
+        "1,6": 0.2,
+        "2,6": 0.2,
+        "3,6": 0.2,
+        "4,2": 0.2,
+        "4,3": 0.2,
+        "4,4": 0.2,
+        "4,5": 0.2,
+        "4,6": 0.2
+      },
+      "commit": "8e9a0ddc3fb922021c1ce0c32981be9dfdf4b2accc15c3d2e6d0cc898dc3ac10",
+      "timestamp": "2026-08-23T17:30:38.399824+00:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 7,
+      "sender": "police",
+      "hint": "They say the crowds near Grand Central hide anyone.",
+      "smell_grid": {
+        "0,1": 0.2,
+        "0,2": 0.3,
+        "0,3": 0.3,
+        "1,1": 0.1,
+        "1,2": 0.4,
+        "1,3": 0.5,
+        "2,1": 0.1,
+        "2,2": 0.2,
+        "2,3": 0.4,
+        "0,4": 0.3,
+        "1,4": 0.6,
+        "2,4": 0.7,
+        "3,2": 0.1,
+        "3,3": 0.4,
+        "3,4": 0.5,
+        "0,5": 0.3,
+        "1,5": 0.5,
+        "2,5": 0.8,
+        "3,5": 0.5,
+        "0,6": 0.2,
+        "1,6": 0.5,
+        "2,6": 0.5,
+        "3,6": 0.5,
+        "4,2": 0.1,
+        "4,3": 0.2,
+        "4,4": 0.2,
+        "4,5": 0.2,
+        "4,6": 0.2
+      },
+      "commit": "450884294c42d88a2e970f133913dc4d2e356e740d2c84132c69d78c0985d07c",
+      "timestamp": "2026-08-23T17:30:39.883767+00:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 8,
+      "sender": "police",
+      "hint": "I heard sirens somewhere around Grand Central.",
+      "smell_grid": {
+        "0,1": 0.1,
+        "0,2": 0.2,
+        "0,3": 0.2,
+        "1,2": 0.3,
+        "1,3": 0.4,
+        "2,2": 0.1,
+        "2,3": 0.3,
+        "0,4": 0.2,
+        "1,4": 0.5,
+        "2,4": 0.6,
+        "3,3": 0.3,
+        "3,4": 0.5,
+        "0,5": 0.2,
+        "1,5": 0.4,
+        "2,5": 0.7,
+        "3,5": 0.8,
+        "0,6": 0.1,
+        "1,6": 0.4,
+        "2,6": 0.5,
+        "3,6": 0.5,
+        "4,3": 0.2,
+        "4,4": 0.5,
+        "4,5": 0.5,
+        "4,6": 0.5,
+        "5,3": 0.2,
+        "5,4": 0.2,
+        "5,5": 0.2,
+        "5,6": 0.2
+      },
+      "commit": "6bcaaef55ebc99006192d62faeede35a3135c4cc17ebcd48959ad228c16536e5",
+      "timestamp": "2026-08-23T17:30:41.404179+00:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 9,
+      "sender": "police",
+      "hint": "The shadows by Brooklyn Bridge feel busy tonight.",
+      "smell_grid": {
+        "0,2": 0.1,
+        "0,3": 0.1,
+        "1,2": 0.2,
+        "1,3": 0.3,
+        "2,3": 0.2,
+        "0,4": 0.1,
+        "1,4": 0.4,
+        "2,4": 0.5,
+        "3,3": 0.2,
+        "3,4": 0.5,
+        "0,5": 0.1,
+        "1,5": 0.3,
+        "2,5": 0.6,
+        "3,5": 0.7,
+        "1,6": 0.3,
+        "2,6": 0.4,
+        "3,6": 0.5,
+        "4,3": 0.2,
+        "4,4": 0.5,
+        "4,5": 0.8,
+        "4,6": 0.5,
+        "5,3": 0.2,
+        "5,4": 0.5,
+        "5,5": 0.5,
+        "5,6": 0.5,
+        "6,3": 0.2,
+        "6,4": 0.2,
+        "6,5": 0.2,
+        "6,6": 0.2
+      },
+      "commit": "f001aaabc3fa7542086527594edcb1cdeb1aef03dfde821542ee29f15cb6aa63",
+      "timestamp": "2026-08-23T17:30:42.976044+00:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 10,
+      "sender": "police",
+      "hint": "Word is, keep an eye on Brooklyn Bridge.",
+      "smell_grid": {
+        "1,2": 0.1,
+        "1,3": 0.2,
+        "2,3": 0.1,
+        "1,4": 0.3,
+        "2,4": 0.4,
+        "3,3": 0.2,
+        "3,4": 0.4,
+        "1,5": 0.2,
+        "2,5": 0.5,
+        "3,5": 0.6,
+        "1,6": 0.2,
+        "2,6": 0.3,
+        "3,6": 0.4,
+        "4,3": 0.2,
+        "4,4": 0.5,
+        "4,5": 0.7,
+        "4,6": 0.5,
+        "5,3": 0.2,
+        "5,4": 0.5,
+        "5,5": 0.8,
+        "5,6": 0.5,
+        "6,3": 0.2,
+        "6,4": 0.5,
+        "6,5": 0.5,
+        "6,6": 0.5
+      },
+      "commit": "471398d620e82bc5abccfe7fa766acd27edf45a9f5f96961f755ffe5beb6dc1e",
+      "timestamp": "2026-08-23T17:30:44.570105+00:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 11,
+      "sender": "police",
+      "hint": "Someone was asking about Brooklyn Bridge just now.",
+      "smell_grid": {
+        "1,3": 0.1,
+        "1,4": 0.2,
+        "2,4": 0.3,
+        "3,3": 0.1,
+        "3,4": 0.3,
+        "1,5": 0.1,
+        "2,5": 0.4,
+        "3,5": 0.5,
+        "1,6": 0.1,
+        "2,6": 0.2,
+        "3,6": 0.3,
+        "4,3": 0.2,
+        "4,4": 0.4,
+        "4,5": 0.6,
+        "4,6": 0.4,
+        "5,3": 0.2,
+        "5,4": 0.5,
+        "5,5": 0.7,
+        "5,6": 0.5,
+        "6,3": 0.2,
+        "6,4": 0.5,
+        "6,5": 0.8,
+        "6,6": 0.5
+      },
+      "commit": "56e3c5edbb8eef8e88b2ebbc2bbf0f90d75341711e4b5c11ebb29c55e6cd17a8",
+      "timestamp": "2026-08-23T17:32:22.736536+00:00",
+      "barrier_placed": null,
+      "capture_claim": [
+        6,
+        5
+      ],
+      "claim_response": null,
+      "win_claim": null
+    }
+  ],
+  "mutual_agreement": {
+    "opponent_group_id": "imreeyal",
+    "sha256": "18319b2200df0e99450ea830f21c87f306300a3d37b56015d2df3db27e4e6354",
+    "confirmed": true
+  }
+}

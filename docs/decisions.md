@@ -257,3 +257,73 @@ both submitted repos, which is what rule 50's stated purpose asks for.
 **Reported where a grader will read it:** the academic `README.md` carries this
 with the citations, and it is exported into both submission repos.
 **Status:** accepted.
+
+## ADR-25 — The evader may STAY; the pursuer spends no barriers
+
+**Status:** accepted 2026-08-24, after losing the imreeyal counted series 90–30
+(0–6 sub-games) and receiving their post-league strategy debrief.
+
+**Context.** Three counted series, three losses, and the same two shapes every
+time: our cop chased for the full 35-step horizon without converting, and our
+thief was captured in 11–20 steps, always on an edge.
+
+Reconstructing counted sub-game 2 from our own sealed log and the scent peaks in
+their turn messages settled the thief half beyond argument:
+
+| step | our cell | their cop | distance |
+|------|----------|-----------|----------|
+| 8    | (4,6)    | (3,5)     | 2 — safe |
+| 9    | (5,6)    | (4,5)     | 2 — safe |
+| 10   | (6,6)    | (5,5)     | 2 — safe, cornered |
+| 11   | (6,5)    | (6,5)     | 0 — CAPTURED |
+
+At step 10 we stood in the corner (6,6). Our options were (6,6) — distance 2,
+**safe** — and (5,6) and (6,5), both inside the cop's reach. `_decide_move`
+offered only `board.legal_moves`, so HOLD was never in the option set, although
+STAY is a signed term of the agreed move set and our own police already used it
+to break a parity lock. A cornered evader was **forced** to step into the
+pursuer's reach. That is exactly the containment imreeyal described ("every cell
+your rule can pick is within our reach"); it worked because our rule could not
+pick the safe one.
+
+**Decision.**
+
+1. **STAY is in the evader's option set.** Plus room (BFS territory) instead of
+   exit count, a flight floor inside which distance beats room, and a
+   lag-robust second safety key in case the believed cell is a move old.
+2. **The pursuer scores `escapes`** — how many of the evader's replies land
+   outside the cop's next reach — with room as the tie-break, not the goal.
+3. **The pursuer spends no barriers by default** (`spend_barriers = False`).
+
+**Why (3), which is the surprising one.** A barrier costs the cop its move and
+may only be placed on a cell adjacent to the cop — a cell the cop could simply
+step onto. A wall can therefore never capture anything a step could not capture
+more cheaply, while the pocket-seal trigger fires repeatedly and spends the
+tempo that would have closed the distance. Measured over 32 seeds per arm:
+
+| evader     | with 14 walls | walls off |
+|------------|---------------|-----------|
+| greedy-run | 0/32, med 35  | 32/32, med 17 |
+| territory  | 0/32, med 35  | 32/32, med 15 |
+| doctrine   | 0/32, med 35  | 32/32, med 15 |
+| random     | 29/32         | 32/32 |
+
+Live corroboration: our cop burned 5–9 walls per window and converted nothing;
+imreeyal's used **zero** and won three. Two wall heuristics from their §2 fix 1
+were tested and refused by measurement — territory-based `wall_gain` is
+identically zero over 840 turns (a wall beside the cop lies in the cop's own
+Voronoi region and cannot shrink the thief's), and sealing an escape is
+impossible for the same reason. Using 0 of 14 barriers is legal: `max_barriers`
+is a ceiling, not a quota. The capability is kept behind a tunable, not deleted.
+
+**Consequences.** Measured on 96 unseen seeds per arm, both belief lags: the cop
+captures **100%** of every competent evader arm (previously 0%), and the evader
+is caught **0/288** across every pursuer arm and lag (previously up to 91/96).
+Neither brain regresses on any arm — the champion gate imreeyal recommended
+(§4) now runs in the unit suite as `tests/unit/test_arena_gate.py`.
+
+**Rejected.** Stochastic top-k selection (their §1 fix 3). It is the right idea
+against an opponent that models us as a function, but measured here it made the
+evader strictly worse (384/512 caught against 365 for the shipped brain) because
+randomising past the best option breaks the safety ordering. Recorded rather
+than silently dropped; revisit if an opponent starts predicting us.
