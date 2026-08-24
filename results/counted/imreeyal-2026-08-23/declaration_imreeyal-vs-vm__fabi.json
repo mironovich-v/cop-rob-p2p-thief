@@ -1,0 +1,75 @@
+{
+  "_schema": "Static pre-game declaration for the whole series: team identity, members, repos, MCP URLs, hardware, model, token cap, and start/end times. Roles alternate across sub-games, so no role/sub_game_number appears here.",
+  "schema_version": "1.1",
+  "declaration_type": "pre_game_declaration",
+  "game_id": "imreeyal-vs-vm__fabi",
+  "game_uid": "0e07bcda-4bfd-3668-1fec-86833963b58c",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_imreeyal-vs-vm__fabi.json",
+    "config": "config_imreeyal-vs-vm__fabi_g<NN>.json",
+    "log": "log_imreeyal-vs-vm__fabi_g<NN>.json",
+    "result": "result_imreeyal-vs-vm__fabi.json"
+  },
+  "timezone": "Asia/Jerusalem",
+  "game_started_at": "2026-08-23T17:20:03.477074+00:00",
+  "game_ended_at": "2026-08-23T17:40:18.593855+00:00",
+  "num_sub_games": 6,
+  "max_tokens_per_game": 200000,
+  "groups": {
+    "group_1": {
+      "group_id": "vm__fabi",
+      "group_name": "VM-Fabi",
+      "members": [
+        "Vasily Mironovich",
+        "Fahed Bitar"
+      ],
+      "repos": {
+        "cop": "https://github.com/mironovich-v/cop-rob-p2p-police",
+        "thief": "https://github.com/mironovich-v/cop-rob-p2p-thief"
+      },
+      "mcp_servers": {
+        "cop": "https://cop-rob-p2p.ngrok.app/mcp",
+        "thief": "https://cop-rob-p2p.ngrok.app/mcp"
+      },
+      "llm_model": "template",
+      "hardware_spec": {
+        "cpu_type": "x86_64",
+        "cpu_freq_mhz": 2918.4,
+        "cpu_cores": 16,
+        "ram_gb": 15.5,
+        "gpu_model": "none",
+        "vram_gb": 0
+      },
+      "github_commit": "eae0d7096f211ec2e2c7a278b3d80240ad7ac018",
+      "signature": "744c6d93ad0c5d1e555ff74a2fd02d492decda497daf0ea3e525d9df77ffbae2"
+    },
+    "group_2": {
+      "group_id": "imreeyal",
+      "group_name": "ImreEyal-Police",
+      "members": [
+        "Imree Cohen",
+        "Eyal Shtinmetz"
+      ],
+      "repos": {
+        "cop": "https://github.com/Imreec/copthief-p2p-cop",
+        "thief": "https://github.com/Imreec/copthief-p2p-thief"
+      },
+      "mcp_servers": {
+        "cop": "https://cop.imreeyal.com/mcp",
+        "thief": "https://thief.imreeyal.com/mcp"
+      },
+      "llm_model": "none",
+      "hardware_spec": {
+        "cpu_type": "AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD",
+        "cpu_freq_mhz": 3693,
+        "cpu_cores": 24,
+        "ram_gb": 31.9,
+        "gpu_model": null,
+        "vram_gb": 12.0
+      },
+      "github_commit": "f5a64c065e33cbaef555053844fc4cfb2142b7ad",
+      "signature": "bf4b51012c285f247fab06da0e09ec620fc0768adca0df0d697b1d9cef7c06cf"
+    }
+  }
+}

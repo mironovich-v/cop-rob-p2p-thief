@@ -1,0 +1,254 @@
+{
+  "_schema": "Aggregated final result over all sub-games: per-group scores, the series winner/tie, and the mutual-agreement signature. Both teams email their own copy.",
+  "schema_version": "1.1",
+  "report_type": "final_game_result",
+  "game_id": "imreeyal-vs-vm__fabi",
+  "game_uid": "0e07bcda-4bfd-3668-1fec-86833963b58c",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_imreeyal-vs-vm__fabi.json",
+    "config": "config_imreeyal-vs-vm__fabi_g<NN>.json",
+    "log": "log_imreeyal-vs-vm__fabi_g<NN>.json",
+    "result": "result_imreeyal-vs-vm__fabi.json",
+    "github": {
+      "vm__fabi": {
+        "cop": "https://github.com/mironovich-v/cop-rob-p2p-police",
+        "thief": "https://github.com/mironovich-v/cop-rob-p2p-thief"
+      },
+      "imreeyal": {
+        "cop": "https://github.com/Imreec/copthief-p2p-cop",
+        "thief": "https://github.com/Imreec/copthief-p2p-thief"
+      }
+    }
+  },
+  "timezone": "Asia/Jerusalem",
+  "groups": [
+    "imreeyal",
+    "vm__fabi"
+  ],
+  "num_sub_games": 6,
+  "sub_games": [
+    {
+      "sub_game_number": 1,
+      "roles": {
+        "vm__fabi": "police",
+        "imreeyal": "thief"
+      },
+      "started_at": "2026-08-23T17:20:03.477074+00:00",
+      "ended_at": "2026-08-23T17:22:25.077074+00:00",
+      "result": "survival",
+      "winner_group": "imreeyal",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "imreeyal": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "imreeyal": 10
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_imreeyal-vs-vm__fabi_g01.json",
+        "imreeyal": "imreeyal/log_imreeyal-vs-vm__fabi_g01.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      },
+      "github_commit": {
+        "vm__fabi": "eae0d7096f211ec2e2c7a278b3d80240ad7ac018",
+        "imreeyal": "f5a64c065e33cbaef555053844fc4cfb2142b7ad"
+      }
+    },
+    {
+      "sub_game_number": 2,
+      "roles": {
+        "vm__fabi": "thief",
+        "imreeyal": "police"
+      },
+      "started_at": "2026-08-23T17:22:38.568647+00:00",
+      "ended_at": "2026-08-23T17:24:27.768647+00:00",
+      "result": "capture",
+      "winner_group": "imreeyal",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "imreeyal": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "imreeyal": 20
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_imreeyal-vs-vm__fabi_g02.json",
+        "imreeyal": "imreeyal/log_imreeyal-vs-vm__fabi_g02.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      },
+      "github_commit": {
+        "vm__fabi": "eae0d7096f211ec2e2c7a278b3d80240ad7ac018",
+        "imreeyal": "f5a64c065e33cbaef555053844fc4cfb2142b7ad"
+      }
+    },
+    {
+      "sub_game_number": 3,
+      "roles": {
+        "vm__fabi": "police",
+        "imreeyal": "thief"
+      },
+      "started_at": "2026-08-23T17:24:37.057257+00:00",
+      "ended_at": "2026-08-23T17:30:05.457257+00:00",
+      "result": "survival",
+      "winner_group": "imreeyal",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "imreeyal": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "imreeyal": 10
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_imreeyal-vs-vm__fabi_g03.json",
+        "imreeyal": "imreeyal/log_imreeyal-vs-vm__fabi_g03.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      },
+      "github_commit": {
+        "vm__fabi": "eae0d7096f211ec2e2c7a278b3d80240ad7ac018",
+        "imreeyal": "f5a64c065e33cbaef555053844fc4cfb2142b7ad"
+      }
+    },
+    {
+      "sub_game_number": 4,
+      "roles": {
+        "vm__fabi": "thief",
+        "imreeyal": "police"
+      },
+      "started_at": "2026-08-23T17:30:29.990696+00:00",
+      "ended_at": "2026-08-23T17:32:18.290696+00:00",
+      "result": "capture",
+      "winner_group": "imreeyal",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "imreeyal": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "imreeyal": 20
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_imreeyal-vs-vm__fabi_g04.json",
+        "imreeyal": "imreeyal/log_imreeyal-vs-vm__fabi_g04.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      },
+      "github_commit": {
+        "vm__fabi": "eae0d7096f211ec2e2c7a278b3d80240ad7ac018",
+        "imreeyal": "f5a64c065e33cbaef555053844fc4cfb2142b7ad"
+      }
+    },
+    {
+      "sub_game_number": 5,
+      "roles": {
+        "vm__fabi": "police",
+        "imreeyal": "thief"
+      },
+      "started_at": "2026-08-23T17:32:27.657875+00:00",
+      "ended_at": "2026-08-23T17:36:24.457875+00:00",
+      "result": "survival",
+      "winner_group": "imreeyal",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "imreeyal": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "imreeyal": 10
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_imreeyal-vs-vm__fabi_g05.json",
+        "imreeyal": "imreeyal/log_imreeyal-vs-vm__fabi_g05.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      },
+      "github_commit": {
+        "vm__fabi": "eae0d7096f211ec2e2c7a278b3d80240ad7ac018",
+        "imreeyal": "f5a64c065e33cbaef555053844fc4cfb2142b7ad"
+      }
+    },
+    {
+      "sub_game_number": 6,
+      "roles": {
+        "vm__fabi": "thief",
+        "imreeyal": "police"
+      },
+      "started_at": "2026-08-23T17:36:43.893855+00:00",
+      "ended_at": "2026-08-23T17:40:18.593855+00:00",
+      "result": "capture",
+      "winner_group": "imreeyal",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "imreeyal": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "imreeyal": 20
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_imreeyal-vs-vm__fabi_g06.json",
+        "imreeyal": "imreeyal/log_imreeyal-vs-vm__fabi_g06.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      },
+      "github_commit": {
+        "vm__fabi": "eae0d7096f211ec2e2c7a278b3d80240ad7ac018",
+        "imreeyal": "f5a64c065e33cbaef555053844fc4cfb2142b7ad"
+      }
+    }
+  ],
+  "final_result": {
+    "total_score": {
+      "imreeyal": 90,
+      "vm__fabi": 30
+    },
+    "sub_games_won": {
+      "imreeyal": 6,
+      "vm__fabi": 0
+    },
+    "ties": 0,
+    "winner_group": "imreeyal",
+    "series_tie": false,
+    "tokens_total_series": {
+      "imreeyal": 0,
+      "vm__fabi": 0
+    },
+    "games_played_including_this": {
+      "vm__fabi": 3,
+      "imreeyal": 10
+    },
+    "first_meeting_between_groups": true,
+    "diversity_reward_applied": {
+      "vm__fabi": false,
+      "imreeyal": true
+    }
+  },
+  "mutual_agreement": {
+    "sha256": "549118679b6f4344cc9a2d4255eb79f8a7fe7cb23488bbed2d3bcea8d7b53edc",
+    "confirmed": true
+  }
+}

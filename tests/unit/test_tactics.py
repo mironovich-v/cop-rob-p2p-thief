@@ -48,11 +48,17 @@ def test_thief_score_prefers_freedom_over_deep_corner():
 
 
 def test_thief_brain_never_enters_the_corner_trap():
-    # The exact counted-game death: at (6,5), threat far away, v1 chose (6,6).
+    """The exact counted-game death: at (6,5), threat far away, v1 chose (6,6).
+
+    STAY is now in the option set, and here it is the roomiest answer of all
+    (territory 27, against 26/25 for the open steps and 21 for the corner), so
+    a HOLD is a correct outcome. What must never happen is the corner.
+    """
     state = _state(Role.THIEF, (6, 5))
     brain = ThiefBrain(rng=random.Random(1))
     move_type, direction = brain._decide_move(state, _belief((0, 0)), 14)
-    assert move_type is MoveType.MOVE
+    if move_type is MoveType.HOLD:
+        return                                        # stood still: not the corner
     assert state.board.step(state.position, direction) != (6, 6)
 
 
@@ -74,7 +80,7 @@ def test_thief_recent_trail_penalty_breaks_oscillation():
 
 def test_police_strikes_rule46_barrier_when_adjacent_to_peak():
     state = _state(Role.POLICE, (3, 2))
-    brain = PoliceBrain(rng=random.Random(1))
+    brain = PoliceBrain(rng=random.Random(1), tactics={"spend_barriers": True})
     move_type, direction = brain._decide_move(state, _belief((3, 3)), 14)
     assert move_type is MoveType.BARRIER
     assert state.board.step(state.position, direction) == (3, 3)  # wall ON the peak
@@ -86,7 +92,7 @@ def test_police_seals_a_pocketed_thiefs_exit():
     # place from (6, 5): sealing E puts a wall on (6, 6)? that's the strike.
     # Pocket case: we at (4, 6), thief believed (6, 6) with (5,6) open:
     state = _state(Role.POLICE, (4, 6), barriers=[(6, 5)])
-    brain = PoliceBrain(rng=random.Random(1))
+    brain = PoliceBrain(rng=random.Random(1), tactics={"spend_barriers": True})
     move_type, direction = brain._decide_move(state, _belief((6, 6)), 14)
     assert move_type is MoveType.BARRIER
     assert state.board.step(state.position, direction, state.barriers) == (5, 6)
