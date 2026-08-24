@@ -1,7 +1,6 @@
 {
   "message_type": "correction",
   "corrects_gmail_message_id": "1a0337c3d013aa7b",
-  "correction_gmail_message_id": "1a033882dfda7f87",
   "game_id": "il-nv-ai-vs-vm__fabi",
   "game_uid": "566d2396-e3e9-10ef-6f15-ef51ff64acba",
   "mutual_agreement": {
@@ -26,5 +25,10 @@
     "games_played_including_this": "opponent declared count (2) was exchanged out of band after settlement; the filed report carried null",
     "github_commit": "il-nv-ai runs two published role checkouts (police 870a4479, thief a79fd147); the filed report repeated the thief commit in all six rows"
   },
-  "reported_by": "vm__fabi"
+  "reported_by": "vm__fabi",
+  "correction_gmail_message_ids": {
+    "lecturer_only_first_send": "1a033882dfda7f87",
+    "resend_with_il_nv_ai_for_in_thread_confirmation": "1a0338ee52d26880"
+  },
+  "il_nv_ai_report_gmail_message_id": "1a0337f00c6c77e1"
 }
