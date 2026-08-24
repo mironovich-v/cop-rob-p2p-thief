@@ -1,0 +1,254 @@
+{
+  "_schema": "Aggregated final result over all sub-games: per-group scores, the series winner/tie, and the mutual-agreement signature. Both teams email their own copy.",
+  "schema_version": "1.1",
+  "report_type": "final_game_result",
+  "game_id": "il-nv-ai-vs-vm__fabi",
+  "game_uid": "566d2396-e3e9-10ef-6f15-ef51ff64acba",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_il-nv-ai-vs-vm__fabi.json",
+    "config": "config_il-nv-ai-vs-vm__fabi_g<NN>.json",
+    "log": "log_il-nv-ai-vs-vm__fabi_g<NN>.json",
+    "result": "result_il-nv-ai-vs-vm__fabi.json",
+    "github": {
+      "vm__fabi": {
+        "cop": "https://github.com/mironovich-v/cop-rob-p2p-police",
+        "thief": "https://github.com/mironovich-v/cop-rob-p2p-thief"
+      },
+      "il-nv-ai": {
+        "cop": "https://github.com/ilyalaz01/police_thief_p2p-police",
+        "thief": "https://github.com/ilyalaz01/police_thief_p2p-thief"
+      }
+    }
+  },
+  "timezone": "Asia/Jerusalem",
+  "groups": [
+    "il-nv-ai",
+    "vm__fabi"
+  ],
+  "num_sub_games": 6,
+  "sub_games": [
+    {
+      "sub_game_number": 1,
+      "roles": {
+        "vm__fabi": "thief",
+        "il-nv-ai": "police"
+      },
+      "started_at": "2026-08-24T11:06:08.484652+00:00",
+      "ended_at": "2026-08-24T11:06:57.184652+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "il-nv-ai": 0
+      },
+      "score": {
+        "vm__fabi": 10,
+        "il-nv-ai": 5
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_il-nv-ai-vs-vm__fabi_g01.json",
+        "il-nv-ai": "il-nv-ai/log_il-nv-ai-vs-vm__fabi_g01.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      },
+      "github_commit": {
+        "vm__fabi": "c83d81e6b42d03c53d32ac2ffe5cc9a41b142eb5",
+        "il-nv-ai": "a79fd147103f433a77e7f323f647cd347c13c832"
+      }
+    },
+    {
+      "sub_game_number": 2,
+      "roles": {
+        "vm__fabi": "police",
+        "il-nv-ai": "thief"
+      },
+      "started_at": "2026-08-24T11:07:07.490263+00:00",
+      "ended_at": "2026-08-24T11:07:54.690263+00:00",
+      "result": "survival",
+      "winner_group": "il-nv-ai",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "il-nv-ai": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "il-nv-ai": 10
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_il-nv-ai-vs-vm__fabi_g02.json",
+        "il-nv-ai": "il-nv-ai/log_il-nv-ai-vs-vm__fabi_g02.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      },
+      "github_commit": {
+        "vm__fabi": "c83d81e6b42d03c53d32ac2ffe5cc9a41b142eb5",
+        "il-nv-ai": "a79fd147103f433a77e7f323f647cd347c13c832"
+      }
+    },
+    {
+      "sub_game_number": 3,
+      "roles": {
+        "vm__fabi": "thief",
+        "il-nv-ai": "police"
+      },
+      "started_at": "2026-08-24T11:07:56.989917+00:00",
+      "ended_at": "2026-08-24T11:08:45.189917+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "il-nv-ai": 0
+      },
+      "score": {
+        "vm__fabi": 10,
+        "il-nv-ai": 5
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_il-nv-ai-vs-vm__fabi_g03.json",
+        "il-nv-ai": "il-nv-ai/log_il-nv-ai-vs-vm__fabi_g03.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      },
+      "github_commit": {
+        "vm__fabi": "c83d81e6b42d03c53d32ac2ffe5cc9a41b142eb5",
+        "il-nv-ai": "a79fd147103f433a77e7f323f647cd347c13c832"
+      }
+    },
+    {
+      "sub_game_number": 4,
+      "roles": {
+        "vm__fabi": "police",
+        "il-nv-ai": "thief"
+      },
+      "started_at": "2026-08-24T11:08:47.469746+00:00",
+      "ended_at": "2026-08-24T11:09:34.169746+00:00",
+      "result": "survival",
+      "winner_group": "il-nv-ai",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "il-nv-ai": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "il-nv-ai": 10
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_il-nv-ai-vs-vm__fabi_g04.json",
+        "il-nv-ai": "il-nv-ai/log_il-nv-ai-vs-vm__fabi_g04.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      },
+      "github_commit": {
+        "vm__fabi": "c83d81e6b42d03c53d32ac2ffe5cc9a41b142eb5",
+        "il-nv-ai": "a79fd147103f433a77e7f323f647cd347c13c832"
+      }
+    },
+    {
+      "sub_game_number": 5,
+      "roles": {
+        "vm__fabi": "thief",
+        "il-nv-ai": "police"
+      },
+      "started_at": "2026-08-24T11:09:36.610086+00:00",
+      "ended_at": "2026-08-24T11:10:24.810086+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "il-nv-ai": 0
+      },
+      "score": {
+        "vm__fabi": 10,
+        "il-nv-ai": 5
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_il-nv-ai-vs-vm__fabi_g05.json",
+        "il-nv-ai": "il-nv-ai/log_il-nv-ai-vs-vm__fabi_g05.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      },
+      "github_commit": {
+        "vm__fabi": "c83d81e6b42d03c53d32ac2ffe5cc9a41b142eb5",
+        "il-nv-ai": "a79fd147103f433a77e7f323f647cd347c13c832"
+      }
+    },
+    {
+      "sub_game_number": 6,
+      "roles": {
+        "vm__fabi": "police",
+        "il-nv-ai": "thief"
+      },
+      "started_at": "2026-08-24T11:10:27.028482+00:00",
+      "ended_at": "2026-08-24T11:11:13.528482+00:00",
+      "result": "survival",
+      "winner_group": "il-nv-ai",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "il-nv-ai": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "il-nv-ai": 10
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_il-nv-ai-vs-vm__fabi_g06.json",
+        "il-nv-ai": "il-nv-ai/log_il-nv-ai-vs-vm__fabi_g06.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      },
+      "github_commit": {
+        "vm__fabi": "c83d81e6b42d03c53d32ac2ffe5cc9a41b142eb5",
+        "il-nv-ai": "a79fd147103f433a77e7f323f647cd347c13c832"
+      }
+    }
+  ],
+  "final_result": {
+    "total_score": {
+      "il-nv-ai": 47,
+      "vm__fabi": 47
+    },
+    "sub_games_won": {
+      "il-nv-ai": 3,
+      "vm__fabi": 3
+    },
+    "ties": 0,
+    "winner_group": null,
+    "series_tie": true,
+    "tokens_total_series": {
+      "il-nv-ai": 0,
+      "vm__fabi": 0
+    },
+    "games_played_including_this": {
+      "vm__fabi": 4,
+      "il-nv-ai": null
+    },
+    "first_meeting_between_groups": true,
+    "diversity_reward_applied": {
+      "vm__fabi": false,
+      "il-nv-ai": false
+    }
+  },
+  "mutual_agreement": {
+    "sha256": "381f268c7b3a727f43c0d7340da1cc87f38d4ca7d4eaeeea33955b5119fc73fa",
+    "confirmed": true
+  }
+}

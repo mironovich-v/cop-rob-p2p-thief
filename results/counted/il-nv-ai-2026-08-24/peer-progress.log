@@ -1,0 +1,255 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/vasily/claude/cop-rob-p2p/src/thief_agent/__main__.py", line 16, in <module>
+    main()
+    ~~~~^^
+  File "/home/vasily/claude/cop-rob-p2p/src/thief_agent/__main__.py", line 12, in main
+    run_role("thief")
+    ~~~~~~~~^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/agent_cli.py", line 56, in run_role
+    outcome = sdk.run_peer(role, stub_llm=not args.real_llm, transport=transport,
+                           listener=progress_listener(), counted=args.counted)
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/sdk/sdk.py", line 75, in run_peer
+    armed = self._arm(counted)
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/sdk/sdk.py", line 121, in _arm
+    (self.email_sender or EmailSender(self.config)).preflight_armed()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/email_sender.py", line 92, in preflight_armed
+    raise SimulationError(
+    ...<2 lines>...
+    )
+cop_thief_core.exceptions.SimulationError: armed counted run cannot deliver its report — require email.enabled=true, email.mode='send', and a recipient
+12:51:21  opening  sub_game=1 of=6 role=thief
+12:51:21  waiting for opponent agreement  sub_game=1 role=thief
+12:56:20  agreement signed  sub_game=1
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/vasily/claude/cop-rob-p2p/src/thief_agent/__main__.py", line 16, in <module>
+    main()
+    ~~~~^^
+  File "/home/vasily/claude/cop-rob-p2p/src/thief_agent/__main__.py", line 12, in main
+    run_role("thief")
+    ~~~~~~~~^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/agent_cli.py", line 56, in run_role
+    outcome = sdk.run_peer(role, stub_llm=not args.real_llm, transport=transport,
+                           listener=progress_listener(), counted=args.counted)
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/sdk/sdk.py", line 79, in run_peer
+    series = run_series(self.config, peer_role, self._build_llm(stub_llm), transport, listener)
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/sdk/series.py", line 72, in run_series
+    summary = runtime.run()
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/orchestration/runtime.py", line 103, in run
+    self._take_turn(None)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/orchestration/runtime.py", line 169, in _take_turn
+    self._send(decision, claim_response, capture_claim, {"type": win} if win else None)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/orchestration/runtime.py", line 176, in _send
+    self.my_scent.deposit(self.state.position, self._config.get("smell.emit_intensity"))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/domain/smell.py", line 34, in deposit
+    if intensity < self._min_center:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'float' and 'NoneType'
+12:57:39  opening  sub_game=1 of=6 role=thief
+12:57:39  waiting for opponent agreement  sub_game=1 role=thief
+13:02:09  agreement signed  sub_game=1
+13:05:48  settled  sub_game=1 result=timeout steps=25
+13:05:48  opening  sub_game=2 of=6 role=police
+13:05:48  waiting for opponent agreement  sub_game=2 role=police
+13:10:35  opening  sub_game=1 of=6 role=thief
+13:10:35  waiting for opponent agreement  sub_game=1 role=thief
+13:22:09  agreement signed  sub_game=1
+Traceback (most recent call last):
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/mcp_server.py", line 22, in _ensure_port_free
+    probe.bind((host, port))
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+OSError: [Errno 98] Address already in use
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/vasily/claude/cop-rob-p2p/src/thief_agent/__main__.py", line 16, in <module>
+    main()
+    ~~~~^^
+  File "/home/vasily/claude/cop-rob-p2p/src/thief_agent/__main__.py", line 12, in main
+    run_role("thief")
+    ~~~~~~~~^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/agent_cli.py", line 56, in run_role
+    outcome = sdk.run_peer(role, stub_llm=not args.real_llm, transport=transport,
+                           listener=progress_listener(), counted=args.counted)
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/sdk/sdk.py", line 78, in run_peer
+    transport = transport or self._build_transport(peer_role)
+                             ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/sdk/sdk.py", line 50, in _build_transport
+    inboxes = start_peer_server(
+        role.value, cfg.get("network.host", "127.0.0.1"), cfg.get("network.my_port")
+    )
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/mcp_server.py", line 81, in start_peer_server
+    _ensure_port_free(host, port)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/mcp_server.py", line 24, in _ensure_port_free
+    raise SimulationError(
+    ...<4 lines>...
+    ) from exc
+cop_thief_core.exceptions.SimulationError: Port 8802 on 127.0.0.1 is already in use — a previous peer is probably still running. Stop it (e.g. `Get-NetTCPConnection -LocalPort 8802` on Windows, or `lsof -i :8802` on Linux) or change network.my_port in this peer's config/<role>/game.toml.
+Traceback (most recent call last):
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/mcp_server.py", line 22, in _ensure_port_free
+    probe.bind((host, port))
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+OSError: [Errno 98] Address already in use
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/vasily/claude/cop-rob-p2p/src/thief_agent/__main__.py", line 16, in <module>
+    main()
+    ~~~~^^
+  File "/home/vasily/claude/cop-rob-p2p/src/thief_agent/__main__.py", line 12, in main
+    run_role("thief")
+    ~~~~~~~~^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/agent_cli.py", line 56, in run_role
+    outcome = sdk.run_peer(role, stub_llm=not args.real_llm, transport=transport,
+                           listener=progress_listener(), counted=args.counted)
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/sdk/sdk.py", line 78, in run_peer
+    transport = transport or self._build_transport(peer_role)
+                             ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/sdk/sdk.py", line 50, in _build_transport
+    inboxes = start_peer_server(
+        role.value, cfg.get("network.host", "127.0.0.1"), cfg.get("network.my_port")
+    )
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/mcp_server.py", line 81, in start_peer_server
+    _ensure_port_free(host, port)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/mcp_server.py", line 24, in _ensure_port_free
+    raise SimulationError(
+    ...<4 lines>...
+    ) from exc
+cop_thief_core.exceptions.SimulationError: Port 8802 on 127.0.0.1 is already in use — a previous peer is probably still running. Stop it (e.g. `Get-NetTCPConnection -LocalPort 8802` on Windows, or `lsof -i :8802` on Linux) or change network.my_port in this peer's config/<role>/game.toml.
+13:23:21  opening  sub_game=1 of=6 role=thief
+13:23:21  waiting for opponent agreement  sub_game=1 role=thief
+13:26:42  agreement signed  sub_game=1
+13:29:43  settled  sub_game=1 result=timeout steps=1
+13:29:43  opening  sub_game=2 of=6 role=police
+13:29:43  waiting for opponent agreement  sub_game=2 role=police
+13:31:09  agreement signed  sub_game=2
+Traceback (most recent call last):
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/mcp_server.py", line 22, in _ensure_port_free
+    probe.bind((host, port))
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+OSError: [Errno 98] Address already in use
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/vasily/claude/cop-rob-p2p/src/thief_agent/__main__.py", line 16, in <module>
+    main()
+    ~~~~^^
+  File "/home/vasily/claude/cop-rob-p2p/src/thief_agent/__main__.py", line 12, in main
+    run_role("thief")
+    ~~~~~~~~^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/agent_cli.py", line 56, in run_role
+    outcome = sdk.run_peer(role, stub_llm=not args.real_llm, transport=transport,
+                           listener=progress_listener(), counted=args.counted)
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/sdk/sdk.py", line 78, in run_peer
+    transport = transport or self._build_transport(peer_role)
+                             ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/sdk/sdk.py", line 50, in _build_transport
+    inboxes = start_peer_server(
+        role.value, cfg.get("network.host", "127.0.0.1"), cfg.get("network.my_port")
+    )
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/mcp_server.py", line 81, in start_peer_server
+    _ensure_port_free(host, port)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/mcp_server.py", line 24, in _ensure_port_free
+    raise SimulationError(
+    ...<4 lines>...
+    ) from exc
+cop_thief_core.exceptions.SimulationError: Port 8802 on 127.0.0.1 is already in use — a previous peer is probably still running. Stop it (e.g. `Get-NetTCPConnection -LocalPort 8802` on Windows, or `lsof -i :8802` on Linux) or change network.my_port in this peer's config/<role>/game.toml.
+Traceback (most recent call last):
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/mcp_server.py", line 22, in _ensure_port_free
+    probe.bind((host, port))
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+OSError: [Errno 98] Address already in use
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/vasily/claude/cop-rob-p2p/src/thief_agent/__main__.py", line 16, in <module>
+    main()
+    ~~~~^^
+  File "/home/vasily/claude/cop-rob-p2p/src/thief_agent/__main__.py", line 12, in main
+    run_role("thief")
+    ~~~~~~~~^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/agent_cli.py", line 56, in run_role
+    outcome = sdk.run_peer(role, stub_llm=not args.real_llm, transport=transport,
+                           listener=progress_listener(), counted=args.counted)
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/sdk/sdk.py", line 78, in run_peer
+    transport = transport or self._build_transport(peer_role)
+                             ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/sdk/sdk.py", line 50, in _build_transport
+    inboxes = start_peer_server(
+        role.value, cfg.get("network.host", "127.0.0.1"), cfg.get("network.my_port")
+    )
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/mcp_server.py", line 81, in start_peer_server
+    _ensure_port_free(host, port)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/home/vasily/claude/cop-rob-p2p/src/cop_thief_core/infra/mcp_server.py", line 24, in _ensure_port_free
+    raise SimulationError(
+    ...<4 lines>...
+    ) from exc
+cop_thief_core.exceptions.SimulationError: Port 8802 on 127.0.0.1 is already in use — a previous peer is probably still running. Stop it (e.g. `Get-NetTCPConnection -LocalPort 8802` on Windows, or `lsof -i :8802` on Linux) or change network.my_port in this peer's config/<role>/game.toml.
+13:32:20  opening  sub_game=1 of=6 role=thief
+13:32:20  waiting for opponent agreement  sub_game=1 role=thief
+13:35:10  agreement signed  sub_game=1
+13:38:11  settled  sub_game=1 result=timeout steps=1
+13:38:11  opening  sub_game=2 of=6 role=police
+13:38:11  waiting for opponent agreement  sub_game=2 role=police
+13:41:01  opening  sub_game=1 of=6 role=thief
+13:41:01  waiting for opponent agreement  sub_game=1 role=thief
+13:49:32  opening  sub_game=1 of=6 role=thief
+13:49:32  waiting for opponent agreement  sub_game=1 role=thief
+13:52:07  agreement signed  sub_game=1
+13:55:08  settled  sub_game=1 result=timeout steps=1
+13:55:08  opening  sub_game=2 of=6 role=police
+13:55:08  waiting for opponent agreement  sub_game=2 role=police
+13:56:41  opening  sub_game=1 of=6 role=thief
+13:56:41  waiting for opponent agreement  sub_game=1 role=thief
+14:06:08  agreement signed  sub_game=1
+14:06:46  waiting for opponent audit  sub_game=1 result=survival
+14:06:57  settled  sub_game=1 result=survival steps=35
+14:06:57  opening  sub_game=2 of=6 role=police
+14:06:57  waiting for opponent agreement  sub_game=2 role=police
+14:07:07  agreement signed  sub_game=2
+14:07:43  waiting for opponent audit  sub_game=2 result=survival
+14:07:54  settled  sub_game=2 result=survival steps=34
+14:07:54  opening  sub_game=3 of=6 role=thief
+14:07:54  waiting for opponent agreement  sub_game=3 role=thief
+14:07:56  agreement signed  sub_game=3
+14:08:34  waiting for opponent audit  sub_game=3 result=survival
+14:08:45  settled  sub_game=3 result=survival steps=35
+14:08:45  opening  sub_game=4 of=6 role=police
+14:08:45  waiting for opponent agreement  sub_game=4 role=police
+14:08:47  agreement signed  sub_game=4
+14:09:23  waiting for opponent audit  sub_game=4 result=survival
+14:09:34  settled  sub_game=4 result=survival steps=34
+14:09:34  opening  sub_game=5 of=6 role=thief
+14:09:34  waiting for opponent agreement  sub_game=5 role=thief
+14:09:36  agreement signed  sub_game=5
+14:10:14  waiting for opponent audit  sub_game=5 result=survival
+14:10:24  settled  sub_game=5 result=survival steps=35
+14:10:24  opening  sub_game=6 of=6 role=police
+14:10:24  waiting for opponent agreement  sub_game=6 role=police
+14:10:27  agreement signed  sub_game=6
+14:11:02  waiting for opponent audit  sub_game=6 result=survival
+14:11:13  settled  sub_game=6 result=survival steps=34
+[thief] result=survival winner=thief game_uid=566d2396-e3e9-10ef-6f15-ef51ff64acba artifacts=logs/vm__fabi
