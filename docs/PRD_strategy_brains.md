@@ -112,3 +112,76 @@ channel. Tests: `test_brains`, `test_tactics`, `test_territory`,
 cop with an exact position appears to catch any evader we can write — our thief
 survives 0/24 against ours. Expect to win police sub-games and lose thief
 sub-games against any opponent that also reads the peak.
+
+## 8. Live falsification — the il-nv-ai counted series (2026-08-24)
+
+Section 7's closing expectation ("expect to win police sub-games … against any
+opponent that also reads the peak") is now **falsified by evidence**. The
+counted series against il-nv-ai settled 47:47 on six thief survivals out of
+six: our police captured nothing in g2/g4/g6, and — the symmetric fact that
+reframes the whole question — **their police captured nothing against our
+thief either**. In their own words: "neither police ever closed it."
+
+### 8.1 What the sealed logs show
+
+Reconstruction from `results/counted/il-nv-ai-2026-08-24/` (their scent peak is
+the sender's exact cell, so the full pursuit geometry is recoverable from our
+own artifacts; all three police games are near-identical because both brains
+are deterministic):
+
+- The peak channel worked: their maps carried the 0.8 peak on their true cell
+  every step (34/34). **Information was never the problem.**
+- Our cop closed from distance 5 to **distance 1 within ~8 steps and held
+  distance 1 for 17 of 34 steps** — half the game spent adjacent.
+- No capture, because distance 1 is a **stable dodge cycle** under this
+  ruleset: the thief moves first AND knows our exact cell (we hand it over in
+  `capture_claim` every move). From distance 1 it steps away to 2; we close to
+  1; repeat. Their endgame was **edge-running** — sliding along a border row
+  with our cop shadowing one row inside, reversing at will, answering our
+  parity STAY with its own STAY.
+
+### 8.2 Why the bench said 32/32 anyway
+
+The arena's evader is our own and is corner-prone relative to il-nv-ai's
+edge-slider; we never built an adversary that dodges indefinitely at distance
+1. This is the §5 method rule violated in its second half: we built the
+adversary that reproduced the *thief's* live loss (HerderCop), but never the
+one that reproduces the *police's* live failure. The bench measured cornering
+against an evader that consents to be cornered.
+
+### 8.3 What the Stage-8 rebuild fixed — and what it cost the pursuer
+
+The imreeyal-informed rebuild was evader-side and it worked: STAY plus the
+corner-death fix took our thief from caught-in-every-counted-game to 6/6
+survivals. But the same change **removed barriers from the cop** ("stop the
+pursuer spending walls") because walls measured badly in our arena. Against a
+live edge-runner that is exactly backwards: a wall placeable adjacent to the
+cop is the **only mechanism that converts a distance-1 shadow into a corner
+trap** — shadowing at (1,3) under an edge-runner at (0,3), the wall on (0,2)
+or (0,4) is legal and amputates the retreat. We deleted the endgame tool the
+live opponents force us to need.
+
+### 8.4 The theory gap, stated precisely
+
+Classic pursuit theory: a 7×7 grid has cop number 1 — with sequential,
+fully-informed moves a lone cop *can* force capture, comfortably inside 35
+steps. Nothing in this ruleset (thief-first order, STAY on both sides, honest
+overlap capture) breaks that. The tie equilibrium the league has converged to
+is therefore a **strategy ceiling, not a structural one**: heuristic
+distance/territory pursuit does not corner an evader with perfect pursuer
+information, on either team's implementation.
+
+### 8.5 The designed (unimplemented) endgame
+
+Keep the herder for midgame — it demonstrably pins the evader to an edge.
+Then, on an edge-run trigger (≥N consecutive adjacent-shadow steps along a
+border; today's 17-step dodge cycle is trivially detectable):
+
+1. approach from the open side to drive the evader toward the nearer corner;
+2. spend barriers on the border cells behind and ahead of it (always adjacent
+   to a cop shadowing one row inside) to amputate the reversal;
+3. parity STAY only once the retreat is walled.
+
+Prerequisite per §5: first build the **edge-slider adversary** that reproduces
+today's 34-step survival against our current cop, then measure the endgame
+mode against it. Fourteen walls is far more than one corner trap needs.
