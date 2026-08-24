@@ -1618,3 +1618,32 @@
 - **Lesson:** the debrief was worth more than the games. But every claim in it
   had to be re-derived locally before it earned a line of code, and the two that
   did not survive were exactly the two that sounded most authoritative.
+
+## 2026-08-24 · Interop · il-nv-ai counted request, verified point by point
+- **Their two "defects" checked against our code, not accepted on trust.**
+  DEFECT 1 (`num_games` hardcoded to 1) does not apply: `terms_from_config`
+  already yields 6 for this pairing, and our test pins the resulting
+  `game_uid` 566d2396-… which they confirmed before the window. DEFECT 2
+  (per-sub-game git provenance) does not apply either: we run ONE process from
+  ONE checkout for all six sub-games, so the single advertised SHA is truthful —
+  their own second valid fix.
+- **Their config bytes verified, not assumed:** their attached 911-byte file is
+  byte-identical to `config/il-nv-ai/game.json` and hashes to the sha they
+  quoted. The 948-byte variant we once argued for stays dead (ADR: Appendix B is
+  not the signed-terms scope).
+- **Their role schedule matched what we had already recorded.** They state
+  il-nv-ai POLICE on odd; our `test_il_nv_ai_pairing_config_is_playable` already
+  says "we are THIEF on odd … launch thief_agent". Independent agreement, so the
+  schedule needed no negotiation — only the right entry point at launch, which
+  is now a comment in the config file where the launcher will look.
+- **The real find was ours:** `counted_games_played` still read 2. It feeds the
+  declaration and the report's `games_played_including_this`, so playing without
+  fixing it would have MISREPORTED our league standing to the lecturer. Their
+  request is what surfaced it.
+- **Consensus:** they name the mode `reference_symmetric_outcome_without_tie`.
+  We do not carry that label, but our `_symmetric` construction reproduced both
+  il-nv-ai warm-up signatures exactly from the filed rows (`confirmed: true`),
+  and matched imreeyal across a full six. Evidence, not a naming match — so the
+  reply proposes compare-then-send, which is their own policy anyway.
+- **Lesson:** an opponent's bug report is a hypothesis about YOUR code. Both of
+  theirs were false for us; the true defect was one they never mentioned.

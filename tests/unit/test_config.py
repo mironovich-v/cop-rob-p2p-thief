@@ -156,4 +156,6 @@ def test_il_nv_ai_pairing_config_is_playable():
     assert cfg.get("game.counted") is False  # armed only by the window overlay
     # We are THIEF on odd sub-games here (kit_sorted_first_police_odd_v1 puts
     # il-nv-ai first), the OPPOSITE of the warm-up: launch thief_agent.
-    assert cfg.get("game.counted_games_played") == 2  # nis-yar1 + vibecode banked
+    # Three banked: nis-yar1 08-18, vibecode 08-22, imreeyal 08-23. An armed run
+    # declares this count + 1, so a stale value misreports the league standing.
+    assert cfg.get("game.counted_games_played") == 3
