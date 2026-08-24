@@ -1680,3 +1680,23 @@
 - **Lesson:** when both sides swear their half is fine, argue from transport
   semantics you can prove (tool-level ack vs bare HTTP; fresh session per call)
   — it converts a shouting match into a pincer that finds the zombie.
+
+## 2026-08-24 · Post-settlement · il-nv-ai file-level compare finds two out-of-scope defects; correction mailed
+- il-nv-ai diffed the two FILED reports (not just the hashes) and found two
+  defects in ours, both OUTSIDE the hashed consensus scope — which is exactly
+  why the byte-identical series hash could not catch them: (1)
+  `games_played_including_this.il-nv-ai` was null (their count 2 arrived only
+  out of band after settlement); (2) `github_commit.il-nv-ai` carried their
+  THIEF commit in all six rows — they run two published role checkouts and the
+  SHA alternates by role; our one-checkout model stores the opponent identity
+  once and never expected that.
+- Both confirmed in our archived bytes before acting. Per their protocol:
+  original NOT re-filed; one JSON-only correction mailed lecturer-only naming
+  the original message-id, the two corrected fields, and the unchanged series
+  hash. Original `1a0337c3d013aa7b`; correction `1a033882dfda7f87`; their
+  report `1a0337f00c6c77e1`. Correction record archived with the evidence.
+- Follow-up defects to fix: allow injecting the opponent's declared count when
+  it arrives out of band; capture the opponent's commit PER SUB-GAME from each
+  negotiate, not once per series (role-split opponents alternate SHAs).
+- Lesson: hashes prove the agreed scope and nothing else — a settlement ritual
+  needs one full-file diff on top of the hash compare.
