@@ -85,6 +85,24 @@ def test_export_ships_the_match_evidence(exported):
                 f"{role}: counted evidence missing from the export")
 
 
+def test_shipped_markdown_images_resolve(exported):
+    # The academic README ships verbatim, so every relative image it embeds
+    # must exist in the same tree — a grader sees broken images otherwise
+    # (img/ was silently absent from both role repos, found 2026-08-24).
+    import re
+    dist, _ = exported
+    for role in ("police", "thief"):
+        out = dist / f"{role}-agent"
+        for md in out.rglob("*.md"):
+            text = md.read_text(encoding="utf-8", errors="replace")
+            for match in re.finditer(r'!\[[^\]]*\]\(([^)#\s]+)\)', text):
+                target = match.group(1)
+                if target.startswith(("http://", "https://")):
+                    continue
+                assert (md.parent / target).exists() or (out / target).exists(), (
+                    f"{role}: {md.relative_to(out)} embeds missing {target}")
+
+
 def test_export_stands_alone_for_grading(exported):
     # If grading walks ONLY the submitted repos, every guideline-mandatory
     # file must be there (owner finding vs the lecturer's reference layout).

@@ -71,10 +71,14 @@ def export_role(role: str, workspace: Path, dist_dir: Path, commit: str) -> dict
     # grader holding just this repo. Driving the copy from `git ls-files` means
     # anything we deliberately track ships, and the untracked scratch copies in
     # results/ (browser-downloaded compare files) never do.
-    for relative in _tracked_under(workspace, "results"):
-        target = out / relative
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes((workspace / relative).read_bytes())
+    # img/ rides the same rule: the academic README (shipped verbatim below)
+    # embeds the replay screenshots by relative path, so a tree without them
+    # shows a grader broken images (found live 2026-08-24).
+    for directory in ("results", "img"):
+        for relative in _tracked_under(workspace, directory):
+            target = out / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((workspace / relative).read_bytes())
     # A submission repo must STAND ALONE for grading: the guideline's mandatory
     # documentation set, the AI-control files, the academic README, the license,
     # and an .gitignore ship in BOTH trees (owner finding, 2026-08-19 — the
