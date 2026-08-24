@@ -1715,3 +1715,14 @@
 - Written to `docs/PRD_strategy_brains.md` §8 with the designed endgame
   (edge-run trigger → corner-drive + wall-block + parity STAY) and its bench
   prerequisite (edge-slider adversary first).
+
+## 2026-08-24 · Fix · Submission repos shipped a README with broken screenshot embeds
+- Owner found `img/imree_replay_police.png` missing from the police repo's main.
+  Root cause: `export_role` ships a curated set that never included `img/`,
+  while the academic README (shipped verbatim) embeds both replay screenshots.
+  A full relative-reference sweep of the export tree found exactly those two
+  missing targets and nothing else.
+- Fix: tracked `img/` now ships via the same `git ls-files` rule as `results/`
+  (anything deliberately tracked publishes). TDD: a new export test asserts
+  every relative image embedded by ANY shipped markdown resolves in the tree —
+  the general guarantee, so the next asset directory cannot silently drop.
