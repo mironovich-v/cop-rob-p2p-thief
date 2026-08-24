@@ -148,6 +148,26 @@ uv run python -m cop_thief_core.gui --config config/police \
 Replay re-verifies each step's commit against its revealed nonce and, when the
 sibling log is present, draws both true trajectories on one board.
 
+#### Screenshots
+
+Both captures below are from the **counted series against imreeyal**
+(2026-08-23), replayed from the sealed logs archived under
+`results/counted/imreeyal-2026-08-23/`.
+
+| Sub-game 5 — we played police, thief survived | Sub-game 2 — we played thief, captured at step 12 |
+|---|---|
+| ![Replay, police role](img/imree_replay_police.png) | ![Replay, thief role](img/imree_replay_thief.png) |
+
+Each window shows the banner verdict, the step counter, the sealed commit with
+its per-step verification (`[verified OK]`), and the audit status. Note
+`opponent log missing` in the status line: a peer keeps only **its own** sealed
+log, so the both-trajectory overlay appears only once the sibling log has been
+gathered — the local-truth boundary holding even in retrospective replay.
+
+The thief capture is the position that drove the strategy rebuild in ADR-25:
+the evader is pinned on the bottom edge with the pursuer landing on it, because
+the brain of the day could not choose STAY.
+
 ### Interoperability vectors (cross-team byte-exactness)
 
 The league kit is owned by another team and is **not vendored**; fetch it, then run

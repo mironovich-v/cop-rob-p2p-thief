@@ -108,6 +108,14 @@ display-guarded `test_gui_shell` skips; on a display it builds a real window and
 asserts the render. **Screenshot:** run the command on a WSLg/X display and
 capture the window for the submission (FR-21/AC-G4 evidence).
 
+**Delivered captures** (see README §Usage): `img/imree_replay_police.png` and
+`img/imree_replay_thief.png`, both replayed from the counted imreeyal series
+archived under `results/counted/imreeyal-2026-08-23/`. They evidence the replay
+window; a LIVE-window capture (banner `WAITING`, board drawn with no opponent
+marker) is still outstanding and is the direct FR-21 evidence, since only the
+live view can demonstrate that opponent truth is absent while a game is in
+progress.
+
 Replay a saved sub-game log (both revealed trajectories, per-step commit verify):
 
 ```bash

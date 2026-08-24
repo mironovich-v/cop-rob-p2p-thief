@@ -38,9 +38,16 @@ repos = { cop = "https://github.com/mironovich-v/cop-rob-p2p-police", thief = "h
 mcp_servers = { cop = "https://cop-rob-p2p.ngrok.app/mcp", thief = "https://cop-rob-p2p.ngrok.app/mcp" }
 opponent_group_id = "il-nv-ai"
 counted = false                       # flip ONLY for the one counted series (+ --counted)
-counted_games_played = 2              # nis-yar1 2026-08-18 + vibecode 2026-08-22;
+counted_games_played = 3              # nis-yar1 08-18 + vibecode 08-22 + imreeyal 08-23;
                                       # an armed run declares 3 including this series
 tie_rule = "series_add"               # declared in the constitution chat (ADR-17)
+# ROLE SCHEDULE — launch this pairing with `thief_agent`, NOT `police_agent`.
+# The schedule is DERIVED, not negotiated: the alphabetically first group id
+# plays police in the odd sub-games, and "il-nv-ai" sorts before "vm__fabi".
+# So they are POLICE in 1/3/5 and we are THIEF in 1/3/5 — the mirror of the
+# imreeyal pairing, where we launched police_agent. `role_for()` gives a peer
+# its NATURAL role on odd sub-games, and the natural role is the entry point
+# that was started, so the entry point is what fixes the schedule.
 
 [belief]
 smell_trust_weight = 4.0

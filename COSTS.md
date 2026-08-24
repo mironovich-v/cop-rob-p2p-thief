@@ -116,7 +116,8 @@
 | 2026-08-23 | PR (observability) | fix-peer-progress-logging | 959ed1d | Fable 5 · high | peer wrote a 0-byte log for 30 min across TWO aborted counted attempts; announce every seam, flushed, on stderr | ~0.3 session + 2 void windows | merged (#104) |
 | 2026-08-23 | PR (reliability) | fix-bounded-audit-wait | 241ba6e | Fable 5 · high | audit wait shared connect_timeout (2400s armed) — a missing g3 audit hung us 40 min; separate budget, 120s x2 with one re-send | ~0.3 session | merged (#105) |
 | 2026-08-23 | PR (protocol) | feat-void-on-missing-audit | eae0d70 | Fable 5 · high | option A agreed with imreeyal: lost audit voids the sub-game and stops the series, nothing filed | ~0.2 session | merged (#106) |
-| 2026-08-24 | PR (strategy) | feat-brains-stay-and-containment | (pending) | Fable 5 · xhigh | overnight brains rebuild on imreeyal's debrief: evader gains STAY (the corner death), cop scores escapes, barriers OFF (0/32 -> 32/32); new arena + champion gate | ~4 session, ~30k arena games | in review |
+| 2026-08-24 | PR (strategy) | feat-brains-stay-and-containment | 7a06bcc | Fable 5 · xhigh | overnight brains rebuild on imreeyal's debrief: evader gains STAY (the corner death), cop scores escapes, barriers OFF (0/32 -> 32/32); new arena + champion gate | ~4 session, ~30k arena games | merged (#107) |
+| 2026-08-24 | PR (config/docs) | config-il-nv-ai-counted-ready | (pending) | Fable 5 · high | il-nv-ai counted prep: stale counted_games_played 2->3 (would have misreported), role-schedule note, GUI replay screenshots wired into README/PRD | ~0.4 session | in review |
 
 ## Notes on methodology
 - Exact token accounting used when available (e.g. subagent token totals from the
