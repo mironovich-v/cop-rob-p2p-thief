@@ -127,3 +127,4 @@
 - Log here as they occur: full 6-sub-game match runs, cross-implementation tunnel
   games, and any opt-in LLM (`claude_api` / `claude_cli`) banter usage against the
   token budget (200,000 / series).
+| 2026-08-24 | Counted series | chore-il-nv-ai-counted-banked | (pending) | Fable 5 · high | il-nv-ai counted 6-series: 5 void g1s diagnosed live (ngrok edge throttle -> Cloudflare quick tunnel; their zombie preflight listener; our armed-gate/min_center gaps), clean run 14:06-14:11, tie 47:47, consensus matched, mailed lecturer `1a0337c3d013aa7b`; evidence archived + ledger advanced | ~1.5 session, ~85 min window incl. 5 retries | in review |

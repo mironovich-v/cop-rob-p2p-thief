@@ -1,5 +1,5 @@
 {
-  "core_commit": "c83d81e6b42d03c53d32ac2ffe5cc9a41b142eb5",
+  "core_commit": "83af9b33496d00b9d6637484bc965889312ad66f",
   "core_sha256": "f3177e3d3bdf08b2da2fe1ff0f3b05adbcffb3675ad438afa65c3154e0c580d0",
   "repo": "https://github.com/mironovich-v/cop-rob-p2p-thief",
   "role": "thief",

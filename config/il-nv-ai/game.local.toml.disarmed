@@ -1,0 +1,49 @@
+# COUNTED ARMING — il-nv-ai, T = 2026-08-24 13:15:00 Asia/Jerusalem, agreed in
+# writing. ADR-20 double arming: this half sets game.counted; the CLI must also
+# pass --counted.
+#
+# email.mode = "dry_run" ON PURPOSE: il-nv-ai and we agreed compare-then-send —
+# we exchange the six per-sub-game hashes and the series hash BEFORE either side
+# mails, then send the filed bytes with scripts/send_filed_report.py. Rule 35
+# zeroes both teams on contradictory reports, so nobody mails first.
+[game]
+counted = true
+# EDGE SWITCH 13:10: g1 attempt 2 died at step 25 because the ngrok edge stopped
+# forwarding at 13:02:49 (agent log: all 200/202 until then, then total blackout
+# while il-nv-ai's 101 retries never arrived — edge throttling at ~4 HTTP
+# requests per MCP call at their 1.5s pacing). Serve this window through a
+# Cloudflare quick tunnel instead (their class of tunnel, no per-minute cap);
+# Host pinned to the origin via --http-host-header. ngrok stays up as backup.
+mcp_servers = { cop = "https://titled-migration-chest-let.trycloudflare.com/mcp", thief = "https://titled-migration-chest-let.trycloudflare.com/mcp" }
+
+[email]
+# DISCOVERED AT THE WINDOW (12:47): preflight_armed refuses a held armed run —
+# it demands enabled+send+recipient (PR #96 added the deferred send but never
+# taught the gate the dry_run posture). Config-only resolution that keeps the
+# compare-then-send agreement: arm SENDABLE with OUR OWN inbox as the only
+# recipient. Settlement auto-mails the filed bytes to us alone; the lecturer is
+# not in recipients, so nobody FILES first (rule 35 intact). After the hash
+# compare, set recipient to the lecturer ALONE and run
+# scripts/send_filed_report.py with the filed artifact.
+enabled = true
+mode = "send"
+# POST-SETTLEMENT (14:11 sealed, hashes compared): recipient now the lecturer
+# ALONE for the deferred compare-then-send via scripts/send_filed_report.py.
+# The settlement auto-mail already went to our own inbox with the same bytes.
+recipient = ["rmisegal+uoh26finalgame@gmail.com"]
+
+[smell]
+# WINDOW FIX 12:57: their Appendix-B constitution (schema 1.2) carries only the
+# book's three pheromone keys — no pheromone_min_center_intensity — and the
+# "loader fills it from the SPEC default" claimed in game.toml's header DOES NOT
+# EXIST in config.py (_translate_shared only maps present keys). runtime.py:82
+# then hands None to SmellField and deposit() crashed our first counted move
+# (float < None). 0.5 is the value the 14 SIGNED terms already pin (terms sha
+# a284082d…, confirmed by il-nv-ai), so this fills the gap without touching the
+# adopted constitution bytes or any agreed term.
+min_center_intensity = 0.5
+
+[network]
+# We come up early and hold; they bind at T. Patience spans their inter-sub-game
+# door gap (they start 2..6 automatically ~3s after each previous log lands).
+connect_timeout_seconds = 2400

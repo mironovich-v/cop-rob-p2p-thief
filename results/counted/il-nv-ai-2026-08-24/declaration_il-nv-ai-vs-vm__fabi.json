@@ -1,0 +1,75 @@
+{
+  "_schema": "Static pre-game declaration for the whole series: team identity, members, repos, MCP URLs, hardware, model, token cap, and start/end times. Roles alternate across sub-games, so no role/sub_game_number appears here.",
+  "schema_version": "1.1",
+  "declaration_type": "pre_game_declaration",
+  "game_id": "il-nv-ai-vs-vm__fabi",
+  "game_uid": "566d2396-e3e9-10ef-6f15-ef51ff64acba",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_il-nv-ai-vs-vm__fabi.json",
+    "config": "config_il-nv-ai-vs-vm__fabi_g<NN>.json",
+    "log": "log_il-nv-ai-vs-vm__fabi_g<NN>.json",
+    "result": "result_il-nv-ai-vs-vm__fabi.json"
+  },
+  "timezone": "Asia/Jerusalem",
+  "game_started_at": "2026-08-24T11:06:08.484652+00:00",
+  "game_ended_at": "2026-08-24T11:11:13.528482+00:00",
+  "num_sub_games": 6,
+  "max_tokens_per_game": 200000,
+  "groups": {
+    "group_1": {
+      "group_id": "vm__fabi",
+      "group_name": "VM-Fabi",
+      "members": [
+        "Vasily Mironovich",
+        "Fahed Bitar"
+      ],
+      "repos": {
+        "cop": "https://github.com/mironovich-v/cop-rob-p2p-police",
+        "thief": "https://github.com/mironovich-v/cop-rob-p2p-thief"
+      },
+      "mcp_servers": {
+        "cop": "https://titled-migration-chest-let.trycloudflare.com/mcp",
+        "thief": "https://titled-migration-chest-let.trycloudflare.com/mcp"
+      },
+      "llm_model": "template",
+      "hardware_spec": {
+        "cpu_type": "x86_64",
+        "cpu_freq_mhz": 2918.4,
+        "cpu_cores": 16,
+        "ram_gb": 15.5,
+        "gpu_model": "none",
+        "vram_gb": 0
+      },
+      "github_commit": "c83d81e6b42d03c53d32ac2ffe5cc9a41b142eb5",
+      "signature": "4c7dbbb2b9dd503643cce9d41d3ea47f006cd257cb8d60c4fab0e59754fa20b3"
+    },
+    "group_2": {
+      "group_id": "il-nv-ai",
+      "group_name": "il-nv-ai",
+      "members": [
+        "Ilya",
+        "Nadav"
+      ],
+      "repos": {
+        "cop": "https://github.com/ilyalaz01/police_thief_p2p-police",
+        "thief": "https://github.com/ilyalaz01/police_thief_p2p-thief"
+      },
+      "mcp_servers": {
+        "cop": "https://ask-lancaster-bits-toll.trycloudflare.com/mcp",
+        "thief": "https://ask-lancaster-bits-toll.trycloudflare.com/mcp"
+      },
+      "llm_model": "deterministic-python",
+      "hardware_spec": {
+        "cpu_type": "Intel(R) Core(TM) i5-14600KF",
+        "cpu_freq_mhz": 3500,
+        "cpu_cores": 20,
+        "ram_gb": 32,
+        "gpu_model": null,
+        "vram_gb": 8
+      },
+      "github_commit": "a79fd147103f433a77e7f323f647cd347c13c832",
+      "signature": "9e13ea3522dd844de6c9ed6a24419e2101fc980b4f781daf9c1f7e7164cb129d"
+    }
+  }
+}

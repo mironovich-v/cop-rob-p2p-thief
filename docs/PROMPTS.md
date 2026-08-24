@@ -1647,3 +1647,36 @@
   reply proposes compare-then-send, which is their own policy anyway.
 - **Lesson:** an opponent's bug report is a hypothesis about YOUR code. Both of
   theirs were false for us; the true defect was one they never mentioned.
+
+## 2026-08-24 · Counted window · il-nv-ai series played, settled, and banked (tie 47:47)
+- **Goal:** play the agreed counted 6-series at the confirmed T, hold the
+  compare-then-send mail order, and bank the evidence.
+- **Five void g1 attempts before the clean run, every one root-caused, none
+  guessed:** (1) ngrok's edge throttles ~300 req/min — 4 HTTP requests per MCP
+  call at their 1.5s pacing — and cut the first real game dead at step 25 with
+  an agent-side blackout (all 200/202 before, their 101 retries never reached
+  us); moved our door to a Cloudflare quick tunnel, same class as theirs.
+  (2-3) their launcher's preflight listener survived a `uv run` wrapper-kill as
+  a zombie child and ACKED-AND-DISCARDED our agreement pushes; our
+  fresh-client-per-call transport let us prove the acks were real and
+  session-reuse impossible, which cornered the bug on their side — they found
+  the zombie exactly where the evidence pointed. (4) their negotiate raced their
+  own port handover. (5) our own armed gate refused the documented held-mail
+  arming (see below).
+- **Two of OUR defects found live:** `preflight_armed` demands
+  enabled+send+recipient, so the §11 documented dry_run arming cannot start —
+  worked around by arming sendable with recipient=SELF (lecturer still
+  unreachable until the deferred send; rule-35 order preserved); and
+  `smell.min_center_intensity` resolved None at runtime because the 8.41 fill
+  covers the TERMS scope only, not the runtime config — first counted move
+  crashed; overlay-papered with the signed 0.5. Both need PRs.
+- **Settlement:** 6/6 thief survivals, 47:47 with series_add, series consensus
+  `381f268c…` byte-identical (both sides recomputed independently from their own
+  artifacts); per-sub-game hashes differ BY SCOPE (ours seals the full 70-record
+  mutual log, theirs the symmetric outcome) — agreed non-issue, settlement value
+  is the series consensus. Filed bytes mailed lecturer-only via
+  send_filed_report; message-id `1a0337c3d013aa7b` exchanged. il-nv-ai declares
+  count 2; ours 4.
+- **Lesson:** when both sides swear their half is fine, argue from transport
+  semantics you can prove (tool-level ack vs bare HTTP; fresh session per call)
+  — it converts a shouting match into a pincer that finds the zombie.

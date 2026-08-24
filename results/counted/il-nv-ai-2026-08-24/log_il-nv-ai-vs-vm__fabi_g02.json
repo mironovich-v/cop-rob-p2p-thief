@@ -1,0 +1,2254 @@
+{
+  "_schema": "Per-sub-game commit-reveal log for the replay viewer: every sealed step and the mutual-audit result, plus received_messages: the opponent turns this peer applied, filed as evidence and never part of the signature. Static team metadata lives in the declaration; join by game_uid.",
+  "schema_version": "1.1",
+  "game_id": "il-nv-ai-vs-vm__fabi",
+  "game_uid": "566d2396-e3e9-10ef-6f15-ef51ff64acba",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_il-nv-ai-vs-vm__fabi.json",
+    "config": "config_il-nv-ai-vs-vm__fabi_g<NN>.json",
+    "log": "log_il-nv-ai-vs-vm__fabi_g<NN>.json",
+    "result": "result_il-nv-ai-vs-vm__fabi.json"
+  },
+  "summary": {
+    "sub_game_number": 2,
+    "group_id": "vm__fabi",
+    "role": "police",
+    "opponent_group_id": "il-nv-ai",
+    "result": "survival",
+    "winner_role": "thief",
+    "steps": 34,
+    "timezone": "Asia/Jerusalem",
+    "started_at": "2026-08-24T11:07:07.490263+00:00",
+    "ended_at": "2026-08-24T11:07:54.690263+00:00",
+    "duration_seconds": 47.2,
+    "tokens_total": 0,
+    "audit": {
+      "passed": true,
+      "verified_steps": 35,
+      "failed_steps": [],
+      "bound_steps": 35
+    }
+  },
+  "records": [
+    {
+      "payload": {
+        "step": 0,
+        "type": "system_spec",
+        "spec": {
+          "os": "Linux 6.6.87.2-microsoft-standard-WSL2",
+          "cpu_type": "x86_64",
+          "cpu_cores": 16,
+          "cpu_freq_mhz": 2918.4,
+          "ram_gb": 15.5,
+          "gpu_model": "none",
+          "vram_gb": 0
+        },
+        "model": "template",
+        "code_version": "1.0.0",
+        "group_name": "VM-Fabi",
+        "sub_game_number": 2
+      },
+      "nonce": "9fa9859a6c353ab81acd3d5774f4a97a",
+      "commit": "c3c8270bf4f36ce479d06bbfdc206545a66dc52bd8310fe607850fff75e33104"
+    },
+    {
+      "payload": {
+        "step": 1,
+        "state": "grid=7x7;self=[1, 0];barriers=[]",
+        "position": [
+          1,
+          0
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "11f4fd62cde7a77f869cccf4e951cd6a",
+      "commit": "fa269cac8bae3937aa44d164c99261319b31508231d1f816b2645a19289ad416"
+    },
+    {
+      "payload": {
+        "step": 2,
+        "state": "grid=7x7;self=[1, 1];barriers=[]",
+        "position": [
+          1,
+          1
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "5273be564ba5bc206af4728516909a8b",
+      "commit": "4b2f784104c2b3267969aa02d5193e3d3d774d82f93426aa9b5d37510ea7247f"
+    },
+    {
+      "payload": {
+        "step": 3,
+        "state": "grid=7x7;self=[2, 1];barriers=[]",
+        "position": [
+          2,
+          1
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "b85d5a4ced78bdded2581b18dbda9d9c",
+      "commit": "b036e2f9fc365c8303ec8f9edb1f33c79e089644448b8ae0b18faa7e2c3e2b5e"
+    },
+    {
+      "payload": {
+        "step": 4,
+        "state": "grid=7x7;self=[2, 2];barriers=[]",
+        "position": [
+          2,
+          2
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "5fd45868368b66f3b757f17af007047f",
+      "commit": "3fa05094acf28555b749add71fd78308642b4d074afad5422405ce92bcc5b553"
+    },
+    {
+      "payload": {
+        "step": 5,
+        "state": "grid=7x7;self=[3, 2];barriers=[]",
+        "position": [
+          3,
+          2
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "f1a896c31808961ff943437d361eb867",
+      "commit": "81e10922c7c3a45fa1f34a09a3cc5d65bf567a610730f0c0433c4555d3ccf259"
+    },
+    {
+      "payload": {
+        "step": 6,
+        "state": "grid=7x7;self=[3, 3];barriers=[]",
+        "position": [
+          3,
+          3
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "5459011c63b7a31a31856e3cb7035a0c",
+      "commit": "fd93a4ebc239209717868c26c7bf05c9bc2e48a0db29ecec64df276ddc003d8f"
+    },
+    {
+      "payload": {
+        "step": 7,
+        "state": "grid=7x7;self=[4, 3];barriers=[]",
+        "position": [
+          4,
+          3
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near Times Square.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "89a299e737b0b29fbcad5f4847ca9a47",
+      "commit": "05cdb51ddb75a7a6143f1a147cf1862c82a281d2b84b59959fedc52c8dbfea8c"
+    },
+    {
+      "payload": {
+        "step": 8,
+        "state": "grid=7x7;self=[4, 4];barriers=[]",
+        "position": [
+          4,
+          4
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "f411cc2fdaab3ead616b4a8b9c0c24e2",
+      "commit": "92c82ec2e92fa55acbdc538df89ff6db11bf6af6f1ac5c89a42a06bc6a918aaa"
+    },
+    {
+      "payload": {
+        "step": 9,
+        "state": "grid=7x7;self=[4, 5];barriers=[]",
+        "position": [
+          4,
+          5
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near the Brooklyn Bridge.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "bda92f4c929cc29abed24b72a832d1a2",
+      "commit": "ae2538d22a31aa8a7d4ad18a222ef939fc555bef37c509ec5efc51bdcd6962c0"
+    },
+    {
+      "payload": {
+        "step": 10,
+        "state": "grid=7x7;self=[5, 5];barriers=[]",
+        "position": [
+          5,
+          5
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "80b01292875ea1c686f3b7e3acd3f4cc",
+      "commit": "bc532f71b986176968166902f5978efb40e8927402bd683ca6dcf28d504ea9aa"
+    },
+    {
+      "payload": {
+        "step": 11,
+        "state": "grid=7x7;self=[5, 4];barriers=[]",
+        "position": [
+          5,
+          4
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near the Brooklyn Bridge.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "42ece4d6b13336d1056ed1d3583f0176",
+      "commit": "f6a32bc1008f7ea8877975e091d50a2b97ba53ecfcab21c55a5bda7d11f81d62"
+    },
+    {
+      "payload": {
+        "step": 12,
+        "state": "grid=7x7;self=[5, 3];barriers=[]",
+        "position": [
+          5,
+          3
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "f66dca8dccf26125f09b40446a311622",
+      "commit": "c1b6ccb3b9335469ebf7aa4fcf09d69d9032861abd7c4ce618ca17953b008b91"
+    },
+    {
+      "payload": {
+        "step": 13,
+        "state": "grid=7x7;self=[5, 2];barriers=[]",
+        "position": [
+          5,
+          2
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "722cdade5a18292c79ade51b3fba7ae3",
+      "commit": "aaad2a77ce3098c138a3e36770a36defe430da6256c8bb349fc16288f70e315c"
+    },
+    {
+      "payload": {
+        "step": 14,
+        "state": "grid=7x7;self=[5, 1];barriers=[]",
+        "position": [
+          5,
+          1
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "b29babc19fd28f1068b94831fe64bab7",
+      "commit": "101d55bc13f5a98d1e2fe31760fd8c398275d8c867fff517f916773eb6ddde93"
+    },
+    {
+      "payload": {
+        "step": 15,
+        "state": "grid=7x7;self=[6, 1];barriers=[]",
+        "position": [
+          6,
+          1
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "7d4e3fbd24b330d0e47b8ffc905d5d99",
+      "commit": "0a8fa4418921d47e8a37fa5992ac03e062c44497b757db66efed8492f5d4ddef"
+    },
+    {
+      "payload": {
+        "step": 16,
+        "state": "grid=7x7;self=[5, 1];barriers=[]",
+        "position": [
+          5,
+          1
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "5c4d1eb13233b4567db54ffc37e2bc33",
+      "commit": "9f90763db2e5efd255f40be8dfb81972ee226ea19f5f40178197552b7e7dcf07"
+    },
+    {
+      "payload": {
+        "step": 17,
+        "state": "grid=7x7;self=[5, 1];barriers=[]",
+        "position": [
+          5,
+          1
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "1bd14df08e810555a926f4c3deae8d94",
+      "commit": "b362a6a98795b652dabab403442a03c53aae34cf03e016aa4736cb6a200447c7"
+    },
+    {
+      "payload": {
+        "step": 18,
+        "state": "grid=7x7;self=[4, 1];barriers=[]",
+        "position": [
+          4,
+          1
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "f2b0742685039a2d4c40754d9d36128a",
+      "commit": "24ede941865e7852f70ad4fa7b5e9f9b580f91fabe9e87862edec7afe8b11260"
+    },
+    {
+      "payload": {
+        "step": 19,
+        "state": "grid=7x7;self=[3, 1];barriers=[]",
+        "position": [
+          3,
+          1
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "1c233819706fa45ad638f347c61bfa56",
+      "commit": "a452f5818711546f656f2c468f1de8c0ea30d12ef941a9b96959fb56a2757d72"
+    },
+    {
+      "payload": {
+        "step": 20,
+        "state": "grid=7x7;self=[2, 1];barriers=[]",
+        "position": [
+          2,
+          1
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "4a2f9f4178a2b24325f683e30505f193",
+      "commit": "c107c3baa1429ad49f1c9ee9b9a4d8818a404ba5ac60c61360eab5f96dca4b93"
+    },
+    {
+      "payload": {
+        "step": 21,
+        "state": "grid=7x7;self=[1, 1];barriers=[]",
+        "position": [
+          1,
+          1
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around the Brooklyn Bridge.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "14e34cbce1d4c06540d04c2402d2d883",
+      "commit": "86b21a6b67046091215cc399223a729b9f19a31d0ea81164c5dcb39b87a76ff5"
+    },
+    {
+      "payload": {
+        "step": 22,
+        "state": "grid=7x7;self=[1, 0];barriers=[]",
+        "position": [
+          1,
+          0
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I can see your trail near Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "d264f8eca40ef18e48c1dba3eee8ee4c",
+      "commit": "ca5d1b627c9b0e714f40264e314840078e0c5338ecbde57f6071221a5d4a2586"
+    },
+    {
+      "payload": {
+        "step": 23,
+        "state": "grid=7x7;self=[1, 1];barriers=[]",
+        "position": [
+          1,
+          1
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past the Brooklyn Bridge.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "d13d75540dd5dac352cc1842f7595740",
+      "commit": "3f338e9690b18f8d4683c05599da4d8bdcc404280b6f7102c4c2d1c965bec914"
+    },
+    {
+      "payload": {
+        "step": 24,
+        "state": "grid=7x7;self=[1, 1];barriers=[]",
+        "position": [
+          1,
+          1
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "ea97ca99ca1d072cd2fdd0815d22719f",
+      "commit": "c7b4acfd2c4b09606abe347f3a9ab8a0bfb71d7ba73991adc1c32104a643f5a1"
+    },
+    {
+      "payload": {
+        "step": 25,
+        "state": "grid=7x7;self=[1, 2];barriers=[]",
+        "position": [
+          1,
+          2
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "b7abfe2196c611049c31c1dd4e1999d9",
+      "commit": "96eabfc9f0de3e12aad0cac8c0816e1161c05e04cd6e99d7bad02d8b15b2f87e"
+    },
+    {
+      "payload": {
+        "step": 26,
+        "state": "grid=7x7;self=[1, 3];barriers=[]",
+        "position": [
+          1,
+          3
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "d931801ec8d2013bf3960bea675f37b4",
+      "commit": "858c17e6723ea64a81351a10ca9bb764b1cbd5a610f0d9c5e6936a4f65feb586"
+    },
+    {
+      "payload": {
+        "step": 27,
+        "state": "grid=7x7;self=[1, 4];barriers=[]",
+        "position": [
+          1,
+          4
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "d432157e13c16e03c25e7a222fa86094",
+      "commit": "09d1144a1d47eaf2160d5541e91417b8cf08222ba37ee58e9dd982b91c256199"
+    },
+    {
+      "payload": {
+        "step": 28,
+        "state": "grid=7x7;self=[1, 5];barriers=[]",
+        "position": [
+          1,
+          5
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past the Brooklyn Bridge.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "f5bd6c8445b335008c72729e3fed9dad",
+      "commit": "3c168af1305847132133438c1eca5ba0c95dcd72a9aef1ed09d74304183269ae"
+    },
+    {
+      "payload": {
+        "step": 29,
+        "state": "grid=7x7;self=[1, 6];barriers=[]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "I'm closing in around Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "16ef98a37d5170bbb9e307891243217e",
+      "commit": "353bc9638348e03653f6660d8cb884df3c678a267e363a344fcd80dc92a8e3fd"
+    },
+    {
+      "payload": {
+        "step": 30,
+        "state": "grid=7x7;self=[1, 5];barriers=[]",
+        "position": [
+          1,
+          5
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "17d10c69b6ba08b7734553628c022406",
+      "commit": "e375140582726407ab2d0ba3df7462da108077e52c8c6b4f40e571435d743820"
+    },
+    {
+      "payload": {
+        "step": 31,
+        "state": "grid=7x7;self=[1, 5];barriers=[]",
+        "position": [
+          1,
+          5
+        ],
+        "move": "HOLD:-",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "ef675f5bf7b481a89b43e6110f6ab3b0",
+      "commit": "de8520f22de7e2fdfab6dba9223ab3863dfd0f98c19d8223ba2b8294b5d87845"
+    },
+    {
+      "payload": {
+        "step": 32,
+        "state": "grid=7x7;self=[1, 4];barriers=[]",
+        "position": [
+          1,
+          4
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past Harlem.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "7e3e6cd4f77d137e704d8b0ce66e0d11",
+      "commit": "2fbc7f7b4a0f5e3937b91790f6003755976b81bf4264be233175da4d50db2c72"
+    },
+    {
+      "payload": {
+        "step": 33,
+        "state": "grid=7x7;self=[1, 3];barriers=[]",
+        "position": [
+          1,
+          3
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Corner by corner - starting at the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "a08d0ccf20665e5329c0024b77906750",
+      "commit": "76f6e28943c15381879587eab353b1072218b71c25535fedc86cd7ac383a2083"
+    },
+    {
+      "payload": {
+        "step": 34,
+        "state": "grid=7x7;self=[1, 2];barriers=[]",
+        "position": [
+          1,
+          2
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Nowhere left to run past Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "6c7ddcd378f4692b710aca7a2a9f6569",
+      "commit": "fc56cf50dff899bddf1fb43531fe93da0f1eac330021c97d6e2b9a017d5f7923"
+    }
+  ],
+  "received_messages": [
+    {
+      "step": 1,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "1,1": 0.2,
+        "1,2": 0.2,
+        "1,3": 0.2,
+        "1,4": 0.2,
+        "1,5": 0.2,
+        "2,1": 0.2,
+        "2,2": 0.5,
+        "2,3": 0.5,
+        "2,4": 0.5,
+        "2,5": 0.2,
+        "3,1": 0.2,
+        "3,2": 0.5,
+        "3,3": 0.8,
+        "3,4": 0.5,
+        "3,5": 0.2,
+        "4,1": 0.2,
+        "4,2": 0.5,
+        "4,3": 0.5,
+        "4,4": 0.5,
+        "4,5": 0.2,
+        "5,1": 0.2,
+        "5,2": 0.2,
+        "5,3": 0.2,
+        "5,4": 0.2,
+        "5,5": 0.2
+      },
+      "commit": "dd6bd408f3f33790116707cb438a91c317a85a781125af94028ac099b09da0a5",
+      "timestamp": "2026-08-15T00:00:01+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 2,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "1,1": 0.1,
+        "1,2": 0.1,
+        "1,3": 0.1,
+        "1,4": 0.1,
+        "1,5": 0.1,
+        "2,1": 0.2,
+        "2,2": 0.4,
+        "2,3": 0.4,
+        "2,4": 0.4,
+        "2,5": 0.2,
+        "3,1": 0.2,
+        "3,2": 0.5,
+        "3,3": 0.7,
+        "3,4": 0.5,
+        "3,5": 0.2,
+        "4,1": 0.2,
+        "4,2": 0.5,
+        "4,3": 0.8,
+        "4,4": 0.5,
+        "4,5": 0.2,
+        "5,1": 0.2,
+        "5,2": 0.5,
+        "5,3": 0.5,
+        "5,4": 0.5,
+        "5,5": 0.2,
+        "6,1": 0.2,
+        "6,2": 0.2,
+        "6,3": 0.2,
+        "6,4": 0.2,
+        "6,5": 0.2
+      },
+      "commit": "3ba95e871a0e1eb3d02246d9ec59e2ce48b39ce4e8fdde4d6a5b37f93012610f",
+      "timestamp": "2026-08-15T00:00:02+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          0
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 3,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "2,1": 0.1,
+        "2,2": 0.3,
+        "2,3": 0.3,
+        "2,4": 0.3,
+        "2,5": 0.2,
+        "2,6": 0.2,
+        "3,1": 0.1,
+        "3,2": 0.4,
+        "3,3": 0.6,
+        "3,4": 0.5,
+        "3,5": 0.5,
+        "3,6": 0.2,
+        "4,1": 0.1,
+        "4,2": 0.4,
+        "4,3": 0.7,
+        "4,4": 0.8,
+        "4,5": 0.5,
+        "4,6": 0.2,
+        "5,1": 0.1,
+        "5,2": 0.4,
+        "5,3": 0.5,
+        "5,4": 0.5,
+        "5,5": 0.5,
+        "5,6": 0.2,
+        "6,1": 0.1,
+        "6,2": 0.2,
+        "6,3": 0.2,
+        "6,4": 0.2,
+        "6,5": 0.2,
+        "6,6": 0.2
+      },
+      "commit": "861c0f0bccac163f2ae744c0e5a83dbfd21349f3c66135be546a47f93af71a50",
+      "timestamp": "2026-08-15T00:00:03+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          1
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 4,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "2,2": 0.2,
+        "2,3": 0.2,
+        "2,4": 0.2,
+        "2,5": 0.1,
+        "2,6": 0.1,
+        "3,2": 0.3,
+        "3,3": 0.5,
+        "3,4": 0.4,
+        "3,5": 0.4,
+        "3,6": 0.2,
+        "4,2": 0.3,
+        "4,3": 0.6,
+        "4,4": 0.7,
+        "4,5": 0.5,
+        "4,6": 0.2,
+        "5,2": 0.3,
+        "5,3": 0.5,
+        "5,4": 0.8,
+        "5,5": 0.5,
+        "5,6": 0.2,
+        "6,2": 0.2,
+        "6,3": 0.5,
+        "6,4": 0.5,
+        "6,5": 0.5,
+        "6,6": 0.2
+      },
+      "commit": "65ad573e2223c84005f6c51b25ad7bf4b73cf0d72ca796e3c44b7c57b0c0ecee",
+      "timestamp": "2026-08-15T00:00:04+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          2,
+          1
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 5,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "2,2": 0.1,
+        "2,3": 0.1,
+        "2,4": 0.1,
+        "3,2": 0.2,
+        "3,3": 0.4,
+        "3,4": 0.3,
+        "3,5": 0.3,
+        "3,6": 0.2,
+        "4,2": 0.2,
+        "4,3": 0.5,
+        "4,4": 0.6,
+        "4,5": 0.5,
+        "4,6": 0.5,
+        "5,2": 0.2,
+        "5,3": 0.4,
+        "5,4": 0.7,
+        "5,5": 0.8,
+        "5,6": 0.5,
+        "6,2": 0.1,
+        "6,3": 0.4,
+        "6,4": 0.5,
+        "6,5": 0.5,
+        "6,6": 0.5
+      },
+      "commit": "61e88b53705b03602f499ed651e13e091e7e517a1653b630a95533d288ea9767",
+      "timestamp": "2026-08-15T00:00:05+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          2,
+          2
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 6,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "3,2": 0.1,
+        "3,3": 0.3,
+        "3,4": 0.2,
+        "3,5": 0.2,
+        "3,6": 0.2,
+        "4,2": 0.1,
+        "4,3": 0.4,
+        "4,4": 0.5,
+        "4,5": 0.5,
+        "4,6": 0.5,
+        "5,2": 0.1,
+        "5,3": 0.3,
+        "5,4": 0.6,
+        "5,5": 0.7,
+        "5,6": 0.8,
+        "6,3": 0.3,
+        "6,4": 0.4,
+        "6,5": 0.5,
+        "6,6": 0.5
+      },
+      "commit": "9a6a2dca8c9fd6d47c5d80be4e3017a14e05c13576bcf41281cb3d17d208ddfb",
+      "timestamp": "2026-08-15T00:00:06+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          3,
+          2
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 7,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "3,3": 0.2,
+        "3,4": 0.1,
+        "3,5": 0.1,
+        "3,6": 0.1,
+        "4,3": 0.3,
+        "4,4": 0.4,
+        "4,5": 0.4,
+        "4,6": 0.4,
+        "5,3": 0.2,
+        "5,4": 0.5,
+        "5,5": 0.6,
+        "5,6": 0.7,
+        "6,3": 0.2,
+        "6,4": 0.3,
+        "6,5": 0.5,
+        "6,6": 0.8
+      },
+      "commit": "522c446d0205b1f77f69f367560b162083d4898507ef62c8a1db1a5874c7e9e5",
+      "timestamp": "2026-08-15T00:00:07+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          3,
+          3
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 8,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "3,3": 0.1,
+        "3,4": 0.2,
+        "3,5": 0.2,
+        "3,6": 0.2,
+        "4,3": 0.2,
+        "4,4": 0.3,
+        "4,5": 0.5,
+        "4,6": 0.5,
+        "5,3": 0.1,
+        "5,4": 0.4,
+        "5,5": 0.5,
+        "5,6": 0.8,
+        "6,3": 0.1,
+        "6,4": 0.2,
+        "6,5": 0.5,
+        "6,6": 0.7
+      },
+      "commit": "68e5b439537160a295fa78a23e9bfb4840ff3a6786e2b4a87779b8b08cc08c6f",
+      "timestamp": "2026-08-15T00:00:08+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          4,
+          3
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 9,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "3,4": 0.1,
+        "3,5": 0.1,
+        "3,6": 0.1,
+        "4,3": 0.1,
+        "4,4": 0.2,
+        "4,5": 0.4,
+        "4,6": 0.4,
+        "5,4": 0.3,
+        "5,5": 0.5,
+        "5,6": 0.7,
+        "6,4": 0.2,
+        "6,5": 0.5,
+        "6,6": 0.8
+      },
+      "commit": "851298e6532542c82230ede4d74be4c377886c15fcb7e1e2f5c9d37fd40f7191",
+      "timestamp": "2026-08-15T00:00:09+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          4,
+          4
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 10,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "4,3": 0.2,
+        "4,4": 0.2,
+        "4,5": 0.3,
+        "4,6": 0.3,
+        "5,3": 0.2,
+        "5,4": 0.5,
+        "5,5": 0.5,
+        "5,6": 0.6,
+        "6,3": 0.2,
+        "6,4": 0.5,
+        "6,5": 0.8,
+        "6,6": 0.7
+      },
+      "commit": "8087ece300eaaf1d1c026bd1a575282dd67803c791780c67fb5a01935f324290",
+      "timestamp": "2026-08-15T00:00:10+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          4,
+          5
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 11,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "4,2": 0.2,
+        "4,3": 0.2,
+        "4,4": 0.2,
+        "4,5": 0.2,
+        "4,6": 0.2,
+        "5,2": 0.2,
+        "5,3": 0.5,
+        "5,4": 0.5,
+        "5,5": 0.5,
+        "5,6": 0.5,
+        "6,2": 0.2,
+        "6,3": 0.5,
+        "6,4": 0.8,
+        "6,5": 0.7,
+        "6,6": 0.6
+      },
+      "commit": "f723e9cc703e4c04643170e68473027dec22f0023a30702e4799c8bbc0f3e10e",
+      "timestamp": "2026-08-15T00:00:11+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          5,
+          5
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 12,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "4,1": 0.2,
+        "4,2": 0.2,
+        "4,3": 0.2,
+        "4,4": 0.2,
+        "4,5": 0.2,
+        "4,6": 0.1,
+        "5,1": 0.2,
+        "5,2": 0.5,
+        "5,3": 0.5,
+        "5,4": 0.5,
+        "5,5": 0.4,
+        "5,6": 0.4,
+        "6,1": 0.2,
+        "6,2": 0.5,
+        "6,3": 0.8,
+        "6,4": 0.7,
+        "6,5": 0.6,
+        "6,6": 0.5
+      },
+      "commit": "4637a962b7a877a2460cac1e6a76a4742a7409c2a5317da39a412d4c623fed28",
+      "timestamp": "2026-08-15T00:00:12+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          5,
+          4
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 13,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "4,0": 0.2,
+        "4,1": 0.2,
+        "4,2": 0.2,
+        "4,3": 0.2,
+        "4,4": 0.2,
+        "4,5": 0.1,
+        "5,0": 0.2,
+        "5,1": 0.5,
+        "5,2": 0.5,
+        "5,3": 0.5,
+        "5,4": 0.4,
+        "5,5": 0.3,
+        "5,6": 0.3,
+        "6,0": 0.2,
+        "6,1": 0.5,
+        "6,2": 0.8,
+        "6,3": 0.7,
+        "6,4": 0.6,
+        "6,5": 0.5,
+        "6,6": 0.4
+      },
+      "commit": "e619af2dd87a6e7c07cf983686fb1b76f7f24b1079794d4ab498642f3a48531d",
+      "timestamp": "2026-08-15T00:00:13+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          5,
+          3
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 14,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "4,0": 0.2,
+        "4,1": 0.2,
+        "4,2": 0.2,
+        "4,3": 0.2,
+        "4,4": 0.1,
+        "5,0": 0.5,
+        "5,1": 0.5,
+        "5,2": 0.5,
+        "5,3": 0.4,
+        "5,4": 0.3,
+        "5,5": 0.2,
+        "5,6": 0.2,
+        "6,0": 0.5,
+        "6,1": 0.8,
+        "6,2": 0.7,
+        "6,3": 0.6,
+        "6,4": 0.5,
+        "6,5": 0.4,
+        "6,6": 0.3
+      },
+      "commit": "47448f92cbb876af3127323280d0dfcde3d10214ee076f1f3962deaa5f0a8002",
+      "timestamp": "2026-08-15T00:00:14+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          5,
+          2
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 15,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "4,0": 0.2,
+        "4,1": 0.2,
+        "4,2": 0.2,
+        "4,3": 0.1,
+        "5,0": 0.5,
+        "5,1": 0.5,
+        "5,2": 0.4,
+        "5,3": 0.3,
+        "5,4": 0.2,
+        "5,5": 0.1,
+        "5,6": 0.1,
+        "6,0": 0.8,
+        "6,1": 0.7,
+        "6,2": 0.6,
+        "6,3": 0.5,
+        "6,4": 0.4,
+        "6,5": 0.3,
+        "6,6": 0.2
+      },
+      "commit": "ab524f19de69ea00bd2499f00037ca17fce7bc616c9da61ffa8cf22192eb5a75",
+      "timestamp": "2026-08-15T00:00:15+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          5,
+          1
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 16,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "3,0": 0.2,
+        "3,1": 0.2,
+        "3,2": 0.2,
+        "4,0": 0.5,
+        "4,1": 0.5,
+        "4,2": 0.2,
+        "5,0": 0.8,
+        "5,1": 0.5,
+        "5,2": 0.3,
+        "5,3": 0.2,
+        "5,4": 0.1,
+        "6,0": 0.7,
+        "6,1": 0.6,
+        "6,2": 0.5,
+        "6,3": 0.4,
+        "6,4": 0.3,
+        "6,5": 0.2,
+        "6,6": 0.1
+      },
+      "commit": "8089bc5081a8c51047af503113837f29a6769ec96ac6b3e06a325b253feeb596",
+      "timestamp": "2026-08-15T00:00:16+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          6,
+          1
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 17,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "2,0": 0.2,
+        "2,1": 0.2,
+        "2,2": 0.2,
+        "3,0": 0.5,
+        "3,1": 0.5,
+        "3,2": 0.2,
+        "4,0": 0.8,
+        "4,1": 0.5,
+        "4,2": 0.2,
+        "5,0": 0.7,
+        "5,1": 0.5,
+        "5,2": 0.2,
+        "5,3": 0.1,
+        "6,0": 0.6,
+        "6,1": 0.5,
+        "6,2": 0.4,
+        "6,3": 0.3,
+        "6,4": 0.2,
+        "6,5": 0.1
+      },
+      "commit": "08faf5c48e31600a82eeb79fdd4ef71b9fc03f167ea6c763115e60740128beb1",
+      "timestamp": "2026-08-15T00:00:17+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          5,
+          1
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 18,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "1,0": 0.2,
+        "1,1": 0.2,
+        "1,2": 0.2,
+        "2,0": 0.5,
+        "2,1": 0.5,
+        "2,2": 0.2,
+        "3,0": 0.8,
+        "3,1": 0.5,
+        "3,2": 0.2,
+        "4,0": 0.7,
+        "4,1": 0.5,
+        "4,2": 0.2,
+        "5,0": 0.6,
+        "5,1": 0.4,
+        "5,2": 0.2,
+        "6,0": 0.5,
+        "6,1": 0.4,
+        "6,2": 0.3,
+        "6,3": 0.2,
+        "6,4": 0.1
+      },
+      "commit": "984179a907219ff2524024f0f88f56b58a42200ffb288f8fdf4350493149ac37",
+      "timestamp": "2026-08-15T00:00:18+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 19,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.2,
+        "0,1": 0.2,
+        "0,2": 0.2,
+        "1,0": 0.5,
+        "1,1": 0.5,
+        "1,2": 0.2,
+        "2,0": 0.8,
+        "2,1": 0.5,
+        "2,2": 0.2,
+        "3,0": 0.7,
+        "3,1": 0.5,
+        "3,2": 0.2,
+        "4,0": 0.6,
+        "4,1": 0.4,
+        "4,2": 0.2,
+        "5,0": 0.5,
+        "5,1": 0.3,
+        "5,2": 0.1,
+        "6,0": 0.4,
+        "6,1": 0.3,
+        "6,2": 0.2,
+        "6,3": 0.1
+      },
+      "commit": "e423053ccb94d3c849b8c95e442ca3a43ffad5305373ad4824c6d2c51fe88e7a",
+      "timestamp": "2026-08-15T00:00:19+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          4,
+          1
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 20,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.2,
+        "0,1": 0.2,
+        "0,2": 0.2,
+        "1,0": 0.5,
+        "1,1": 0.5,
+        "1,2": 0.2,
+        "2,0": 0.8,
+        "2,1": 0.5,
+        "2,2": 0.2,
+        "3,0": 0.6,
+        "3,1": 0.5,
+        "3,2": 0.2,
+        "4,0": 0.5,
+        "4,1": 0.3,
+        "4,2": 0.2,
+        "5,0": 0.4,
+        "5,1": 0.2,
+        "6,0": 0.3,
+        "6,1": 0.2,
+        "6,2": 0.1
+      },
+      "commit": "512847b9b686f5ac6602f00118c60dd99513716ffc493bfceb14dc5d7ab40250",
+      "timestamp": "2026-08-15T00:00:20+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          3,
+          1
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 21,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.5,
+        "0,1": 0.5,
+        "0,2": 0.2,
+        "1,0": 0.8,
+        "1,1": 0.5,
+        "1,2": 0.2,
+        "2,0": 0.7,
+        "2,1": 0.5,
+        "2,2": 0.2,
+        "3,0": 0.5,
+        "3,1": 0.4,
+        "3,2": 0.2,
+        "4,0": 0.4,
+        "4,1": 0.2,
+        "4,2": 0.1,
+        "5,0": 0.3,
+        "5,1": 0.1,
+        "6,0": 0.2,
+        "6,1": 0.1
+      },
+      "commit": "997f4beeb47c678708c79440550e761bf2fe9b236f6241642bb4c5099689f099",
+      "timestamp": "2026-08-15T00:00:21+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          2,
+          1
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 22,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.8,
+        "0,1": 0.5,
+        "0,2": 0.2,
+        "1,0": 0.7,
+        "1,1": 0.5,
+        "1,2": 0.2,
+        "2,0": 0.6,
+        "2,1": 0.4,
+        "2,2": 0.2,
+        "3,0": 0.4,
+        "3,1": 0.3,
+        "3,2": 0.1,
+        "4,0": 0.3,
+        "4,1": 0.1,
+        "5,0": 0.2,
+        "6,0": 0.1
+      },
+      "commit": "cb39afeb998a2887166b5c309cd6629e9eeb2d54c5fb8e46085cc5eee7053e69",
+      "timestamp": "2026-08-15T00:00:22+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          1
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 23,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.7,
+        "0,1": 0.8,
+        "0,2": 0.5,
+        "0,3": 0.2,
+        "1,0": 0.6,
+        "1,1": 0.5,
+        "1,2": 0.5,
+        "1,3": 0.2,
+        "2,0": 0.5,
+        "2,1": 0.3,
+        "2,2": 0.2,
+        "2,3": 0.2,
+        "3,0": 0.3,
+        "3,1": 0.2,
+        "4,0": 0.2,
+        "5,0": 0.1
+      },
+      "commit": "2543ba4798604eb34971cea0c197cc2738ad22ed180a9781cd5ada26b8506e64",
+      "timestamp": "2026-08-15T00:00:23+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          0
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 24,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.6,
+        "0,1": 0.7,
+        "0,2": 0.8,
+        "0,3": 0.5,
+        "0,4": 0.2,
+        "1,0": 0.5,
+        "1,1": 0.5,
+        "1,2": 0.5,
+        "1,3": 0.5,
+        "1,4": 0.2,
+        "2,0": 0.4,
+        "2,1": 0.2,
+        "2,2": 0.2,
+        "2,3": 0.2,
+        "2,4": 0.2,
+        "3,0": 0.2,
+        "3,1": 0.1,
+        "4,0": 0.1
+      },
+      "commit": "e6a5bea7e3e1442d0151748ea3ff0e5c502caf3f01bb6aaa87805f9c842684d5",
+      "timestamp": "2026-08-15T00:00:24+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          1
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 25,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.5,
+        "0,1": 0.6,
+        "0,2": 0.7,
+        "0,3": 0.8,
+        "0,4": 0.5,
+        "0,5": 0.2,
+        "1,0": 0.4,
+        "1,1": 0.4,
+        "1,2": 0.5,
+        "1,3": 0.5,
+        "1,4": 0.5,
+        "1,5": 0.2,
+        "2,0": 0.3,
+        "2,1": 0.2,
+        "2,2": 0.2,
+        "2,3": 0.2,
+        "2,4": 0.2,
+        "2,5": 0.2,
+        "3,0": 0.1
+      },
+      "commit": "abf7afb2de0c4e30ca572dd9d804531364a3e0ac7acb289ceadcdb7e2e873e42",
+      "timestamp": "2026-08-15T00:00:25+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 26,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.4,
+        "0,1": 0.5,
+        "0,2": 0.6,
+        "0,3": 0.7,
+        "0,4": 0.8,
+        "0,5": 0.5,
+        "0,6": 0.2,
+        "1,0": 0.3,
+        "1,1": 0.3,
+        "1,2": 0.4,
+        "1,3": 0.5,
+        "1,4": 0.5,
+        "1,5": 0.5,
+        "1,6": 0.2,
+        "2,0": 0.2,
+        "2,1": 0.1,
+        "2,2": 0.2,
+        "2,3": 0.2,
+        "2,4": 0.2,
+        "2,5": 0.2,
+        "2,6": 0.2
+      },
+      "commit": "d2ba25caf1939059a3df144e66fcc5b5ffee4db836fa91a62fda9ca185bb8009",
+      "timestamp": "2026-08-15T00:00:26+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          2
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 27,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.3,
+        "0,1": 0.4,
+        "0,2": 0.5,
+        "0,3": 0.6,
+        "0,4": 0.8,
+        "0,5": 0.5,
+        "0,6": 0.2,
+        "1,0": 0.2,
+        "1,1": 0.2,
+        "1,2": 0.3,
+        "1,3": 0.5,
+        "1,4": 0.5,
+        "1,5": 0.5,
+        "1,6": 0.2,
+        "2,0": 0.1,
+        "2,2": 0.2,
+        "2,3": 0.2,
+        "2,4": 0.2,
+        "2,5": 0.2,
+        "2,6": 0.2
+      },
+      "commit": "49f1b1db91f927c993636e65d2085b5ae2b4f5a27ba8b6c71914a5d46fd3b40f",
+      "timestamp": "2026-08-15T00:00:27+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          3
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 28,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.2,
+        "0,1": 0.3,
+        "0,2": 0.4,
+        "0,3": 0.5,
+        "0,4": 0.7,
+        "0,5": 0.8,
+        "0,6": 0.5,
+        "1,0": 0.1,
+        "1,1": 0.1,
+        "1,2": 0.2,
+        "1,3": 0.4,
+        "1,4": 0.5,
+        "1,5": 0.5,
+        "1,6": 0.5,
+        "2,2": 0.1,
+        "2,3": 0.2,
+        "2,4": 0.2,
+        "2,5": 0.2,
+        "2,6": 0.2
+      },
+      "commit": "63b0fa054f9e01860fd5fa1f945faf6aeff26c7bfa471225fff50626730887d4",
+      "timestamp": "2026-08-15T00:00:28+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          4
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 29,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.1,
+        "0,1": 0.2,
+        "0,2": 0.3,
+        "0,3": 0.4,
+        "0,4": 0.6,
+        "0,5": 0.7,
+        "0,6": 0.8,
+        "1,2": 0.1,
+        "1,3": 0.3,
+        "1,4": 0.4,
+        "1,5": 0.5,
+        "1,6": 0.5,
+        "2,3": 0.1,
+        "2,4": 0.2,
+        "2,5": 0.2,
+        "2,6": 0.2
+      },
+      "commit": "97b31f001836065b6d3f6b21735cc67be08b65157be18807b6a785de5afb410f",
+      "timestamp": "2026-08-15T00:00:29+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          5
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 30,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,1": 0.1,
+        "0,2": 0.2,
+        "0,3": 0.3,
+        "0,4": 0.5,
+        "0,5": 0.8,
+        "0,6": 0.7,
+        "1,3": 0.2,
+        "1,4": 0.5,
+        "1,5": 0.5,
+        "1,6": 0.5,
+        "2,3": 0.2,
+        "2,4": 0.2,
+        "2,5": 0.2,
+        "2,6": 0.2
+      },
+      "commit": "55557ac6575e37a4f4fb6b68bee07c8e408973684e32c7536588e4003be944bc",
+      "timestamp": "2026-08-15T00:00:30+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          6
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 31,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,2": 0.2,
+        "0,3": 0.5,
+        "0,4": 0.8,
+        "0,5": 0.7,
+        "0,6": 0.6,
+        "1,2": 0.2,
+        "1,3": 0.5,
+        "1,4": 0.5,
+        "1,5": 0.5,
+        "1,6": 0.4,
+        "2,2": 0.2,
+        "2,3": 0.2,
+        "2,4": 0.2,
+        "2,5": 0.2,
+        "2,6": 0.2
+      },
+      "commit": "dce8ca28bbe70797883c35b09d17ecc31860ffb54b414438a332be22f7a3d135",
+      "timestamp": "2026-08-15T00:00:31+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          5
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 32,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,1": 0.2,
+        "0,2": 0.5,
+        "0,3": 0.8,
+        "0,4": 0.7,
+        "0,5": 0.6,
+        "0,6": 0.5,
+        "1,1": 0.2,
+        "1,2": 0.5,
+        "1,3": 0.5,
+        "1,4": 0.5,
+        "1,5": 0.4,
+        "1,6": 0.3,
+        "2,1": 0.2,
+        "2,2": 0.2,
+        "2,3": 0.2,
+        "2,4": 0.2,
+        "2,5": 0.2,
+        "2,6": 0.1
+      },
+      "commit": "bc3c6400204277c5eaaec2922087611b87f7b5c56ddb7406ce1d11a7cb43ae49",
+      "timestamp": "2026-08-15T00:00:32+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": null,
+      "win_claim": null
+    },
+    {
+      "step": 33,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,1": 0.2,
+        "0,2": 0.5,
+        "0,3": 0.8,
+        "0,4": 0.6,
+        "0,5": 0.5,
+        "0,6": 0.4,
+        "1,1": 0.2,
+        "1,2": 0.5,
+        "1,3": 0.5,
+        "1,4": 0.5,
+        "1,5": 0.3,
+        "1,6": 0.2,
+        "2,1": 0.2,
+        "2,2": 0.2,
+        "2,3": 0.2,
+        "2,4": 0.2,
+        "2,5": 0.2
+      },
+      "commit": "b05dce7676f52b4f6e66dba98b8ef576443340540e97a479f63d0011d7dda92c",
+      "timestamp": "2026-08-15T00:00:33+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          4
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 34,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.2,
+        "0,1": 0.5,
+        "0,2": 0.8,
+        "0,3": 0.7,
+        "0,4": 0.5,
+        "0,5": 0.4,
+        "0,6": 0.3,
+        "1,0": 0.2,
+        "1,1": 0.5,
+        "1,2": 0.5,
+        "1,3": 0.5,
+        "1,4": 0.4,
+        "1,5": 0.2,
+        "1,6": 0.1,
+        "2,0": 0.2,
+        "2,1": 0.2,
+        "2,2": 0.2,
+        "2,3": 0.2,
+        "2,4": 0.2,
+        "2,5": 0.1
+      },
+      "commit": "2acc8f629f665be61450b2ba4951f0cffa97cf91200b9e9b55e3f9da46b40ae1",
+      "timestamp": "2026-08-15T00:00:34+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          3
+        ],
+        "caught": false
+      },
+      "win_claim": null
+    },
+    {
+      "step": 35,
+      "sender": "thief",
+      "hint": "Counted sub-game 2 of 6",
+      "smell_grid": {
+        "0,0": 0.5,
+        "0,1": 0.8,
+        "0,2": 0.7,
+        "0,3": 0.6,
+        "0,4": 0.4,
+        "0,5": 0.3,
+        "0,6": 0.2,
+        "1,0": 0.5,
+        "1,1": 0.5,
+        "1,2": 0.5,
+        "1,3": 0.4,
+        "1,4": 0.3,
+        "1,5": 0.1,
+        "2,0": 0.2,
+        "2,1": 0.2,
+        "2,2": 0.2,
+        "2,3": 0.2,
+        "2,4": 0.1
+      },
+      "commit": "42076226e855dfc29e77f1ab39aad741f71f625bf7f7300843d92d02d4a1949e",
+      "timestamp": "2026-08-15T00:00:35+03:00",
+      "barrier_placed": null,
+      "capture_claim": null,
+      "claim_response": {
+        "claim": [
+          1,
+          2
+        ],
+        "caught": false
+      },
+      "win_claim": {
+        "type": "survival"
+      }
+    }
+  ],
+  "mutual_agreement": {
+    "opponent_group_id": "il-nv-ai",
+    "sha256": "939df61640454f792337846648d4de8434fdaccbe5cba6de66037913bed3d49e",
+    "confirmed": true
+  }
+}
