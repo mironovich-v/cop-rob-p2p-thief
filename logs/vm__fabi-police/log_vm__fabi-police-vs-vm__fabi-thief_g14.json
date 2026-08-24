@@ -1,0 +1,971 @@
+{
+  "_schema": "Per-sub-game commit-reveal log for the replay viewer: every sealed step and the mutual-audit result. Static team metadata lives in the declaration; join by game_uid.",
+  "schema_version": "1.1",
+  "game_id": "vm__fabi-police-vs-vm__fabi-thief",
+  "game_uid": "2f30b769-88ac-c564-fb63-d7712e3c1346",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_vm__fabi-police-vs-vm__fabi-thief.json",
+    "config": "config_vm__fabi-police-vs-vm__fabi-thief_g<NN>.json",
+    "log": "log_vm__fabi-police-vs-vm__fabi-thief_g<NN>.json",
+    "result": "result_vm__fabi-police-vs-vm__fabi-thief.json"
+  },
+  "summary": {
+    "sub_game_number": 14,
+    "group_id": "vm__fabi-police",
+    "role": "thief",
+    "opponent_group_id": "vm__fabi-thief",
+    "result": "survival",
+    "winner_role": "thief",
+    "steps": 35,
+    "timezone": "Asia/Jerusalem",
+    "started_at": "2026-08-19T12:18:11.096359+00:00",
+    "ended_at": "2026-08-19T12:21:34.796359+00:00",
+    "duration_seconds": 203.7,
+    "tokens_total": 0,
+    "audit": {
+      "passed": true,
+      "verified_steps": 35,
+      "failed_steps": [],
+      "bound_steps": 34
+    }
+  },
+  "records": [
+    {
+      "payload": {
+        "step": 0,
+        "type": "system_spec",
+        "spec": {
+          "os": "Linux 6.6.87.2-microsoft-standard-WSL2",
+          "cpu_type": "x86_64",
+          "cpu_cores": 16,
+          "cpu_freq_mhz": "unknown",
+          "ram_gb": 15.5,
+          "gpu_model": "unknown",
+          "vram_gb": "unknown"
+        },
+        "model": "claude-opus-4-8[1m]",
+        "code_version": "1.0.0",
+        "group_name": "VM-Fabi",
+        "sub_game_number": 14
+      },
+      "nonce": "8374688269cd3d463e381eea8ba68ba7",
+      "commit": "386c64a777d8ed11ebdd35737fc361474740aa635ba34b49e9c97842df9b9cd2"
+    },
+    {
+      "payload": {
+        "step": 1,
+        "state": "grid=7x7;self=[3, 4];barriers=[]",
+        "position": [
+          3,
+          4
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Catch me if you can - I'm slipping past Central Park!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "64d33ea4fe626d874186e7b74c31129a",
+      "commit": "fdd4f6a073ab5e9a3e70bb982f9c0a7944691f5f563d3efecfa21c35599811ae"
+    },
+    {
+      "payload": {
+        "step": 2,
+        "state": "grid=7x7;self=[4, 4];barriers=[]",
+        "position": [
+          4,
+          4
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Catch me if you can - I'm slipping past Central Park!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "f6494443f93428017c09a7c80a5a8d91",
+      "commit": "c7f6f4f9d250a4a07ee2d4f7099c9e5add8ad2b59fc9eec81ac132f09da89916"
+    },
+    {
+      "payload": {
+        "step": 3,
+        "state": "grid=7x7;self=[4, 5];barriers=[]",
+        "position": [
+          4,
+          5
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Still one step ahead, near the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "40d57115c4dbe41d59a01d010cfb9c7e",
+      "commit": "3cd0d6bdfaae05c34e810d7a9d458819ffaaab211aa8e360d782421b916ebd80"
+    },
+    {
+      "payload": {
+        "step": 4,
+        "state": "grid=7x7;self=[5, 5];barriers=[]",
+        "position": [
+          5,
+          5
+        ],
+        "move": "MOVE:S",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Still one step ahead, near Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "2b988e5e5386048808a7e8c8fc0a499a",
+      "commit": "ba4ce8d4766df50fb8293d3864d33be3484bcfd678c6bf231beaaadba1c0da4c"
+    },
+    {
+      "payload": {
+        "step": 5,
+        "state": "grid=7x7;self=[6, 5];barriers=[]",
+        "position": [
+          6,
+          5
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Too slow, officer - Wall Street is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "9a17c82c3a53092be8b3fb8858bdf921",
+      "commit": "964023171c78e550f021c0eabf5522742ccc9ec6671e2d1abcd663c0f53bdc21"
+    },
+    {
+      "payload": {
+        "step": 6,
+        "state": "grid=7x7;self=[6, 6];barriers=[]",
+        "position": [
+          6,
+          6
+        ],
+        "move": "MOVE:E",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Catch me if you can - I'm slipping past Wall Street!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "a0cdc9506ec8117b5d6b6562cab10c0e",
+      "commit": "c298320878bc76bea6d7bf6e8b48f66d42ac68bf4c6586086238f6b2afddb2fb"
+    },
+    {
+      "payload": {
+        "step": 7,
+        "state": "grid=7x7;self=[5, 6];barriers=[]",
+        "position": [
+          5,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Times Square.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "2378d9a615f65e8c18d2771c099cadca",
+      "commit": "a79b3c28b9d6c77dd5148214c5d32c69ef7c1ec62929afc00a3a9839ab63b27c"
+    },
+    {
+      "payload": {
+        "step": 8,
+        "state": "grid=7x7;self=[4, 6];barriers=[]",
+        "position": [
+          4,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Still one step ahead, near the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "8d56c79b568e957440833357b6b11b5f",
+      "commit": "6405d2aed7eb3cfa3771ac6beca2fd0370215d9f284820b8a154fc57e8fc9937"
+    },
+    {
+      "payload": {
+        "step": 9,
+        "state": "grid=7x7;self=[3, 6];barriers=[]",
+        "position": [
+          3,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Too slow, officer - Harlem is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "3b7f4dc3868138da37d52b8f4e3a69eb",
+      "commit": "9f7d50652315177650ac38413bb2b36cfae3bad2fa377b5afe2138b511937e48"
+    },
+    {
+      "payload": {
+        "step": 10,
+        "state": "grid=7x7;self=[2, 6];barriers=[]",
+        "position": [
+          2,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Catch me if you can - I'm slipping past the East Village!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "2205fe82305c5b9071aee26b51891474",
+      "commit": "c950edf67535b7d7ebcae2d7d85a7388b597a810fb07aed6a82cd3cc01c0f63f"
+    },
+    {
+      "payload": {
+        "step": 11,
+        "state": "grid=7x7;self=[1, 6];barriers=[]",
+        "position": [
+          1,
+          6
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Too slow, officer - the Brooklyn Bridge is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "12296f05d5ddc423eb0cc97b0015158c",
+      "commit": "ec53db87ae2c4481c24476bdfcd7c7a4aa9a0d448f455790ac28178f531f84e7"
+    },
+    {
+      "payload": {
+        "step": 12,
+        "state": "grid=7x7;self=[1, 5];barriers=[]",
+        "position": [
+          1,
+          5
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Times Square.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "fe00953b95132a6c48b1cddfa3f4aee5",
+      "commit": "f41e1a40e62716706d9f52b60a3dba20d398e66acd358d75cc1f174d97a46820"
+    },
+    {
+      "payload": {
+        "step": 13,
+        "state": "grid=7x7;self=[0, 5];barriers=[[4, 6]]",
+        "position": [
+          0,
+          5
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "4af6966dfbd6006834692d1e895a167e",
+      "commit": "e6b45b35a1a8d16a361e070fa355e328aac4feb6721da5a657d6983f69d8b76a"
+    },
+    {
+      "payload": {
+        "step": 14,
+        "state": "grid=7x7;self=[0, 6];barriers=[[4, 6]]",
+        "position": [
+          0,
+          6
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Still one step ahead, near Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "a0cd716360688bb7e58ae1057bdae678",
+      "commit": "e4f119027d629479291f8e8b15c6ebc5c1e46cecdd5b5029ad96bd06a4a6922a"
+    },
+    {
+      "payload": {
+        "step": 15,
+        "state": "grid=7x7;self=[0, 5];barriers=[[4, 6]]",
+        "position": [
+          0,
+          5
+        ],
+        "move": "MOVE:W",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Too slow, officer - Central Park is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "5a3af2932a73b4d6249b44f9e4f86b3f",
+      "commit": "4023ac6076fe94a7f910eda1ad21b6e0efb1ec22d105aba9c7bc98db4f0da080"
+    },
+    {
+      "payload": {
+        "step": 16,
+        "state": "grid=7x7;self=[0, 4];barriers=[[4, 6]]",
+        "position": [
+          0,
+          4
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Catch me if you can - I'm slipping past the Brooklyn Bridge!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "a4fa1105373f226b2fec38b39646c745",
+      "commit": "a569a231334af3cee672b167fc4a32bf8a212ea1299ca4acd083fd8d2ff2624f"
+    },
+    {
+      "payload": {
+        "step": 17,
+        "state": "grid=7x7;self=[0, 3];barriers=[[4, 6]]",
+        "position": [
+          0,
+          3
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Catch me if you can - I'm slipping past Wall Street!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "194ff086a1146f5c6b4b2ed011017425",
+      "commit": "26aa44cc6c16d6f49907addcf56ae1178996ccd9229d314d4cc4564f12bf323d"
+    },
+    {
+      "payload": {
+        "step": 18,
+        "state": "grid=7x7;self=[0, 2];barriers=[[4, 6]]",
+        "position": [
+          0,
+          2
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "3c8c2da88db7594d6777e243f6c0fac6",
+      "commit": "e7ceccd0c47cf7e0230fcf012acd209c192b39ce3ec43f2ebcb736f6ea1d9cdf"
+    },
+    {
+      "payload": {
+        "step": 19,
+        "state": "grid=7x7;self=[0, 1];barriers=[[4, 6]]",
+        "position": [
+          0,
+          1
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Still one step ahead, near Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "0387d1410416a1be9717dfc11ffd93ad",
+      "commit": "c09b9490cf1f3de5dd9d0bc8e1699e592724a7781365c079d2aec08f8679693d"
+    },
+    {
+      "payload": {
+        "step": 20,
+        "state": "grid=7x7;self=[1, 1];barriers=[[4, 6]]",
+        "position": [
+          1,
+          1
+        ],
+        "move": "MOVE:S",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Too slow, officer - the East Village is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "7d0baf266c796e786bf0f9718f14520c",
+      "commit": "d8446507d57dd1b118523e75f69f3c70a582cb92dfcea92cfd5ff96e9a7124d9"
+    },
+    {
+      "payload": {
+        "step": 21,
+        "state": "grid=7x7;self=[1, 0];barriers=[[4, 6]]",
+        "position": [
+          1,
+          0
+        ],
+        "move": "MOVE:W",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Too slow, officer - Times Square is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "7a2253aea21b324cedf48f6629a6f4f4",
+      "commit": "b5178fbbab8c62ca5436915cb1c925f5463f7267885357289f983cdffe9add1e"
+    },
+    {
+      "payload": {
+        "step": 22,
+        "state": "grid=7x7;self=[0, 0];barriers=[[0, 4], [4, 6]]",
+        "position": [
+          0,
+          0
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Too slow, officer - Times Square is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "0a953a7a7b2d07d9a1d6252904146e4a",
+      "commit": "23ea43eb9f8f259e771f0bddaaaa9277d4a8620a6ada9d80355165ee9b4cded6"
+    },
+    {
+      "payload": {
+        "step": 23,
+        "state": "grid=7x7;self=[1, 0];barriers=[[0, 4], [4, 6]]",
+        "position": [
+          1,
+          0
+        ],
+        "move": "MOVE:S",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Still one step ahead, near the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "41e0b600986e86d825b1a6a99ef9da95",
+      "commit": "a1d0066926024e53a9543a1ff4a9985e9e39b566208ab1373f450727b118c4f7"
+    },
+    {
+      "payload": {
+        "step": 24,
+        "state": "grid=7x7;self=[2, 0];barriers=[[0, 4], [4, 6]]",
+        "position": [
+          2,
+          0
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Too slow, officer - Harlem is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "d3177a43ab9f244314133cef0f6d5bfd",
+      "commit": "323ec23f0d24658ef96a50a26f162962b2024c7a5ceb9a336d2c62519e3d70b9"
+    },
+    {
+      "payload": {
+        "step": 25,
+        "state": "grid=7x7;self=[3, 0];barriers=[[0, 4], [4, 6]]",
+        "position": [
+          3,
+          0
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Too slow, officer - the East Village is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "dc3c5477a21b048012f8c59188bb659b",
+      "commit": "ab2f069c04c1daf5c4bcbd15c289280345091b4108a70e3c0026d0be5b924f53"
+    },
+    {
+      "payload": {
+        "step": 26,
+        "state": "grid=7x7;self=[4, 0];barriers=[[0, 4], [4, 6]]",
+        "position": [
+          4,
+          0
+        ],
+        "move": "MOVE:S",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Too slow, officer - Harlem is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "be2df03629e2a86381919eecd51a3ae6",
+      "commit": "c172ed54d61e41bdefffe730c72e7685fb86725cfdfb60e11ea0a82b8121e986"
+    },
+    {
+      "payload": {
+        "step": 27,
+        "state": "grid=7x7;self=[5, 0];barriers=[[0, 4], [4, 6]]",
+        "position": [
+          5,
+          0
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Still one step ahead, near Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "3d071be441e4d4a6f5b989e07a174d67",
+      "commit": "f3532dbdd49e6ba5fddf38f858acab4cc4408a4b2116a5936d01bbaa560493fa"
+    },
+    {
+      "payload": {
+        "step": 28,
+        "state": "grid=7x7;self=[5, 1];barriers=[[0, 4], [4, 6]]",
+        "position": [
+          5,
+          1
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around Central Park.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "40a67faf62ecccb84d728fa1d96bad63",
+      "commit": "d4b8cebcaa7aa055f4320ffbb6d5c6084e3c6fc62635cd261b680696d2796187"
+    },
+    {
+      "payload": {
+        "step": 29,
+        "state": "grid=7x7;self=[6, 1];barriers=[[0, 4], [4, 6]]",
+        "position": [
+          6,
+          1
+        ],
+        "move": "MOVE:S",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "You'll never pin me down around the Brooklyn Bridge.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "67111770562c04d1a6d66f70df94f9f0",
+      "commit": "19e326a1093fcf24975476177480248e3348d5f2ee14834cdd9617a78a103424"
+    },
+    {
+      "payload": {
+        "step": 30,
+        "state": "grid=7x7;self=[6, 0];barriers=[[0, 4], [4, 6]]",
+        "position": [
+          6,
+          0
+        ],
+        "move": "MOVE:W",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Catch me if you can - I'm slipping past Harlem!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "147b6300a7eb237062e31d4fceac5bdd",
+      "commit": "d4333c3117c0792f4af05dd5fb5380d9dcbdb4cabdc1d9ca5cddc1daf3567c3b"
+    },
+    {
+      "payload": {
+        "step": 31,
+        "state": "grid=7x7;self=[5, 0];barriers=[[0, 4], [4, 6]]",
+        "position": [
+          5,
+          0
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Catch me if you can - I'm slipping past Central Park!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "f96f88ed29f49f9eb32502b0f57f14f7",
+      "commit": "c7c11f0441482f7db04ef1a5e5f0ef5f8210b6ee95f73e1120b05cccd2c2c939"
+    },
+    {
+      "payload": {
+        "step": 32,
+        "state": "grid=7x7;self=[5, 1];barriers=[[0, 4], [4, 6]]",
+        "position": [
+          5,
+          1
+        ],
+        "move": "MOVE:E",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "You'll never pin me down around the East Village.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "ba5117c3e7c8f8e45dd32e505ea45154",
+      "commit": "a13dd7c2b3e545056bfa98c70c9cb8e5c767f2a20e47b9c9df14b3d327adb8d4"
+    },
+    {
+      "payload": {
+        "step": 33,
+        "state": "grid=7x7;self=[4, 1];barriers=[[0, 4], [4, 6]]",
+        "position": [
+          4,
+          1
+        ],
+        "move": "MOVE:N",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Catch me if you can - I'm slipping past Wall Street!",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "0abf879112510bfbe8634415d15cddff",
+      "commit": "be5fb0dd0e5410be675ca829364653b685469a184f46a04db7e4fc849a619523"
+    },
+    {
+      "payload": {
+        "step": 34,
+        "state": "grid=7x7;self=[4, 2];barriers=[[0, 4], [4, 6], [5, 0]]",
+        "position": [
+          4,
+          2
+        ],
+        "move": "MOVE:E",
+        "intent": "lie",
+        "verdict": "lie",
+        "hint": "Too slow, officer - Wall Street is mine.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "lie"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "a47ce797380db283f4cfa7dca9dfb5ff",
+      "commit": "5f1c3707008c5ae78041604f51c89dbff380c599bd9abb5b90d458178f1da860"
+    },
+    {
+      "payload": {
+        "step": 35,
+        "state": "grid=7x7;self=[4, 3];barriers=[[0, 4], [4, 6], [5, 0]]",
+        "position": [
+          4,
+          3
+        ],
+        "move": "MOVE:E",
+        "intent": "truth",
+        "verdict": "truth",
+        "hint": "Still one step ahead, near Wall Street.",
+        "prompt_discussion": {
+          "llm_prompt": "",
+          "llm_reasoning": "",
+          "bluff_classification": "truth"
+        },
+        "model": "template",
+        "tokens_step": 0,
+        "tokens_total": 0,
+        "response_seconds": 0.0,
+        "random_move": false
+      },
+      "nonce": "a66164b1e880eacd4320faeb59d8388a",
+      "commit": "776c87521ce34c8ddd7300ca101d523c178fbd1e0065d713004cdaf33e500bf5"
+    }
+  ],
+  "mutual_agreement": {
+    "opponent_group_id": "vm__fabi-thief",
+    "sha256": "2307ba0d5bf74a166e4a96f262211861fff34ee0b934bf50ef1e10ad46acb557",
+    "confirmed": true
+  }
+}

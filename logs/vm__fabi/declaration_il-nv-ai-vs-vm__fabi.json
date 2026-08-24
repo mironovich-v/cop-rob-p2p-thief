@@ -1,0 +1,69 @@
+{
+  "_schema": "Static pre-game declaration for the whole series: team identity, members, repos, MCP URLs, hardware, model, token cap, and start/end times. Roles alternate across sub-games, so no role/sub_game_number appears here.",
+  "schema_version": "1.1",
+  "declaration_type": "pre_game_declaration",
+  "game_id": "il-nv-ai-vs-vm__fabi",
+  "game_uid": "00aec465-1e83-befa-15ed-a5d427995ffc",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_il-nv-ai-vs-vm__fabi.json",
+    "config": "config_il-nv-ai-vs-vm__fabi_g<NN>.json",
+    "log": "log_il-nv-ai-vs-vm__fabi_g<NN>.json",
+    "result": "result_il-nv-ai-vs-vm__fabi.json"
+  },
+  "timezone": "Asia/Jerusalem",
+  "game_started_at": "2026-08-21T14:12:11.498600+00:00",
+  "game_ended_at": "2026-08-21T14:12:26.498600+00:00",
+  "num_sub_games": 1,
+  "max_tokens_per_game": 200000,
+  "groups": {
+    "group_1": {
+      "group_id": "vm__fabi",
+      "group_name": "VM-Fabi",
+      "members": [
+        "Vasily Mironovich",
+        "Fahed Bitar"
+      ],
+      "repos": {
+        "cop": "https://github.com/mironovich-v/cop-rob-p2p-police",
+        "thief": "https://github.com/mironovich-v/cop-rob-p2p-thief"
+      },
+      "mcp_servers": {
+        "cop": "https://cop-rob-p2p.ngrok.app/mcp",
+        "thief": "https://cop-rob-p2p.ngrok.app/mcp"
+      },
+      "llm_model": "template",
+      "hardware_spec": {
+        "cpu_type": "x86_64",
+        "cpu_freq_mhz": "unknown",
+        "cpu_cores": 16,
+        "ram_gb": 15.5,
+        "gpu_model": "unknown",
+        "vram_gb": "unknown"
+      },
+      "signature": "035c0a02f39f6103487d8aa8ce876c7a77b519508b84eda9857f3218508d22f6"
+    },
+    "group_2": {
+      "group_id": "il-nv-ai",
+      "group_name": "il-nv-ai",
+      "members": [],
+      "repos": {
+        "cop": "local-unpublished",
+        "thief": "local-unpublished"
+      },
+      "mcp_servers": {
+        "cop": "https://committees-goto-white-loans.trycloudflare.com/mcp"
+      },
+      "llm_model": "deterministic-python",
+      "hardware_spec": {
+        "cpu_type": null,
+        "cpu_freq_mhz": null,
+        "cpu_cores": null,
+        "ram_gb": null,
+        "gpu_model": null,
+        "vram_gb": null
+      },
+      "signature": "7d8b71b380427ba5f2cb4f31cbb72ca51fa30bfc588702c1c943bbc3bbca21e5"
+    }
+  }
+}

@@ -1,0 +1,762 @@
+{
+  "_schema": "Aggregated final result over all sub-games: per-group scores, the series winner/tie, and the mutual-agreement signature. Both teams email their own copy.",
+  "schema_version": "1.1",
+  "report_type": "final_game_result",
+  "game_id": "vm__fabi-police-vs-vm__fabi-thief",
+  "game_uid": "2f30b769-88ac-c564-fb63-d7712e3c1346",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_vm__fabi-police-vs-vm__fabi-thief.json",
+    "config": "config_vm__fabi-police-vs-vm__fabi-thief_g<NN>.json",
+    "log": "log_vm__fabi-police-vs-vm__fabi-thief_g<NN>.json",
+    "result": "result_vm__fabi-police-vs-vm__fabi-thief.json",
+    "github": {
+      "vm__fabi-police": {
+        "cop": "https://github.com/mironovich-v/cop-rob-p2p-police",
+        "thief": "https://github.com/mironovich-v/cop-rob-p2p-thief"
+      },
+      "vm__fabi-thief": {
+        "cop": "https://github.com/mironovich-v/cop-rob-p2p-police",
+        "thief": "https://github.com/mironovich-v/cop-rob-p2p-thief"
+      }
+    }
+  },
+  "timezone": "Asia/Jerusalem",
+  "groups": [
+    "vm__fabi-police",
+    "vm__fabi-thief"
+  ],
+  "num_sub_games": 25,
+  "sub_games": [
+    {
+      "sub_game_number": 1,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T11:38:23.406323+00:00",
+      "ended_at": "2026-08-19T11:38:39.706323+00:00",
+      "result": "capture",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 20,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g01.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g01.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 2,
+      "roles": {
+        "vm__fabi-police": "thief",
+        "vm__fabi-thief": "police"
+      },
+      "started_at": "2026-08-19T11:38:41.621501+00:00",
+      "ended_at": "2026-08-19T11:42:23.121501+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 10,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g02.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g02.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 3,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T11:42:32.128988+00:00",
+      "ended_at": "2026-08-19T11:44:34.328988+00:00",
+      "result": "capture",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 20,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g03.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g03.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 4,
+      "roles": {
+        "vm__fabi-police": "thief",
+        "vm__fabi-thief": "police"
+      },
+      "started_at": "2026-08-19T11:44:39.971344+00:00",
+      "ended_at": "2026-08-19T11:44:59.471344+00:00",
+      "result": "capture",
+      "winner_group": "vm__fabi-thief",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 5,
+        "vm__fabi-thief": 20
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g04.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g04.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 5,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T11:45:02.162825+00:00",
+      "ended_at": "2026-08-19T11:48:40.062825+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-thief",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 5,
+        "vm__fabi-thief": 10
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g05.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g05.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 6,
+      "roles": {
+        "vm__fabi-police": "thief",
+        "vm__fabi-thief": "police"
+      },
+      "started_at": "2026-08-19T11:48:48.946837+00:00",
+      "ended_at": "2026-08-19T11:52:28.846837+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 10,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g06.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g06.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 7,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T11:52:37.395357+00:00",
+      "ended_at": "2026-08-19T11:54:54.595357+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-thief",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 5,
+        "vm__fabi-thief": 10
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g07.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g07.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 8,
+      "roles": {
+        "vm__fabi-police": "thief",
+        "vm__fabi-thief": "police"
+      },
+      "started_at": "2026-08-19T11:55:01.611972+00:00",
+      "ended_at": "2026-08-19T11:57:05.111972+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 10,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g08.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g08.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 9,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T11:58:38.873313+00:00",
+      "ended_at": "2026-08-19T12:03:54.573313+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-thief",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 5,
+        "vm__fabi-thief": 10
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g09.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g09.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 10,
+      "roles": {
+        "vm__fabi-police": "thief",
+        "vm__fabi-thief": "police"
+      },
+      "started_at": "2026-08-19T12:04:07.179264+00:00",
+      "ended_at": "2026-08-19T12:06:07.279264+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 10,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g10.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g10.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 11,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T12:06:25.952497+00:00",
+      "ended_at": "2026-08-19T12:11:38.552497+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-thief",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 5,
+        "vm__fabi-thief": 10
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g11.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g11.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 12,
+      "roles": {
+        "vm__fabi-police": "thief",
+        "vm__fabi-thief": "police"
+      },
+      "started_at": "2026-08-19T12:11:51.705046+00:00",
+      "ended_at": "2026-08-19T12:13:38.505046+00:00",
+      "result": "capture",
+      "winner_group": "vm__fabi-thief",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 5,
+        "vm__fabi-thief": 20
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g12.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g12.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 13,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T12:13:56.275777+00:00",
+      "ended_at": "2026-08-19T12:18:01.275777+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-thief",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 5,
+        "vm__fabi-thief": 10
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g13.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g13.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 14,
+      "roles": {
+        "vm__fabi-police": "thief",
+        "vm__fabi-thief": "police"
+      },
+      "started_at": "2026-08-19T12:18:11.096359+00:00",
+      "ended_at": "2026-08-19T12:21:34.796359+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 10,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g14.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g14.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 15,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T12:21:57.828364+00:00",
+      "ended_at": "2026-08-19T12:24:03.328364+00:00",
+      "result": "capture",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 20,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g15.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g15.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 16,
+      "roles": {
+        "vm__fabi-police": "thief",
+        "vm__fabi-thief": "police"
+      },
+      "started_at": "2026-08-19T12:24:09.157685+00:00",
+      "ended_at": "2026-08-19T12:25:45.557685+00:00",
+      "result": "capture",
+      "winner_group": "vm__fabi-thief",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 5,
+        "vm__fabi-thief": 20
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g16.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g16.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 17,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T12:26:03.678263+00:00",
+      "ended_at": "2026-08-19T12:29:51.878263+00:00",
+      "result": "capture",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 20,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g17.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g17.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 18,
+      "roles": {
+        "vm__fabi-police": "thief",
+        "vm__fabi-thief": "police"
+      },
+      "started_at": "2026-08-19T12:30:01.103302+00:00",
+      "ended_at": "2026-08-19T12:33:23.603302+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 10,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g18.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g18.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 19,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T12:33:47.180287+00:00",
+      "ended_at": "2026-08-19T12:35:52.280287+00:00",
+      "result": "capture",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 20,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g19.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g19.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 20,
+      "roles": {
+        "vm__fabi-police": "thief",
+        "vm__fabi-thief": "police"
+      },
+      "started_at": "2026-08-19T12:35:58.186711+00:00",
+      "ended_at": "2026-08-19T12:37:21.886711+00:00",
+      "result": "capture",
+      "winner_group": "vm__fabi-thief",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 5,
+        "vm__fabi-thief": 20
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g20.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g20.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 21,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T12:37:40.390485+00:00",
+      "ended_at": "2026-08-19T12:39:47.790485+00:00",
+      "result": "capture",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 20,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g21.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g21.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 22,
+      "roles": {
+        "vm__fabi-police": "thief",
+        "vm__fabi-thief": "police"
+      },
+      "started_at": "2026-08-19T12:39:53.642529+00:00",
+      "ended_at": "2026-08-19T12:43:16.142529+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 10,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g22.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g22.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 23,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T12:43:39.182439+00:00",
+      "ended_at": "2026-08-19T12:45:53.182439+00:00",
+      "result": "capture",
+      "winner_group": "vm__fabi-police",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 20,
+        "vm__fabi-thief": 5
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g23.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g23.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 24,
+      "roles": {
+        "vm__fabi-police": "thief",
+        "vm__fabi-thief": "police"
+      },
+      "started_at": "2026-08-19T12:46:00.258539+00:00",
+      "ended_at": "2026-08-19T12:47:48.158539+00:00",
+      "result": "capture",
+      "winner_group": "vm__fabi-thief",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 5,
+        "vm__fabi-thief": 20
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g24.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g24.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    },
+    {
+      "sub_game_number": 25,
+      "roles": {
+        "vm__fabi-police": "police",
+        "vm__fabi-thief": "thief"
+      },
+      "started_at": "2026-08-19T12:48:08.035378+00:00",
+      "ended_at": "2026-08-19T12:53:23.235378+00:00",
+      "result": "survival",
+      "winner_group": "vm__fabi-thief",
+      "tie": false,
+      "tokens": {
+        "vm__fabi-police": 0,
+        "vm__fabi-thief": 0
+      },
+      "score": {
+        "vm__fabi-police": 5,
+        "vm__fabi-thief": 10
+      },
+      "log_files": {
+        "vm__fabi-police": "vm__fabi-police/log_vm__fabi-police-vs-vm__fabi-thief_g25.json",
+        "vm__fabi-thief": "vm__fabi-thief/log_vm__fabi-police-vs-vm__fabi-thief_g25.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    }
+  ],
+  "final_result": {
+    "total_score": {
+      "vm__fabi-police": 265,
+      "vm__fabi-thief": 230
+    },
+    "sub_games_won": {
+      "vm__fabi-police": 14,
+      "vm__fabi-thief": 11
+    },
+    "ties": 0,
+    "winner_group": "vm__fabi-police",
+    "series_tie": false,
+    "tokens_total_series": {
+      "vm__fabi-police": 0,
+      "vm__fabi-thief": 0
+    },
+    "games_played_including_this": {
+      "vm__fabi-police": 0,
+      "vm__fabi-thief": 0
+    },
+    "first_meeting_between_groups": true,
+    "diversity_reward_applied": {
+      "vm__fabi-police": false,
+      "vm__fabi-thief": false
+    }
+  },
+  "mutual_agreement": {
+    "sha256": "de4dff98ca11e1ae4b81311f9d42eb2777c9d39fc1728703edfe924afa040f06",
+    "confirmed": true
+  }
+}

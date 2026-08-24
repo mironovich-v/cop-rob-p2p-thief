@@ -1,0 +1,90 @@
+{
+  "_schema": "Aggregated final result over all sub-games: per-group scores, the series winner/tie, and the mutual-agreement signature. Both teams email their own copy.",
+  "schema_version": "1.1",
+  "report_type": "final_game_result",
+  "game_id": "il-nv-ai-vs-vm__fabi",
+  "game_uid": "00aec465-1e83-befa-15ed-a5d427995ffc",
+  "links": {
+    "_remark": "Logical roles, not fixed filenames. Names derive from game_id: declaration/result = <name>_<game_id>.json; per-sub-game config/log = <name>_<game_id>_g<NN>.json.",
+    "declaration": "declaration_il-nv-ai-vs-vm__fabi.json",
+    "config": "config_il-nv-ai-vs-vm__fabi_g<NN>.json",
+    "log": "log_il-nv-ai-vs-vm__fabi_g<NN>.json",
+    "result": "result_il-nv-ai-vs-vm__fabi.json",
+    "github": {
+      "vm__fabi": {
+        "cop": "https://github.com/mironovich-v/cop-rob-p2p-police",
+        "thief": "https://github.com/mironovich-v/cop-rob-p2p-thief"
+      },
+      "il-nv-ai": {
+        "cop": "local-unpublished",
+        "thief": "local-unpublished"
+      }
+    }
+  },
+  "timezone": "Asia/Jerusalem",
+  "groups": [
+    "il-nv-ai",
+    "vm__fabi"
+  ],
+  "num_sub_games": 1,
+  "sub_games": [
+    {
+      "sub_game_number": 1,
+      "roles": {
+        "vm__fabi": "thief",
+        "il-nv-ai": "police"
+      },
+      "started_at": "2026-08-21T14:12:11.498600+00:00",
+      "ended_at": "2026-08-21T14:12:26.498600+00:00",
+      "result": "capture",
+      "winner_group": "il-nv-ai",
+      "tie": false,
+      "tokens": {
+        "vm__fabi": 0,
+        "il-nv-ai": 0
+      },
+      "score": {
+        "vm__fabi": 5,
+        "il-nv-ai": 20
+      },
+      "log_files": {
+        "vm__fabi": "vm__fabi/log_il-nv-ai-vs-vm__fabi_g01.json",
+        "il-nv-ai": "il-nv-ai/log_il-nv-ai-vs-vm__fabi_g01.json"
+      },
+      "audit": {
+        "log_verified": true,
+        "tampered": false
+      }
+    }
+  ],
+  "final_result": {
+    "total_score": {
+      "il-nv-ai": 20,
+      "vm__fabi": 5
+    },
+    "sub_games_won": {
+      "il-nv-ai": 1,
+      "vm__fabi": 0
+    },
+    "ties": 0,
+    "winner_group": "il-nv-ai",
+    "series_tie": false,
+    "tokens_total_series": {
+      "il-nv-ai": 0,
+      "vm__fabi": 0
+    },
+    "games_played_including_this": {
+      "vm__fabi": 1,
+      "il-nv-ai": null
+    },
+    "first_meeting_between_groups": true,
+    "diversity_reward_applied": {
+      "vm__fabi": false,
+      "il-nv-ai": false
+    }
+  },
+  "mutual_agreement": {
+    "sha256": "1be7dd12823e322891c2461d57594284869946faafe987f1445bf831818dde00",
+    "confirmed": true
+  }
+}
