@@ -1700,3 +1700,18 @@
   negotiate, not once per series (role-split opponents alternate SHAs).
 - Lesson: hashes prove the agreed scope and nothing else — a settlement ritual
   needs one full-file diff on top of the hash compare.
+
+## 2026-08-24 · Analysis · Police endgame post-mortem from the il-nv-ai sealed logs
+- Reconstructed all three police games from our own archived artifacts (their
+  scent peak = their exact cell, verified 34/34): cop reached distance 1 in ~8
+  steps, held it 17/34 steps, never captured. Diagnosis: distance-1 dodge cycle
+  (thief moves first + reads our capture_claim); their endgame is edge-running;
+  our #107 rebuild removed the cop's walls — the one tool that converts a
+  distance-1 shadow into a corner trap. Bench 32/32 was against our own
+  corner-prone evader (§5 method rule violated on the pursuer side).
+- League observation: their police also 0-for-3 vs our thief — the 45+2 tie is
+  the league's current strategy ceiling, not a structural one (7×7 grid is
+  one-cop-win in classic pursuit theory).
+- Written to `docs/PRD_strategy_brains.md` §8 with the designed endgame
+  (edge-run trigger → corner-drive + wall-block + parity STAY) and its bench
+  prerequisite (edge-slider adversary first).
