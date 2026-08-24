@@ -1726,3 +1726,18 @@
   (anything deliberately tracked publishes). TDD: a new export test asserts
   every relative image embedded by ANY shipped markdown resolves in the tree —
   the general guarantee, so the next asset directory cannot silently drop.
+
+## 2026-08-24 · Fix · Tracked logs/ evidence never shipped in the role repos
+- Owner finding, same class as the img/ gap an hour earlier: the README's
+  replay example points at `logs/vm__fabi-police/log_*_g01.json`, and 100+
+  deliberately force-added evidence files (25-game self-play series both
+  perspectives, nis-yar1 friendly, il-nv-ai warm-up snapshot) live under
+  tracked `logs/` — none shipped, because `logs` sits in copy_tree's exclusion
+  for UNTRACKED runtime logs and the ls-files ship loop covered only
+  results/ + img/.
+- Fix: `logs` joins the ls-files rule. The no-secrets test now asserts the
+  export's logs/ contains ONLY workspace-tracked paths (untracked runtime
+  logs still can never ride), plus a RED->GREEN test pinning the README's
+  replay target and the friendly evidence.
+- Pattern worth naming after two hits in one day: every hand-curated ship
+  list goes stale; every "what tracked files exist under X" rule stays true.

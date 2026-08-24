@@ -48,8 +48,15 @@ def test_no_secrets_or_private_logs_shipped(exported):
         out = dist / f"{role}-agent"
         assert not (out / ".env").exists()
         assert not (out / "secrets").exists()
-        assert not (out / "logs").exists()
         assert not list(out.rglob("*.pyc"))
+        # logs/ ships ONLY what the workspace deliberately tracks — an
+        # untracked runtime log must never ride an export.
+        tracked = set(subprocess.run(
+            ["git", "ls-files", "--", "logs"], cwd=WORKSPACE,
+            capture_output=True, text=True).stdout.splitlines())
+        for shipped in (out / "logs").rglob("*"):
+            if shipped.is_file():
+                assert shipped.relative_to(out).as_posix() in tracked, shipped
         assert (out / ".env-example").is_file()  # placeholders only
         assert not (out / "tests" / "integration" / "test_export.py").exists()
 
@@ -83,6 +90,18 @@ def test_export_ships_the_match_evidence(exported):
         if (WORKSPACE / "results" / "counted").is_dir():  # banked 2026-08-18
             assert list((results / "counted").rglob("result_*.json")), (
                 f"{role}: counted evidence missing from the export")
+
+
+def test_export_ships_tracked_logs_evidence(exported):
+    # README's replay example points at logs/vm__fabi-police/log_*_g01.json and
+    # the friendly/warm-up evidence was force-added deliberately — tracked
+    # logs/ must ship like tracked results/ (found missing 2026-08-24).
+    dist, _ = exported
+    for role in ("police", "thief"):
+        out = dist / f"{role}-agent"
+        assert list((out / "logs" / "vm__fabi-police").glob("log_*_g01.json")), (
+            f"{role}: README replay example target missing")
+        assert (out / "logs" / "vm__fabi" / "result_nis-yar1-vs-vm__fabi.json").is_file()
 
 
 def test_shipped_markdown_images_resolve(exported):

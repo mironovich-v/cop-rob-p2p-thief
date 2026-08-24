@@ -71,10 +71,11 @@ def export_role(role: str, workspace: Path, dist_dir: Path, commit: str) -> dict
     # grader holding just this repo. Driving the copy from `git ls-files` means
     # anything we deliberately track ships, and the untracked scratch copies in
     # results/ (browser-downloaded compare files) never do.
-    # img/ rides the same rule: the academic README (shipped verbatim below)
-    # embeds the replay screenshots by relative path, so a tree without them
-    # shows a grader broken images (found live 2026-08-24).
-    for directory in ("results", "img"):
+    # img/ and logs/ ride the same rule: the README embeds the replay
+    # screenshots and points its replay example at a tracked self-play log, and
+    # the friendly/warm-up evidence was force-added deliberately. `git ls-files`
+    # keeps untracked runtime logs out (both gaps found live 2026-08-24).
+    for directory in ("results", "img", "logs"):
         for relative in _tracked_under(workspace, directory):
             target = out / relative
             target.parent.mkdir(parents=True, exist_ok=True)
