@@ -39,18 +39,22 @@ for ROLE in police thief; do
     git symbolic-ref HEAD refs/heads/main
     git reset -q
     git add -A
-    # The exported .gitignore is the workspace one, which hides results/* — so
-    # `git add -A` SILENTLY skips every evidence file and publishes a repo whose
-    # results/ holds only .gitkeep and the ledger. Force-add it, exactly as the
-    # workspace does for the same files (see results/README.md).
-    [ -d results ] && git add -f results
+    # The exported .gitignore is the workspace one, which hides results/* AND
+    # logs/* — so `git add -A` SILENTLY skips every evidence file under them
+    # and publishes a repo missing exactly what the export shipped. Force-add
+    # both, exactly as the workspace does for the same files (results found
+    # 2026-08-19; logs found 2026-08-24 — the export fix #114 alone was not
+    # enough, the ignore ate the files again one layer later).
+    for EVIDENCE in results logs; do
+      [ -d "$EVIDENCE" ] && git add -f "$EVIDENCE"
+    done
     if git diff --cached --quiet; then
       echo "    tree unchanged — nothing to commit"
     else
       git -c user.name="mironovich-v" -c user.email="mironovichvasily@gmail.com" \
         commit -q -m "Republish ${ROLE} submission tree from workspace ${COMMIT}"
       git push -q origin main
-      echo "    main -> $(git rev-parse --short HEAD)  (results files: $(git ls-files results | wc -l))"
+      echo "    main -> $(git rev-parse --short HEAD)  (results files: $(git ls-files results | wc -l), logs files: $(git ls-files logs | wc -l))"
     fi
   )
   git push -q "$URL" main:workspace-history

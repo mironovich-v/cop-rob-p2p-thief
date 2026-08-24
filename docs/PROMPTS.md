@@ -1741,3 +1741,15 @@
   replay target and the friendly evidence.
 - Pattern worth naming after two hits in one day: every hand-curated ship
   list goes stale; every "what tracked files exist under X" rule stays true.
+
+## 2026-08-24 · Fix · Publish script's add -A dropped logs/ one layer after the export fix
+- Owner asked where logs/ sits in the role repos — GitHub answered 404. The
+  export fix (#114) put logs/ into the dist trees, but publish_submissions.sh
+  commits with `git add -A` inside the export repo, whose shipped workspace
+  .gitignore hides logs/* — the same silent-skip that ate results/ on
+  2026-08-19, one layer later. Only results/ was force-added.
+- Fix: force-add results AND logs; the publish report line now prints both
+  counts so a zero is visible at publish time. img/ was unaffected (not
+  gitignored). Third same-day lesson in the same family: an ignore rule plus
+  any blanket add is a silent evidence-eater — every evidence path needs the
+  explicit force-add, at EVERY layer that runs git add.
